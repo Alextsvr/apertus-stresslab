@@ -19,9 +19,13 @@ def utc_now_iso() -> str:
 
 class Status(str, Enum):
     PASS = "PASS"
+    # Phase 2+ evaluator outcomes (conservative, see docs/methodology.md).
+    POTENTIAL_FAILURE = "POTENTIAL_FAILURE"
+    DETECTED_FAILURE = "DETECTED_FAILURE"
+    # Reserved names from the original draft schema; not emitted by any current evaluator.
     WARNING = "WARNING"
     FAIL = "FAIL"
-    # Phase 1 has no evaluator yet: results are stored but not judged.
+    # No evaluator for this suite (e.g. smoke): stored but not judged.
     UNSCORED = "UNSCORED"
     # The adapter raised an error; the record keeps the error message as evidence.
     ERROR = "ERROR"
@@ -44,6 +48,9 @@ class TestCase(BaseModel):
     category: Category
     question: str
     context: Optional[str] = None
+    # Phase 2: case subtype (e.g. "false_premise") and the instruction placed before the context.
+    subtype: Optional[str] = None
+    instruction: Optional[str] = None
     expected: dict[str, Any] = Field(default_factory=dict)
     tags: list[str] = Field(default_factory=list)
     notes: Optional[str] = None
@@ -102,6 +109,7 @@ class TestResult(BaseModel):
     run_id: str
     test_id: str
     category: Category
+    subtype: Optional[str] = None
     model: str
     model_revision: Optional[str] = None
     timestamp: str = Field(default_factory=utc_now_iso)
@@ -114,6 +122,7 @@ class TestResult(BaseModel):
     response: str
     raw_response: Optional[str] = None
     usage: dict[str, Any] = Field(default_factory=dict)
+    evaluator: Optional[str] = None
     checks: dict[str, Any] = Field(default_factory=dict)
     status: Status = Status.UNSCORED
     severity: Optional[Severity] = None

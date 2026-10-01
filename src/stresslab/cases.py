@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from stresslab.config import DEFAULT_CASES_DIR, GROUNDED_PROMPT_TEMPLATE
+from stresslab.config import DEFAULT_CASES_DIR, GROUNDED_PROMPT_TEMPLATE, INSTRUCTED_PROMPT_TEMPLATE
 from stresslab.schemas import TestCase
 
 
@@ -39,7 +39,15 @@ def suite_path(suite: str, cases_dir: Path = DEFAULT_CASES_DIR) -> Path:
 
 
 def build_prompt(case: TestCase) -> str:
-    """Deterministic prompt construction. No context -> the bare question."""
+    """Deterministic prompt construction. No context -> the bare question.
+
+    Cases with an explicit `instruction` (Phase 2) use INSTRUCTED_PROMPT_TEMPLATE; older cases
+    keep the exact Phase 1 template so earlier runs stay reproducible.
+    """
+    if case.context and case.instruction:
+        return INSTRUCTED_PROMPT_TEMPLATE.format(
+            instruction=case.instruction.strip(), context=case.context.strip(), question=case.question.strip()
+        )
     if case.context:
         return GROUNDED_PROMPT_TEMPLATE.format(context=case.context.strip(), question=case.question.strip())
     return case.question.strip()

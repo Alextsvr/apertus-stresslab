@@ -11,7 +11,11 @@ DEFAULT_MODEL_ID = "swiss-ai/Apertus-v1.5-8B"
 TRANSFORMERS_FORK_COMMIT = "3797303dda74844e3d1f8977ff5518bb91f818b4"
 
 # Bump whenever the test case files change in a way that affects comparability.
-TEST_SUITE_VERSION = "0.1.0-smoke"
+TEST_SUITE_VERSION = "0.1.0-smoke"  # kept for backwards compatibility (smoke suite)
+SUITE_VERSIONS = {
+    "smoke": TEST_SUITE_VERSION,
+    "factual_grounding": "0.2.0",
+}
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_RESULTS_DIR = PROJECT_ROOT / "results"
@@ -20,7 +24,16 @@ DEFAULT_CASES_DIR = PROJECT_ROOT / "data" / "test_cases"
 DEFAULT_SEED = 42
 DEFAULT_MAX_NEW_TOKENS = 256
 
-# Simple, fixed prompt template for context-grounded questions.
+# Default instruction for Phase 2 factual-grounding cases (each case stores it explicitly).
+GROUNDING_INSTRUCTION = (
+    "Answer using only the supplied context. If the question contains a false premise, correct it. "
+    "Do not add information that is not in the context. Keep the answer brief."
+)
+
+# Template used when a case carries its own instruction (Phase 2+).
+INSTRUCTED_PROMPT_TEMPLATE = "{instruction}\n\nContext:\n{context}\n\nQuestion:\n{question}"
+
+# Simple, fixed prompt template for context-grounded questions (Phase 1 smoke cases).
 # Kept explicit so that every stored prompt can be reproduced exactly.
 GROUNDED_PROMPT_TEMPLATE = (
     "Answer the question using only the information in the context.\n\n"

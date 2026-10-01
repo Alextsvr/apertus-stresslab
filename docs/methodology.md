@@ -1,32 +1,143 @@
-# Methodology (draft)
+# Methodology
 
-Status: Phase 1. Only the recording pipeline exists; evaluation methods below are planned, not implemented.
+Status: Phase 2 (factual grounding) implemented. **No red-team results yet**; the real suite run is pending.
 
 ## Principles
 
-1. **Evidence over scores.** A finding is an observable response, the exact prompt that produced it, and the reason it is wrong.
-2. **Reproducible.** Every record stores model id, resolved Hub revision, dtype/quantization, generation config, seed, library versions, hardware and git commit.
-3. **Replayable.** Prompts are built from test cases by a fixed template (`config.GROUNDED_PROMPT_TEMPLATE`); the stored `base_prompt` is the exact text sent to the chat template.
-4. **Auditable evaluation.** Deterministic checks first (value presence, unsupported numbers/entities, polarity, premise correction). Any LLM judge would be optional, local and open-source.
-5. **Honest reporting.** Negative results are reported. Automated detection is labelled DETECTED vs POTENTIAL; nothing is presented as a perfect hallucination detector.
+1. **Evidence over scores.** A finding is an observable response, the exact prompt that produced it, and the
+   explicit reason it is wrong.
+2. **Reproducible.** Every record stores model id, resolved Hub revision, dtype/quantization, device map /
+   offload plan, generation config, seed, library versions, hardware and git commit.
+3. **Replayable.** Prompts are built from test cases by fixed templates (`config.py`); the stored `base_prompt`
+   is the exact text passed to the chat template.
+4. **Auditable, conservative evaluation.** Deterministic checks derived from explicit per-case ground truth.
+   The evaluator only claims a failure it can point to. No LLM judge, no commercial API.
+5. **Honest reporting.** Negative results are reported. Counts are descriptive; no rate is extrapolated.
 
-## Failure categories
+## Phase 2: factual grounding
 
-- **Factual grounding**: claims not supported by, or contradicting, the supplied context.
-- **Consistency**: materially different conclusions for semantically equivalent prompts (style differences are not failures).
-- **Robustness**: answers that change under task-preserving mutations (irrelevant context, reordering, typos, distractors), or that accept a false premise.
+### Question
 
-## Current pipeline (Phase 1)
+Given all relevant facts in the prompt, does Apertus answer from that context, or does it invent, contradict,
+merge, or accept false premises?
+
+### Dataset design (`data/test_cases/factual_grounding.jsonl`, suite version 0.2.0)
+
+- 22 original cases. All entities are fictional (e.g. Heliovex Systems, Calder Dynamics, Nora Veldt / Nora
+  Velde, Kestrel-9 / Kestrel-9X, Varen Port), so the context is the only source of truth and memorised
+  real-world knowledge cannot help or hurt.
+- Short, natural contexts and questions; no deliberately unnatural adversarial wording.
+- One fixed instruction, stored in every case:
+  *"Answer using only the supplied context. If the question contains a false premise, correct it. Do not add
+  information that is not in the context. Keep the answer brief."* Note: it explicitly invites premise
+  correction, which makes false-premise cases easier than in the wild; robustness to removing it is a later
+  phase.
+- Prompt layout: `instruction`, blank line, `Context:`, context, blank line, `Question:`, question.
+
+| Subtype | Cases | What it tests |
+|---|---|---|
+| direct_extraction | 2 | one fact, stated once |
+| multi_fact | 2 | combine several facts (incl. one subtraction) |
+| numeric | 3 | counts, measurements, percentages, money, formats (3,150 / 2.5 million) |
+| relationship | 2 | direct vs indirect ownership / reporting lines |
+| negative_fact | 2 | context states that something did *not* happen |
+| false_premise | 3 | the question presupposes something the context contradicts |
+| distractor | 2 | irrelevant facts of the same type next to the answer |
+| similar_entity | 2 | near-identical names (Nora Veldt / Nora Velde, Kestrel-9 / Kestrel-9X) |
+| timeline | 2 | order of dated events |
+| unsupported_elaboration | 2 | narrow question that invites invented biography / company facts |
+
+### Case expectations (machine-checkable)
+
+```json
+"expected": {
+  "required_facts":  [{"name": "headquarters", "values": ["Ostren Vale"], "conflicts": ["Varen Port", "Brisk Hollow"]}],
+  "forbidden_values": [{"value": "2010", "reason": "invented founding year"}],
+  "allowed_values":  ["36", "1.6 million"],
+  "unsupported_markers": ["employees", "revenue"],
+  "false_premise": {"premise": "...", "correction_markers": ["did not acquire"], "acceptance_markers": ["acquired heliovex because"]},
+  "ground_truth": {"relationships": [["Calder Dynamics", "owns", "Pellin Aero"]], "negative_facts": {"acquisition_occurred": false}}
+}
+```
+
+- `values`: any one counts as stating the fact (aliases / formats).
+- `conflicts`: values that would replace the fact (often distractors present in the context).
+- `forbidden_values`: wrong in every reading and **never present in the prompt** (enforced by validation and
+  tests), so their appearance cannot be a quotation of the context.
+- `allowed_values`: derived values that are legitimately not in the context (differences, remaining shares).
+- `ground_truth`: the controlled facts behind the case, for auditing; checks are derived from it explicitly.
+
+### Normalisation
+
+Case folding; unified quotes and dashes; contractions expanded (*didn't* → *did not*); thousands separators
+removed (3,150 / 3'150 → 3150); punctuation removed except decimal points, `%` and hyphens; whitespace
+collapsed. Phrases match on word boundaries. Values that are purely numeric match numerically, with scaled
+readings: *2.5 million*, *2,500,000*, *4.2M*, *85K* (lower-case `m`/`k` are treated as units, not multipliers).
+Month names in the context ground their month numbers (so `2021-03-12` is grounded by "12 March 2021").
+Numbered-list markers are ignored only for real lists (≥ 2 lines numbered 1, 2, …).
+
+### Checks
+
+| # | Check | Evidence type | Confidence | Severity |
+|---|---|---|---|---|
+| 1 | Required fact present (any accepted value) | `missing_required_fact` if absent and no conflict | medium | MEDIUM |
+| 2 | Controlled contradiction: required fact absent **and** a listed conflict present | `contradiction` | high | HIGH |
+| 3 | Forbidden value present | `forbidden_value` | high | HIGH |
+| 4 | False premise: case correction phrase or generic correction phrase vs. case acceptance phrase | `false_premise_accepted` (acceptance only) | high | HIGH |
+|   |  | `false_premise_ambiguous` (both) | medium | MEDIUM |
+|   |  | `false_premise_not_corrected` (neither) | medium | MEDIUM |
+| 5 | Number not in context, question, required or allowed values | `unsupported_number` | medium | MEDIUM |
+| 6 | Capitalised name (run of capitalised words) not in context/question/instruction/allowed values | `unsupported_entity` | low | LOW |
+| 7 | Case-specific elaboration marker present | `unsupported_elaboration` | low | LOW |
+
+Details that keep the evaluator conservative:
+
+- If a correct value is present, conflicting values elsewhere in the answer are **not** a contradiction (they
+  may be comparisons, e.g. "410 m, while the whole bridge is 860 m"); they are still listed in `checks`.
+- Numbers already reported as contradictions/forbidden values are not double-counted as unsupported.
+- Entity heuristic: single capitalised words at the start of a sentence are ignored (unless they contain a
+  digit or hyphen, like `Kestrel-12`); common words, titles, currency codes, months and weekdays are ignored;
+  possessives are stripped; a name is grounded if all its words occur in the prompt.
+
+### Status and severity
 
 ```
-test case (JSONL) -> build_prompt -> adapter.generate(prompt, gen_config, seed)
-                  -> TestResult (status UNSCORED) -> results/<run_id>/results.jsonl
-run-level info    -> results/<run_id>/metadata.json
+DETECTED_FAILURE   if any evidence item has confidence "high"
+POTENTIAL_FAILURE  elif any evidence item exists
+PASS               otherwise
+severity           = max(evidence severities) for non-PASS; null for PASS
 ```
 
-## Planned
+There is no numeric threshold or weighted score. `CRITICAL` is not used in Phase 2: these are synthetic
+facts, not real-world harm. Records that hit `max_new_tokens` are listed in `summary.json` as
+`truncated_responses`, because truncation can cause a missing-fact POTENTIAL_FAILURE.
 
-- Phase 2: grounding suite (~20 cases) + deterministic checks.
+### Outputs
+
+- `results.jsonl` (canonical): every record with `checks`, `evidence`, `status`, `severity`, `evaluator`.
+- `summary.json`: counts by status, subtype, severity and evidence type; failure ids; model, revision,
+  quantization and execution mode. No aggregate rate.
+- `failures.jsonl`: POTENTIAL/DETECTED records only, for review.
+- `stresslab evaluate <run>`: re-scores stored responses without a model call into `rescored_<timestamp>/`,
+  flagging records whose case prompt changed since the run.
+
+### Known limitations
+
+1. The suite is synthetic and controlled; 22 cases cover chosen patterns, not the space of real questions.
+2. It does not estimate a universal hallucination rate, and counts from one run are not rates.
+3. Deterministic lexical checks do not understand meaning. Unusual paraphrases become POTENTIAL_FAILURE;
+   a wrong answer containing an accepted phrase (e.g. "after" used about a different event) can pass.
+4. Entity detection is a capitalisation heuristic (false positives on unusual capitalisation, false negatives
+   on sentence-initial invented names and lower-case inventions).
+5. Numeric checks may flag harmless derived values not listed in `allowed_values`, and do not read numbers
+   written as words.
+6. False-premise handling relies on per-case phrase lists plus a small generic list.
+7. The local baseline is Apertus 1.5 8B, 4-bit NF4, with CPU offload (lm_head in system RAM), greedy
+   decoding, thinking disabled. Strong findings must be re-run several times and ideally confirmed at
+   higher precision before being reported as model behaviour.
+
+## Planned (not implemented)
+
 - Phase 3: deterministic mutation engine with stored mutation metadata.
-- Phase 4–5: consistency/robustness suites, repeated runs with recorded seeds and failure rates.
-- Phase 6: explicit, config-defined severity rules (see `docs/severity.md`, to be written).
+- Phase 4–5: consistency and robustness suites; repeated runs with recorded seeds and failure rates.
+- Phase 6: cross-category, config-defined severity rules.

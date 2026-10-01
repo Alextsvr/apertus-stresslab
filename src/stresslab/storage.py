@@ -3,7 +3,9 @@
 Layout:
     results/<YYYY-MM-DD_HHMMSS>[_<n>]/
         metadata.json
-        results.jsonl
+        results.jsonl     # canonical: every record
+        summary.json      # descriptive counts (derived from results.jsonl)
+        failures.jsonl    # evaluated runs only: POTENTIAL_FAILURE / DETECTED_FAILURE records
 
 Existing run directories are never overwritten.
 """
@@ -13,12 +15,14 @@ from __future__ import annotations
 import json
 from datetime import datetime
 from pathlib import Path
-from typing import Iterator, Optional
+from typing import Any, Iterable, Iterator, Optional
 
 from stresslab.schemas import RunMetadata, TestResult
 
 METADATA_FILE = "metadata.json"
 RESULTS_FILE = "results.jsonl"
+SUMMARY_FILE = "summary.json"
+FAILURES_FILE = "failures.jsonl"
 
 
 def new_run_id(now: Optional[datetime] = None) -> str:
@@ -75,3 +79,18 @@ def iter_results(run_dir: Path) -> Iterator[TestResult]:
 
 def read_results(run_dir: Path) -> list[TestResult]:
     return list(iter_results(run_dir))
+
+
+def write_summary(run_dir: Path, summary: dict[str, Any]) -> Path:
+    path = Path(run_dir) / SUMMARY_FILE
+    path.write_text(json.dumps(summary, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return path
+
+
+def write_failures(run_dir: Path, results: Iterable[TestResult]) -> Path:
+    """Convenience copy of the failure records; results.jsonl stays the canonical source."""
+    path = Path(run_dir) / FAILURES_FILE
+    with path.open("w", encoding="utf-8", newline="\n") as fh:
+        for r in results:
+            fh.write(json.dumps(r.model_dump(mode="json"), ensure_ascii=False) + "\n")
+    return path

@@ -2,8 +2,10 @@
 
     python -m stresslab env                      # print environment metadata (no model load)
     python -m stresslab infer --prompt "..."     # Phase 0: one real prompt -> one stored record
-    python -m stresslab run --suite smoke        # run a JSONL suite from data/test_cases/
-    python -m stresslab show results/<run_id>    # print a stored run
+    python -m stresslab run --suite smoke        # run a JSONL suite from data/test_cases/ (unscored)
+    python -m stresslab run --suite factual_grounding   # Phase 2: scored automatically
+    python -m stresslab show results/<run_id> [--failures-only]
+    python -m stresslab evaluate results/<run_id>       # re-score stored responses, no model call
 
 Add `--adapter echo` to `infer`/`run` to test the pipeline without loading a model.
 """
@@ -23,13 +25,15 @@ from stresslab.config import (
     DEFAULT_MODEL_ID,
     DEFAULT_RESULTS_DIR,
     DEFAULT_SEED,
+    SUITE_VERSIONS,
     TEST_SUITE_VERSION,
 )
+from stresslab.evaluators import EVALUATORS, evaluator_for
 from stresslab.environment import collect_environment
 from stresslab.models import build_adapter
 from stresslab.offload import DEFAULT_CPU_MAX_MEMORY_GIB, DEFAULT_GPU_MAX_MEMORY_GIB, DEFAULT_GPU_RESERVE_GIB
-from stresslab.runner import RunOutcome, run_cases, single_prompt_case
-from stresslab.schemas import GenerationConfig
+from stresslab.runner import RunOutcome, rescore_run, run_cases, single_prompt_case
+from stresslab.schemas import GenerationConfig, Status
 from stresslab.storage import read_metadata, read_results
 
 
@@ -94,14 +98,37 @@ def _adapter(args: argparse.Namespace):
                          cpu_max_memory_gib=args.cpu_max_memory_gib)
 
 
+def _label(r) -> str:  # noqa: ANN001
+    sev = f" {r.severity.value}" if r.severity else ""
+    sub = f" ({r.subtype})" if r.subtype else ""
+    return f"--- {r.test_id}{sub} [{r.status.value}{sev}] ---"
+
+
+def _print_evidence(r) -> None:  # noqa: ANN001
+    for e in r.evidence:
+        print(f"  * {e['type']} [{e['confidence']}]: {e['detail']}"
+              + (f" | expected {e['expected']}" if e.get("expected") is not None else "")
+              + (f" | observed {e['observed']}" if e.get("observed") is not None else ""))
+
+
+def _print_counts(results) -> None:  # noqa: ANN001
+    counts: dict[str, int] = {}
+    for r in results:
+        counts[r.status.value] = counts.get(r.status.value, 0) + 1
+    print("Status counts: " + ", ".join(f"{k}={v}" for k, v in sorted(counts.items())))
+
+
 def _print_outcome(outcome: RunOutcome) -> None:
     for r in outcome.results:
-        print(f"\n--- {r.test_id} [{r.status.value}] ---")
+        print(f"\n{_label(r)}")
         if r.error:
             print(f"ERROR: {r.error}")
         else:
             print(r.response)
-    print(f"\nStored {len(outcome.results)} record(s) ({outcome.errors} error(s)) in: {outcome.run_dir}")
+            _print_evidence(r)
+    print()
+    _print_counts(outcome.results)
+    print(f"Stored {len(outcome.results)} record(s) ({outcome.errors} error(s)) in: {outcome.run_dir}")
 
 
 def cmd_env(_: argparse.Namespace) -> int:
@@ -117,13 +144,36 @@ def cmd_infer(args: argparse.Namespace) -> int:
     return 1 if outcome.errors else 0
 
 
+def _select_evaluator(choice: str, suite: str):  # noqa: ANN202
+    if choice == "none":
+        return None
+    return evaluator_for(suite if choice == "auto" else choice)
+
+
+def _load_validated(path: Path, evaluator) -> list:  # noqa: ANN001
+    cases = load_cases(path)
+    if evaluator is not None:
+        for case in cases:
+            evaluator.validate(case)
+    return cases
+
+
 def cmd_run(args: argparse.Namespace) -> int:
     path = Path(args.cases) if args.cases else suite_path(args.suite)
-    cases = load_cases(path)
+    evaluator = _select_evaluator(args.evaluator, path.stem)
+    cases = _load_validated(path, evaluator)
+    if args.only:
+        wanted = set(args.only)
+        cases = [c for c in cases if c.id in wanted]
+        missing = wanted - {c.id for c in cases}
+        if missing:
+            raise ValueError(f"Unknown test id(s): {sorted(missing)}")
     if args.limit:
         cases = cases[: args.limit]
     outcome = run_cases(cases, _adapter(args), _gen_config(args), args.seed, args.results_dir,
-                        command=_command_line(), suite=path.stem, test_suite_version=TEST_SUITE_VERSION)
+                        command=_command_line(), suite=path.stem,
+                        test_suite_version=SUITE_VERSIONS.get(path.stem, TEST_SUITE_VERSION),
+                        evaluator=evaluator)
     _print_outcome(outcome)
     return 1 if outcome.errors else 0
 
@@ -131,11 +181,34 @@ def cmd_run(args: argparse.Namespace) -> int:
 def cmd_show(args: argparse.Namespace) -> int:
     meta = read_metadata(args.run_dir)
     model = meta.model.model_id if meta.model else "(model not loaded)"
-    print(f"run {meta.run_id} | model {model} | seed {meta.seed} | cases {meta.num_cases}")
+    print(f"run {meta.run_id} | suite {meta.suite} | model {model} | seed {meta.seed} | cases {meta.num_cases}")
     if meta.notes:
         print(f"notes: {meta.notes}")
-    for r in read_results(args.run_dir):
-        print(f"\n--- {r.test_id} [{r.status.value}] ---\nPROMPT:\n{r.base_prompt}\nRESPONSE:\n{r.error or r.response}")
+    results = read_results(args.run_dir)
+    for r in results:
+        if args.failures_only and r.status not in (Status.POTENTIAL_FAILURE, Status.DETECTED_FAILURE):
+            continue
+        print(f"\n{_label(r)}\nPROMPT:\n{r.base_prompt}\nRESPONSE:\n{r.error or r.response}")
+        _print_evidence(r)
+    print()
+    _print_counts(results)
+    return 0
+
+
+def cmd_evaluate(args: argparse.Namespace) -> int:
+    meta = read_metadata(args.run_dir)
+    suite = args.suite or meta.suite
+    evaluator = _select_evaluator(args.evaluator, suite or "")
+    if evaluator is None:
+        raise ValueError(f"No evaluator for suite {suite!r}. Available: {sorted(EVALUATORS)}")
+    path = Path(args.cases) if args.cases else suite_path(suite)
+    out_dir, rescored = rescore_run(args.run_dir, _load_validated(path, evaluator), evaluator)
+    for r in rescored:
+        if r.status in (Status.POTENTIAL_FAILURE, Status.DETECTED_FAILURE):
+            print(_label(r))
+            _print_evidence(r)
+    _print_counts(rescored)
+    print(f"Rescored records written to: {out_dir} (original results.jsonl unchanged)")
     return 0
 
 
@@ -155,12 +228,23 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--suite", default="smoke", help="Suite name = file stem in data/test_cases/.")
     p.add_argument("--cases", default=None, help="Explicit path to a JSONL file (overrides --suite).")
     p.add_argument("--limit", type=int, default=None, help="Only run the first N cases.")
+    p.add_argument("--only", nargs="+", default=None, metavar="TEST_ID", help="Only run these test ids.")
+    p.add_argument("--evaluator", choices=["auto", "none", *sorted(EVALUATORS)], default="auto",
+                   help="'auto' picks the evaluator from the suite name (smoke -> none).")
     _add_model_args(p)
     p.set_defaults(func=cmd_run)
 
     p = sub.add_parser("show", help="Print a stored run.")
     p.add_argument("run_dir", type=Path)
+    p.add_argument("--failures-only", action="store_true", help="Only POTENTIAL_FAILURE / DETECTED_FAILURE.")
     p.set_defaults(func=cmd_show)
+
+    p = sub.add_parser("evaluate", help="Re-score a stored run with the current evaluator (no model call).")
+    p.add_argument("run_dir", type=Path)
+    p.add_argument("--suite", default=None, help="Default: the suite recorded in metadata.json.")
+    p.add_argument("--cases", default=None, help="Explicit path to the case file used for the run.")
+    p.add_argument("--evaluator", choices=["auto", *sorted(EVALUATORS)], default="auto")
+    p.set_defaults(func=cmd_evaluate)
     return parser
 
 

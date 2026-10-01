@@ -12,11 +12,12 @@ A model failure is only useful to the people improving the model if it is **obse
 
 | Phase | Scope | State |
 |---|---|---|
-| 0 | One real Apertus inference, stored with full metadata | Code ready; first real run pending (see below) |
+| 0 | One real Apertus inference, stored with full metadata | Done (local RTX 5070 Laptop, 4-bit + CPU offload) |
 | 1 | Schemas, model adapter, runner, JSONL storage, metadata, CLI, smoke cases, tests | Done |
-| 2–9 | Grounding suite, mutations, consistency/robustness, reproducibility, scoring, dashboard, experiments, report | Not started |
+| 2 | Factual-grounding suite (22 synthetic cases) + conservative deterministic evaluator, evidence, summary | Implemented; **real suite run pending** |
+| 3–9 | Mutations, consistency/robustness, reproducibility, scoring, dashboard, experiments, report | Not started |
 
-**No experimental results exist yet.** Nothing in this repository should be read as a finding about Apertus until a real run is committed.
+**No red-team results exist yet.** The only real model output so far is the Phase 0 sanity inference. Nothing here should be read as a finding about Apertus until a real suite run is committed.
 
 ## Model
 
@@ -39,16 +40,15 @@ Rough hardware guide for inference with transformers:
 
 ## Install (Windows PowerShell)
 
-Requires Python 3.11 or 3.12 and Git.
+Requires Python 3.11 or 3.12 and Git. Commands call the venv interpreter directly, so they work even
+where PowerShell script activation (`Activate.ps1`) is blocked.
 
 ```powershell
 cd C:\Extra\apertus-stresslab
-py -3.11 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-# If activation is blocked: Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-python -m pip install --upgrade pip
-pip install -r requirements.txt     # core + pytest (light, no torch)
-python -m pytest                    # unit tests, no model download
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install --upgrade pip
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt   # core + pytest (light, no torch)
+.\.venv\Scripts\python.exe -m pytest                             # unit tests, no model download
 ```
 
 Check your hardware (writes `results\env_check.txt`, read-only probe):
@@ -62,10 +62,10 @@ Get-Content results\env_check.txt
 
 ```powershell
 # 1) CUDA build of PyTorch FIRST (otherwise pip installs a CPU-only build)
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+.\.venv\Scripts\python.exe -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
 # 2) Apertus transformers fork + accelerate + bitsandbytes
-pip install -r requirements-inference.txt
-python -c "import torch; print(torch.__version__, torch.cuda.is_available())"
+.\.venv\Scripts\python.exe -m pip install -r requirements-inference.txt
+.\.venv\Scripts\python.exe -c "import torch; print(torch.__version__, torch.cuda.is_available())"
 ```
 
 ### Hugging Face access (free, no billing)
@@ -86,23 +86,87 @@ Model weights are cached in `%USERPROFILE%\.cache\huggingface` (~18 GB). Set `$e
 
 ```powershell
 # Pipeline check without a model (fake "echo" adapter, clearly marked as not real)
-python -m stresslab infer --adapter echo --prompt "Hello"
+.\.venv\Scripts\python.exe -m stresslab infer --adapter echo --prompt "Hello"
 
-# Phase 0: first REAL Apertus inference (pick --quantization for your GPU)
-python -m stresslab infer --enable-thinking false --prompt "Context: Maria Keller was born in Bern in 1981. Question: Where and when was Maria Keller born? Answer using only the context."
+# Phase 0: one REAL Apertus inference (pick --quantization for your GPU)
+.\.venv\Scripts\python.exe -m stresslab infer --enable-thinking false --prompt "Context: Maria Keller was born in Bern in 1981. Question: Where and when was Maria Keller born? Answer using only the context."
 
-# Smoke suite (data/test_cases/smoke.jsonl, 4 cases)
-python -m stresslab run --suite smoke --enable-thinking false
+# Smoke suite (data/test_cases/smoke.jsonl, 4 cases, unscored)
+.\.venv\Scripts\python.exe -m stresslab run --suite smoke --enable-thinking false
 
 # Inspect a run / print environment
-python -m stresslab show results\2026-10-01_153000
-python -m stresslab env
+.\.venv\Scripts\python.exe -m stresslab show results\2026-10-01_153000
+.\.venv\Scripts\python.exe -m stresslab env
 ```
+
+## Phase 2: factual-grounding suite
+
+`data/test_cases/factual_grounding.jsonl` holds 22 original, synthetic cases (fictional people, companies,
+places, products) across 10 subtypes: direct extraction, multi-fact, numeric, relationship, negative fact,
+false premise, distractor, similar-entity confusion, timeline, unsupported elaboration. Every case stores its
+ground truth explicitly: required facts with accepted values and known-conflicting values, forbidden values,
+allowed derived values, false-premise correction/acceptance phrases, and a `ground_truth` block.
+
+Each case is sent once, with the fixed instruction *"Answer using only the supplied context. If the question
+contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief."*
+
+The evaluator is chosen automatically from the suite name (`smoke` stays unscored). It is deterministic and
+deliberately conservative:
+
+| Status | When |
+|---|---|
+| `DETECTED_FAILURE` | an encoded conflicting value replaces a required fact; a forbidden value appears; a false premise is accepted (case-specific acceptance phrase, no correction) |
+| `POTENTIAL_FAILURE` | a required fact is missing; a number is not in the context/question/allowed values; a capitalised name is not in the prompt (heuristic); an elaboration marker appears; a premise correction could not be confirmed or signals are mixed |
+| `PASS` | none of the above |
+
+Severity (only for non-PASS): `HIGH` = contradiction / forbidden value / accepted false premise; `MEDIUM` =
+missing fact, unsupported number, unconfirmed or ambiguous premise handling; `LOW` = entity heuristic or
+elaboration marker only. `CRITICAL` is not used in Phase 2. Full rules: `docs/methodology.md`.
+
+### Run the real suite (local 8 GB GPU configuration)
+
+```powershell
+cd C:\Extra\apertus-stresslab
+.\.venv\Scripts\python.exe -m stresslab run --suite factual_grounding `
+  --adapter apertus `
+  --model-id swiss-ai/Apertus-v1.5-8B `
+  --revision a411d838600baf0e3635a3daf66fb7c55fc97bb6 `
+  --dtype bfloat16 `
+  --quantization 4bit `
+  --cpu-offload `
+  --gpu-max-memory-gib 7.0 `
+  --seed 42 `
+  --max-new-tokens 128 `
+  --enable-thinking false
+```
+
+22 cases = 22 model calls (one per case, greedy decoding). Add `--only FG-001 FG-012` or `--limit 3` for a
+short trial run first.
+
+### Inspect and re-score
+
+```powershell
+.\.venv\Scripts\python.exe -m stresslab show results\<run_id> --failures-only
+Get-Content results\<run_id>\summary.json
+# Re-apply the (possibly improved) evaluator to stored responses, without calling the model.
+# Writes results\<run_id>\rescored_<timestamp>\; the original results.jsonl is never modified.
+.\.venv\Scripts\python.exe -m stresslab evaluate results\<run_id>
+```
+
+### How to read the results
+
+- `results.jsonl` is canonical: prompt, response, `checks` (every individual check), `evidence` (the reasons
+  for the status), `status`, `severity`, generation config and seed.
+- `summary.json` gives descriptive counts by status, subtype and severity. It intentionally reports **no
+  hallucination rate**: 22 synthetic cases and one run per case do not support a rate claim.
+- `failures.jsonl` repeats the POTENTIAL/DETECTED records for quick review.
+- Every POTENTIAL_FAILURE needs a human look; many will be harmless phrasing the lexical checks did not
+  recognise. A DETECTED_FAILURE is strong evidence for that single run, not yet a reproducible finding.
 
 ### Small GPUs (8 GB): 4-bit + explicit CPU offload
 
 ```powershell
-python -m stresslab infer --quantization 4bit --cpu-offload --gpu-max-memory-gib 7.0 --enable-thinking false --prompt "..."
+.\.venv\Scripts\python.exe -m stresslab infer --quantization 4bit --cpu-offload --gpu-max-memory-gib 7.0 --enable-thinking false --prompt "..."
 ```
 
 `--cpu-offload` builds an explicit device map from a weightless model skeleton (no `device_map="auto"`):
@@ -116,7 +180,7 @@ Useful options: `--quantization {none,8bit,4bit}`, `--cpu-offload`, `--gpu-max-m
 
 ### No suitable GPU? Use Google Colab (free)
 
-1. `python scripts/make_bundle.py` → creates `dist\apertus-stresslab-bundle.zip`.
+1. `.\.venv\Scripts\python.exe scripts/make_bundle.py` → creates `dist\apertus-stresslab-bundle.zip`.
 2. Open `notebooks/colab_smoke_test.ipynb` in Colab (File → Upload notebook), set the runtime to **T4 GPU**, add `HF_TOKEN` in Colab *Secrets*.
 3. Run all cells; it uploads the bundle, installs, runs one inference + the smoke suite in 8-bit, and downloads `stresslab-results.zip`.
 4. Unzip into `C:\Extra\apertus-stresslab\results\`.
@@ -130,17 +194,21 @@ results/
   2026-10-01_153000/
     metadata.json    # run id, command, seed, generation config, model id + resolved revision,
                      # dtype, quantization, device, Python/OS/torch/transformers/GPU, git commit
-    results.jsonl    # one record per test: prompt, response, raw response, usage, status, ...
+    results.jsonl    # canonical: one record per test (prompt, response, checks, evidence, status, ...)
+    summary.json     # descriptive counts (every run)
+    failures.jsonl   # evaluated runs only: POTENTIAL_FAILURE / DETECTED_FAILURE records
 ```
 
-Phase 1 does not evaluate answers: every record has `"status": "UNSCORED"` (or `"ERROR"` with the error message). `results/` is git-ignored; curated runs that back a published finding will be added explicitly.
+Suites without an evaluator (smoke, `infer`) store `"status": "UNSCORED"` (or `"ERROR"` with the error message).
+`results/` is git-ignored; curated runs that back a published finding will be added explicitly.
 
 ## Project layout
 
 ```
-src/stresslab/   cli.py, runner.py, models.py (adapters), schemas.py, storage.py,
-                 cases.py, environment.py, config.py
-data/test_cases/ smoke.jsonl
+src/stresslab/   cli.py, runner.py, models.py (adapters), offload.py, schemas.py, storage.py,
+                 cases.py, environment.py, config.py,
+                 grounding.py (Phase 2 evaluator), evaluators.py (suite -> evaluator), summary.py
+data/test_cases/ smoke.jsonl, factual_grounding.jsonl
 tests/           pytest (no model, no network)
 notebooks/       colab_smoke_test.ipynb
 scripts/         check_env.ps1, make_bundle.py
@@ -149,11 +217,14 @@ docs/            methodology.md, technical_report.md
 
 ## Known limitations
 
-- The first real Apertus run has not been executed yet (needs a GPU or Colab plus the gated-model token).
-- The `ApertusAdapter` follows the official model card but could not be exercised end-to-end during development; expect a small fix-up on first contact with the fork.
-- 8-bit/4-bit quantization changes the model's numerics. Findings from quantized runs must be labelled as such and, where possible, confirmed in bf16.
-- No evaluators, mutations, reproducibility statistics or severity yet (Phases 2–6).
-- Greedy decoding is the default; GPU kernels can still introduce small nondeterminism.
+- The factual-grounding suite has not been run against Apertus yet; there are no results.
+- The suite is small, synthetic and controlled. It does not estimate a general hallucination rate.
+- The evaluator is lexical: it cannot understand semantics. Paraphrases that avoid every encoded alias show up
+  as POTENTIAL_FAILURE; a wrong answer that happens to contain an accepted phrase can pass.
+- Entity detection is a capitalisation heuristic; numeric checks can flag harmless derived values.
+- The local baseline is Apertus 1.5 8B in **4-bit NF4 with CPU offload** (lm_head in system RAM). Quantization
+  changes numerics; strong findings must be re-run several times and ideally confirmed at higher precision.
+- One run per case, greedy decoding; reproducibility reruns and mutations come in later phases.
 
 ## License
 

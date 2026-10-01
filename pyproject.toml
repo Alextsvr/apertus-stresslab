@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "apertus-stresslab"
-version = "0.1.0"
+version = "0.2.0"
 description = "Reproducible red-teaming toolkit that stress-tests Apertus for hallucinations, inconsistency and robustness failures."
 readme = "README.md"
 license = { text = "Apache-2.0" }
