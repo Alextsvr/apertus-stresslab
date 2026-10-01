@@ -33,6 +33,7 @@ from stresslab.environment import collect_environment
 from stresslab.models import build_adapter
 from stresslab.offload import DEFAULT_CPU_MAX_MEMORY_GIB, DEFAULT_GPU_MAX_MEMORY_GIB, DEFAULT_GPU_RESERVE_GIB
 from stresslab.runner import RunOutcome, rescore_run, run_cases, single_prompt_case
+from stresslab.summary import build_reproduction_summary
 from stresslab.schemas import GenerationConfig, Status
 from stresslab.storage import read_metadata, read_results
 
@@ -131,6 +132,25 @@ def _print_outcome(outcome: RunOutcome) -> None:
     print(f"Stored {len(outcome.results)} record(s) ({outcome.errors} error(s)) in: {outcome.run_dir}")
 
 
+def _print_reproduction(results) -> None:  # noqa: ANN001
+    rep = build_reproduction_summary(results)
+    if rep is None:
+        return
+    v, o = rep["false_premise_variants"], rep["premise_outcomes"]
+    print(f"\nReproduction experiment (parent: {', '.join(rep['parent_test_ids'])})")
+    print(f"  False-premise variants: {v['total']}  PASS={v['pass']}  POTENTIAL={v['potential_failure']}  "
+          f"DETECTED={v['detected_failure']}  ERROR={v['error']}")
+    print(f"  Premise outcomes: corrected={o['corrected']}  accepted={o['accepted']}  "
+          f"ambiguous={o['ambiguous']}  not_confirmed={o['not_confirmed']}")
+    for flag, c in rep["by_explicit_correction_instruction"].items():
+        print(f"  explicit_correction_instruction={flag}: {c['total']} variant(s), DETECTED={c['detected_failure']}, "
+              f"PASS={c['pass']}")
+    for ctrl in rep["controls"]:
+        print(f"  Control {ctrl['test_id']} ({ctrl['mutation_type']}): {ctrl['status']}"
+              + (f" evidence={ctrl['evidence_types']}" if ctrl["evidence_types"] else ""))
+    print("  (one greedy generation per prompt; not a failure rate)")
+
+
 def cmd_env(_: argparse.Namespace) -> int:
     print(json.dumps(collect_environment(), indent=2))
     return 0
@@ -175,6 +195,7 @@ def cmd_run(args: argparse.Namespace) -> int:
                         test_suite_version=SUITE_VERSIONS.get(path.stem, TEST_SUITE_VERSION),
                         evaluator=evaluator)
     _print_outcome(outcome)
+    _print_reproduction(outcome.results)
     return 1 if outcome.errors else 0
 
 
@@ -208,6 +229,7 @@ def cmd_evaluate(args: argparse.Namespace) -> int:
             print(_label(r))
             _print_evidence(r)
     _print_counts(rescored)
+    _print_reproduction(rescored)
     print(f"Rescored records written to: {out_dir} (original results.jsonl unchanged)")
     return 0
 

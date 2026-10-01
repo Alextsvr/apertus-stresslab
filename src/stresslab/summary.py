@@ -57,6 +57,68 @@ def build_summary(results: Iterable[TestResult], metadata: Optional[RunMetadata]
         "evidence_types": dict(sorted(evidence_types.items())),
         "failure_ids": [r.test_id for r in results if is_failure(r)],
         "truncated_responses": [r.test_id for r in results if r.usage.get("hit_max_new_tokens")],
+        "reproduction": build_reproduction_summary(results),
         "note": "Descriptive counts from a single run per case on a small synthetic suite; "
                 "not a hallucination rate. Statuses come from a conservative deterministic evaluator.",
+    }
+
+
+def build_reproduction_summary(results: Iterable[TestResult]) -> Optional[dict[str, Any]]:
+    """Focused summary for a cross-prompt reproduction experiment (records that carry lineage).
+
+    Keeps four things apart: the parent (baseline) finding is NOT part of this run; false-premise
+    variants are counted by mutation type and by instruction variant; controls are reported
+    separately and never enter the variant counts. Returns None if no record has lineage.
+    """
+    results = [r for r in results if r.lineage is not None]
+    if not results:
+        return None
+    variants = [r for r in results if r.lineage.role == "false_premise_variant"]
+    controls = [r for r in results if r.lineage.role == "control"]
+
+    def counts(rs: list[TestResult]) -> dict[str, int]:
+        c = Counter(r.status.value for r in rs)
+        return {
+            "total": len(rs),
+            "pass": c.get(Status.PASS.value, 0),
+            "potential_failure": c.get(Status.POTENTIAL_FAILURE.value, 0),
+            "detected_failure": c.get(Status.DETECTED_FAILURE.value, 0),
+            "error": c.get(Status.ERROR.value, 0),
+        }
+
+    def premise_outcome(r: TestResult) -> Optional[str]:
+        check = r.checks.get("false_premise_check") if r.checks else None
+        return check.get("outcome") if check else None
+
+    outcomes = Counter(premise_outcome(r) or "not_evaluated" for r in variants)
+    by_instruction: dict[str, list[TestResult]] = {}
+    for r in variants:
+        by_instruction.setdefault(r.lineage.instruction_variant, []).append(r)
+
+    return {
+        "parent_test_ids": sorted({r.lineage.parent_test_id for r in results}),
+        "false_premise_variants": counts(variants),
+        "premise_outcomes": {  # corrected / accepted / ambiguous / not_confirmed
+            k: outcomes.get(k, 0) for k in ("corrected", "accepted", "ambiguous", "not_confirmed", "not_evaluated")
+        },
+        "by_mutation_type": {
+            r.lineage.mutation_type: {"test_id": r.test_id, "status": r.status.value,
+                                      "premise_outcome": premise_outcome(r),
+                                      "explicit_correction_instruction": r.lineage.explicit_correction_instruction}
+            for r in variants
+        },
+        "by_instruction_variant": {k: counts(v) for k, v in sorted(by_instruction.items())},
+        "by_explicit_correction_instruction": {
+            str(flag).lower(): counts([r for r in variants if r.lineage.explicit_correction_instruction == flag])
+            for flag in (True, False)
+        },
+        "controls": [
+            {"test_id": r.test_id, "mutation_type": r.lineage.mutation_type, "status": r.status.value,
+             "severity": r.severity.value if r.severity else None,
+             "evidence_types": [e.get("type") for e in r.evidence]}
+            for r in controls
+        ],
+        "note": "Cross-prompt reproduction of one baseline finding: one greedy generation per variant. "
+                "Counts describe these prompts only; they are not a failure rate. Controls are excluded "
+                "from variant counts. The baseline run itself is not included.",
     }

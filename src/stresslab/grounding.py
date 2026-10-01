@@ -32,7 +32,9 @@ from stresslab.schemas import Severity, Status, TestCase
 
 # v1.1: false-premise *assertions* (premise stated as fact, not negated or reported) count as
 # acceptance; causal explanations of an accepted false premise are reported as separate evidence.
-EVALUATOR_NAME = "factual_grounding_v1.1"
+# v1.2: premise phrases inside a question sentence (ends with "?") or after a reporting verb such as
+# "you ask" are not assertions (a restated question does not assert its presupposition).
+EVALUATOR_NAME = "factual_grounding_v1.2"
 
 # ---------------------------------------------------------------------------- case schema
 
@@ -336,6 +338,7 @@ PREMISE_GUARD_WORDS = {
     "not", "no", "never", "nor", "neither", "false", "incorrect", "untrue", "wrong", "mistaken",
     "assumes", "assume", "assuming", "assumption", "premise", "claims", "claim", "suggests", "implies",
     "says", "states", "question", "if", "whether", "although", "though",
+    "ask", "asks", "asked", "asking", "wonder", "wondering",
 }
 PREMISE_GUARD_WINDOW = 6
 
@@ -353,6 +356,17 @@ def _sentences(text: str) -> list[str]:
     return [normalize(s) for s in re.split(r"[.!?;\n]+(?:\s|$)", text) if s.strip()]
 
 
+def _question_flags(text: str) -> list[bool]:
+    """Parallel to _sentences(): True where the sentence ends with a question mark."""
+    parts = re.split(r"([.!?;\n]+)(?:\s|$)", text)
+    flags: list[bool] = []
+    for i in range(0, len(parts), 2):
+        if parts[i].strip():
+            terminator = parts[i + 1] if i + 1 < len(parts) else ""
+            flags.append("?" in terminator)
+    return flags
+
+
 Span = tuple[int, int, int]  # (sentence index, start, end) in the normalised sentence
 
 
@@ -362,13 +376,14 @@ def find_unguarded(text: str, phrases: list[str]) -> tuple[list[str], list[str],
     guarded: list[str] = []
     spans: list[Span] = []
     sentences = _sentences(text)
+    questions = _question_flags(text)
     for phrase in phrases:
         regex = _phrase_regex(phrase)
         hit_asserted = hit_guarded = False
         for idx, sentence in enumerate(sentences):
             for m in regex.finditer(sentence):
                 before = sentence[: m.start()].split()[-PREMISE_GUARD_WINDOW:]
-                if PREMISE_GUARD_WORDS.intersection(before):
+                if questions[idx] or PREMISE_GUARD_WORDS.intersection(before):
                     hit_guarded = True
                 else:
                     hit_asserted = True

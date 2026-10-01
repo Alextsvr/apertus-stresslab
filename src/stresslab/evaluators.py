@@ -21,8 +21,12 @@ class Evaluator:
     validate: Callable[[TestCase], None]
 
 
+_GROUNDING = Evaluator(grounding.EVALUATOR_NAME, grounding.evaluate, grounding.validate_case)
+
 EVALUATORS: dict[str, Evaluator] = {
-    "factual_grounding": Evaluator(grounding.EVALUATOR_NAME, grounding.evaluate, grounding.validate_case),
+    "factual_grounding": _GROUNDING,
+    # Phase 3A: controlled variants of FG-013 are scored by the same evaluator (no second evaluator).
+    "fg013_reproduction": _GROUNDING,
 }
 
 

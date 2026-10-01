@@ -38,6 +38,24 @@ class Severity(str, Enum):
     CRITICAL = "CRITICAL"
 
 
+class Lineage(BaseModel):
+    """Where a derived (mutated) case comes from and what was changed (Phase 3A)."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    parent_test_id: str
+    mutation_id: str
+    mutation_type: str
+    role: Literal["false_premise_variant", "control"]
+    changed_fields: list[Literal["context", "question", "instruction"]] = Field(min_length=1)
+    preserves_ground_truth: bool
+    # True if the instruction explicitly asks the model to correct/challenge a wrong question.
+    explicit_correction_instruction: bool
+    # "baseline" = the parent's instruction text, unchanged.
+    instruction_variant: Literal["baseline", "no_correction_clause", "neutral_correction"]
+    description: str
+
+
 class TestCase(BaseModel):
     """One base test case loaded from data/test_cases/*.jsonl."""
 
@@ -51,6 +69,8 @@ class TestCase(BaseModel):
     # Phase 2: case subtype (e.g. "false_premise") and the instruction placed before the context.
     subtype: Optional[str] = None
     instruction: Optional[str] = None
+    # Phase 3A: present only on derived cases (e.g. FG-013 reproduction variants).
+    lineage: Optional[Lineage] = None
     expected: dict[str, Any] = Field(default_factory=dict)
     tags: list[str] = Field(default_factory=list)
     notes: Optional[str] = None
@@ -110,6 +130,7 @@ class TestResult(BaseModel):
     test_id: str
     category: Category
     subtype: Optional[str] = None
+    lineage: Optional[Lineage] = None
     model: str
     model_revision: Optional[str] = None
     timestamp: str = Field(default_factory=utc_now_iso)

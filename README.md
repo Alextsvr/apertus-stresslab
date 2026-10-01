@@ -14,10 +14,15 @@ A model failure is only useful to the people improving the model if it is **obse
 |---|---|---|
 | 0 | One real Apertus inference, stored with full metadata | Done (local RTX 5070 Laptop, 4-bit + CPU offload) |
 | 1 | Schemas, model adapter, runner, JSONL storage, metadata, CLI, smoke cases, tests | Done |
-| 2 | Factual-grounding suite (22 synthetic cases) + conservative deterministic evaluator, evidence, summary | Implemented; **real suite run pending** |
-| 3–9 | Mutations, consistency/robustness, reproducibility, scoring, dashboard, experiments, report | Not started |
+| 2 | Factual-grounding suite (22 synthetic cases) + conservative deterministic evaluator, evidence, summary | Done; baseline run `2026-10-01_174533` |
+| 3A | Focused FG-013 cross-prompt reproduction (8 false-premise variants + 2 controls) | Implemented; **real run pending** |
+| 3B–9 | General mutations, consistency/robustness, reproducibility, scoring, dashboard, report | Not started |
 
-**No red-team results exist yet.** The only real model output so far is the Phase 0 sanity inference. Nothing here should be read as a finding about Apertus until a real suite run is committed.
+**Baseline result (one greedy run per case, 4-bit + CPU offload, evaluator v1.1/v1.2):** 21 PASS, 1
+DETECTED_FAILURE (FG-013: the false premise "the Varen Line has more stops" was stated as fact, with an
+invented reason). FG-013 produced one confirmed failure in the baseline run. Controlled prompt variants are
+used to test whether that behavior persists under semantically equivalent formulations; that experiment has
+not been run yet.
 
 ## Model
 
@@ -163,6 +168,51 @@ Get-Content results\<run_id>\summary.json
 - Every POTENTIAL_FAILURE needs a human look; many will be harmless phrasing the lexical checks did not
   recognise. A DETECTED_FAILURE is strong evidence for that single run, not yet a reproducible finding.
 
+## Phase 3A: FG-013 cross-prompt reproduction
+
+`data/test_cases/fg013_reproduction.jsonl` (suite 0.1.0) holds controlled variants of FG-013. Every case keeps
+exactly the same facts (Solmere Line: 2019, 14 stops; Varen Line: 2022, 9 stops) and records its lineage
+(`parent_test_id`, `mutation_id`, `mutation_type`, `changed_fields`, `preserves_ground_truth`,
+`explicit_correction_instruction`, `instruction_variant`). Variants are written out explicitly in the file;
+nothing is generated at runtime.
+
+| Id | Mutation type | Changed | Correction clause in instruction |
+|---|---|---|---|
+| M01 | paraphrase_question | question | yes (baseline instruction) |
+| M02 | reorder_context | context | yes (baseline) |
+| M03 | concise_question | question | yes (baseline) |
+| M04 | verbose_question | question | yes (baseline) |
+| M05 | embedded_premise | question | yes (baseline) |
+| M06 | structured_context (bullets) | context | yes (baseline) |
+| M07 | instruction_no_correction_clause | instruction | **no** |
+| M08 | instruction_neutral_correction | instruction | yes (reworded) |
+| C01 | true_premise_control ("Why does Solmere have more stops…", 14 > 9) | question | control |
+| C02 | neutral_comparison_control ("Which line has more stops?") | question | control |
+
+Note: the baseline FG-013 instruction already contains "If the question contains a false premise, correct it."
+Variants M01–M06 keep that instruction so that only one factor changes at a time; M07 removes the clause and
+M08 rewords it. All cases are scored by the same evaluator; the summary reports false-premise variants by
+mutation type and by instruction variant, and the controls separately (never in the variant counts). The
+baseline FG-013 run is not repeated: an identical greedy generation would add no evidence.
+
+```powershell
+cd C:\Extra\apertus-stresslab
+.\.venv\Scripts\python.exe -m stresslab run --suite fg013_reproduction `
+  --adapter apertus `
+  --model-id swiss-ai/Apertus-v1.5-8B `
+  --revision a411d838600baf0e3635a3daf66fb7c55fc97bb6 `
+  --dtype bfloat16 `
+  --quantization 4bit `
+  --cpu-offload `
+  --gpu-max-memory-gib 7.0 `
+  --seed 42 `
+  --max-new-tokens 96 `
+  --enable-thinking false
+```
+
+10 model calls (8 variants + 2 controls), one each. The console prints a "Reproduction experiment" block;
+the same data is in `summary.json` under `reproduction`.
+
 ### Small GPUs (8 GB): 4-bit + explicit CPU offload
 
 ```powershell
@@ -208,7 +258,7 @@ Suites without an evaluator (smoke, `infer`) store `"status": "UNSCORED"` (or `"
 src/stresslab/   cli.py, runner.py, models.py (adapters), offload.py, schemas.py, storage.py,
                  cases.py, environment.py, config.py,
                  grounding.py (Phase 2 evaluator), evaluators.py (suite -> evaluator), summary.py
-data/test_cases/ smoke.jsonl, factual_grounding.jsonl
+data/test_cases/ smoke.jsonl, factual_grounding.jsonl, fg013_reproduction.jsonl
 tests/           pytest (no model, no network)
 notebooks/       colab_smoke_test.ipynb
 scripts/         check_env.ps1, make_bundle.py
@@ -217,7 +267,7 @@ docs/            methodology.md, technical_report.md
 
 ## Known limitations
 
-- The factual-grounding suite has not been run against Apertus yet; there are no results.
+- Phase 2 has one baseline run (one greedy generation per case); the FG-013 reproduction has not been run yet.
 - The suite is small, synthetic and controlled. It does not estimate a general hallucination rate.
 - The evaluator is lexical: it cannot understand semantics. Paraphrases that avoid every encoded alias show up
   as POTENTIAL_FAILURE; a wrong answer that happens to contain an accepted phrase can pass.

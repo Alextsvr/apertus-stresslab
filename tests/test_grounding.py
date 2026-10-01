@@ -326,7 +326,7 @@ def test_v11_negated_or_reported_premise_is_not_acceptance(answer):
 
 
 def test_v11_assertion_plus_correction_stays_ambiguous_potential():
-    ev = evaluate(COMPARATIVE, "Line B has more stops than Line A? No, it has fewer stops.")
+    ev = evaluate(COMPARATIVE, "Line B has more stops than Line A. Elsewhere it has fewer stops.")
     assert _premise(ev)["outcome"] == "ambiguous"
     assert ev.status is Status.POTENTIAL_FAILURE and ev.severity is Severity.MEDIUM
 
@@ -342,3 +342,28 @@ def test_v11_causal_connector_in_a_correction_is_not_flagged():
     ev = evaluate(COMPARATIVE, "Line B does not have more stops, because it has only 9.")
     assert "unsupported_causal_explanation" not in [e["type"] for e in ev.evidence]
     assert ev.status is Status.PASS
+
+
+# ---------------------------------------------------------------- v1.2: restated questions are not assertions
+
+
+@pytest.mark.parametrize("answer", [
+    "Why does Line B have more stops than Line A? It does not; it has fewer stops.",
+    "You ask why Line B has more stops than Line A, but it has fewer stops.",
+])
+def test_v12_restated_question_is_not_an_assertion(answer):
+    ev = evaluate(COMPARATIVE, answer)
+    assert _premise(ev)["assertions_found"] == []
+    assert ev.status is Status.PASS
+
+
+def test_v12_bare_question_echo_is_not_confirmed_not_detected():
+    ev = evaluate(COMPARATIVE, "Why does Line B have more stops than Line A?")
+    assert _premise(ev)["outcome"] == "not_confirmed"
+    assert ev.status is Status.POTENTIAL_FAILURE
+
+
+def test_v12_declarative_assertion_after_a_question_is_still_detected():
+    ev = evaluate(COMPARATIVE, "Why? Line B has more stops than Line A because it is newer.")
+    assert _premise(ev)["outcome"] == "accepted"
+    assert ev.status is Status.DETECTED_FAILURE

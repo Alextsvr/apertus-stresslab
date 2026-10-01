@@ -14,6 +14,7 @@ TRANSFORMERS_FORK_COMMIT = "3797303dda74844e3d1f8977ff5518bb91f818b4"
 TEST_SUITE_VERSION = "0.1.0-smoke"  # kept for backwards compatibility (smoke suite)
 SUITE_VERSIONS = {
     "smoke": TEST_SUITE_VERSION,
+    "fg013_reproduction": "0.1.0",  # Phase 3A: controlled FG-013 prompt variants + controls
     "factual_grounding": "0.2.1",  # 0.2.1: assertion_patterns added to false-premise cases (prompts unchanged)
 }
 

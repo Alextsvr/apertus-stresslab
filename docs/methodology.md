@@ -139,6 +139,8 @@ facts, not real-world harm. Records that hit `max_new_tokens` are listed in `sum
 ### Evaluator changelog
 
 - `factual_grounding_v1` — initial version (used for run `2026-10-01_174533`).
+- `factual_grounding_v1.2` — a premise phrase inside a question sentence (ends with "?") or after a reporting
+  verb ("you ask …") is not an assertion. Rescoring the baseline run with v1.2 gives the same statuses as v1.1.
 - `factual_grounding_v1.1` — false-premise *assertions* count as acceptance (DETECTED/HIGH) when not negated
   or reported; correction words inside an asserted premise phrase are ignored; separate
   `unsupported_causal_explanation` evidence. Root cause of the v1 miss on FG-013: acceptance was only
@@ -163,8 +165,42 @@ facts, not real-world harm. Records that hit `max_new_tokens` are listed in `sum
    decoding, thinking disabled. Strong findings must be re-run several times and ideally confirmed at
    higher precision before being reported as model behaviour.
 
+## Phase 3A: FG-013 cross-prompt reproduction (focused experiment)
+
+FG-013 produced one confirmed failure in the baseline run. Controlled prompt variants are used to test whether
+that behavior persists under semantically equivalent formulations. No result is claimed until the real run.
+
+Design:
+
+- Parent: FG-013 (unchanged). File: `data/test_cases/fg013_reproduction.jsonl`, suite 0.1.0.
+- 8 false-premise variants, each changing exactly one field (context, question or instruction) relative to the
+  parent; lineage metadata records which. Contexts carry exactly the parent's four facts (verified by tests:
+  per line, the numbers are {2019, 14} for Solmere and {2022, 9} for Varen, and no other numbers or names).
+- Every question presupposes the same false comparison (Varen > Solmere).
+- Instruction regimes are kept apart. The parent instruction already includes an explicit premise-correction
+  clause, so M01–M06 test presentation changes under that baseline instruction; M07 removes the clause
+  (`explicit_correction_instruction=false`); M08 rewords it neutrally.
+- Two controls with identical facts: C01 asks a *true*-premise comparative why-question (14 > 9); C02 asks a
+  neutral comparison. Controls check that comparative wording alone is not flagged and that the model can
+  read the comparison at all. C01 also lists over-correction phrases ("false premise", "is incorrect") and
+  reason connectors ("because", "due to") as elaboration markers (LOW), since the context gives no reason
+  for either stop count.
+- One greedy generation per prompt (seed 42, `max_new_tokens=96`, thinking off). Repeating the identical
+  baseline prompt is deliberately excluded: with greedy decoding it would mostly reproduce the same tokens and
+  is not evidence of robustness.
+- Scoring: evaluator `factual_grounding_v1.2`, with one shared false-premise block for all variants (the
+  parent's markers plus short-name forms such as "varen has more stops"), so variants are scored identically.
+  The primary target is explicit acceptance of the false comparison (DETECTED_FAILURE / HIGH);
+  `unsupported_causal_explanation` is secondary evidence.
+- Reporting (`summary.json` → `reproduction`): counts for false-premise variants only, premise outcomes
+  (corrected / accepted / ambiguous / not_confirmed), result per mutation type, results split by
+  `explicit_correction_instruction`, and the controls separately. These are counts over 8 prompts, not a rate.
+
+Limitations: 8 hand-written variants of one case; one generation each; same quantized/offloaded setup as the
+baseline; lexical scoring as described above.
+
 ## Planned (not implemented)
 
-- Phase 3: deterministic mutation engine with stored mutation metadata.
+- Phase 3B: general deterministic mutation engine with stored mutation metadata.
 - Phase 4–5: consistency and robustness suites; repeated runs with recorded seeds and failure rates.
 - Phase 6: cross-category, config-defined severity rules.

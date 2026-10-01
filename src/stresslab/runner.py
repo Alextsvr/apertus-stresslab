@@ -105,6 +105,7 @@ def run_cases(
             test_id=case.id,
             category=case.category,
             subtype=case.subtype,
+            lineage=case.lineage,
             model=model_info.model_id,
             model_revision=model_info.resolved_revision or model_info.requested_revision,
             seed=seed,
