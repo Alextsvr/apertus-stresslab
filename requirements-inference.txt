@@ -1,0 +1,13 @@
+# Real Apertus 1.5 inference.
+#
+# 1) Install a CUDA build of PyTorch FIRST (otherwise pip pulls a CPU-only build on Windows):
+#      pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+#    (Colab already ships a CUDA torch; skip this step there.)
+# 2) Then: pip install -r requirements-inference.txt
+#
+# The Apertus-v1.5-8B model card pins this swiss-ai transformers fork commit.
+transformers[torch,vision,audio] @ git+https://github.com/swiss-ai/transformers.git@3797303dda74844e3d1f8977ff5518bb91f818b4
+accelerate>=1.0
+huggingface_hub>=0.34
+# Only needed for --quantization 8bit / 4bit (GPUs with < ~20 GB VRAM, e.g. Colab T4).
+bitsandbytes>=0.45

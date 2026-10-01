@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "apertus-stresslab"
+version = "0.1.0"
+description = "Reproducible red-teaming toolkit that stress-tests Apertus for hallucinations, inconsistency and robustness failures."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.7,<3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+# Real inference also needs torch (install the CUDA build first) and the swiss-ai
+# transformers fork; see requirements-inference.txt.
+inference = [
+    "accelerate>=1.0",
+    "huggingface_hub>=0.34",
+]
+
+[project.scripts]
+stresslab = "stresslab.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

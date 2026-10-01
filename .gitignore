@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+
+# Environments
+.venv/
+venv/
+.env
+.env.*
+
+# Experiment outputs: keep the folder, not local runs.
+# Curated runs that back published findings can be force-added later (git add -f).
+results/*
+!results/.gitkeep
+
+# Model caches / weights (never commit)
+.cache/
+hf_cache/
+*.safetensors
+*.bin
+*.gguf
+
+# Editors / OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# Notebooks
+.ipynb_checkpoints/

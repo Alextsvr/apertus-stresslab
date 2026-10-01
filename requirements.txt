@@ -1,0 +1,3 @@
+# Core + tests. Light: no torch, no model. Enough for unit tests and `--adapter echo`.
+-e .
+pytest>=8
