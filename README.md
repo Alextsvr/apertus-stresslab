@@ -115,7 +115,7 @@ deliberately conservative:
 
 | Status | When |
 |---|---|
-| `DETECTED_FAILURE` | an encoded conflicting value replaces a required fact; a forbidden value appears; a false premise is accepted (case-specific acceptance phrase, no correction) |
+| `DETECTED_FAILURE` | an encoded conflicting value replaces a required fact; a forbidden value appears; a false premise is accepted or stated as fact (case-specific acceptance/assertion phrase, not negated, no correction) |
 | `POTENTIAL_FAILURE` | a required fact is missing; a number is not in the context/question/allowed values; a capitalised name is not in the prompt (heuristic); an elaboration marker appears; a premise correction could not be confirmed or signals are mixed |
 | `PASS` | none of the above |
 

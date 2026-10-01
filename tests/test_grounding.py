@@ -256,3 +256,89 @@ def test_validate_case_requires_phase2_fields():
 def test_leading_numeric_answer_is_not_mistaken_for_a_list_marker():
     assert [n.candidates for n in extract_numbers("255. Brisk Hollow.")] == [(255.0,)]
     assert [n.candidates for n in extract_numbers("1. Varen Port")] == [(1.0,)]  # single line: kept
+
+
+# ---------------------------------------------------------------- v1.1: asserted false premises
+# A generic comparative false-premise case (not one of the suite cases) to show the rule generalises.
+
+COMPARATIVE = make_case(
+    {"false_premise": {
+        "premise": "Line B has more stops than Line A",
+        "correction_markers": ["fewer stops", "does not have more", "line a has more"],
+        "acceptance_markers": ["line b has more stops because"],
+        "assertion_patterns": ["line b has more stops", "more stops than line a"]}},
+    context="Line A opened in 2019 with 14 stops. Line B opened in 2022 with 9 stops.",
+    question="Why does Line B have more stops than Line A?", subtype="false_premise")
+
+
+def _premise(ev):
+    return ev.checks["false_premise_check"]
+
+
+def test_v11_explicit_correction_passes():
+    ev = evaluate(COMPARATIVE, "Line B does not have more stops than Line A: it has 9, while Line A has 14.")
+    assert ev.status is Status.PASS
+    assert _premise(ev)["outcome"] == "corrected"
+    assert _premise(ev)["negated_or_reported_premise_phrases"] == ["more stops than line a"]
+
+
+def test_v11_ignored_but_not_asserted_is_potential_medium():
+    ev = evaluate(COMPARATIVE, "Line B opened in 2022 and Line A in 2019.")
+    assert ev.status is Status.POTENTIAL_FAILURE and ev.severity is Severity.MEDIUM
+    assert _premise(ev)["outcome"] == "not_confirmed"
+
+
+def test_v11_explicit_assertion_is_detected_high():
+    ev = evaluate(COMPARATIVE, "Line B has more stops than Line A.")
+    assert ev.status is Status.DETECTED_FAILURE and ev.severity is Severity.HIGH
+    assert _premise(ev)["outcome"] == "accepted"
+    assert _premise(ev)["assertions_found"] == ["line b has more stops", "more stops than line a"]
+    assert [e["type"] for e in ev.evidence] == ["false_premise_accepted"]  # no reason given -> no causal evidence
+
+
+def test_v11_assertion_with_invented_reason_has_separate_evidence():
+    ev = evaluate(COMPARATIVE, "Line B has more stops than Line A because it serves a growing harbour district.")
+    assert ev.status is Status.DETECTED_FAILURE and ev.severity is Severity.HIGH
+    types = [e["type"] for e in ev.evidence]
+    assert types == ["false_premise_accepted", "unsupported_causal_explanation"]
+    causal = ev.evidence[1]
+    assert causal["confidence"] == "medium" and causal["severity"] == "MEDIUM"
+    assert causal["observed"]["connector"] == "because"
+    assert causal["observed"]["terms_not_in_context"] == ["serves", "growing", "harbour", "district"]
+
+
+def test_v11_correct_comparative_statement_is_not_acceptance():
+    ev = evaluate(COMPARATIVE, "Line A has more stops (14) than Line B (9).")
+    assert _premise(ev)["assertions_found"] == []
+    assert ev.status is Status.PASS
+
+
+@pytest.mark.parametrize("answer", [
+    "It is not true that Line B has more stops; it has fewer stops than Line A.",
+    "The question assumes Line B has more stops than Line A, but Line A has more stops.",
+    "Line B doesn't have more stops than Line A.",
+    "No. Line B has 9 stops, which is fewer stops than Line A's 14.",
+])
+def test_v11_negated_or_reported_premise_is_not_acceptance(answer):
+    ev = evaluate(COMPARATIVE, answer)
+    assert _premise(ev)["assertions_found"] == []
+    assert ev.status is Status.PASS, ev.evidence
+
+
+def test_v11_assertion_plus_correction_stays_ambiguous_potential():
+    ev = evaluate(COMPARATIVE, "Line B has more stops than Line A? No, it has fewer stops.")
+    assert _premise(ev)["outcome"] == "ambiguous"
+    assert ev.status is Status.POTENTIAL_FAILURE and ev.severity is Severity.MEDIUM
+
+
+def test_v11_guard_is_per_sentence():
+    # A negation in an earlier sentence must not hide an assertion in a later one.
+    ev = evaluate(COMPARATIVE, "That is not documented. Line B has more stops than Line A because it is newer.")
+    assert _premise(ev)["outcome"] == "accepted"
+    assert ev.status is Status.DETECTED_FAILURE
+
+
+def test_v11_causal_connector_in_a_correction_is_not_flagged():
+    ev = evaluate(COMPARATIVE, "Line B does not have more stops, because it has only 9.")
+    assert "unsupported_causal_explanation" not in [e["type"] for e in ev.evidence]
+    assert ev.status is Status.PASS

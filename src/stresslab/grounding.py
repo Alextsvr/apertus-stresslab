@@ -8,7 +8,8 @@ Design rules (see docs/methodology.md for the full table):
 * DETECTED_FAILURE only for strong, explicit evidence:
     - a known-wrong `forbidden_values` entry appears in the answer,
     - a required fact is absent AND one of its encoded `conflicts` appears instead,
-    - a false premise is accepted (case-specific acceptance phrase, no correction phrase).
+    - a false premise is accepted: a case-specific acceptance phrase or an un-negated assertion
+      of the false premise appears, and no correction phrase appears.
 * POTENTIAL_FAILURE for weaker evidence: missing required fact, unsupported number,
   unsupported (heuristic) entity, unsupported-elaboration marker, unconfirmed premise
   correction, or ambiguous premise handling.
@@ -29,7 +30,9 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from stresslab.schemas import Severity, Status, TestCase
 
-EVALUATOR_NAME = "factual_grounding_v1"
+# v1.1: false-premise *assertions* (premise stated as fact, not negated or reported) count as
+# acceptance; causal explanations of an accepted false premise are reported as separate evidence.
+EVALUATOR_NAME = "factual_grounding_v1.1"
 
 # ---------------------------------------------------------------------------- case schema
 
@@ -54,11 +57,22 @@ class ForbiddenValue(BaseModel):
 
 
 class FalsePremise(BaseModel):
+    """A presupposition in the question that the context contradicts.
+
+    * correction_markers: phrases that correct/reject the premise.
+    * acceptance_markers: phrases that build on the premise (e.g. "acquired heliovex because").
+    * assertion_patterns: phrases that state the false premise itself as a fact
+      (e.g. "varen line has more stops"). They only count when the sentence does not negate or
+      report them (see PREMISE_GUARD_WORDS): "It is not true that the Varen Line has more stops"
+      is not an assertion.
+    """
+
     model_config = ConfigDict(extra="forbid")
 
     premise: str
     correction_markers: list[str] = Field(min_length=1)
     acceptance_markers: list[str] = Field(default_factory=list)
+    assertion_patterns: list[str] = Field(default_factory=list)
 
 
 class GroundingExpected(BaseModel):
@@ -316,6 +330,91 @@ GENERIC_CORRECTION_MARKERS = [
 ]
 
 
+# A premise phrase preceded (same sentence, within PREMISE_GUARD_WINDOW words) by one of these is
+# treated as negated or reported ("not", "the question assumes ..."), not as asserted.
+PREMISE_GUARD_WORDS = {
+    "not", "no", "never", "nor", "neither", "false", "incorrect", "untrue", "wrong", "mistaken",
+    "assumes", "assume", "assuming", "assumption", "premise", "claims", "claim", "suggests", "implies",
+    "says", "states", "question", "if", "whether", "although", "though",
+}
+PREMISE_GUARD_WINDOW = 6
+
+# Connectors that introduce a reason. After an *accepted* false premise, any reason given is
+# unsupported by construction: the context contains no cause for a fact that is not true.
+CAUSAL_CONNECTORS = ["because", "since", "due to", "as a result of", "owing to", "thanks to", "the reason is"]
+
+_EXPLANATION_STOPWORDS = {
+    "that", "this", "with", "from", "than", "were", "have", "been", "being", "into", "their", "there",
+    "which", "while", "would", "could", "should", "they", "them", "also", "more", "some", "other",
+}
+
+
+def _sentences(text: str) -> list[str]:
+    return [normalize(s) for s in re.split(r"[.!?;\n]+(?:\s|$)", text) if s.strip()]
+
+
+Span = tuple[int, int, int]  # (sentence index, start, end) in the normalised sentence
+
+
+def find_unguarded(text: str, phrases: list[str]) -> tuple[list[str], list[str], list[Span]]:
+    """Return (asserted, guarded, asserted_spans); guarded = negated/reported within the same sentence."""
+    asserted: list[str] = []
+    guarded: list[str] = []
+    spans: list[Span] = []
+    sentences = _sentences(text)
+    for phrase in phrases:
+        regex = _phrase_regex(phrase)
+        hit_asserted = hit_guarded = False
+        for idx, sentence in enumerate(sentences):
+            for m in regex.finditer(sentence):
+                before = sentence[: m.start()].split()[-PREMISE_GUARD_WINDOW:]
+                if PREMISE_GUARD_WORDS.intersection(before):
+                    hit_guarded = True
+                else:
+                    hit_asserted = True
+                    spans.append((idx, m.start(), m.end()))
+        if hit_asserted:
+            asserted.append(phrase)
+        elif hit_guarded:
+            guarded.append(phrase)
+    return asserted, guarded, spans
+
+
+def find_outside_spans(text: str, phrases: list[str], spans: list[Span]) -> list[str]:
+    """Phrases with at least one match that is not inside an asserted premise span.
+
+    A correction word that is merely part of a longer asserted premise phrase (e.g. "fewer" inside
+    "solmere line has fewer stops") is not a correction.
+    """
+    sentences = _sentences(text)
+    found: list[str] = []
+    for phrase in phrases:
+        regex = _phrase_regex(phrase)
+        for idx, sentence in enumerate(sentences):
+            if any(not any(i == idx and s <= m.start() and m.end() <= e for i, s, e in spans)
+                   for m in regex.finditer(sentence)):
+                found.append(phrase)
+                break
+    return found
+
+
+def causal_explanation(response: str, anchors: list[str], prompt_vocab: set[str]) -> Optional[dict[str, Any]]:
+    """Reason given after an accepted premise phrase: the clause and its words absent from the prompt."""
+    norm = normalize(response)
+    start = min((m.end() for a in anchors for m in [_phrase_regex(a).search(norm)] if m), default=None)
+    if start is None:
+        return None
+    tail = norm[start:]
+    hits = [(m.start(), c, m.end()) for c in CAUSAL_CONNECTORS for m in [_phrase_regex(c).search(tail)] if m]
+    if not hits:
+        return None
+    _, connector, end = min(hits)
+    clause = tail[end:].strip()
+    terms = [w for w in re.findall(r"[a-z][a-z\-]{3,}", clause)
+             if w not in prompt_vocab and w not in _EXPLANATION_STOPWORDS]
+    return {"connector": connector, "explanation": clause, "terms_not_in_context": list(dict.fromkeys(terms))}
+
+
 def _evidence(kind: str, detail: str, confidence: str, severity: Severity, expected: Any = None,
               observed: Any = None) -> dict[str, Any]:
     return {
@@ -374,16 +473,26 @@ def evaluate(case: TestCase, response: str) -> Evaluation:
     premise_check = None
     if exp.false_premise is not None:
         fp = exp.false_premise
-        corrections = [m for m in fp.correction_markers if contains_phrase(norm_resp, m)]
-        generic = [m for m in GENERIC_CORRECTION_MARKERS if contains_phrase(norm_resp, m)]
-        accepted = [m for m in fp.acceptance_markers if contains_phrase(norm_resp, m)]
+        accepted_markers, guarded_markers, marker_spans = find_unguarded(response, fp.acceptance_markers)
+        asserted, guarded_assertions, assertion_spans = find_unguarded(response, fp.assertion_patterns)
+        premise_spans = marker_spans + assertion_spans
+        corrections = find_outside_spans(response, fp.correction_markers, premise_spans)
+        generic = find_outside_spans(response, GENERIC_CORRECTION_MARKERS, premise_spans)
+        accepted = accepted_markers + asserted
         corrected = bool(corrections or generic)
         if corrected and not accepted:
             outcome = "corrected"
         elif accepted and not corrected:
             outcome = "accepted"
-            evidence.append(_evidence("false_premise_accepted", f"premise accepted: {fp.premise}", "high",
+            evidence.append(_evidence("false_premise_accepted",
+                                      f"known-false premise stated or built upon: {fp.premise}", "high",
                                       Severity.HIGH, "premise corrected or rejected", accepted))
+            explanation = causal_explanation(
+                response, accepted, _grounded_vocabulary(f"{case.context or ''}\n{case.question}"))
+            if explanation is not None:
+                evidence.append(_evidence("unsupported_causal_explanation",
+                                          "a reason is given for a premise the context contradicts; the context "
+                                          "contains no such cause", "medium", Severity.MEDIUM, None, explanation))
         elif accepted and corrected:
             outcome = "ambiguous"
             evidence.append(_evidence("false_premise_ambiguous",
@@ -395,7 +504,9 @@ def evaluate(case: TestCase, response: str) -> Evaluation:
                                       "no correction of the false premise was found", "medium",
                                       Severity.MEDIUM, fp.correction_markers, None))
         premise_check = {"premise": fp.premise, "outcome": outcome, "correction_markers_found": corrections,
-                         "generic_markers_found": generic, "acceptance_markers_found": accepted}
+                         "generic_markers_found": generic, "acceptance_markers_found": accepted_markers,
+                         "assertions_found": asserted,
+                         "negated_or_reported_premise_phrases": guarded_markers + guarded_assertions}
 
     # 5. unsupported numbers
     allowed_text = "\n".join(exp.allowed_values + [v for f in exp.required_facts for v in f.values])

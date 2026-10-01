@@ -14,7 +14,7 @@ TRANSFORMERS_FORK_COMMIT = "3797303dda74844e3d1f8977ff5518bb91f818b4"
 TEST_SUITE_VERSION = "0.1.0-smoke"  # kept for backwards compatibility (smoke suite)
 SUITE_VERSIONS = {
     "smoke": TEST_SUITE_VERSION,
-    "factual_grounding": "0.2.0",
+    "factual_grounding": "0.2.1",  # 0.2.1: assertion_patterns added to false-premise cases (prompts unchanged)
 }
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]

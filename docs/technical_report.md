@@ -23,7 +23,7 @@ One model call per base case, fixed instruction, fixed prompt template, greedy d
 `enable_thinking=false`, `max_new_tokens=128`). Details: `methodology.md`.
 
 ### 5. Dataset construction
-22 original synthetic cases (suite version 0.2.0) across 10 subtypes: direct extraction, multi-fact, numeric,
+22 original synthetic cases (suite version 0.2.1) across 10 subtypes: direct extraction, multi-fact, numeric,
 relationship, negative fact, false premise, distractor, similar entity, timeline, unsupported elaboration.
 All entities are fictional. Each case encodes machine-checkable expectations (required facts with accepted
 values and known conflicts, forbidden values, allowed derived values, false-premise phrases) and a
@@ -33,7 +33,8 @@ values and known conflicts, forbidden values, allowed derived values, false-prem
 PENDING (Phase 3).
 
 ### 7. Evaluation methodology
-Conservative deterministic evaluator `factual_grounding_v1`:
+Conservative deterministic evaluator `factual_grounding_v1.1` (v1.1 adds detection of false premises stated
+as fact; see the changelog in `methodology.md`):
 - DETECTED_FAILURE: controlled contradiction, forbidden value, or accepted false premise.
 - POTENTIAL_FAILURE: missing required fact, unsupported number, heuristic unsupported entity, elaboration
   marker, unconfirmed/ambiguous premise correction.

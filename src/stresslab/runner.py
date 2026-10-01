@@ -14,6 +14,7 @@ from typing import Iterable, Optional
 
 from stresslab import __version__
 from stresslab.cases import build_prompt
+from stresslab.config import SUITE_VERSIONS
 from stresslab.environment import collect_environment
 from stresslab.evaluators import Evaluator
 from stresslab.models import ModelAdapter
@@ -173,7 +174,9 @@ def rescore_run(run_dir: Path, cases: Iterable[TestCase], evaluator: Evaluator) 
     metadata = read_metadata(run_dir)
     out_dir = create_run_dir(Path(run_dir), f"rescored_{new_run_id()}")
     rescored: list[TestResult] = []
+    original_status: dict[str, str] = {}
     for record in read_results(run_dir):
+        original_status[record.test_id] = record.status.value
         record = record.model_copy(deep=True)
         case = by_id.get(record.test_id)
         if case is None:
@@ -187,6 +190,13 @@ def rescore_run(run_dir: Path, cases: Iterable[TestCase], evaluator: Evaluator) 
     summary = build_summary(rescored, metadata)
     summary["rescored_from"] = str(run_dir)
     summary["rescored_at"] = utc_now_iso()
+    summary["rescore_evaluator"] = evaluator.name
+    summary["rescore_test_suite_version"] = SUITE_VERSIONS.get(metadata.suite or "")
+    summary["original_status_by_test"] = original_status
+    summary["status_changes"] = {
+        r.test_id: {"from": original_status.get(r.test_id), "to": r.status.value}
+        for r in rescored if original_status.get(r.test_id) != r.status.value
+    }
     write_summary(out_dir, summary)
     write_failures(out_dir, [r for r in rescored if is_failure(r)])
     return out_dir, rescored

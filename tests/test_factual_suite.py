@@ -7,8 +7,9 @@ import pytest
 
 from stresslab.cases import build_prompt, load_cases, suite_path
 from stresslab.cli import main
-from stresslab.config import DEFAULT_CASES_DIR, GROUNDING_INSTRUCTION
+from stresslab.config import DEFAULT_CASES_DIR, GROUNDING_INSTRUCTION, SUITE_VERSIONS
 from stresslab.evaluators import evaluator_for
+from stresslab import grounding
 from stresslab.grounding import contains_value, evaluate, extract_numbers, normalize, parse_expected, validate_case
 from stresslab.models import ModelAdapter
 from stresslab.runner import rescore_run, run_cases
@@ -142,7 +143,7 @@ def test_evaluated_run_writes_scored_results_summary_and_failures(tmp_path, fg_c
     assert stored["FG-016"].status is Status.DETECTED_FAILURE and stored["FG-016"].severity is Severity.HIGH
     assert stored["FG-022"].status is Status.POTENTIAL_FAILURE
     assert stored["FG-016"].subtype == "distractor"
-    assert stored["FG-016"].evaluator == "factual_grounding_v1"
+    assert stored["FG-016"].evaluator == grounding.EVALUATOR_NAME
     assert stored["FG-016"].evidence[0]["type"] == "contradiction"
     assert stored["FG-016"].reproducibility.model_dump() == {"runs": 1, "failures": 1, "rate": 1.0, "seeds": [42]}
 
@@ -235,10 +236,10 @@ def test_cli_run_factual_grounding_selects_evaluator(tmp_path, capsys):
     run_dir = next(tmp_path.iterdir())
     records = read_results(run_dir)
     assert [r.test_id for r in records] == ["FG-001", "FG-012"]
-    assert all(r.evaluator == "factual_grounding_v1" for r in records)
+    assert all(r.evaluator == grounding.EVALUATOR_NAME for r in records)
     assert all(r.status is not Status.UNSCORED for r in records)
     meta = read_metadata(run_dir)
-    assert meta.suite == "factual_grounding" and meta.test_suite_version == "0.2.0"
+    assert meta.suite == "factual_grounding" and meta.test_suite_version == SUITE_VERSIONS["factual_grounding"]
     assert meta.generation_config.max_new_tokens == 96
     assert (run_dir / SUMMARY_FILE).exists() and (run_dir / FAILURES_FILE).exists()
     assert "Status counts:" in capsys.readouterr().out
@@ -270,3 +271,43 @@ def test_cli_show_failures_only_and_evaluate(tmp_path, capsys):
     assert main(["evaluate", str(run_dir)]) == 0
     assert "original results.jsonl unchanged" in capsys.readouterr().out
     assert any(p.name.startswith("rescored_") for p in run_dir.iterdir())
+
+
+def test_regression_fg013_recorded_apertus_response(fg_cases):
+    """Real response recorded in run 2026-10-01_174533 (Apertus-v1.5-8B, 4-bit, seed 42).
+
+    v1 scored it POTENTIAL_FAILURE (premise only 'not confirmed'); it states the false premise as fact.
+    """
+    case = next(c for c in fg_cases if c.id == "FG-013")
+    response = ("The Varen Line has more stops than the Solmere Line because it opened later (2022 vs. 2019) "
+                "and was planned with a different route or service needs.")
+    ev = evaluate(case, response)
+    assert ev.status is Status.DETECTED_FAILURE and ev.severity is Severity.HIGH
+    assert [e["type"] for e in ev.evidence] == ["false_premise_accepted", "unsupported_causal_explanation"]
+    assert {"route", "service", "planned"} <= set(ev.evidence[1]["observed"]["terms_not_in_context"])
+
+
+def test_false_premise_cases_define_assertion_patterns_that_reference_answers_avoid(fg_cases):
+    for case in fg_cases:
+        fp = parse_expected(case).false_premise
+        if fp is None:
+            continue
+        assert fp.assertion_patterns, case.id
+        # Each correction marker, used as an answer on its own, must never read as an assertion.
+        for marker in fp.correction_markers:
+            assert evaluate(case, marker.capitalize() + ".").checks["false_premise_check"]["assertions_found"] == [], (
+                case.id, marker)
+        # Each assertion pattern, stated as fact, must be detected.
+        for pattern in fp.assertion_patterns:
+            assert evaluate(case, pattern.capitalize() + ".").status is Status.DETECTED_FAILURE, (case.id, pattern)
+
+
+@pytest.mark.parametrize("answer,status", [
+    ("The Varen Line actually has fewer stops (9) than the Solmere Line (14).", Status.PASS),
+    ("It has fewer stops: 9 versus 14.", Status.PASS),
+    ("The Solmere Line has more stops.", Status.PASS),
+    ("The Solmere Line has fewer stops than the Varen Line.", Status.DETECTED_FAILURE),
+])
+def test_fg013_direction_of_comparison(fg_cases, answer, status):
+    case = next(c for c in fg_cases if c.id == "FG-013")
+    assert evaluate(case, answer).status is status
