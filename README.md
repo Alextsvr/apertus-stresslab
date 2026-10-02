@@ -333,3 +333,36 @@ docs/            methodology.md, technical_report.md
 ## License
 
 Apache-2.0 (see `LICENSE`). Apertus itself is released by the Swiss AI Initiative under Apache-2.0 with an Acceptable Use Policy.
+
+## Phase 3B post-run update (2026-10-02)
+
+The historical PENDING/not-run statements above describe the preserved preregistration checkpoint; this
+addendum records the completed run `results/2026-10-02_111432`. Checkpoint: existing tag
+`phase3b-preregistered`, commit `ed64ba8cb382073d652b24e647a898c94f8ce186` (`ed64ba8`), also recorded in the
+run metadata. All earlier document content is retained unchanged.
+
+**Primary frozen automated result:** 24 false-premise prompts yielded **16 PASS / 6 POTENTIAL_FAILURE /
+2 DETECTED_FAILURE** (HO-006-B and HO-008-B). The 6 neutral controls all passed. Whole run: 30 records,
+**22 PASS / 6 POTENTIAL / 2 DETECTED**, no errors or unscored records and no flagged truncations. Frozen
+false-premise outcomes: 16 corrected, 2 accepted, 2 ambiguous, 4 not_confirmed.
+
+**Separate post-hoc semantic audit:** all 30 responses were reviewed against their stored prompts using a
+human-review rubric, prepared by Codex (AI-assisted review; no independent human sign-off). Among the 24
+false-premise responses: **16 corrected, 4 explicit acceptances, 3 not corrected, 1 ambiguous**; all 6 controls
+are semantically correct. The four acceptances are HO-006-B, HO-008-B and HO-009-A/B (three scenarios).
+These labels do not replace the frozen automated result.
+
+- [Raw-run SHA256 manifest](docs/audits/phase3b-2026-10-02_111432/SHA256SUMS) and
+  [capture record](docs/audits/phase3b-2026-10-02_111432/integrity.json): saved before this detailed audit,
+  outside the raw run directory; post-run hashes, not pre-run hash registration.
+- [Complete semantic audit](docs/audits/phase3b-2026-10-02_111432/human_semantic_audit.md): exact prompts,
+  all 30 answers, frozen labels, separate semantic judgements and rationales.
+- [Technical report addendum](docs/technical_report.md#15-phase-3b-post-run-audit-and-report-2026-10-02),
+  [audit protocol](docs/methodology.md#phase-3b-post-run-audit-protocol-2026-10-02) and
+  [integrity verification](docs/audits/phase3b-2026-10-02_111432/verification.json).
+
+No rerun, rescore, evaluator change, dataset change or raw-result edit was made for this audit. The finding
+is a held-out replication candidate on 12 synthetic scenarios and a narrow more/fewer count family, with
+one greedy generation per prompt in 4-bit NF4 + CPU offload. A/B prompts are paired; six correct controls
+do not establish general reliability. Counts are descriptive, not a general hallucination rate. Raw run
+files remain local/git-ignored; the documentation and hashes do not by themselves publish the full raw run.

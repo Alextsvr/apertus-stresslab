@@ -1,0 +1,109 @@
+{
+  "verified_at_utc": "2026-10-02T08:35:47.245113+00:00",
+  "preregistration_tag": "phase3b-preregistered",
+  "preregistration_commit": "ed64ba8cb382073d652b24e647a898c94f8ce186",
+  "head_and_tag_unchanged": true,
+  "raw_hashes_match_initial_capture": true,
+  "raw_directory_inventory_unchanged": true,
+  "raw_file_count": 4,
+  "raw_files": [
+    {
+      "path": "results/2026-10-02_111432/failures.jsonl",
+      "bytes": 35054,
+      "sha256": "88da8dd6435fd64a2adb7d55210b055ec1c7c224e2d6ba30142e421ba95c3b36"
+    },
+    {
+      "path": "results/2026-10-02_111432/metadata.json",
+      "bytes": 9178,
+      "sha256": "8c08fde3b676515a8caf96fa80ebf5323956c894199bc24d352f20db061d0cd9"
+    },
+    {
+      "path": "results/2026-10-02_111432/results.jsonl",
+      "bytes": 121660,
+      "sha256": "526ed3346649ca457e804a78aaa04d780e029af3b50da6f8b6b4be03891e467a"
+    },
+    {
+      "path": "results/2026-10-02_111432/summary.json",
+      "bytes": 12190,
+      "sha256": "1d2b05c85101f0b1de33add768f2a6eb5cc8767e29e20c1c2633eb00d5c0b0cb"
+    }
+  ],
+  "existing_documents_append_only": {
+    "README.md": {
+      "original_bytes": 18761,
+      "original_sha256": "a145b46f1134fcbc5e587767ded2b112e521c52735b2c1e0b4afea0b41584c4a",
+      "final_bytes": 21319,
+      "final_sha256": "df488ff1443a6e46cb5894dfbf2d88142af1be25fff8f3337e146b4006636a75",
+      "original_prefix_preserved": true
+    },
+    "docs/methodology.md": {
+      "original_bytes": 20125,
+      "original_sha256": "f5223b1b0d04522eaa8dccdbfe667ef52989496a58554cadae343b6bd7e648e0",
+      "final_bytes": 26148,
+      "final_sha256": "1f038e543da920b8b802092c670c3d1ea00ec75375452ba1246052a97b98f2a1",
+      "original_prefix_preserved": true
+    },
+    "docs/technical_report.md": {
+      "original_bytes": 8311,
+      "original_sha256": "c592ee6927b5d5984806f31f7164208608b02b5ae4aa90af6fd07aab9b799677",
+      "final_bytes": 17278,
+      "final_sha256": "7b784d2ecee5d30f9799644e7f7b92d31e1b746d5039b72e57107b9f3cc285c0",
+      "original_prefix_preserved": true
+    }
+  },
+  "unchanged_existing_file_sha256": {
+    ".gitignore": "6be5b804e7304d3a7b6a9ba6de01577fc3a0ea8fd06c1f979a1c47578fdfab70",
+    "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+    "data/test_cases/factual_grounding.jsonl": "9acba354c3b79b3bdbff55aaffcd52ae74a33c7a70bc0498eb07240b01f459f1",
+    "data/test_cases/false_premise_heldout.jsonl": "62f1b7434a450da17ab3e64a09986d0ec555d1aa86981236baa27c606ee4d459",
+    "data/test_cases/fg013_reproduction.jsonl": "ddb47ca41602bfa77286e0e61b68477ee63ffbfd175782a5691ab22f3a4aedb5",
+    "data/test_cases/smoke.jsonl": "06e5f22aaf01a5e3e243e46d1d995bd584e55a40e990485e4ffd74a879324d76",
+    "notebooks/colab_smoke_test.ipynb": "3a91f40b120b8a81c3260463b1bbdbc2cc4ecdff44ee198476fba3cdce7fb867",
+    "pyproject.toml": "019ceb84e86178fce9ae17bfdae50cfd8bc0cc1e03a9f69ce4108e8bd757a408",
+    "requirements-inference.txt": "08aa7e3a9df0f7f77e7a99ebb4eff2bcdb6658ec8e5f078a965a1977d3afbe4e",
+    "requirements.txt": "9fd371220deaa86dd604897263d12774fac03d253874487e1a905d0cd1849208",
+    "results/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "scripts/check_env.ps1": "d33d05de8e0bc4dd9f899d286b51088a3834a7ca040b8f74b0d0c1b4f7952f8f",
+    "scripts/make_bundle.py": "128d9dedccfdd9da060502ff90eddfbb7d8c6880d23968cb8eab7f561d7670e7",
+    "src/stresslab/__init__.py": "6392366e61512840a568371b36638a1dd656a412ac031bee8f811bb3a40943cd",
+    "src/stresslab/__main__.py": "d6b2ab9b695680b1b589529acaee057d4caa4db4a5239a1053960c220929f04d",
+    "src/stresslab/cases.py": "858781ec42d5b242794ba77a84bb0a139d52507657aea2edfce4a1f834e74dbc",
+    "src/stresslab/cli.py": "ae734e67c1717a7c1fa8187a44d3533aa517e78a976962a2a545fa6e53b50c81",
+    "src/stresslab/config.py": "2791654790ee691101320aa7dca410a03aa1790b024752f116b3a317f7a24553",
+    "src/stresslab/controls.py": "44c35e372d68ffead7b03560e8939beb01aef83aa01160bb900cba66a793aea7",
+    "src/stresslab/environment.py": "72bba08c14f4920fe70bcc60778c187b32a65a53c74aca9c1ce7f48645112aef",
+    "src/stresslab/evaluators.py": "c684dbfb4ffaa66a45d09147c387cf982fb7e3e042541ed8d46e7fefb35df98b",
+    "src/stresslab/grounding.py": "7951ac551936cc1d9a20c185160fdbb462690e88530cd0138ee12274d88b07bc",
+    "src/stresslab/heldout.py": "fb77e59734196d932e8534f267338529666eafb029146ef84c22f08b43ab569e",
+    "src/stresslab/models.py": "e470496510ae9e189bea8d572cd71b96a9a27aeec1e5bd49df2511392a2ef9f6",
+    "src/stresslab/offload.py": "4de50a795e4ae00d2538783be86eaaf1fe475820668a710229c92180b646cc62",
+    "src/stresslab/runner.py": "a46f211a63b214bcf7f96c4d9c56d1f25291bc414e40076a702c579a9439f148",
+    "src/stresslab/schemas.py": "a0d42b2f43faad3e532ae3bd3a7212eaf63a55e91afd77bb83f26f9dc0dbe0c3",
+    "src/stresslab/storage.py": "f500139b1fe041905f5e627991498234b8accedeede5548fdb30537d161dd549",
+    "src/stresslab/summary.py": "479d067f50936fa3fcfab23e9bef7ba197dc6236e100da911f0aea9a98b4cd0e",
+    "tests/conftest.py": "5c9bc15d7ccfcaf62e25a35fb59b7b595cd9862908c8095362f0b27650ca68aa",
+    "tests/test_cases_and_cli.py": "119c14ab392748c517c0c462092001b5db2064b7537d67ae9d96ab499ea6ec31",
+    "tests/test_factual_suite.py": "91b3aa1d94ea4beb93b92e3b9175f9e5fa4df2a35ab13176817339e339e935e1",
+    "tests/test_fg013_reproduction.py": "c8bba081cfeb720792e01a3a330fd7d5fbb785815cad297514a6321331069993",
+    "tests/test_grounding.py": "178a5e72a2e158d08f6eb74184168871910a2e72c9754e2e14fb182cb66f9d4c",
+    "tests/test_heldout.py": "893785f4e825d2540eac382ee85e5aebddc30d02fdd10237fb268b6c51c27a0e",
+    "tests/test_offload.py": "f9e82974935596f00cb586690710bbfa9c3afed43cc9d6761d50cdf0d028b24c",
+    "tests/test_runner.py": "407703c028598c63ad156832da7244a9efaaa2acf9b9ce9f9aa9448ae5768f6e",
+    "tests/test_schemas.py": "2ae1f1414af6e9cb4bad8b8e7d0463f8074ee5ece7906775af2343583ce940ab",
+    "tests/test_storage.py": "fc460647941450035523273f59dd99eaef162599ff33d860d01aa1b0065690c4",
+    "docs/audits/phase3b-2026-10-02_111432/SHA256SUMS": "40be9a89ed39e1a67b3d4c89d894b2fc622d359a068cff58cd50f5b2741116d8",
+    "docs/audits/phase3b-2026-10-02_111432/integrity.json": "004a30f9e6b219818b580bfaa001693bcc690172d716517886f57b3518f3a59b"
+  },
+  "source_dataset_tests_match_preregistration_git_diff": true,
+  "stored_prompts_and_expectations_match_checkpoint_dataset": true,
+  "stored_status_outcome_evidence_and_breakdown_counts_consistent": true,
+  "failures_file_is_exact_stored_non_pass_subset": true,
+  "all_30_records_have_semantic_annotations": true,
+  "inference_or_evaluator_invoked_by_audit": false,
+  "validation_scope": "Standard-library JSON, hash, documentary consistency and git checks; no StressLab run/evaluate/validate or model invocation",
+  "audit_artifact_sha256": {
+    "human_semantic_audit.md": "463dc9e6b39a4fa6879ea5c8782971efa4533dde5f08d3339f806d2cc0fde558",
+    "semantic_annotations.json": "c103ea27b58c1e023a2a8f0f5f6a51681842695bc377bf839e4081347de80c4f"
+  },
+  "git_diff_check": "passed"
+}

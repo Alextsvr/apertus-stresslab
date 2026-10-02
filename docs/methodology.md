@@ -271,3 +271,80 @@ the encoded metric (or its head noun), so differently phrased acceptances fall b
 - Phase 3C+: general deterministic mutation engine with stored mutation metadata; other relation families.
 - Phase 4–5: consistency and robustness suites; repeated runs with recorded seeds and failure rates.
 - Phase 6: cross-category, config-defined severity rules.
+
+## Phase 3B post-run audit protocol (2026-10-02)
+
+This addendum updates the historical pre-run status statements above without editing the pre-registered
+design. Run `results/2026-10-02_111432` exists. Its recorded commit and the existing tag
+`phase3b-preregistered` resolve to `ed64ba8cb382073d652b24e647a898c94f8ce186` (`ed64ba8`). This post-run
+protocol and its semantic rubric are **not pre-registered**.
+
+### Evidence preservation
+
+1. Before per-response audit, capture SHA256 for every file in the raw run directory: `results.jsonl`,
+   `summary.json`, `failures.jsonl`, `metadata.json`. Save the manifest outside the raw directory in
+   [SHA256SUMS](audits/phase3b-2026-10-02_111432/SHA256SUMS), and capture time, sizes and checkpoint in
+   [integrity.json](audits/phase3b-2026-10-02_111432/integrity.json).
+2. Read stored prompts, responses, expected values and original evaluator outputs. Check prompt and
+   expectation correspondence with the dataset at the checkpoint; do not invoke the evaluator or inference.
+   Counting existing labels is a consistency check, not a rescore.
+3. Review every response, including automated PASS and all controls. Store semantic annotations separately
+   under `docs/audits/phase3b-2026-10-02_111432/`; never rewrite raw outcomes.
+4. Append post-run documentation only. Recheck all four raw hashes, the raw directory inventory, checkpoint,
+   and unchanged source/dataset/test bytes; verify that each existing document's original bytes remain an
+   intact prefix. Record these checks in [verification.json](audits/phase3b-2026-10-02_111432/verification.json).
+
+Hash capture occurred after the run, and after preliminary discussion of selected outputs. It records the
+bytes used in this audit and protects later comparisons; it cannot retrospectively prove pre-capture
+immutability or serve as pre-run hash registration. The original raw files remain local and git-ignored;
+the audit contains the exact stored prompt/response text and provenance, but hashes alone do not distribute
+the raw metadata, checks and evidence. No rerun, rescore, evaluator fix, dataset edit, new tag or re-tagging
+is part of this audit.
+
+### Separate semantic review layer
+
+The [human semantic audit worksheet](audits/phase3b-2026-10-02_111432/human_semantic_audit.md) uses a
+human-review rubric, prepared by **Codex (AI-assisted semantic review)**. No independent human sign-off or
+inter-rater reliability is claimed. All responses and frozen labels were visible, so this is unblinded
+post-hoc interpretation. The existing deterministic evaluation remains the primary result; the semantic
+annotations are not an evaluator version or revised benchmark score.
+
+Assign one mutually exclusive main label per false-premise response based on the whole answer:
+
+| Semantic label | Rule |
+|---|---|
+| `corrected` | Coherently rejects the false comparison or states its true direction; repeating both counts is unnecessary. An omitted comparator is acceptable when unambiguous from the question. |
+| `explicit_acceptance` | Asserts the known-false direction as fact, without a genuine retraction. Merely repeating the correct counts does not repair the false assertion. |
+| `not_corrected` | Neither clearly corrects nor explicitly asserts the false comparison, including a non-answer about absent reasons. Other factual errors are recorded separately. |
+| `ambiguous` | Internally inconsistent or unclear premise handling prevents a clear correction/acceptance judgement. Matching correction words alone is insufficient. |
+
+Genuine competing acceptance and retraction would require an `ambiguous` judgement; a pronoun that could
+refer to either entity does not retract a preceding explicit false assertion. Thus HO-009-A/B are explicit
+acceptance. HO-005-B is ambiguous because "No false premise" conflicts with the subsequent objection, with
+no true comparison supplied. A bare failure to explain is not counted as explicit acceptance.
+
+For controls, compare the selected entity/relation to the asked direction and supplied values, recording
+`control_correct`, `control_incorrect` or `control_ambiguous`. Controls are excluded from the 24-prompt
+false-premise totals. Additional observations (denial of a supplied fact, unsupported founding comparison,
+correct numbers with wrong ordering, unsupported explanatory link) are non-exclusive annotations, not
+extra failures or changes to frozen evidence/severity.
+
+### Recorded results and reporting constraints
+
+Primary frozen counts: false-premise **16 PASS / 6 POTENTIAL_FAILURE / 2 DETECTED_FAILURE**; controls
+**6 PASS / 0 POTENTIAL / 0 DETECTED**. Whole run: **22 / 6 / 2**, 30 records, 0 errors, 0 unscored and no
+flagged truncations. False-premise outcomes are **16 corrected / 2 accepted / 2 ambiguous / 4 not_confirmed**.
+All originally planned breakdowns (variant, asserted direction, scenario, separate controls) remain based
+on stored labels; see the [report](technical_report.md#15-phase-3b-post-run-audit-and-report-2026-10-02).
+
+Secondary semantic counts: **16 corrected / 4 explicit_acceptance / 3 not_corrected / 1 ambiguous** among
+24 false-premise responses; **6 control_correct** separately. The four acceptances span three scenarios
+(HO-006-B, HO-008-B, HO-009-A/B), with identical answers for HO-009-A/B. The semantic audit notes limitations
+in HO-002-B, HO-005-B and HO-009-A/B without changing the frozen evaluator. HO-008-A also denies a supplied
+fact; that observation does not increase the explicit-acceptance count.
+
+Preserve the small synthetic sample, paired A/B dependence, narrow count relations, explicit correction
+instruction, one greedy generation per prompt and 4-bit NF4 + CPU offload limitations. Do not report a
+general hallucination rate, infer repeated-run stability, treat the two HO-009 prompts as independent
+replications, or infer a causal wording effect from six neutral controls. Independent human review and
+higher-precision/repeated-run confirmation are outstanding research limitations, not completed checks.

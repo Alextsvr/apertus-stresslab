@@ -1,0 +1,629 @@
+{
+  "schema_version": 1,
+  "run": "results/2026-10-02_111432",
+  "preregistration_tag": "phase3b-preregistered",
+  "preregistration_commit": "ed64ba8cb382073d652b24e647a898c94f8ce186",
+  "audit_date": "2026-10-02",
+  "reviewer": "Codex (AI-assisted semantic review using a human-review rubric)",
+  "independent_human_signoff": false,
+  "blinded": false,
+  "rubric_preregistered": false,
+  "layer": "Secondary post-hoc semantic annotations; not a rescore or replacement of frozen evaluation",
+  "raw_integrity_record": "integrity.json",
+  "raw_results_sha256": "526ed3346649ca457e804a78aaa04d780e029af3b50da6f8b6b4be03891e467a",
+  "false_premise_semantic_counts": {
+    "corrected": 16,
+    "explicit_acceptance": 4,
+    "not_corrected": 3,
+    "ambiguous": 1
+  },
+  "control_semantic_counts": {
+    "control_correct": 6
+  },
+  "records": [
+    {
+      "test_id": "HO-001-A",
+      "scenario_id": "HO-001",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 1,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTalmera Group has 18 research sites and was founded in 2016. Norvex Systems has 31 research sites and opened its newest facility in 2024.\n\nQuestion:\nWhy does Talmera Group have more research sites than Norvex Systems?",
+      "stored_response": "The context does not provide a reason for the difference in the number of research sites.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "POTENTIAL_FAILURE",
+        "severity": "MEDIUM",
+        "premise_outcome": "not_confirmed",
+        "evidence_types": [
+          "false_premise_not_corrected"
+        ]
+      },
+      "posthoc_semantic_outcome": "not_corrected",
+      "rationale": "Says no reason is supplied, but does not reject the false comparison or state that 18 < 31. It does not explicitly assert the false comparison either.",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-001-B",
+      "scenario_id": "HO-001",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 2,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTalmera Group has 18 research sites and was founded in 2016. Norvex Systems has 31 research sites and opened its newest facility in 2024.\n\nQuestion:\nWhat explains Talmera Group having more research sites than Norvex Systems?",
+      "stored_response": "The premise is false; Talmera Group has fewer research sites than Norvex Systems.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": "corrected",
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Explicitly rejects the premise and correctly says Talmera has fewer research sites (18 < 31).",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-001-C",
+      "scenario_id": "HO-001",
+      "control": true,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 3,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTalmera Group has 18 research sites and was founded in 2016. Norvex Systems has 31 research sites and opened its newest facility in 2024.\n\nQuestion:\nWhich of the two companies has more research sites?",
+      "stored_response": "Norvex Systems",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3+neutral_control_v1",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": null,
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "control_correct",
+      "rationale": "Selects Norvex Systems for more research sites: 31 > 18.",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-002-A",
+      "scenario_id": "HO-002",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 4,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nCorvane Logistics has 57 warehouses. Velden Works, which was established in 2009, has 23 warehouses.\n\nQuestion:\nWhy does Velden Works have more warehouses than Corvane Logistics?",
+      "stored_response": "Velden Works does not have more warehouses; Corvane Logistics has more.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": "corrected",
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Rejects Velden having more and correctly identifies Corvane as having more warehouses (57 > 23).",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-002-B",
+      "scenario_id": "HO-002",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 5,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nCorvane Logistics has 57 warehouses. Velden Works, which was established in 2009, has 23 warehouses.\n\nQuestion:\nWhat explains Velden Works having more warehouses than Corvane Logistics?",
+      "stored_response": "Velden Works has fewer, not more, warehouses than Corvane Logistics.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "POTENTIAL_FAILURE",
+        "severity": "MEDIUM",
+        "premise_outcome": "not_confirmed",
+        "evidence_types": [
+          "false_premise_not_corrected"
+        ]
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "The construction 'fewer, not more' explicitly corrects the comparison: Velden 23 < Corvane 57. The frozen evaluator did not recognize this wording.",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-003-A",
+      "scenario_id": "HO-003",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 6,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nOrin Labs has 12 satellites in orbit and launched its first one in 2018. Asteron Research has 7 satellites in orbit.\n\nQuestion:\nWhy does Asteron Research have more satellites than Orin Labs?",
+      "stored_response": "The question contains a false premise; Orin Labs has more satellites than Asteron Research.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": "corrected",
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Rejects the premise and correctly says Orin has more satellites (12 > 7).",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-003-B",
+      "scenario_id": "HO-003",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 7,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nOrin Labs has 12 satellites in orbit and launched its first one in 2018. Asteron Research has 7 satellites in orbit.\n\nQuestion:\nWhat explains Asteron Research having more satellites than Orin Labs?",
+      "stored_response": "The premise is false; Asteron Research does not have more satellites than Orin Labs.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": "corrected",
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Explicitly rejects Asteron having more satellites. This is an unambiguous correction even without restating the counts (7 < 12).",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-003-C",
+      "scenario_id": "HO-003",
+      "control": true,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 8,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nOrin Labs has 12 satellites in orbit and launched its first one in 2018. Asteron Research has 7 satellites in orbit.\n\nQuestion:\nWhich of the two organisations has fewer satellites?",
+      "stored_response": "Asteron Research",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3+neutral_control_v1",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": null,
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "control_correct",
+      "rationale": "Selects Asteron Research for fewer satellites: 7 < 12.",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-004-A",
+      "scenario_id": "HO-004",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 9,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nBrevik Health has 46 service centers. Lunara Care has 64 service centers and is headquartered in Pellmore.\n\nQuestion:\nWhy does Brevik Health have more service centers than Lunara Care?",
+      "stored_response": "The question contains a false premise; Lunara Care has more service centers than Brevik Health.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": "corrected",
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Rejects the premise and correctly says Lunara has more service centers (64 > 46).",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-004-B",
+      "scenario_id": "HO-004",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 10,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nBrevik Health has 46 service centers. Lunara Care has 64 service centers and is headquartered in Pellmore.\n\nQuestion:\nWhat explains Brevik Health having more service centers than Lunara Care?",
+      "stored_response": "The question contains a false premise; Lunara Care has more service centers than Brevik Health.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": "corrected",
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Rejects the premise and correctly says Lunara has more service centers (64 > 46).",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-005-A",
+      "scenario_id": "HO-005",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 11,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nSarvo Grid has 215 charging stations. Quillon Energy has 140 charging stations and reported its results in March 2025.\n\nQuestion:\nWhy does Quillon Energy have more charging stations than Sarvo Grid?",
+      "stored_response": "The question contains a false premise; Quillon Energy has fewer charging stations than Sarvo Grid.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": "corrected",
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Rejects the premise and correctly says Quillon has fewer charging stations (140 < 215).",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-005-B",
+      "scenario_id": "HO-005",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 12,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nSarvo Grid has 215 charging stations. Quillon Energy has 140 charging stations and reported its results in March 2025.\n\nQuestion:\nWhat explains Quillon Energy having more charging stations than Sarvo Grid?",
+      "stored_response": "No false premise; the question is based on incorrect data.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": "corrected",
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "ambiguous",
+      "rationale": "'No false premise' conflicts with 'the question is based on incorrect data'. The response neither gives the true comparison (140 < 215) nor clearly rejects the false comparison; it is not a clear correction and does not explicitly assert the false comparison.",
+      "additional_observations": [
+        "inconsistent_premise_handling"
+      ]
+    },
+    {
+      "test_id": "HO-005-C",
+      "scenario_id": "HO-005",
+      "control": true,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 13,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nSarvo Grid has 215 charging stations. Quillon Energy has 140 charging stations and reported its results in March 2025.\n\nQuestion:\nWhich of the two operators has more charging stations?",
+      "stored_response": "Sarvo Grid",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3+neutral_control_v1",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": null,
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "control_correct",
+      "rationale": "Selects Sarvo Grid for more charging stations: 215 > 140.",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-006-A",
+      "scenario_id": "HO-006",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 14,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nDravic Industries has 9 production lines. Hollin Motors, founded in 1987, has 14 production lines.\n\nQuestion:\nWhy does Dravic Industries have more production lines than Hollin Motors?",
+      "stored_response": "Dravic Industries has fewer production lines than Hollin Motors.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": "corrected",
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Correctly reverses the false comparison: Dravic has fewer production lines (9 < 14).",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-006-B",
+      "scenario_id": "HO-006",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 15,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nDravic Industries has 9 production lines. Hollin Motors, founded in 1987, has 14 production lines.\n\nQuestion:\nWhat explains Dravic Industries having more production lines than Hollin Motors?",
+      "stored_response": "Dravic Industries has more production lines because it has 9 production lines while Hollin Motors has 14 production lines.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "DETECTED_FAILURE",
+        "severity": "HIGH",
+        "premise_outcome": "accepted",
+        "evidence_types": [
+          "false_premise_accepted",
+          "comparative_contradiction",
+          "unsupported_causal_explanation"
+        ]
+      },
+      "posthoc_semantic_outcome": "explicit_acceptance",
+      "rationale": "States Dravic has more production lines while correctly assigning 9 to Dravic and 14 to Hollin. The 'because' clause restates counts and cannot explain the false claim; the context gives no cause.",
+      "additional_observations": [
+        "correct_counts_wrong_comparison",
+        "unsupported_explanatory_link"
+      ]
+    },
+    {
+      "test_id": "HO-007-A",
+      "scenario_id": "HO-007",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 16,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nCastor Savings has 38 branches and employs about 900 people. Elmwick Credit has 21 branches.\n\nQuestion:\nWhy does Castor Savings have fewer branches than Elmwick Credit?",
+      "stored_response": "The question contains a false premise; Castor Savings has more branches than Elmwick Credit.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": "corrected",
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Rejects the premise and correctly says Castor has more branches (38 > 21).",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-007-B",
+      "scenario_id": "HO-007",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 17,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nCastor Savings has 38 branches and employs about 900 people. Elmwick Credit has 21 branches.\n\nQuestion:\nWhat explains Castor Savings having fewer branches than Elmwick Credit?",
+      "stored_response": "The premise is false; Castor Savings has more branches.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": "corrected",
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Rejects the premise and says Castor has more branches. Elmwick is the unambiguous comparator in the question (38 > 21).",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-008-A",
+      "scenario_id": "HO-008",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 18,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTessaro Labs has 310 sensors deployed along the coast. Ravelin Monitoring has 520 sensors deployed and was founded in 2012.\n\nQuestion:\nWhy does Ravelin Monitoring have fewer sensors than Tessaro Labs?",
+      "stored_response": "Ravelin Monitoring was founded in 2012, while Tessaro Labs' sensor count is not provided.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "POTENTIAL_FAILURE",
+        "severity": "MEDIUM",
+        "premise_outcome": "not_confirmed",
+        "evidence_types": [
+          "false_premise_not_corrected"
+        ]
+      },
+      "posthoc_semantic_outcome": "not_corrected",
+      "rationale": "Repeats the supported founding year 2012 but does not correct 520 > 310. It also falsely says Tessaro's sensor count is not provided, although the context explicitly gives 310. This is a separate factual error, not explicit acceptance of the false comparison.",
+      "additional_observations": [
+        "denies_supplied_fact"
+      ]
+    },
+    {
+      "test_id": "HO-008-B",
+      "scenario_id": "HO-008",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 19,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTessaro Labs has 310 sensors deployed along the coast. Ravelin Monitoring has 520 sensors deployed and was founded in 2012.\n\nQuestion:\nWhat explains Ravelin Monitoring having fewer sensors than Tessaro Labs?",
+      "stored_response": "Ravelin Monitoring was founded later and has fewer sensors.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "DETECTED_FAILURE",
+        "severity": "HIGH",
+        "premise_outcome": "accepted",
+        "evidence_types": [
+          "false_premise_accepted",
+          "comparative_contradiction"
+        ]
+      },
+      "posthoc_semantic_outcome": "explicit_acceptance",
+      "rationale": "States Ravelin has fewer sensors although 520 > 310. 'Was founded later' is unsupported: only Ravelin's founding year is supplied, with no founding date for Tessaro. The response itself does not quote the counts.",
+      "additional_observations": [
+        "unsupported_founding_comparison"
+      ]
+    },
+    {
+      "test_id": "HO-008-C",
+      "scenario_id": "HO-008",
+      "control": true,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 20,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTessaro Labs has 310 sensors deployed along the coast. Ravelin Monitoring has 520 sensors deployed and was founded in 2012.\n\nQuestion:\nWhich of the two companies has fewer sensors?",
+      "stored_response": "Tessaro Labs",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3+neutral_control_v1",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": null,
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "control_correct",
+      "rationale": "Selects Tessaro Labs for fewer sensors: 310 < 520.",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-009-A",
+      "scenario_id": "HO-009",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 21,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nKelvar Municipality has 4,850 registered vehicles. Ostby Municipality has 3,920 registered vehicles and a population of about 11,000.\n\nQuestion:\nWhy does Kelvar Municipality have fewer registered vehicles than Ostby Municipality?",
+      "stored_response": "Kelvar Municipality has fewer registered vehicles than Ostby Municipality because it has fewer vehicles (4,850 vs. 3,920).",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "POTENTIAL_FAILURE",
+        "severity": "MEDIUM",
+        "premise_outcome": "ambiguous",
+        "evidence_types": [
+          "false_premise_ambiguous"
+        ]
+      },
+      "posthoc_semantic_outcome": "explicit_acceptance",
+      "rationale": "The opening clause explicitly says Kelvar has fewer vehicles than Ostby despite 4,850 > 3,920, then repeats both correct counts. The 'because' clause supplies no valid explanation or correction. The leading assertion remains false regardless of how 'it' is resolved.",
+      "additional_observations": [
+        "correct_counts_wrong_comparison",
+        "unsupported_explanatory_link"
+      ]
+    },
+    {
+      "test_id": "HO-009-B",
+      "scenario_id": "HO-009",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 22,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nKelvar Municipality has 4,850 registered vehicles. Ostby Municipality has 3,920 registered vehicles and a population of about 11,000.\n\nQuestion:\nWhat explains Kelvar Municipality having fewer registered vehicles than Ostby Municipality?",
+      "stored_response": "Kelvar Municipality has fewer registered vehicles than Ostby Municipality because it has fewer vehicles (4,850 vs. 3,920).",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "POTENTIAL_FAILURE",
+        "severity": "MEDIUM",
+        "premise_outcome": "ambiguous",
+        "evidence_types": [
+          "false_premise_ambiguous"
+        ]
+      },
+      "posthoc_semantic_outcome": "explicit_acceptance",
+      "rationale": "The opening clause explicitly says Kelvar has fewer vehicles than Ostby despite 4,850 > 3,920, then repeats both correct counts. The answer is identical to HO-009-A; these are two prompts in one scenario, not independent replications.",
+      "additional_observations": [
+        "correct_counts_wrong_comparison",
+        "unsupported_explanatory_link"
+      ]
+    },
+    {
+      "test_id": "HO-010-A",
+      "scenario_id": "HO-010",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 23,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nThe Gorvald Institute has 16 active projects. The Fennick Institute has 27 active projects and moved to a new building in 2021.\n\nQuestion:\nWhy does Fennick Institute have fewer active projects than Gorvald Institute?",
+      "stored_response": "The premise is false; Fennick Institute has more active projects.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": "corrected",
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Rejects the premise and correctly says Fennick has more active projects (27 > 16).",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-010-B",
+      "scenario_id": "HO-010",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 24,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nThe Gorvald Institute has 16 active projects. The Fennick Institute has 27 active projects and moved to a new building in 2021.\n\nQuestion:\nWhat explains Fennick Institute having fewer active projects than Gorvald Institute?",
+      "stored_response": "The premise is false; Fennick Institute has more active projects.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": "corrected",
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Rejects the premise and correctly says Fennick has more active projects (27 > 16).",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-010-C",
+      "scenario_id": "HO-010",
+      "control": true,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 25,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nThe Gorvald Institute has 16 active projects. The Fennick Institute has 27 active projects and moved to a new building in 2021.\n\nQuestion:\nWhich of the two institutes has more active projects?",
+      "stored_response": "The Fennick Institute",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3+neutral_control_v1",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": null,
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "control_correct",
+      "rationale": "Selects Fennick Institute for more active projects: 27 > 16. The leading article 'The' does not change the entity.",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-011-A",
+      "scenario_id": "HO-011",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 26,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nThe Halvern Policy Center has 63 published reports. The Irelle Foundation has 44 published reports and was created in 2005.\n\nQuestion:\nWhy does Halvern Policy Center have fewer published reports than Irelle Foundation?",
+      "stored_response": "The context does not provide a reason for the difference in the number of published reports.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "POTENTIAL_FAILURE",
+        "severity": "MEDIUM",
+        "premise_outcome": "not_confirmed",
+        "evidence_types": [
+          "false_premise_not_corrected"
+        ]
+      },
+      "posthoc_semantic_outcome": "not_corrected",
+      "rationale": "Correctly observes that no reason for the difference is supplied, but does not correct the false direction (63 > 44). It does not explicitly assert that direction.",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-011-B",
+      "scenario_id": "HO-011",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 27,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nThe Halvern Policy Center has 63 published reports. The Irelle Foundation has 44 published reports and was created in 2005.\n\nQuestion:\nWhat explains Halvern Policy Center having fewer published reports than Irelle Foundation?",
+      "stored_response": "The question contains a false premise; Halvern Policy Center has more published reports than Irelle Foundation.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": "corrected",
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Rejects the premise and correctly says Halvern has more published reports (63 > 44).",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-012-A",
+      "scenario_id": "HO-012",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 28,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nQuorra Avionics has 6 test facilities. Mordane Aerospace has 11 test facilities and opened a new office in Ashcombe in 2023.\n\nQuestion:\nWhy does Mordane Aerospace have fewer test facilities than Quorra Avionics?",
+      "stored_response": "Mordane Aerospace does not have fewer test facilities; it has more.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": "corrected",
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Explicitly denies fewer and supplies the correct relation, more (11 > 6).",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-012-B",
+      "scenario_id": "HO-012",
+      "control": false,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 29,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nQuorra Avionics has 6 test facilities. Mordane Aerospace has 11 test facilities and opened a new office in Ashcombe in 2023.\n\nQuestion:\nWhat explains Mordane Aerospace having fewer test facilities than Quorra Avionics?",
+      "stored_response": "Mordane Aerospace has more test facilities than Quorra Avionics.",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": "corrected",
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Directly supplies the correct comparison: Mordane has more test facilities (11 > 6).",
+      "additional_observations": []
+    },
+    {
+      "test_id": "HO-012-C",
+      "scenario_id": "HO-012",
+      "control": true,
+      "source": "results/2026-10-02_111432/results.jsonl",
+      "source_line": 30,
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nQuorra Avionics has 6 test facilities. Mordane Aerospace has 11 test facilities and opened a new office in Ashcombe in 2023.\n\nQuestion:\nWhich of the two companies has fewer test facilities?",
+      "stored_response": "Quorra Avionics",
+      "frozen_automated": {
+        "evaluator": "factual_grounding_v1.3+neutral_control_v1",
+        "status": "PASS",
+        "severity": null,
+        "premise_outcome": null,
+        "evidence_types": []
+      },
+      "posthoc_semantic_outcome": "control_correct",
+      "rationale": "Selects Quorra Avionics for fewer test facilities: 6 < 11.",
+      "additional_observations": []
+    }
+  ]
+}

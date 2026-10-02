@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "captured_at_utc": "2026-10-02T08:29:36.9837036+00:00",
+  "purpose": "Post-run integrity capture before semantic audit; not evidence of pre-run hash registration",
+  "run": "results/2026-10-02_111432",
+  "preregistration_tag": "phase3b-preregistered",
+  "preregistration_commit": "ed64ba8cb382073d652b24e647a898c94f8ce186",
+  "files": [
+    {
+      "path": "results/2026-10-02_111432/failures.jsonl",
+      "bytes": 35054,
+      "sha256": "88da8dd6435fd64a2adb7d55210b055ec1c7c224e2d6ba30142e421ba95c3b36"
+    },
+    {
+      "path": "results/2026-10-02_111432/metadata.json",
+      "bytes": 9178,
+      "sha256": "8c08fde3b676515a8caf96fa80ebf5323956c894199bc24d352f20db061d0cd9"
+    },
+    {
+      "path": "results/2026-10-02_111432/results.jsonl",
+      "bytes": 121660,
+      "sha256": "526ed3346649ca457e804a78aaa04d780e029af3b50da6f8b6b4be03891e467a"
+    },
+    {
+      "path": "results/2026-10-02_111432/summary.json",
+      "bytes": 12190,
+      "sha256": "1d2b05c85101f0b1de33add768f2a6eb5cc8767e29e20c1c2633eb00d5c0b0cb"
+    }
+  ]
+}
