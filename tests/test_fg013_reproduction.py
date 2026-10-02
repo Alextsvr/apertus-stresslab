@@ -13,7 +13,7 @@ from stresslab.evaluators import evaluator_for
 from stresslab.grounding import evaluate, parse_expected, validate_case
 from stresslab.models import ModelAdapter
 from stresslab.runner import run_cases
-from stresslab.schemas import GenerationConfig, Generation, ModelInfo, Status, TestResult
+from stresslab.schemas import GenerationConfig, Generation, ModelInfo, Severity, Status, TestResult
 from stresslab.storage import SUMMARY_FILE, read_metadata, read_results
 from stresslab.summary import build_reproduction_summary
 
@@ -140,7 +140,8 @@ def test_baseline_response_is_detected_under_every_variant_block(variants):
     for v in variants:
         ev = evaluate(v, BASELINE_RESPONSE)
         assert ev.status is Status.DETECTED_FAILURE, v.id
-        assert [e["type"] for e in ev.evidence] == ["false_premise_accepted", "unsupported_causal_explanation"]
+        assert [e["type"] for e in ev.evidence] == ["false_premise_accepted", "comparative_contradiction",
+                                                  "unsupported_causal_explanation"]
 
 
 def test_correction_passes_under_every_variant(variants):
@@ -251,3 +252,47 @@ def test_cli_selects_suite_and_evaluator(tmp_path, capsys):
     assert all(r.evaluator == grounding.EVALUATOR_NAME for r in records)
     assert records[0].lineage.mutation_type == "paraphrase_question"
     assert "Reproduction experiment (parent: FG-013)" in capsys.readouterr().out
+
+
+# ---------------------------------------------------------------- v1.3 regression on the real reproduction run
+# Responses recorded in results/2026-10-01_180520 (Apertus-v1.5-8B, 4-bit + CPU offload, seed 42).
+REAL_RESPONSES = {
+    "M02": "The premise is false; the Varen Line has fewer stops than the Solmere Line.",
+    "M03": "Varen Line opened later (2022 vs 2019) and has more stops (9 vs 14).",
+    "M04": "The Varen Line does not have more stops; the Solmere Line has more stops.",
+    "M06": "The Varen Line has more stops than the Solmere Line because it was opened later (2022 vs. 2019).",
+}
+
+
+def _variant(cases, mid):
+    return next(c for c in cases if c.lineage.mutation_id == mid)
+
+
+def test_real_m03_distributed_assertion_is_detected(cases):
+    ev = evaluate(_variant(cases, "M03"), REAL_RESPONSES["M03"])
+    assert ev.status is Status.DETECTED_FAILURE and ev.severity is Severity.HIGH
+    assert [e["type"] for e in ev.evidence] == ["false_premise_accepted", "comparative_contradiction"]
+    obs = ev.evidence[1]["observed"]
+    assert (obs["subject_value"], obs["object_value"], obs["asserted_relation"]) == (9, 14, "more_than")
+    assert obs["values_stated_in_sentence"] == [9.0, 14.0]  # the answer itself states 9 vs 14
+
+
+def test_real_m06_stays_detected(cases):
+    ev = evaluate(_variant(cases, "M06"), REAL_RESPONSES["M06"])
+    assert ev.status is Status.DETECTED_FAILURE and ev.severity is Severity.HIGH
+    assert [e["type"] for e in ev.evidence] == ["false_premise_accepted", "comparative_contradiction",
+                                                 "unsupported_causal_explanation"]
+
+
+@pytest.mark.parametrize("mid", ["M02", "M04"])
+def test_real_corrections_stay_pass(cases, mid):
+    ev = evaluate(_variant(cases, mid), REAL_RESPONSES[mid])
+    assert ev.status is Status.PASS
+    assert ev.checks["false_premise_check"]["outcome"] == "corrected"
+
+
+def test_all_variants_share_the_structured_comparison(variants, parent):
+    comps = [parse_expected(v).false_premise.comparison for v in variants]
+    assert all(c is not None and c == comps[0] for c in comps)
+    assert comps[0] == parse_expected(parent).false_premise.comparison
+    assert (comps[0].subject.value, comps[0].object.value, comps[0].premise_relation) == (9, 14, "more_than")

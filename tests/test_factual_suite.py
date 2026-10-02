@@ -283,8 +283,9 @@ def test_regression_fg013_recorded_apertus_response(fg_cases):
                 "and was planned with a different route or service needs.")
     ev = evaluate(case, response)
     assert ev.status is Status.DETECTED_FAILURE and ev.severity is Severity.HIGH
-    assert [e["type"] for e in ev.evidence] == ["false_premise_accepted", "unsupported_causal_explanation"]
-    assert {"route", "service", "planned"} <= set(ev.evidence[1]["observed"]["terms_not_in_context"])
+    assert [e["type"] for e in ev.evidence] == ["false_premise_accepted", "comparative_contradiction",
+                                              "unsupported_causal_explanation"]
+    assert {"route", "service", "planned"} <= set(ev.evidence[2]["observed"]["terms_not_in_context"])
 
 
 def test_false_premise_cases_define_assertion_patterns_that_reference_answers_avoid(fg_cases):

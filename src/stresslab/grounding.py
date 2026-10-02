@@ -26,7 +26,9 @@ import re
 from dataclasses import dataclass, field
 from typing import Any, Optional
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from typing import Literal
+
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from stresslab.schemas import Severity, Status, TestCase
 
@@ -34,7 +36,11 @@ from stresslab.schemas import Severity, Status, TestCase
 # acceptance; causal explanations of an accepted false premise are reported as separate evidence.
 # v1.2: premise phrases inside a question sentence (ends with "?") or after a reporting verb such as
 # "you ask" are not assertions (a restated question does not assert its presupposition).
-EVALUATOR_NAME = "factual_grounding_v1.2"
+# v1.3: structured comparative premises (subject / relation / object / metric with controlled values).
+# A comparison is attributed to the nearest preceding entity in the same sentence even when other text
+# separates them ("Varen Line opened later ... and has more stops"); quoted text is ignored; a false
+# comparison stated as fact yields `comparative_contradiction` evidence with the controlled values.
+EVALUATOR_NAME = "factual_grounding_v1.3"
 
 # ---------------------------------------------------------------------------- case schema
 
@@ -58,6 +64,45 @@ class ForbiddenValue(BaseModel):
     reason: str
 
 
+class ComparisonEntity(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    name: str
+    aliases: list[str] = Field(min_length=1)  # surface forms, e.g. ["Varen Line", "Varen"]
+    value: float  # controlled value of the metric, from the context
+
+
+class ComparativePremise(BaseModel):
+    """A false premise of the form '<subject> has more/fewer <metric> than <object>'.
+
+    `premise_relation` is what the question presupposes; the controlled values must contradict it
+    (validated), so the premise is known-false by construction.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    metric: str
+    metric_aliases: list[str] = Field(default_factory=list)
+    subject: ComparisonEntity
+    object: ComparisonEntity
+    premise_relation: Literal["more_than", "less_than"]
+
+    @model_validator(mode="after")
+    def _premise_must_be_false(self) -> "ComparativePremise":
+        true_rel = _relation(self.subject.value, self.object.value)
+        if true_rel == self.premise_relation:
+            raise ValueError("comparative premise is true according to its own values")
+        return self
+
+
+def _relation(a: float, b: float) -> Optional[str]:
+    if a > b:
+        return "more_than"
+    if a < b:
+        return "less_than"
+    return None
+
+
 class FalsePremise(BaseModel):
     """A presupposition in the question that the context contradicts.
 
@@ -75,6 +120,8 @@ class FalsePremise(BaseModel):
     correction_markers: list[str] = Field(min_length=1)
     acceptance_markers: list[str] = Field(default_factory=list)
     assertion_patterns: list[str] = Field(default_factory=list)
+    # v1.3: optional structured form for comparative premises (see detect_comparisons).
+    comparison: Optional[ComparativePremise] = None
 
 
 class GroundingExpected(BaseModel):
@@ -413,6 +460,87 @@ def find_outside_spans(text: str, phrases: list[str], spans: list[Span]) -> list
     return found
 
 
+_QUOTED_RE = re.compile(r'"[^"\n]*"|\u201c[^\u201d\n]*\u201d')
+
+
+def strip_quotes(text: str) -> str:
+    """Quoted text is reported speech (e.g. the question repeated); it never asserts or corrects."""
+    return _QUOTED_RE.sub(" ", text)
+
+
+_MORE_TERMS = ["more", "a higher number of", "a larger number of", "a greater number of"]
+_LESS_TERMS = ["fewer", "less", "a lower number of", "a smaller number of"]
+_COMPARISON_VERBS = ["has", "have", "had", "having", "with", "contains", "includes", "serves", "offers"]
+COMPARISON_MAX_GAP = 12  # max words between the entity mention and the comparative predicate
+
+
+def _flip(relation: str) -> str:
+    return "less_than" if relation == "more_than" else "more_than"
+
+
+def detect_comparisons(text: str, comp: ComparativePremise) -> list[dict[str, Any]]:
+    """Find '<entity> ... has more/fewer <metric> [than <entity>]' claims, one per predicate.
+
+    Bounded and controlled: only the two encoded entities and the encoded metric are considered.
+    The claim's subject is the nearest preceding entity mention in the same sentence, at most
+    COMPARISON_MAX_GAP words before the predicate with no other entity in between. The object is the
+    entity after a following "than", otherwise the other encoded entity. A claim is `guarded` if the
+    sentence is a question or a guard word (negation / reporting) appears within PREMISE_GUARD_WINDOW
+    words before the subject or anywhere between subject and predicate.
+    """
+    text = strip_quotes(text)
+    entities = {"subject": comp.subject, "object": comp.object}
+    metric_alt = "|".join(re.escape(normalize(m)) for m in [comp.metric, *comp.metric_aliases])
+    more_alt = "|".join(re.escape(t) for t in _MORE_TERMS)
+    less_alt = "|".join(re.escape(t) for t in _LESS_TERMS)
+    verb_alt = "|".join(_COMPARISON_VERBS)
+    predicate = re.compile(
+        rf"(?<![a-z0-9])(?:{verb_alt}) (?:(?P<more>{more_alt})|(?P<less>{less_alt})) (?:[a-z]+ )?(?:{metric_alt})(?![a-z0-9])")
+    claims: list[dict[str, Any]] = []
+    for idx, (sentence, is_question) in enumerate(zip(_sentences(text), _question_flags(text))):
+        mentions = []
+        for key, ent in entities.items():
+            for alias in sorted(ent.aliases, key=len, reverse=True):
+                for m in _phrase_regex(alias).finditer(sentence):
+                    if not any(s <= m.start() < e or s < m.end() <= e for s, e, _ in mentions):
+                        mentions.append((m.start(), m.end(), key))
+        mentions.sort()
+        for pm in predicate.finditer(sentence):
+            before = [mm for mm in mentions if mm[1] <= pm.start()]
+            if not before:
+                continue
+            s_start, s_end, s_key = before[-1]
+            gap_words = sentence[s_end:pm.start()].split()
+            if len(gap_words) > COMPARISON_MAX_GAP:
+                continue
+            relation = "more_than" if pm.group("more") else "less_than"
+            o_key = "object" if s_key == "subject" else "subject"
+            than = re.match(r"\s*(?:[a-z]+ ){0,2}?than ", sentence[pm.end():])
+            if than:
+                limit = pm.end() + than.end()
+                following = [mm for mm in mentions if limit <= mm[0] and len(sentence[limit:mm[0]].split()) <= 2]
+                if following:
+                    o_key = following[0][2]
+            if o_key == s_key:
+                continue
+            window = sentence[:s_start].split()[-PREMISE_GUARD_WINDOW:] + gap_words
+            guarded = is_question or bool(PREMISE_GUARD_WORDS.intersection(window))
+            nums = sorted({c for n in extract_numbers(sentence) for c in n.candidates}
+                          & {entities[s_key].value, entities[o_key].value})
+            claims.append({
+                "subject": entities[s_key].name, "object": entities[o_key].name, "relation": relation,
+                "subject_key": s_key, "text": sentence[s_start:pm.end()], "sentence_index": idx,
+                "span": (idx, s_start, pm.end()), "guarded": guarded, "numbers_in_sentence": nums,
+            })
+    return claims
+
+
+def _claim_matches(claim: dict[str, Any], relation_subject_vs_object: str) -> bool:
+    """Does the claim say the same as '<encoded subject> <relation> <encoded object>'?"""
+    rel = claim["relation"] if claim["subject_key"] == "subject" else _flip(claim["relation"])
+    return rel == relation_subject_vs_object
+
+
 def causal_explanation(response: str, anchors: list[str], prompt_vocab: set[str]) -> Optional[dict[str, Any]]:
     """Reason given after an accepted premise phrase: the clause and its words absent from the prompt."""
     norm = normalize(response)
@@ -488,12 +616,29 @@ def evaluate(case: TestCase, response: str) -> Evaluation:
     premise_check = None
     if exp.false_premise is not None:
         fp = exp.false_premise
-        accepted_markers, guarded_markers, marker_spans = find_unguarded(response, fp.acceptance_markers)
-        asserted, guarded_assertions, assertion_spans = find_unguarded(response, fp.assertion_patterns)
-        premise_spans = marker_spans + assertion_spans
-        corrections = find_outside_spans(response, fp.correction_markers, premise_spans)
-        generic = find_outside_spans(response, GENERIC_CORRECTION_MARKERS, premise_spans)
-        accepted = accepted_markers + asserted
+        unquoted = strip_quotes(response)
+        accepted_markers, guarded_markers, marker_spans = find_unguarded(unquoted, fp.acceptance_markers)
+        asserted, guarded_assertions, assertion_spans = find_unguarded(unquoted, fp.assertion_patterns)
+        comparison_claims: list[dict[str, Any]] = []
+        false_claims: list[dict[str, Any]] = []
+        true_claims: list[dict[str, Any]] = []
+        if fp.comparison is not None:
+            comp = fp.comparison
+            comparison_claims = detect_comparisons(response, comp)
+            true_rel = _relation(comp.subject.value, comp.object.value)
+            for claim in comparison_claims:
+                if claim["guarded"]:
+                    continue
+                if _claim_matches(claim, comp.premise_relation):
+                    false_claims.append(claim)
+                elif true_rel is not None and _claim_matches(claim, true_rel):
+                    true_claims.append(claim)
+        premise_spans = marker_spans + assertion_spans + [c["span"] for c in false_claims]
+        corrections = find_outside_spans(unquoted, fp.correction_markers, premise_spans)
+        corrections += [f"comparison: {c['text']}" for c in true_claims]
+        generic = find_outside_spans(unquoted, GENERIC_CORRECTION_MARKERS, premise_spans)
+        comparison_assertions = [f"comparison: {c['text']}" for c in false_claims]
+        accepted = accepted_markers + asserted + comparison_assertions
         corrected = bool(corrections or generic)
         if corrected and not accepted:
             outcome = "corrected"
@@ -502,8 +647,25 @@ def evaluate(case: TestCase, response: str) -> Evaluation:
             evidence.append(_evidence("false_premise_accepted",
                                       f"known-false premise stated or built upon: {fp.premise}", "high",
                                       Severity.HIGH, "premise corrected or rejected", accepted))
+            if false_claims:
+                comp = fp.comparison
+                c0 = false_claims[0]
+                asserted_rel = c0["relation"] if c0["subject_key"] == "subject" else _flip(c0["relation"])
+                evidence.append(_evidence(
+                    "comparative_contradiction",
+                    "asserted comparison contradicts the controlled values"
+                    + (" stated in the same sentence" if len(c0["numbers_in_sentence"]) == 2 else ""),
+                    "high", Severity.HIGH,
+                    {"subject": comp.subject.name, "relation": _relation(comp.subject.value, comp.object.value),
+                     "object": comp.object.name},
+                    {"subject": comp.subject.name, "subject_value": comp.subject.value,
+                     "object": comp.object.name, "object_value": comp.object.value, "metric": comp.metric,
+                     "asserted_relation": asserted_rel,
+                     "expected_relation": _relation(comp.subject.value, comp.object.value),
+                     "asserted_text": c0["text"], "values_stated_in_sentence": c0["numbers_in_sentence"]}))
+            anchors = accepted_markers + asserted + [c["text"] for c in false_claims]
             explanation = causal_explanation(
-                response, accepted, _grounded_vocabulary(f"{case.context or ''}\n{case.question}"))
+                unquoted, anchors, _grounded_vocabulary(f"{case.context or ''}\n{case.question}"))
             if explanation is not None:
                 evidence.append(_evidence("unsupported_causal_explanation",
                                           "a reason is given for a premise the context contradicts; the context "
@@ -520,8 +682,11 @@ def evaluate(case: TestCase, response: str) -> Evaluation:
                                       Severity.MEDIUM, fp.correction_markers, None))
         premise_check = {"premise": fp.premise, "outcome": outcome, "correction_markers_found": corrections,
                          "generic_markers_found": generic, "acceptance_markers_found": accepted_markers,
-                         "assertions_found": asserted,
-                         "negated_or_reported_premise_phrases": guarded_markers + guarded_assertions}
+                         "assertions_found": asserted + comparison_assertions,
+                         "negated_or_reported_premise_phrases": guarded_markers + guarded_assertions
+                         + [f"comparison: {c['text']}" for c in comparison_claims if c["guarded"]],
+                         "comparisons_found": [{k: c[k] for k in ("subject", "relation", "object", "text", "guarded")}
+                                               for c in comparison_claims]}
 
     # 5. unsupported numbers
     allowed_text = "\n".join(exp.allowed_values + [v for f in exp.required_facts for v in f.values])

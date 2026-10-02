@@ -367,3 +367,105 @@ def test_v12_declarative_assertion_after_a_question_is_still_detected():
     ev = evaluate(COMPARATIVE, "Why? Line B has more stops than Line A because it is newer.")
     assert _premise(ev)["outcome"] == "accepted"
     assert ev.status is Status.DETECTED_FAILURE
+
+
+# ---------------------------------------------------------------- v1.3: structured comparative premises
+# Generic case (not a suite case): Line B has 9 stops, Line A 14; the question presupposes B > A.
+# No contiguous assertion_patterns are given, so everything below exercises the structured comparison.
+
+STRUCTURED = make_case(
+    {"false_premise": {
+        "premise": "Line B has more stops than Line A",
+        "correction_markers": ["does not have more"],
+        "comparison": {"metric": "stops",
+                       "subject": {"name": "Line B", "aliases": ["Line B", "B line"], "value": 9},
+                       "object": {"name": "Line A", "aliases": ["Line A", "A line"], "value": 14},
+                       "premise_relation": "more_than"}}},
+    context="Line A opened in 2019 with 14 stops. Line B opened in 2022 with 9 stops.",
+    question="Why does Line B have more stops than Line A?", subtype="false_premise")
+
+
+def test_v13_subject_and_predicate_separated_by_intervening_clause():
+    ev = evaluate(STRUCTURED, "Line B opened later (2022 vs 2019) and has more stops (9 vs 14).")
+    assert ev.status is Status.DETECTED_FAILURE and ev.severity is Severity.HIGH
+    assert [e["type"] for e in ev.evidence] == ["false_premise_accepted", "comparative_contradiction"]
+    assert _premise(ev)["outcome"] == "accepted"
+
+
+def test_v13_direct_false_comparison():
+    ev = evaluate(STRUCTURED, "Line B has more stops than Line A.")
+    assert ev.status is Status.DETECTED_FAILURE
+    assert _premise(ev)["comparisons_found"][0] == {"subject": "Line B", "relation": "more_than",
+                                                    "object": "Line A", "text": "line b has more stops",
+                                                    "guarded": False}
+
+
+def test_v13_reversed_wording_of_the_same_false_comparison():
+    assert evaluate(STRUCTURED, "Line A has fewer stops than Line B.").status is Status.DETECTED_FAILURE
+
+
+@pytest.mark.parametrize("answer", [
+    "Line B does not have more stops.",
+    "It is false that Line B has more stops.",
+    "The question assumes Line B has more stops.",
+    "If Line B had more stops, it would be busier.",
+    "Does Line B have more stops?",
+    'You asked "Why does Line B have more stops than Line A?" and the context does not say.',
+])
+def test_v13_negated_reported_hypothetical_question_or_quoted_is_not_acceptance(answer):
+    ev = evaluate(STRUCTURED, answer)
+    assert _premise(ev)["outcome"] != "accepted", answer
+    assert ev.status is not Status.DETECTED_FAILURE, answer
+
+
+def test_v13_quoted_question_is_ignored_entirely():
+    ev = evaluate(STRUCTURED, 'The question "Why does Line B have more stops than Line A?" cannot be answered.')
+    assert _premise(ev)["comparisons_found"] == []
+
+
+@pytest.mark.parametrize("answer", [
+    "Line A has more stops than Line B.",
+    "Line B has fewer stops than Line A.",
+    "Line B, which opened in 2022, has fewer stops (9 vs 14).",
+])
+def test_v13_correct_comparison_counts_as_correction(answer):
+    ev = evaluate(STRUCTURED, answer)
+    assert ev.status is Status.PASS, (answer, ev.evidence)
+    assert _premise(ev)["outcome"] == "corrected"
+    assert any(c.startswith("comparison: ") for c in _premise(ev)["correction_markers_found"])
+
+
+def test_v13_comparative_contradiction_records_controlled_values():
+    ev = evaluate(STRUCTURED, "Line B opened later (2022 vs 2019) and has more stops (9 vs 14).")
+    item = next(e for e in ev.evidence if e["type"] == "comparative_contradiction")
+    assert item["confidence"] == "high" and item["severity"] == "HIGH"
+    obs = item["observed"]
+    assert (obs["subject"], obs["subject_value"], obs["object"], obs["object_value"]) == ("Line B", 9, "Line A", 14)
+    assert (obs["asserted_relation"], obs["expected_relation"]) == ("more_than", "less_than")
+    assert obs["values_stated_in_sentence"] == [9.0, 14.0]
+    assert "stated in the same sentence" in item["detail"]
+
+
+def test_v13_contradiction_only_emitted_with_acceptance():
+    # false comparison + correction = ambiguous: no high-confidence contradiction evidence
+    ev = evaluate(STRUCTURED, "Line B has more stops. Line B does not have more stops than Line A.")
+    assert _premise(ev)["outcome"] == "ambiguous"
+    assert ev.status is Status.POTENTIAL_FAILURE
+    assert "comparative_contradiction" not in [e["type"] for e in ev.evidence]
+
+
+def test_v13_gap_limit_and_intervening_entity():
+    far = "Line B opened in 2022, " + "and then " * 8 + "it has more stops."
+    assert _premise(evaluate(STRUCTURED, far))["comparisons_found"] == []
+    # nearest preceding entity wins: the claim is about Line A, which is true (14 > 9)
+    ev = evaluate(STRUCTURED, "Line B opened in 2022, while Line A has more stops.")
+    assert ev.status is Status.PASS
+
+
+def test_v13_comparison_metadata_must_encode_a_false_premise():
+    with pytest.raises(Exception, match="premise is true"):
+        GroundingExpected.model_validate({"false_premise": {
+            "premise": "A has more", "correction_markers": ["x"],
+            "comparison": {"metric": "stops", "subject": {"name": "A", "aliases": ["A"], "value": 14},
+                           "object": {"name": "B", "aliases": ["B"], "value": 9},
+                           "premise_relation": "more_than"}}})

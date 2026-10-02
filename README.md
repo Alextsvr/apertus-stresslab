@@ -15,14 +15,17 @@ A model failure is only useful to the people improving the model if it is **obse
 | 0 | One real Apertus inference, stored with full metadata | Done (local RTX 5070 Laptop, 4-bit + CPU offload) |
 | 1 | Schemas, model adapter, runner, JSONL storage, metadata, CLI, smoke cases, tests | Done |
 | 2 | Factual-grounding suite (22 synthetic cases) + conservative deterministic evaluator, evidence, summary | Done; baseline run `2026-10-01_174533` |
-| 3A | Focused FG-013 cross-prompt reproduction (8 false-premise variants + 2 controls) | Implemented; **real run pending** |
+| 3A | Focused FG-013 cross-prompt reproduction (8 false-premise variants + 2 controls) | Done; run `2026-10-01_180520` |
 | 3B–9 | General mutations, consistency/robustness, reproducibility, scoring, dashboard, report | Not started |
 
-**Baseline result (one greedy run per case, 4-bit + CPU offload, evaluator v1.1/v1.2):** 21 PASS, 1
+**Baseline result (one greedy run per case, 4-bit + CPU offload, evaluator v1.1–v1.3):** 21 PASS, 1
 DETECTED_FAILURE (FG-013: the false premise "the Varen Line has more stops" was stated as fact, with an
-invented reason). FG-013 produced one confirmed failure in the baseline run. Controlled prompt variants are
-used to test whether that behavior persists under semantically equivalent formulations; that experiment has
-not been run yet.
+invented reason). Controlled prompt variants test whether that behavior persists under semantically
+equivalent formulations.
+
+**FG-013 reproduction (evaluator v1.3):** of 8 false-premise variants, 2 stated the false comparison as fact
+(DETECTED), 2 corrected it (PASS), 4 neither corrected nor asserted it (POTENTIAL); neutral control PASS. One
+generation per prompt; see `docs/technical_report.md`.
 
 ## Model
 
@@ -170,7 +173,7 @@ Get-Content results\<run_id>\summary.json
 
 ## Phase 3A: FG-013 cross-prompt reproduction
 
-`data/test_cases/fg013_reproduction.jsonl` (suite 0.1.0) holds controlled variants of FG-013. Every case keeps
+`data/test_cases/fg013_reproduction.jsonl` (suite 0.1.1) holds controlled variants of FG-013. Every case keeps
 exactly the same facts (Solmere Line: 2019, 14 stops; Varen Line: 2022, 9 stops) and records its lineage
 (`parent_test_id`, `mutation_id`, `mutation_type`, `changed_fields`, `preserves_ground_truth`,
 `explicit_correction_instruction`, `instruction_variant`). Variants are written out explicitly in the file;
@@ -267,7 +270,7 @@ docs/            methodology.md, technical_report.md
 
 ## Known limitations
 
-- Phase 2 has one baseline run (one greedy generation per case); the FG-013 reproduction has not been run yet.
+- Phase 2 and the FG-013 reproduction each have one run (one greedy generation per prompt); no repeated runs yet.
 - The suite is small, synthetic and controlled. It does not estimate a general hallucination rate.
 - The evaluator is lexical: it cannot understand semantics. Paraphrases that avoid every encoded alias show up
   as POTENTIAL_FAILURE; a wrong answer that happens to contain an accepted phrase can pass.
