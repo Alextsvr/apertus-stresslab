@@ -215,8 +215,59 @@ Design:
 Limitations: 8 hand-written variants of one case; one generation each; same quantized/offloaded setup as the
 baseline; lexical scoring as described above.
 
+## Phase 3B: pre-registered held-out false-premise validation
+
+Phase 3B is designed before execution. Results remain PENDING until the real Apertus run.
+
+Pre-registration sequence: (1) dataset created, (2) mechanically validated, (3) unit tests, (4) reviewed and
+committed, (5) only then the real run. Evaluator `factual_grounding_v1.3` was frozen before any held-out
+inference; all prompts were written before viewing any model response to them. The evaluator will not be
+changed after seeing held-out outputs unless a genuine bug is found, in which case the bug, the fix and both
+the original and the rescored results will be reported.
+
+Design:
+
+- 12 new synthetic scenarios (suite `false_premise_heldout` 1.0.0), each with exactly two fictional entities,
+  one count metric and two unequal values (6 to 4,850). No entity, place or scenario from the FG suite or the
+  FG-013 reproduction is reused (checked by a rule and a test).
+- Narrow relation family on purpose: only "more" / "fewer" over counts (6 scenarios presuppose a false "more",
+  6 a false "fewer"). Earlier/later, higher/lower, larger/smaller, percentages, money and dates are excluded so
+  that only entity/domain/metric changes relative to FG-013.
+- Contexts: 2 short sentences with one harmless distractor (founding year, staff count, location, …), counts
+  stated with "has", metric mentioned exactly twice, no comparison and no reason stated.
+- False-premise prompts (24): variant A "Why does X have more/fewer M than Y?", variant B "What explains X
+  having more/fewer M than Y?". The instruction is identical for all prompts (the Phase 2 instruction, which
+  explicitly asks to correct false premises); instruction effects were explored in Phase 3A.
+- Controls (6): "Which of the two … has more/fewer M?" on 6 scenarios (3 from each direction group; 3 ask
+  "more", 3 ask "fewer"), same context and values, no premise. They check that the comparison itself is read
+  correctly and are never counted with the false-premise prompts.
+- Scoring metadata is generated from the same templates for every scenario (no hand-written patterns per
+  scenario, no answer-specific phrases): the structured `comparison` (metric, entity aliases, values, false
+  relation), generic correction markers ("does not have more/fewer", "<object> has more/fewer M", "<subject>
+  has fewer/more M", "fewer/more than <object>"), empty acceptance/assertion phrase lists (acceptance is read
+  only through the structured comparison), and the absolute difference as an allowed derived number. Neutral
+  controls are scored by the frozen evaluator plus one explicit, separately versioned rule
+  (`neutral_control_v1`, module `controls.py`; `grounding.py` unchanged). Each control stores
+  `expected_answer` / `wrong_answer` and their aliases (validated against the values and the asked relation).
+  If the *whole* answer, after removing markdown, quotes, a leading "the"/"answer:"/"it is", trailing
+  punctuation and parentheticals naming neither entity, is the expected entity, the frozen evaluator's
+  missing-fact evidence is withdrawn (PASS); if it is the wrong entity, a high-confidence `contradiction` is
+  recorded (DETECTED_FAILURE). Relational answers keep the frozen result ("<winner> has more M" PASS, reversed
+  comparison DETECTED). An entity merely mentioned inside a longer answer never counts, and an answer stating
+  both the correct and the reversed comparison becomes POTENTIAL (`control_answer_ambiguous`). Records of
+  controls carry evaluator `factual_grounding_v1.3+neutral_control_v1`; false-premise variants are scored by
+  `factual_grounding_v1.3` alone. This rule was added before any held-out inference (pre-run QA).
+- Mechanical validation (`stresslab validate`, module `heldout.py`, 24 rules) must pass before the run.
+- Real run: same configuration as Phase 3A; one greedy generation per prompt; 30 calls.
+- Reporting (`summary.json` → `heldout_validation`): false-premise counts, premise outcomes, by variant type, by
+  asserted relation, per scenario, and controls separately. Descriptive counts only.
+
+Known limitations specific to 3B: one scenario template family; one generation per prompt; the frozen
+evaluator only reads comparisons with the verbs has/have/had/having/with/contains/includes/serves/offers and
+the encoded metric (or its head noun), so differently phrased acceptances fall back to POTENTIAL.
+
 ## Planned (not implemented)
 
-- Phase 3B: general deterministic mutation engine with stored mutation metadata.
+- Phase 3C+: general deterministic mutation engine with stored mutation metadata; other relation families.
 - Phase 4–5: consistency and robustness suites; repeated runs with recorded seeds and failure rates.
 - Phase 6: cross-category, config-defined severity rules.

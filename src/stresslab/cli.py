@@ -33,7 +33,7 @@ from stresslab.environment import collect_environment
 from stresslab.models import build_adapter
 from stresslab.offload import DEFAULT_CPU_MAX_MEMORY_GIB, DEFAULT_GPU_MAX_MEMORY_GIB, DEFAULT_GPU_RESERVE_GIB
 from stresslab.runner import RunOutcome, rescore_run, run_cases, single_prompt_case
-from stresslab.summary import build_reproduction_summary
+from stresslab.summary import build_heldout_summary, build_reproduction_summary
 from stresslab.schemas import GenerationConfig, Status
 from stresslab.storage import read_metadata, read_results
 
@@ -151,6 +151,44 @@ def _print_reproduction(results) -> None:  # noqa: ANN001
     print("  (one greedy generation per prompt; not a failure rate)")
 
 
+def _print_heldout(results) -> None:  # noqa: ANN001
+    ho = build_heldout_summary(results)
+    if ho is None:
+        return
+    v, o = ho["false_premise_results"], ho["premise_outcomes"]
+    print(f"\nHeld-out validation: {ho['scenarios']} scenarios, {ho['false_premise_variants']} false-premise "
+          f"variants, {ho['controls']} controls")
+    print(f"  False-premise variants: PASS={v['pass']}  POTENTIAL={v['potential_failure']}  "
+          f"DETECTED={v['detected_failure']}  ERROR={v['error']}")
+    print(f"  Premise outcomes: corrected={o['corrected']}  accepted={o['accepted']}  "
+          f"ambiguous={o['ambiguous']}  not_confirmed={o['not_confirmed']}")
+    for rel, c in ho["by_asserted_relation"].items():
+        print(f"  false {rel}: PASS={c['pass']}  POTENTIAL={c['potential_failure']}  DETECTED={c['detected_failure']}")
+    for vt, c in ho["by_variant_type"].items():
+        print(f"  {vt}: PASS={c['pass']}  POTENTIAL={c['potential_failure']}  DETECTED={c['detected_failure']}")
+    c = ho["control_results"]
+    print(f"  Controls (separate): PASS={c['pass']}  POTENTIAL={c['potential_failure']}  DETECTED={c['detected_failure']}")
+    print("  (one greedy generation per prompt; descriptive counts, not a rate)")
+
+
+def cmd_validate(args: argparse.Namespace) -> int:
+    """Mechanical dataset validation (no model): evaluator schema checks + held-out rules if applicable."""
+    path = Path(args.cases) if args.cases else suite_path(args.suite)
+    evaluator = evaluator_for(path.stem)
+    cases = _load_validated(path, evaluator)
+    print(f"{path.name}: {len(cases)} case(s) load and pass evaluator validation")
+    if any(c.heldout for c in cases):
+        from stresslab.heldout import validate_heldout  # noqa: PLC0415
+
+        results = validate_heldout(cases)
+        for r in results:
+            print(f"  {'PASS' if r.passed else 'FAIL'}  {r.rule}" + (f"  -> {r.detail}" if r.detail else ""))
+        failed = sum(not r.passed for r in results)
+        print(f"Held-out rules: {len(results) - failed}/{len(results)} passed")
+        return 1 if failed else 0
+    return 0
+
+
 def cmd_env(_: argparse.Namespace) -> int:
     print(json.dumps(collect_environment(), indent=2))
     return 0
@@ -196,6 +234,7 @@ def cmd_run(args: argparse.Namespace) -> int:
                         evaluator=evaluator)
     _print_outcome(outcome)
     _print_reproduction(outcome.results)
+    _print_heldout(outcome.results)
     return 1 if outcome.errors else 0
 
 
@@ -230,6 +269,7 @@ def cmd_evaluate(args: argparse.Namespace) -> int:
             _print_evidence(r)
     _print_counts(rescored)
     _print_reproduction(rescored)
+    _print_heldout(rescored)
     print(f"Rescored records written to: {out_dir} (original results.jsonl unchanged)")
     return 0
 
@@ -260,6 +300,11 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("run_dir", type=Path)
     p.add_argument("--failures-only", action="store_true", help="Only POTENTIAL_FAILURE / DETECTED_FAILURE.")
     p.set_defaults(func=cmd_show)
+
+    p = sub.add_parser("validate", help="Mechanically validate a suite's dataset (no model call).")
+    p.add_argument("--suite", default="false_premise_heldout")
+    p.add_argument("--cases", default=None, help="Explicit path to a JSONL file (overrides --suite).")
+    p.set_defaults(func=cmd_validate)
 
     p = sub.add_parser("evaluate", help="Re-score a stored run with the current evaluator (no model call).")
     p.add_argument("run_dir", type=Path)

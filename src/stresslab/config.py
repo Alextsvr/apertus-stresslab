@@ -15,6 +15,7 @@ TEST_SUITE_VERSION = "0.1.0-smoke"  # kept for backwards compatibility (smoke su
 SUITE_VERSIONS = {
     "smoke": TEST_SUITE_VERSION,
     "fg013_reproduction": "0.1.1",  # Phase 3A variants + controls; 0.1.1: structured `comparison` premise (prompts unchanged)
+    "false_premise_heldout": "1.0.0",  # Phase 3B pre-registered held-out set (frozen before inference)
     "factual_grounding": "0.2.2",  # 0.2.1: assertion_patterns; 0.2.2: FG-013 structured `comparison` (prompts unchanged)
 }
 

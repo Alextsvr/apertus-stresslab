@@ -58,6 +58,7 @@ def build_summary(results: Iterable[TestResult], metadata: Optional[RunMetadata]
         "failure_ids": [r.test_id for r in results if is_failure(r)],
         "truncated_responses": [r.test_id for r in results if r.usage.get("hit_max_new_tokens")],
         "reproduction": build_reproduction_summary(results),
+        "heldout_validation": build_heldout_summary(results),
         "note": "Descriptive counts from a single run per case on a small synthetic suite; "
                 "not a hallucination rate. Statuses come from a conservative deterministic evaluator.",
     }
@@ -121,4 +122,66 @@ def build_reproduction_summary(results: Iterable[TestResult]) -> Optional[dict[s
         "note": "Cross-prompt reproduction of one baseline finding: one greedy generation per variant. "
                 "Counts describe these prompts only; they are not a failure rate. Controls are excluded "
                 "from variant counts. The baseline run itself is not included.",
+    }
+
+
+def build_heldout_summary(results: Iterable[TestResult]) -> Optional[dict[str, Any]]:
+    """Phase 3B held-out validation: descriptive counts, controls strictly separate.
+
+    No rates, intervals or scores. Returns None if no record carries held-out metadata.
+    """
+    results = [r for r in results if r.heldout is not None]
+    if not results:
+        return None
+    variants = [r for r in results if not r.heldout.control]
+    controls = [r for r in results if r.heldout.control]
+
+    def counts(rs: list[TestResult]) -> dict[str, int]:
+        c = Counter(r.status.value for r in rs)
+        return {"total": len(rs), "pass": c.get(Status.PASS.value, 0),
+                "potential_failure": c.get(Status.POTENTIAL_FAILURE.value, 0),
+                "detected_failure": c.get(Status.DETECTED_FAILURE.value, 0),
+                "error": c.get(Status.ERROR.value, 0)}
+
+    def outcome(r: TestResult) -> str:
+        check = r.checks.get("false_premise_check") if r.checks else None
+        return (check or {}).get("outcome") or "not_evaluated"
+
+    def group(key) -> dict[str, dict[str, int]]:  # noqa: ANN001
+        buckets: dict[str, list[TestResult]] = {}
+        for r in variants:
+            buckets.setdefault(key(r), []).append(r)
+        return {k: counts(v) for k, v in sorted(buckets.items())}
+
+    outcomes = Counter(outcome(r) for r in variants)
+    scenarios: dict[str, dict[str, Any]] = {}
+    for r in results:
+        h = r.heldout
+        entry = scenarios.setdefault(h.scenario_id, {
+            "domain": h.domain, "metric": h.metric, "subject": h.subject, "subject_value": h.subject_value,
+            "object": h.object, "object_value": h.object_value, "asserted_relation": h.asserted_relation,
+            "direct_causal": None, "paraphrased_causal": None, "control": None})
+        key = "control" if h.control else h.variant_type
+        entry[key] = {"test_id": r.test_id, "status": r.status.value,
+                      **({} if h.control else {"premise_outcome": outcome(r)})}
+
+    return {
+        "scenarios": len(scenarios),
+        "false_premise_variants": len(variants),
+        "controls": len(controls),
+        "false_premise_results": counts(variants),
+        "premise_outcomes": {k: outcomes.get(k, 0)
+                             for k in ("corrected", "accepted", "ambiguous", "not_confirmed", "not_evaluated")},
+        "by_variant_type": group(lambda r: r.heldout.variant_type),
+        "by_asserted_relation": group(lambda r: r.heldout.asserted_relation),
+        "by_scenario": dict(sorted(scenarios.items())),
+        "control_results": {
+            **counts(controls),
+            "cases": [{"test_id": r.test_id, "scenario_id": r.heldout.scenario_id,
+                       "asked_relation": r.heldout.asked_relation, "status": r.status.value,
+                       "evidence_types": [e.get("type") for e in r.evidence]} for r in controls],
+        },
+        "note": "Pre-registered held-out validation: one greedy generation per prompt, frozen evaluator. "
+                "Descriptive counts only (no rate, interval or score). Controls are excluded from "
+                "false-premise counts.",
     }

@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from enum import Enum
 from typing import Any, Literal, Optional
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 SCHEMA_VERSION = "0.1"
 
@@ -56,6 +56,72 @@ class Lineage(BaseModel):
     description: str
 
 
+Relation = Literal["more_than", "less_than"]
+
+
+class HeldOut(BaseModel):
+    """Phase 3B pre-registered held-out scenario metadata (one scenario = A/B variants + optional control).
+
+    `asserted_relation` is the (false) relation the scenario's false-premise variants presuppose for
+    subject vs object; `expected_relation` is the true relation from the controlled values. Controls carry the
+    same scenario facts plus `asked_relation`, the relation their neutral question asks about.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    held_out: Literal[True] = True
+    scenario_id: str
+    domain: str
+    variant_type: Literal["direct_causal", "paraphrased_causal", "neutral_control"]
+    control: bool
+    metric: str
+    subject: str
+    subject_aliases: list[str] = Field(min_length=1)
+    subject_value: float
+    object: str
+    object_aliases: list[str] = Field(min_length=1)
+    object_value: float
+    asserted_relation: Relation
+    expected_relation: Relation
+    asked_relation: Optional[Relation] = None
+    # Controls only: the entity that correctly answers the neutral "Which of the two ..." question, and the
+    # opposite entity. Used by the neutral-control answer check (stresslab.controls), not by grounding.py.
+    expected_answer: Optional[str] = None
+    expected_answer_aliases: list[str] = Field(default_factory=list)
+    wrong_answer: Optional[str] = None
+    wrong_answer_aliases: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def _consistent(self) -> "HeldOut":
+        if self.subject_value == self.object_value:
+            raise ValueError("compared values must differ")
+        true_rel = "more_than" if self.subject_value > self.object_value else "less_than"
+        if self.expected_relation != true_rel:
+            raise ValueError("expected_relation does not match the stored values")
+        if self.asserted_relation == self.expected_relation:
+            raise ValueError("asserted_relation must be the opposite of expected_relation (a false premise)")
+        if self.control != (self.variant_type == "neutral_control"):
+            raise ValueError("control flag and variant_type disagree")
+        if self.control != (self.asked_relation is not None):
+            raise ValueError("asked_relation is required for controls and only for controls")
+        answer_fields = (self.expected_answer, self.wrong_answer, self.expected_answer_aliases, self.wrong_answer_aliases)
+        if not self.control:
+            if any(answer_fields):
+                raise ValueError("expected/wrong answer fields are for controls only")
+            return self
+        if not all(answer_fields):
+            raise ValueError("controls need expected_answer(_aliases) and wrong_answer(_aliases)")
+        bigger, smaller = ((self.subject, self.object) if self.subject_value > self.object_value
+                           else (self.object, self.subject))
+        correct = bigger if self.asked_relation == "more_than" else smaller
+        wrong = smaller if correct == bigger else bigger
+        if (self.expected_answer, self.wrong_answer) != (correct, wrong):
+            raise ValueError("expected_answer/wrong_answer do not follow from values and asked_relation")
+        if self.expected_answer not in self.expected_answer_aliases or self.wrong_answer not in self.wrong_answer_aliases:
+            raise ValueError("answer aliases must include the full entity name")
+        return self
+
+
 class TestCase(BaseModel):
     """One base test case loaded from data/test_cases/*.jsonl."""
 
@@ -71,6 +137,8 @@ class TestCase(BaseModel):
     instruction: Optional[str] = None
     # Phase 3A: present only on derived cases (e.g. FG-013 reproduction variants).
     lineage: Optional[Lineage] = None
+    # Phase 3B: present only on pre-registered held-out cases.
+    heldout: Optional[HeldOut] = None
     expected: dict[str, Any] = Field(default_factory=dict)
     tags: list[str] = Field(default_factory=list)
     notes: Optional[str] = None
@@ -131,6 +199,8 @@ class TestResult(BaseModel):
     category: Category
     subtype: Optional[str] = None
     lineage: Optional[Lineage] = None
+    # Phase 3B: present only on pre-registered held-out cases.
+    heldout: Optional[HeldOut] = None
     model: str
     model_revision: Optional[str] = None
     timestamp: str = Field(default_factory=utc_now_iso)

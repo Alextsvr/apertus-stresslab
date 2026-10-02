@@ -16,7 +16,8 @@ A model failure is only useful to the people improving the model if it is **obse
 | 1 | Schemas, model adapter, runner, JSONL storage, metadata, CLI, smoke cases, tests | Done |
 | 2 | Factual-grounding suite (22 synthetic cases) + conservative deterministic evaluator, evidence, summary | Done; baseline run `2026-10-01_174533` |
 | 3A | Focused FG-013 cross-prompt reproduction (8 false-premise variants + 2 controls) | Done; run `2026-10-01_180520` |
-| 3B–9 | General mutations, consistency/robustness, reproducibility, scoring, dashboard, report | Not started |
+| 3B | Pre-registered held-out false-premise validation (12 new scenarios, 24 prompts, 6 controls) | Defined and validated; **results PENDING** |
+| 3C–9 | General mutations, consistency/robustness, reproducibility, scoring, dashboard, report | Not started |
 
 **Baseline result (one greedy run per case, 4-bit + CPU offload, evaluator v1.1–v1.3):** 21 PASS, 1
 DETECTED_FAILURE (FG-013: the false premise "the Varen Line has more stops" was stated as fact, with an
@@ -216,6 +217,52 @@ cd C:\Extra\apertus-stresslab
 10 model calls (8 variants + 2 controls), one each. The console prints a "Reproduction experiment" block;
 the same data is in `summary.json` under `reproduction`.
 
+## Phase 3B: pre-registered held-out false-premise validation
+
+Phase 3B is designed before execution. Results remain PENDING until the real Apertus run.
+
+Question: does the FG-013 behaviour (stating a false "more/fewer" comparison as fact) transfer to new
+entities, domains and count metrics that were never used to develop or debug the evaluator?
+
+- `data/test_cases/false_premise_heldout.jsonl` (suite 1.0.0): 12 new synthetic scenarios (research sites,
+  warehouses, satellites, service centers, charging stations, production lines, branches, sensors, registered
+  vehicles, active projects, published reports, test facilities). New fictional entities; no FG/FG-013 names.
+- Each scenario: two entities, one count metric, two different values, short context with a harmless distractor
+  and no stated reason for the difference. 6 scenarios presuppose a false "more", 6 a false "fewer".
+- Two false-premise prompts per scenario with fixed classes: A "Why does X have more/fewer M than Y?",
+  B "What explains X having more/fewer M than Y?" (24 prompts).
+- 6 neutral controls ("Which of the two … has more/fewer M?"), same context and values, reported separately.
+- Instruction identical for all 30 prompts (the Phase 2 instruction, which asks to correct false premises).
+- Scored by the frozen `factual_grounding_v1.3` evaluator; `grounding.py` is not changed for Phase 3B. Each case
+  carries `heldout` metadata (scenario, variant type, entities, aliases, values, asserted vs expected relation)
+  and the evaluator's structured `comparison`.
+- Neutral controls additionally use an explicit expected-answer check (`neutral_control_v1`, `controls.py`):
+  an answer that is exactly the correct entity ("Norvex Systems") passes, exactly the wrong entity is DETECTED,
+  and an entity merely mentioned inside a longer answer does not count.
+- `stresslab validate --suite false_premise_heldout` runs 24 mechanical checks (premise false by stored values,
+  values in context, no comparison or reason in the context, A/B identical ground truth, controls identical
+  context and values, no development entities, counts 12/24/6/30, 6/6 balance, identical instruction, premise
+  detectable by the frozen evaluator, …).
+
+```powershell
+.\.venv\Scripts\python.exe -m stresslab validate --suite false_premise_heldout
+.\.venv\Scripts\python.exe -m stresslab run --suite false_premise_heldout `
+  --adapter apertus `
+  --model-id swiss-ai/Apertus-v1.5-8B `
+  --revision a411d838600baf0e3635a3daf66fb7c55fc97bb6 `
+  --dtype bfloat16 `
+  --quantization 4bit `
+  --cpu-offload `
+  --gpu-max-memory-gib 7.0 `
+  --seed 42 `
+  --max-new-tokens 96 `
+  --enable-thinking false
+```
+
+30 model calls (24 false-premise prompts + 6 controls), one greedy generation each, no repeats. The summary
+(`summary.json` → `heldout_validation`) gives counts by variant type, by asserted relation and by scenario,
+with controls separate. No rates, intervals or scores.
+
 ### Small GPUs (8 GB): 4-bit + explicit CPU offload
 
 ```powershell
@@ -261,7 +308,7 @@ Suites without an evaluator (smoke, `infer`) store `"status": "UNSCORED"` (or `"
 src/stresslab/   cli.py, runner.py, models.py (adapters), offload.py, schemas.py, storage.py,
                  cases.py, environment.py, config.py,
                  grounding.py (Phase 2 evaluator), evaluators.py (suite -> evaluator), summary.py
-data/test_cases/ smoke.jsonl, factual_grounding.jsonl, fg013_reproduction.jsonl
+data/test_cases/ smoke.jsonl, factual_grounding.jsonl, fg013_reproduction.jsonl, false_premise_heldout.jsonl
 tests/           pytest (no model, no network)
 notebooks/       colab_smoke_test.ipynb
 scripts/         check_env.ps1, make_bundle.py
@@ -271,6 +318,10 @@ docs/            methodology.md, technical_report.md
 ## Known limitations
 
 - Phase 2 and the FG-013 reproduction each have one run (one greedy generation per prompt); no repeated runs yet.
+- Phase 3B (held-out) has not been run; its results are PENDING.
+- The frozen evaluator only recognises the comparative verbs has/have/had/having/with/contains/includes/serves/
+  offers; an answer phrased with another verb ("operates more …") is not read as a comparison and is counted
+  conservatively (POTENTIAL, not DETECTED). Held-out prompts therefore use "have"/"having".
 - The suite is small, synthetic and controlled. It does not estimate a general hallucination rate.
 - The evaluator is lexical: it cannot understand semantics. Paraphrases that avoid every encoded alias show up
   as POTENTIAL_FAILURE; a wrong answer that happens to contain an accepted phrase can pass.
