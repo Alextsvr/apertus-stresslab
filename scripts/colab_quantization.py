@@ -29,6 +29,14 @@ def require(ok, message):
         raise RuntimeError(message)
 
 
+def check_vram(free, total):
+    """Use CUDA free memory, not the nominal capacity displayed by nvidia-smi."""
+    require(0 <= free <= total and total > 0, "Invalid CUDA memory readings")
+    require(free / 2**30 >= 13.0,
+            f"Need >=13 GiB free VRAM; CUDA reports {free / 2**30:.3f} GiB free "
+            f"of {total / 2**30:.3f} GiB total")
+
+
 def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -78,7 +86,7 @@ def check():
     props = torch.cuda.get_device_properties(0)
     require("T4" in props.name and (props.major, props.minor) == (7, 5), "GPU differs from protocol")
     free, total = torch.cuda.mem_get_info()
-    require(total / 2**30 >= 14.9 and free / 2**30 >= 13.0, "Need >=13 GiB free VRAM")
+    check_vram(free, total)
     ram = psutil.virtual_memory().available / 2**30
     require(ram >= 8.0, "Need >=8 GiB available RAM before loading")
     identity = subprocess.check_output(
@@ -91,6 +99,7 @@ def check():
             "model_revision": REVISION, "versions": versions, "all_packages": packages,
             "transformers_source": source, "gpu": props.name, "gpu_identity": identity,
             "torch_cuda": torch.version.cuda, "free_vram_gib": round(free / 2**30, 3),
+            "cuda_total_vram_gib": round(total / 2**30, 3),
             "available_ram_gib": round(ram, 3), "free_disk_gib": round(disk, 3),
             "evidence_check": verify(ROOT),
             "source_sha256": {p.relative_to(ROOT).as_posix(): sha(p)

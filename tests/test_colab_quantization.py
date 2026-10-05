@@ -11,6 +11,16 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 import colab_quantization as study
 
 
+def test_observed_colab_t4_memory_passes_despite_lower_cuda_total():
+    study.check_vram(int(14.461 * 2**30), int(14.563 * 2**30))
+
+
+def test_free_memory_gate_still_rejects_shortfall_and_reports_actual_values():
+    with pytest.raises(RuntimeError, match="12.999 GiB free of 14.563 GiB total"):
+        study.check_vram(int(12.999 * 2**30), int(14.563 * 2**30))
+    study.check_vram(13 * 2**30, int(14.563 * 2**30))
+
+
 def test_claim_rejects_existing_attempt_and_preserves_it(tmp_path):
     folder = tmp_path / "attempt"
     study.claim(folder)

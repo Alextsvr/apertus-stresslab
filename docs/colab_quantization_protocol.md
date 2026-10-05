@@ -119,3 +119,21 @@ fixed condition order and one GPU/session do not establish an independent failur
 rate, general model reliability, statistical significance or repeat-run stability.
 
 This protocol leaves the earlier unquantized precision-check draft deferred.
+
+## Pre-inference amendment 1 (2026-10-05): CUDA memory accounting
+
+The initial protocol/launcher checkpoint was
+`d89cf3d43141911af7990f64f3fce53b750e826f`. Its resource check rejected the user's
+T4 before any weight loading or model inference. The launcher incorrectly required
+CUDA-reported total memory >=14.9 GiB, in addition to the intended free-memory gate.
+Its combined error message did not distinguish the two conditions.
+
+The user supplied a diagnostic showing nvidia-smi total 15,360 MiB and no listed
+compute processes, but CUDA total 14.563 GiB and free 14.461 GiB. Available RAM was
+9.415 GiB and disk 69.726 GiB. The intended >=13 GiB free VRAM gate was satisfied.
+Remove the erroneous nominal-total assumption, retain the same GPU identity and
+>=13 GiB free VRAM requirement, and record CUDA total separately. A failed check
+now reports both actual values. RAM/disk gates and every experimental condition
+remain unchanged. No study attempt has been generated or resumed by this amendment.
+The Git commit containing this amendment supersedes the initial checkpoint for
+new inference and is captured in the study's preflight and per-condition metadata.
