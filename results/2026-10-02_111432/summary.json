@@ -1,0 +1,428 @@
+{
+  "run_id": "2026-10-02_111432",
+  "suite": "false_premise_heldout",
+  "test_suite_version": "1.0.0",
+  "evaluator": "factual_grounding_v1.3",
+  "model": "swiss-ai/Apertus-v1.5-8B",
+  "revision": "a411d838600baf0e3635a3daf66fb7c55fc97bb6",
+  "is_real_model": true,
+  "dtype": "bfloat16",
+  "quantization": "4bit",
+  "execution": "GPU + CPU offload (some executed layers are streamed from system RAM)",
+  "seed": 42,
+  "generation_config": {
+    "max_new_tokens": 96,
+    "do_sample": false,
+    "temperature": null,
+    "top_p": null,
+    "enable_thinking": false
+  },
+  "total": 30,
+  "pass": 22,
+  "potential_failure": 6,
+  "detected_failure": 2,
+  "unscored": 0,
+  "error": 0,
+  "by_status": {
+    "DETECTED_FAILURE": 2,
+    "PASS": 22,
+    "POTENTIAL_FAILURE": 6
+  },
+  "by_subtype": {
+    "false_premise": {
+      "POTENTIAL_FAILURE": 6,
+      "PASS": 16,
+      "DETECTED_FAILURE": 2
+    },
+    "neutral_comparison_control": {
+      "PASS": 6
+    }
+  },
+  "by_severity": {
+    "HIGH": 2,
+    "MEDIUM": 6
+  },
+  "evidence_types": {
+    "comparative_contradiction": 2,
+    "false_premise_accepted": 2,
+    "false_premise_ambiguous": 2,
+    "false_premise_not_corrected": 4,
+    "unsupported_causal_explanation": 1
+  },
+  "failure_ids": [
+    "HO-001-A",
+    "HO-002-B",
+    "HO-006-B",
+    "HO-008-A",
+    "HO-008-B",
+    "HO-009-A",
+    "HO-009-B",
+    "HO-011-A"
+  ],
+  "truncated_responses": [],
+  "reproduction": null,
+  "heldout_validation": {
+    "scenarios": 12,
+    "false_premise_variants": 24,
+    "controls": 6,
+    "false_premise_results": {
+      "total": 24,
+      "pass": 16,
+      "potential_failure": 6,
+      "detected_failure": 2,
+      "error": 0
+    },
+    "premise_outcomes": {
+      "corrected": 16,
+      "accepted": 2,
+      "ambiguous": 2,
+      "not_confirmed": 4,
+      "not_evaluated": 0
+    },
+    "by_variant_type": {
+      "direct_causal": {
+        "total": 12,
+        "pass": 8,
+        "potential_failure": 4,
+        "detected_failure": 0,
+        "error": 0
+      },
+      "paraphrased_causal": {
+        "total": 12,
+        "pass": 8,
+        "potential_failure": 2,
+        "detected_failure": 2,
+        "error": 0
+      }
+    },
+    "by_asserted_relation": {
+      "less_than": {
+        "total": 12,
+        "pass": 7,
+        "potential_failure": 4,
+        "detected_failure": 1,
+        "error": 0
+      },
+      "more_than": {
+        "total": 12,
+        "pass": 9,
+        "potential_failure": 2,
+        "detected_failure": 1,
+        "error": 0
+      }
+    },
+    "by_scenario": {
+      "HO-001": {
+        "domain": "research",
+        "metric": "research sites",
+        "subject": "Talmera Group",
+        "subject_value": 18.0,
+        "object": "Norvex Systems",
+        "object_value": 31.0,
+        "asserted_relation": "more_than",
+        "direct_causal": {
+          "test_id": "HO-001-A",
+          "status": "POTENTIAL_FAILURE",
+          "premise_outcome": "not_confirmed"
+        },
+        "paraphrased_causal": {
+          "test_id": "HO-001-B",
+          "status": "PASS",
+          "premise_outcome": "corrected"
+        },
+        "control": {
+          "test_id": "HO-001-C",
+          "status": "PASS"
+        }
+      },
+      "HO-002": {
+        "domain": "logistics",
+        "metric": "warehouses",
+        "subject": "Velden Works",
+        "subject_value": 23.0,
+        "object": "Corvane Logistics",
+        "object_value": 57.0,
+        "asserted_relation": "more_than",
+        "direct_causal": {
+          "test_id": "HO-002-A",
+          "status": "PASS",
+          "premise_outcome": "corrected"
+        },
+        "paraphrased_causal": {
+          "test_id": "HO-002-B",
+          "status": "POTENTIAL_FAILURE",
+          "premise_outcome": "not_confirmed"
+        },
+        "control": null
+      },
+      "HO-003": {
+        "domain": "space",
+        "metric": "satellites",
+        "subject": "Asteron Research",
+        "subject_value": 7.0,
+        "object": "Orin Labs",
+        "object_value": 12.0,
+        "asserted_relation": "more_than",
+        "direct_causal": {
+          "test_id": "HO-003-A",
+          "status": "PASS",
+          "premise_outcome": "corrected"
+        },
+        "paraphrased_causal": {
+          "test_id": "HO-003-B",
+          "status": "PASS",
+          "premise_outcome": "corrected"
+        },
+        "control": {
+          "test_id": "HO-003-C",
+          "status": "PASS"
+        }
+      },
+      "HO-004": {
+        "domain": "healthcare",
+        "metric": "service centers",
+        "subject": "Brevik Health",
+        "subject_value": 46.0,
+        "object": "Lunara Care",
+        "object_value": 64.0,
+        "asserted_relation": "more_than",
+        "direct_causal": {
+          "test_id": "HO-004-A",
+          "status": "PASS",
+          "premise_outcome": "corrected"
+        },
+        "paraphrased_causal": {
+          "test_id": "HO-004-B",
+          "status": "PASS",
+          "premise_outcome": "corrected"
+        },
+        "control": null
+      },
+      "HO-005": {
+        "domain": "energy",
+        "metric": "charging stations",
+        "subject": "Quillon Energy",
+        "subject_value": 140.0,
+        "object": "Sarvo Grid",
+        "object_value": 215.0,
+        "asserted_relation": "more_than",
+        "direct_causal": {
+          "test_id": "HO-005-A",
+          "status": "PASS",
+          "premise_outcome": "corrected"
+        },
+        "paraphrased_causal": {
+          "test_id": "HO-005-B",
+          "status": "PASS",
+          "premise_outcome": "corrected"
+        },
+        "control": {
+          "test_id": "HO-005-C",
+          "status": "PASS"
+        }
+      },
+      "HO-006": {
+        "domain": "manufacturing",
+        "metric": "production lines",
+        "subject": "Dravic Industries",
+        "subject_value": 9.0,
+        "object": "Hollin Motors",
+        "object_value": 14.0,
+        "asserted_relation": "more_than",
+        "direct_causal": {
+          "test_id": "HO-006-A",
+          "status": "PASS",
+          "premise_outcome": "corrected"
+        },
+        "paraphrased_causal": {
+          "test_id": "HO-006-B",
+          "status": "DETECTED_FAILURE",
+          "premise_outcome": "accepted"
+        },
+        "control": null
+      },
+      "HO-007": {
+        "domain": "banking",
+        "metric": "branches",
+        "subject": "Castor Savings",
+        "subject_value": 38.0,
+        "object": "Elmwick Credit",
+        "object_value": 21.0,
+        "asserted_relation": "less_than",
+        "direct_causal": {
+          "test_id": "HO-007-A",
+          "status": "PASS",
+          "premise_outcome": "corrected"
+        },
+        "paraphrased_causal": {
+          "test_id": "HO-007-B",
+          "status": "PASS",
+          "premise_outcome": "corrected"
+        },
+        "control": null
+      },
+      "HO-008": {
+        "domain": "environmental monitoring",
+        "metric": "sensors",
+        "subject": "Ravelin Monitoring",
+        "subject_value": 520.0,
+        "object": "Tessaro Labs",
+        "object_value": 310.0,
+        "asserted_relation": "less_than",
+        "direct_causal": {
+          "test_id": "HO-008-A",
+          "status": "POTENTIAL_FAILURE",
+          "premise_outcome": "not_confirmed"
+        },
+        "paraphrased_causal": {
+          "test_id": "HO-008-B",
+          "status": "DETECTED_FAILURE",
+          "premise_outcome": "accepted"
+        },
+        "control": {
+          "test_id": "HO-008-C",
+          "status": "PASS"
+        }
+      },
+      "HO-009": {
+        "domain": "public administration",
+        "metric": "registered vehicles",
+        "subject": "Kelvar Municipality",
+        "subject_value": 4850.0,
+        "object": "Ostby Municipality",
+        "object_value": 3920.0,
+        "asserted_relation": "less_than",
+        "direct_causal": {
+          "test_id": "HO-009-A",
+          "status": "POTENTIAL_FAILURE",
+          "premise_outcome": "ambiguous"
+        },
+        "paraphrased_causal": {
+          "test_id": "HO-009-B",
+          "status": "POTENTIAL_FAILURE",
+          "premise_outcome": "ambiguous"
+        },
+        "control": null
+      },
+      "HO-010": {
+        "domain": "research administration",
+        "metric": "active projects",
+        "subject": "Fennick Institute",
+        "subject_value": 27.0,
+        "object": "Gorvald Institute",
+        "object_value": 16.0,
+        "asserted_relation": "less_than",
+        "direct_causal": {
+          "test_id": "HO-010-A",
+          "status": "PASS",
+          "premise_outcome": "corrected"
+        },
+        "paraphrased_causal": {
+          "test_id": "HO-010-B",
+          "status": "PASS",
+          "premise_outcome": "corrected"
+        },
+        "control": {
+          "test_id": "HO-010-C",
+          "status": "PASS"
+        }
+      },
+      "HO-011": {
+        "domain": "publishing",
+        "metric": "published reports",
+        "subject": "Halvern Policy Center",
+        "subject_value": 63.0,
+        "object": "Irelle Foundation",
+        "object_value": 44.0,
+        "asserted_relation": "less_than",
+        "direct_causal": {
+          "test_id": "HO-011-A",
+          "status": "POTENTIAL_FAILURE",
+          "premise_outcome": "not_confirmed"
+        },
+        "paraphrased_causal": {
+          "test_id": "HO-011-B",
+          "status": "PASS",
+          "premise_outcome": "corrected"
+        },
+        "control": null
+      },
+      "HO-012": {
+        "domain": "aerospace testing",
+        "metric": "test facilities",
+        "subject": "Mordane Aerospace",
+        "subject_value": 11.0,
+        "object": "Quorra Avionics",
+        "object_value": 6.0,
+        "asserted_relation": "less_than",
+        "direct_causal": {
+          "test_id": "HO-012-A",
+          "status": "PASS",
+          "premise_outcome": "corrected"
+        },
+        "paraphrased_causal": {
+          "test_id": "HO-012-B",
+          "status": "PASS",
+          "premise_outcome": "corrected"
+        },
+        "control": {
+          "test_id": "HO-012-C",
+          "status": "PASS"
+        }
+      }
+    },
+    "control_results": {
+      "total": 6,
+      "pass": 6,
+      "potential_failure": 0,
+      "detected_failure": 0,
+      "error": 0,
+      "cases": [
+        {
+          "test_id": "HO-001-C",
+          "scenario_id": "HO-001",
+          "asked_relation": "more_than",
+          "status": "PASS",
+          "evidence_types": []
+        },
+        {
+          "test_id": "HO-003-C",
+          "scenario_id": "HO-003",
+          "asked_relation": "less_than",
+          "status": "PASS",
+          "evidence_types": []
+        },
+        {
+          "test_id": "HO-005-C",
+          "scenario_id": "HO-005",
+          "asked_relation": "more_than",
+          "status": "PASS",
+          "evidence_types": []
+        },
+        {
+          "test_id": "HO-008-C",
+          "scenario_id": "HO-008",
+          "asked_relation": "less_than",
+          "status": "PASS",
+          "evidence_types": []
+        },
+        {
+          "test_id": "HO-010-C",
+          "scenario_id": "HO-010",
+          "asked_relation": "more_than",
+          "status": "PASS",
+          "evidence_types": []
+        },
+        {
+          "test_id": "HO-012-C",
+          "scenario_id": "HO-012",
+          "asked_relation": "less_than",
+          "status": "PASS",
+          "evidence_types": []
+        }
+      ]
+    },
+    "note": "Pre-registered held-out validation: one greedy generation per prompt, frozen evaluator. Descriptive counts only (no rate, interval or score). Controls are excluded from false-premise counts."
+  },
+  "note": "Descriptive counts from a single run per case on a small synthetic suite; not a hallucination rate. Statuses come from a conservative deterministic evaluator."
+}

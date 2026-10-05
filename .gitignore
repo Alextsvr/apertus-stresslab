@@ -13,7 +13,7 @@ venv/
 .env.*
 
 # Experiment outputs: keep the folder, not local runs.
-# Curated runs that back published findings can be force-added later (git add -f).
+# Only the explicitly selected Phase 3B raw files are published.
 results/*
 !results/.gitkeep
 
@@ -32,3 +32,11 @@ Thumbs.db
 
 # Notebooks
 .ipynb_checkpoints/
+
+# Published Phase 3B evidence; all other runs and later rescores stay ignored.
+!results/2026-10-02_111432/
+results/2026-10-02_111432/*
+!results/2026-10-02_111432/results.jsonl
+!results/2026-10-02_111432/summary.json
+!results/2026-10-02_111432/failures.jsonl
+!results/2026-10-02_111432/metadata.json
