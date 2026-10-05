@@ -245,3 +245,68 @@ general hallucination rate, robustness estimate, precision comparison or evidenc
 The semantic rubric was chosen after outputs existed; the review was unblinded, AI-assisted and lacks
 independent human adjudication. No confidence intervals, significance claims or aggregate score are inferred.
 Higher-precision confirmation, new datasets and repeat runs remain future work, not work performed here.
+
+### 16. Post-run abstract, conclusion and evidence overview (2026-10-02)
+
+The following submission text is based on the completed Phase 3B run and its separately labelled semantic
+audit. It supplies the abstract and conclusion left PENDING in the preserved pre-run sections above.
+No new inference or scoring was performed to prepare this text. Higher-precision confirmation is deferred
+pending dedicated compute resources.
+
+#### Abstract
+
+We investigate whether Apertus-v1.5-8B accepts false comparative premises despite having the relevant
+facts in context and an explicit instruction to correct such premises. Following an exploratory finding
+and focused prompt variants, we pre-registered 12 new synthetic scenarios comprising 24 false-premise
+questions and six neutral comparison controls. The dataset and deterministic evaluator were frozen before
+inference. With one greedy generation per prompt in a 4-bit NF4 configuration with CPU offload, the frozen
+evaluator assigned 16 PASS, six POTENTIAL_FAILURE and two DETECTED_FAILURE labels to the false-premise
+questions; all six controls passed. The two detected responses assert false comparisons in different
+scenarios and opposite directions. One states both correct counts, 9 and 14, while claiming that the entity
+with 9 has more. A separate, unblinded, AI-assisted semantic audit identified four explicit acceptances
+across three scenarios, including two responses labelled POTENTIAL by the frozen evaluator. It also
+identified 16 corrections, three responses without correction and one ambiguous response. This secondary
+analysis does not replace the pre-registered automated result. A targeted, unblinded human audit
+confirmed five selected AI-proposed labels; the remaining 25 annotations have no human confirmation.
+This assisted review is not independent human adjudication. The observations support a held-out replication candidate for this failure class in the
+tested configuration. They do not estimate a general hallucination rate or establish stability across
+repeated runs, precision settings or hardware.
+
+#### Conclusion
+
+The completed experiment shows that successful neutral count comparison can coexist with explicit
+false-premise acceptance under causal questions on a pre-registered synthetic set. The strongest primary
+evidence is two frozen-evaluator detections, including a response that repeats the supplied numbers but
+reverses their ordering. Separate semantic review exposes limitations of the lexical evaluator in both
+recognizing corrections and distinguishing apparent correction signals from actual corrections.
+
+The contribution is an auditable set of prompts, responses and descriptive counts, with raw-file hashes
+and a clear boundary between pre-registered evaluation and post-hoc interpretation. Claims remain limited
+to 12 synthetic scenarios, paired question formulations, one greedy generation per prompt and 4-bit NF4
+with CPU offload. Neither a causal effect of question wording nor a quantization-independent failure has
+been established. Five selected semantic judgements have been confirmed by the user in an assisted
+human audit; the full 30-response audit remains AI-assisted. Higher-precision confirmation and
+repeat-run studies remain future work.
+
+#### Compact evidence overview
+
+This table is a selection for exposition, not a new sample or an additional set of observations.
+The full audit covers all 30 responses. P = PASS; U = POTENTIAL_FAILURE; D = DETECTED_FAILURE.
+
+| Case(s) | Controlled facts | Observed answer behaviour | Frozen label | Separate semantic judgement |
+|---|---|---|---|---|
+| HO-006-B | Dravic 9; Hollin 14 production lines | Says Dravic has more while quoting both correct counts | D | Explicit acceptance |
+| HO-008-B | Ravelin 520; Tessaro 310 sensors | Says Ravelin has fewer and was founded later; Tessaro's founding date is absent | D | Explicit acceptance; unsupported founding comparison |
+| HO-009-A/B | Kelvar 4,850; Ostby 3,920 vehicles | Identical answers say Kelvar has fewer while quoting both counts | U / U | Two explicit acceptances within one scenario |
+| HO-002-B | Velden 23; Corvane 57 warehouses | Says "fewer, not more" | U | Clear correction |
+| HO-005-B | Quillon 140; Sarvo 215 charging stations | Says "No false premise; the question is based on incorrect data." | P | Ambiguous premise handling |
+| HO-008-A | Ravelin 520; Tessaro 310 sensors | Says Tessaro's sensor count is not provided | U | Premise not corrected; denies a supplied fact |
+
+The semantic column contains the existing Codex-prepared audit judgements. The user has confirmed
+HO-002-B, HO-005-B, HO-008-A and HO-009-A/B in a targeted
+[human audit](audits/phase3b-2026-10-02_111432/human_review_pending.md), with comments drafted by Codex.
+This is unblinded human confirmation of five proposed labels, not independent human validation of all
+30 responses. The subset contains 1 correction, 2 explicit acceptances, 1 not-corrected and 1 ambiguous
+response. The other 25 annotations remain AI-assisted only. Earlier audit-time statements in section 15
+and the committed audit artifacts are retained as historical records. The [precision-check draft](precision_check_protocol.md) is deferred,
+not pre-registered or executed; any future hardware change must be specified before that experiment.
