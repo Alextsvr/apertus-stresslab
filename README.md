@@ -152,3 +152,7 @@ This new one-configuration study uses new prompts informed by prior outputs; it 
 [Full response-level audit and provenance](docs/colab_semantic/2026-10-06/post_run_report.md).
 
 The [saved preparation notebook](notebooks/sessions/2026-10-06-preparation.ipynb) retains the user's executed notebook from commit `1ffbcc7` byte-for-byte. The main setup notebook remains a clean, opt-in template with no saved outputs.
+
+### Prospective INT8 condition on the same 30 prompts — 2026-10-06
+
+The [new protocol](experiments/colab-int8-matched-prompts-2026-10-06/protocol.md) fixes one INT8/FP16 response per previously observed prompt, with identical order/decoding and exact baseline input-ID matching before any generation. Outputs use their own exclusive directory; no NF4/FP32 rerun or semantic evaluator is invoked. This is a prospective new condition against an observed exploratory baseline, not held-out validation or an isolated causal quantization/precision comparison. Preparation/check/cache/run are separate explicit notebook-helper modes. No INT8 responses to these prompts are known at registration.
