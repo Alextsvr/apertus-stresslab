@@ -1,0 +1,27 @@
+{
+  "archive": "colab-layer-replay-2026-10-06.zip",
+  "archive_bytes": 6226343,
+  "archive_sha256": "ef98d1fe60a71adf4abe2082a9a4974d8ec8ba4eb97e04e596a1d6cd83b2ae23",
+  "sender_checksum_match": true,
+  "internal_hashes": "16/16 match",
+  "manifest_complete": true,
+  "plan_launcher_and_helpers_match_commit": "81bc476c0d765667f82c22c8b9e1beaaf2b9745b",
+  "frozen_source_hashes": "16/16 match",
+  "input_and_five_output_array_fingerprints_match": true,
+  "packed_weights_and_state_unchanged": true,
+  "prior_environment_input_ids_and_trace_match": true,
+  "model_forward_calls": 1,
+  "isolated_matmul_calls": 3,
+  "generation_or_rescoring_performed": false,
+  "ordinary_fp16_equals_original_byte_for_byte": true,
+  "independent_numpy_cast_matches": true,
+  "fp16_finite_limit": 65504.0,
+  "overflow_coordinate": [
+    0,
+    0,
+    2012
+  ],
+  "reference_value": 117986.203125,
+  "raw_preserved_byte_for_byte": true,
+  "analysis_source": "Codex AI-assisted technical audit"
+}

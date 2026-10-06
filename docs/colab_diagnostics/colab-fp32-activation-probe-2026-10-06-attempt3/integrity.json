@@ -1,0 +1,82 @@
+{
+  "archive": "colab-fp32-activation-probe-2026-10-06-attempt3.zip",
+  "archive_bytes": 189981,
+  "archive_sha256": "96c0c4553e5dd96f28982ac9b4a6504f30807e6b4f870a97198678382e554a2e",
+  "sender_checksum_match": true,
+  "internal_hashes": "12/12 match",
+  "manifest_complete": true,
+  "plan_launcher_and_helpers_match_commit": "c8ec8053b2b84c01087c7a393ebb4ebe7537327c",
+  "frozen_source_hashes": "16/16 match",
+  "preceding_replay_archive_sha256_match": true,
+  "preceding_software_source_and_input_ids_match": true,
+  "packed_weights_and_quantization_state_unchanged_modules": 217,
+  "target_weight_and_state_match_preceding_replay": true,
+  "observed_fp32_tensor_events": 2070,
+  "observed_non_finite_events": 0,
+  "forward_calls_in_supplied_probe": 2,
+  "supplied_generated_ids": [
+    29706,
+    68
+  ],
+  "hardware_identity_comparison": {
+    "previous": {
+      "raw": "GPU-577c04ea-9cd1-bbc6-7826-547a9c671dfa, 580.82.07",
+      "uuid": "GPU-577c04ea-9cd1-bbc6-7826-547a9c671dfa",
+      "driver_version": "580.82.07"
+    },
+    "current": {
+      "raw": "GPU-282e8aac-f790-b267-994f-ee18450a0f14, 580.82.07",
+      "uuid": "GPU-282e8aac-f790-b267-994f-ee18450a0f14",
+      "driver_version": "580.82.07"
+    },
+    "uuid_changed": true,
+    "driver_changed": false,
+    "gpu_model": "Tesla T4",
+    "compute_capability": [
+      7,
+      5
+    ],
+    "cross_session_identity_equality_required": false
+  },
+  "target_outputs": [
+    {
+      "step": 1,
+      "module": "model.language_model.layers.2.mlp.down_proj",
+      "stage": "output",
+      "path": "value",
+      "shape": [
+        1,
+        70,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "nan": 0,
+      "positive_inf": 0,
+      "negative_inf": 0,
+      "finite_min": -5344.09130859375,
+      "finite_max": 118004.5078125
+    },
+    {
+      "step": 2,
+      "module": "model.language_model.layers.2.mlp.down_proj",
+      "stage": "output",
+      "path": "value",
+      "shape": [
+        1,
+        71,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "nan": 0,
+      "positive_inf": 0,
+      "negative_inf": 0,
+      "finite_min": -5344.09130859375,
+      "finite_max": 118004.5078125
+    }
+  ],
+  "raw_preserved_byte_for_byte": true,
+  "inference_or_rescoring_performed_during_this_audit": false,
+  "analysis_source": "Codex AI-assisted technical audit of supplied Colab evidence"
+}

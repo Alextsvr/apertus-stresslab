@@ -13,21 +13,37 @@ from verify_evidence import RAW_NAMES, ROOT, RUN, verify
 
 TOP_FILES = ('.gitignore', '.gitattributes', 'LICENSE', 'README.md', 'pyproject.toml',
              'requirements.txt', 'requirements-inference.txt')
-DIRECTORIES = ('src', 'data', 'tests', 'scripts', 'docs')
-SUFFIXES = {'.py', '.md', '.json', '.jsonl', '.txt', '.toml', '.sha256'}
+DIRECTORIES = ('src', 'data', 'tests', 'scripts', 'docs', 'notebooks', 'evidence/colab')
+SUFFIXES = {'.py', '.md', '.json', '.jsonl', '.txt', '.toml', '.sha256', '.ipynb'}
 EXCLUDED = {'.git', '.venv', 'venv', '__pycache__', '.pytest_cache', '.cache', 'dist', 'node_modules'}
 
 
 def payload_files(root: Path) -> list[Path]:
+    tracked = None
+    if (root / '.git').exists():
+        try:
+            tracked = set(subprocess.check_output(['git', 'ls-files'], cwd=root,
+                          stderr=subprocess.DEVNULL, text=True).splitlines())
+        except subprocess.CalledProcessError:
+            pass  # A portable/non-Git snapshot uses the existing suffix allowlist.
     selected = [root / path for path in TOP_FILES]
     selected.extend(root / RUN / name for name in RAW_NAMES)
     for directory in DIRECTORIES:
         for path in (root / directory).rglob('*'):
             rel = path.relative_to(root)
+            if tracked is not None and rel.as_posix() not in tracked:
+                continue
             if (path.is_file() and not path.is_symlink() and not EXCLUDED.intersection(rel.parts)
                     and not any(part.startswith('.') or part.endswith('.egg-info') for part in rel.parts)
                     and (path.suffix in SUFFIXES or path.name == 'SHA256SUMS')):
                 selected.append(path)
+    catalog_path = root / 'evidence/colab/catalog.json'
+    if catalog_path.is_file():
+        for item in json.loads(catalog_path.read_text(encoding='utf-8'))['attempts']:
+            relative = Path(item['archive'])
+            if relative.is_absolute() or '..' in relative.parts or relative.parts[:2] != ('evidence', 'colab'):
+                raise ValueError('Unsafe diagnostic archive path')
+            selected.extend([root / relative, root / (item['archive'] + '.sha256')])
     for path in selected:
         if not path.is_file() or path.is_symlink():
             raise ValueError(f'Missing or non-regular package input: {path.relative_to(root)}')
@@ -47,6 +63,9 @@ def git_value(root: Path, *args: str) -> str | None:
 def build_archive(root: Path, destination: Path) -> tuple[Path, int]:
     root = root.resolve()
     verify(root)
+    if (root / 'evidence/colab/catalog.json').is_file():
+        from verify_colab_evidence import verify as verify_colab
+        verify_colab(root, verify_git=(root / '.git').exists())
     files = payload_files(root)
     payload = {path.relative_to(root).as_posix(): path.read_bytes() for path in files}
     provenance = {

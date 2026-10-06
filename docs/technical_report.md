@@ -310,3 +310,38 @@ This is unblinded human confirmation of five proposed labels, not independent hu
 response. The other 25 annotations remain AI-assisted only. Earlier audit-time statements in section 15
 and the committed audit artifacts are retained as historical records. The [precision-check draft](precision_check_protocol.md) is deferred,
 not pre-registered or executed; any future hardware change must be specified before that experiment.
+
+
+### 17. Colab numerical diagnostics and technical FP32 result (2026-10-06)
+
+This dated addendum records a separate prospective diagnostic chain after Phase 3B. Historical sections above,
+the original evaluator/dataset/raw files and `phase3b-preregistered` / `ed64ba8` remain unchanged. The eight
+attempts and their original source/protocol versions are published in the [diagnostic report](colab_diagnostics/README.md).
+All new post-run interpretation is AI-assisted; no independent human adjudication is claimed.
+
+The October 5 NF4/FP16 condition returned 30 empty cleaned responses with 96 unknown tokens each, preventing
+the intended semantic comparison to INT8. Its frozen stored whole-run counts are 0 PASS / 30 POTENTIAL / 0 DETECTED;
+INT8 returned assessable text with 22 / 5 / 3 overall and six PASS controls. These reused prompts are not new
+held-out evidence, and no original raw label was rewritten or rescored.
+
+The observational diagnostic found one positive infinity at the third decoder block's `mlp.down_proj` output.
+The isolated replay's ordinary FP16 output matched the original output byte-for-byte; its FP32 reference at
+`[0,0,2012]` was 117986.203125, and converting that value to FP16 reproduced infinity. This establishes
+representation overflow for that coordinate, without a general claim of backend correctness or causation
+for every earlier unknown-token response. Two FP32 attempts stopped at prerequisites before model load/forward
+and remain published alongside success; prospective amendments explain dependency restoration and GPU identity.
+
+Promoting the loaded floating parameters/buffers and 4-bit computation to FP32 while preserving all 217 packed
+NF4 weight/state fingerprints produced `hello` with EOS in the manual probe, three exact answers with EOS
+through the unchanged normal adapter, and a full 96-token normal cached continuation. The latter used one
+91-token prefill and 95 decoding forwards, generated the correct integers 1 through 35 plus a raw trailing space,
+and intentionally stopped at the cap. All 111,584 observed floating events, including 12,224 accessible KV-cache
+events, were finite FP32; cache length reached 186. The generation-call peak was 10.773 GiB and instrumented
+generation latency 67.342 seconds, excluding load/promotion.
+
+These checks establish functionality for their technical prompts/configuration only. They do not establish
+long-context/general numerical stability, semantic robustness or higher-precision semantic confirmation.
+FP32 computation can change backend kernels and rounding; the FP32 board differs from the original FP16 replay.
+The original Phase 3B primary result remains 16 / 6 / 2 on 24 false-premise prompts and six PASS controls,
+22 / 6 / 2 overall. Read-only publication verification performed no inference or scoring. The new notebook
+reviews evidence and optionally prepares a future environment; any next experiment requires a separate prospective plan.

@@ -110,3 +110,29 @@ not an executed experiment.
 
 Project code and original synthetic test data: [Apache-2.0](LICENSE). Model weights are not distributed
 here; access to the Apertus checkpoint is governed by its own model repository terms.
+
+
+## Colab T4 diagnostics: completed post-run update (2026-10-06)
+
+The separate [numerical diagnostic report](docs/colab_diagnostics/README.md) now publishes the complete
+October 5–6 chain, including both preflight stops, byte-exact ZIP evidence, provenance and interpretation limits.
+The isolated replay confirms FP16 representation overflow at one projection coordinate. Keeping packed NF4
+weights/state unchanged while promoting floating parameters, buffers and computation to FP32 produced three
+exact short answers through the normal adapter and one complete **96-token cached technical continuation**.
+That continuation had 111,584 finite FP32 observations and a generation-call memory peak of 10.773 GiB on a free T4.
+This is technical functionality for the tested prompts, not proof that false-premise reasoning is repaired.
+
+The original Phase 3B counts remain **22 PASS / 6 POTENTIAL / 2 DETECTED overall**, with six PASS controls.
+The October 5 reuse of those prompts is separately labelled configuration-sensitivity evidence; it is not
+another held-out validation. Higher-precision semantic confirmation and repeated-run studies remain outstanding.
+
+Verify all eight diagnostic archives and original Phase 3B without a model:
+
+```text
+python scripts/verify_colab_evidence.py
+```
+
+Use the [unified Colab notebook](notebooks/colab_evidence_and_setup.ipynb) for model-free evidence review and
+optional environment/cache preparation. It has no automatic inference or historical rerun/rescore. The older
+smoke notebook is historical. The current packaging command also includes catalogued diagnostic ZIPs and the
+notebooks, with separate provenance; in a Git checkout it excludes untracked local audit folders.

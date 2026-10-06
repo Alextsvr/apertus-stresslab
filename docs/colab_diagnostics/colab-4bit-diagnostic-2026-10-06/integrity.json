@@ -1,0 +1,17 @@
+{
+  "archive": "colab-4bit-diagnostic-2026-10-06.zip",
+  "archive_bytes": 22295,
+  "archive_sha256": "50f77cd2ba0aa919f53ae4a466a39067576f099aea326c3d8277dce65bdd109a",
+  "sender_checksum_match": true,
+  "internal_hashes": "8/8 match",
+  "manifest_complete": true,
+  "protocol_and_launcher_match_commit": "562fc48518b163a276e39a3f431acd1a1c7192c9",
+  "frozen_source_hashes": "16/16 match",
+  "dataset_sha256": "62f1b7434a450da17ab3e64a09986d0ec555d1aa86981236baa27c606ee4d459",
+  "forward_calls": 1,
+  "generation_or_rescoring_performed": false,
+  "trace_events": 99,
+  "finite_events_before_first_bad": 98,
+  "raw_preserved_byte_for_byte": true,
+  "analysis_source": "Codex AI-assisted technical audit"
+}

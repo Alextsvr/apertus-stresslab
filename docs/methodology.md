@@ -348,3 +348,41 @@ instruction, one greedy generation per prompt and 4-bit NF4 + CPU offload limita
 general hallucination rate, infer repeated-run stability, treat the two HO-009 prompts as independent
 replications, or infer a causal wording effect from six neutral controls. Independent human review and
 higher-precision/repeated-run confirmation are outstanding research limitations, not completed checks.
+
+
+## Colab diagnostic post-run publication (2026-10-06)
+
+This addendum documents the completed, separately specified October 5–6 numerical investigation. The original
+Phase 3B preregistration, evaluator, dataset, raw counts and separate semantic audit remain historical evidence.
+No original run was overwritten or rescored. The [diagnostic overview](colab_diagnostics/README.md) links every
+pre-run protocol/launcher commit, eight preserved ZIPs, full SHA256 values and byte-exact post-run reports.
+
+Keep three evidence layers distinct: original held-out Phase 3B frozen counts; the later configuration study
+on already observed prompts (including the NF4 generation-quality collapse); and subsequent technical
+non-study prompts/projection replay. A numerical intervention's success is not a revised benchmark score.
+All diagnostic post-run interpretation and the later INT8 semantic annotations are AI-assisted, without
+independent human adjudication. Both stopped FP32 attempts are retained with zero forwards rather than excluded
+from the record or treated as numerical failures. Older per-attempt statements describe their creation-time state.
+
+SHA256 preservation covers sender ZIP bytes and complete internal manifests. October 5 lacked a received
+external checksum; its local ZIP hash is a post-download anchor. Seven later sender checksums matched.
+The stdlib verifier checks archived source/protocol against historical commits, available preflight source
+fingerprints, copied report/metadata hashes, stored label counts and original Phase 3B hashes. It does not
+infer, invoke an evaluator or relabel responses. Full traces/arrays remain in the original compressed archives.
+
+The FP32 intervention promotes already loaded floating parameters/buffers, preserves packed NF4 weight/state,
+and changes quantized computation precision. It does not restore source precision or eliminate quantization
+error. Report initial FP16 loading separately from actual FP32 execution. Module/cache boundary observation
+does not cover every internal operation. GPU UUID/driver changes are explicitly recorded; the FP32 board
+differs from the FP16 replay, limiting causal comparison.
+
+The three normal-generation smoke answers used 2, 4 and 16 tokens including EOS. The subsequent single prompt
+actually generated 96 tokens across 96 forwards, with 95 cached decoding forwards and intentional cap stopping.
+An early EOS would have been preserved as incomplete horizon coverage without retry. The valid sequence prefix,
+finiteness, horizon coverage and cache checks are separately recorded technical criteria, not semantic evaluator labels.
+The 96-token output had a 91-token input and cache length 186, so it supplies no long-context result.
+
+Per-call peak memory and instrumented latency exclude load/promotion. General stability, repeated runs, other
+environments and higher-precision semantic confirmation remain future work. The unified notebook performs
+model-free review by default; environment/model-cache preparation is opt-in and executes no study inference.
+A changed fresh Colab inventory must be recorded and considered before another prospective experiment.

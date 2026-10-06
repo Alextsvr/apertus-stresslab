@@ -1,3 +1,6 @@
 # Preserve published evidence bytes across platforms; SHA256 must survive checkout.
 results/2026-10-02_111432/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 docs/audits/phase3b-2026-10-02_111432/** -text
+
+evidence/colab/** -text
+docs/colab_diagnostics/** -text

@@ -1,0 +1,10 @@
+{
+  "archive_sha256": "a0b21d6664df7bf4f225cac504517a7dd2e6489ac0dfe70e14b2db3f6c13157c",
+  "sender_checksum_match": true,
+  "internal_hashes": "11/11 match",
+  "plan_launcher_match_commit": "3ed0ae3b580e7c8e4e75f88b7337f43b154bf3a8",
+  "forward_calls": 0,
+  "model_loaded": false,
+  "outcome": "gpu_identity_equality_gate_stop",
+  "raw_preserved_byte_for_byte": true
+}

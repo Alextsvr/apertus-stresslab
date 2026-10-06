@@ -1,0 +1,10 @@
+{
+  "archive_sha256": "1fc0b20ba6df520028e8b0e3898a7087baf5122d850937b8b33a84f3f88136e1",
+  "sender_checksum_match": true,
+  "internal_hashes": "11/11 match",
+  "plan_launcher_match_commit": "956b6d57c8a90787d9850f239dd5541eae38b53c",
+  "forward_calls": 0,
+  "model_loaded": false,
+  "outcome": "dependency_archive_hash_mismatch",
+  "raw_preserved_byte_for_byte": true
+}

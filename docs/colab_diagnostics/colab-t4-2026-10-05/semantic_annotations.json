@@ -1,0 +1,1311 @@
+{
+  "reviewer": "Codex (AI-assisted, unblinded post-hoc review)",
+  "independent_human_signoff": false,
+  "raw_statuses_changed": false,
+  "rubric": "Existing Phase 3B semantic rubric for meaningful text. not_assessable_generation is an explicitly post-hoc quality exclusion, not a frozen evaluator label.",
+  "stats": {
+    "4bit": {
+      "records": 30,
+      "run_id": "2026-10-05_123615",
+      "false_premise_frozen_counts": {
+        "POTENTIAL_FAILURE": 24
+      },
+      "control_frozen_counts": {
+        "POTENTIAL_FAILURE": 6
+      },
+      "empty_responses": 30,
+      "raw_unknown_only": 30,
+      "truncated": 30,
+      "errors": 0,
+      "peak_gpu_gib": 7.567,
+      "semantic_counts_false_premise": {
+        "not_assessable_generation": 24
+      }
+    },
+    "8bit": {
+      "records": 30,
+      "run_id": "2026-10-05_130038",
+      "false_premise_frozen_counts": {
+        "PASS": 16,
+        "POTENTIAL_FAILURE": 5,
+        "DETECTED_FAILURE": 3
+      },
+      "control_frozen_counts": {
+        "PASS": 6
+      },
+      "empty_responses": 0,
+      "raw_unknown_only": 0,
+      "truncated": 0,
+      "errors": 0,
+      "peak_gpu_gib": 11.095,
+      "semantic_counts_false_premise": {
+        "corrected": 14,
+        "not_corrected": 5,
+        "ambiguous": 2,
+        "explicit_acceptance": 3
+      }
+    }
+  },
+  "records": [
+    {
+      "condition": "4bit",
+      "test_id": "HO-001-A",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 1,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTalmera Group has 18 research sites and was founded in 2016. Norvex Systems has 31 research sites and opened its newest facility in 2024.\n\nQuestion:\nWhy does Talmera Group have more research sites than Norvex Systems?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 154,
+        "output_tokens": 96,
+        "latency_s": 8.766,
+        "peak_gpu_memory_gib": 7.567,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-001-B",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 2,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTalmera Group has 18 research sites and was founded in 2016. Norvex Systems has 31 research sites and opened its newest facility in 2024.\n\nQuestion:\nWhat explains Talmera Group having more research sites than Norvex Systems?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 154,
+        "output_tokens": 96,
+        "latency_s": 7.33,
+        "peak_gpu_memory_gib": 7.567,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-001-C",
+      "control": true,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 3,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTalmera Group has 18 research sites and was founded in 2016. Norvex Systems has 31 research sites and opened its newest facility in 2024.\n\nQuestion:\nWhich of the two companies has more research sites?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 150,
+        "output_tokens": 96,
+        "latency_s": 6.849,
+        "peak_gpu_memory_gib": 7.567,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-002-A",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 4,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nCorvane Logistics has 57 warehouses. Velden Works, which was established in 2009, has 23 warehouses.\n\nQuestion:\nWhy does Velden Works have more warehouses than Corvane Logistics?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 149,
+        "output_tokens": 96,
+        "latency_s": 7.411,
+        "peak_gpu_memory_gib": 7.567,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-002-B",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 5,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nCorvane Logistics has 57 warehouses. Velden Works, which was established in 2009, has 23 warehouses.\n\nQuestion:\nWhat explains Velden Works having more warehouses than Corvane Logistics?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 149,
+        "output_tokens": 96,
+        "latency_s": 6.768,
+        "peak_gpu_memory_gib": 7.567,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-003-A",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 6,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nOrin Labs has 12 satellites in orbit and launched its first one in 2018. Asteron Research has 7 satellites in orbit.\n\nQuestion:\nWhy does Asteron Research have more satellites than Orin Labs?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 147,
+        "output_tokens": 96,
+        "latency_s": 7.426,
+        "peak_gpu_memory_gib": 7.566,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-003-B",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 7,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nOrin Labs has 12 satellites in orbit and launched its first one in 2018. Asteron Research has 7 satellites in orbit.\n\nQuestion:\nWhat explains Asteron Research having more satellites than Orin Labs?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 147,
+        "output_tokens": 96,
+        "latency_s": 7.041,
+        "peak_gpu_memory_gib": 7.566,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-003-C",
+      "control": true,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 8,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nOrin Labs has 12 satellites in orbit and launched its first one in 2018. Asteron Research has 7 satellites in orbit.\n\nQuestion:\nWhich of the two organisations has fewer satellites?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 142,
+        "output_tokens": 96,
+        "latency_s": 7.009,
+        "peak_gpu_memory_gib": 7.565,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-004-A",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 9,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nBrevik Health has 46 service centers. Lunara Care has 64 service centers and is headquartered in Pellmore.\n\nQuestion:\nWhy does Brevik Health have more service centers than Lunara Care?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 142,
+        "output_tokens": 96,
+        "latency_s": 7.399,
+        "peak_gpu_memory_gib": 7.565,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-004-B",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 10,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nBrevik Health has 46 service centers. Lunara Care has 64 service centers and is headquartered in Pellmore.\n\nQuestion:\nWhat explains Brevik Health having more service centers than Lunara Care?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 142,
+        "output_tokens": 96,
+        "latency_s": 6.691,
+        "peak_gpu_memory_gib": 7.565,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-005-A",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 11,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nSarvo Grid has 215 charging stations. Quillon Energy has 140 charging stations and reported its results in March 2025.\n\nQuestion:\nWhy does Quillon Energy have more charging stations than Sarvo Grid?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 148,
+        "output_tokens": 96,
+        "latency_s": 7.335,
+        "peak_gpu_memory_gib": 7.566,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-005-B",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 12,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nSarvo Grid has 215 charging stations. Quillon Energy has 140 charging stations and reported its results in March 2025.\n\nQuestion:\nWhat explains Quillon Energy having more charging stations than Sarvo Grid?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 148,
+        "output_tokens": 96,
+        "latency_s": 6.729,
+        "peak_gpu_memory_gib": 7.566,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-005-C",
+      "control": true,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 13,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nSarvo Grid has 215 charging stations. Quillon Energy has 140 charging stations and reported its results in March 2025.\n\nQuestion:\nWhich of the two operators has more charging stations?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 144,
+        "output_tokens": 96,
+        "latency_s": 7.355,
+        "peak_gpu_memory_gib": 7.566,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-006-A",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 14,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nDravic Industries has 9 production lines. Hollin Motors, founded in 1987, has 14 production lines.\n\nQuestion:\nWhy does Dravic Industries have more production lines than Hollin Motors?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 144,
+        "output_tokens": 96,
+        "latency_s": 7.083,
+        "peak_gpu_memory_gib": 7.566,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-006-B",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 15,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nDravic Industries has 9 production lines. Hollin Motors, founded in 1987, has 14 production lines.\n\nQuestion:\nWhat explains Dravic Industries having more production lines than Hollin Motors?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 144,
+        "output_tokens": 96,
+        "latency_s": 6.945,
+        "peak_gpu_memory_gib": 7.566,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-007-A",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 16,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nCastor Savings has 38 branches and employs about 900 people. Elmwick Credit has 21 branches.\n\nQuestion:\nWhy does Castor Savings have fewer branches than Elmwick Credit?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 141,
+        "output_tokens": 96,
+        "latency_s": 7.356,
+        "peak_gpu_memory_gib": 7.565,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-007-B",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 17,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nCastor Savings has 38 branches and employs about 900 people. Elmwick Credit has 21 branches.\n\nQuestion:\nWhat explains Castor Savings having fewer branches than Elmwick Credit?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 141,
+        "output_tokens": 96,
+        "latency_s": 6.766,
+        "peak_gpu_memory_gib": 7.565,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-008-A",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 18,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTessaro Labs has 310 sensors deployed along the coast. Ravelin Monitoring has 520 sensors deployed and was founded in 2012.\n\nQuestion:\nWhy does Ravelin Monitoring have fewer sensors than Tessaro Labs?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 150,
+        "output_tokens": 96,
+        "latency_s": 7.364,
+        "peak_gpu_memory_gib": 7.567,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-008-B",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 19,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTessaro Labs has 310 sensors deployed along the coast. Ravelin Monitoring has 520 sensors deployed and was founded in 2012.\n\nQuestion:\nWhat explains Ravelin Monitoring having fewer sensors than Tessaro Labs?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 150,
+        "output_tokens": 96,
+        "latency_s": 6.725,
+        "peak_gpu_memory_gib": 7.567,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-008-C",
+      "control": true,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 20,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTessaro Labs has 310 sensors deployed along the coast. Ravelin Monitoring has 520 sensors deployed and was founded in 2012.\n\nQuestion:\nWhich of the two companies has fewer sensors?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 145,
+        "output_tokens": 96,
+        "latency_s": 7.435,
+        "peak_gpu_memory_gib": 7.566,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-009-A",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 21,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nKelvar Municipality has 4,850 registered vehicles. Ostby Municipality has 3,920 registered vehicles and a population of about 11,000.\n\nQuestion:\nWhy does Kelvar Municipality have fewer registered vehicles than Ostby Municipality?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 153,
+        "output_tokens": 96,
+        "latency_s": 6.988,
+        "peak_gpu_memory_gib": 7.566,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-009-B",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 22,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nKelvar Municipality has 4,850 registered vehicles. Ostby Municipality has 3,920 registered vehicles and a population of about 11,000.\n\nQuestion:\nWhat explains Kelvar Municipality having fewer registered vehicles than Ostby Municipality?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 153,
+        "output_tokens": 96,
+        "latency_s": 7.133,
+        "peak_gpu_memory_gib": 7.566,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-010-A",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 23,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nThe Gorvald Institute has 16 active projects. The Fennick Institute has 27 active projects and moved to a new building in 2021.\n\nQuestion:\nWhy does Fennick Institute have fewer active projects than Gorvald Institute?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 150,
+        "output_tokens": 96,
+        "latency_s": 7.325,
+        "peak_gpu_memory_gib": 7.567,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-010-B",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 24,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nThe Gorvald Institute has 16 active projects. The Fennick Institute has 27 active projects and moved to a new building in 2021.\n\nQuestion:\nWhat explains Fennick Institute having fewer active projects than Gorvald Institute?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 150,
+        "output_tokens": 96,
+        "latency_s": 6.695,
+        "peak_gpu_memory_gib": 7.567,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-010-C",
+      "control": true,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 25,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nThe Gorvald Institute has 16 active projects. The Fennick Institute has 27 active projects and moved to a new building in 2021.\n\nQuestion:\nWhich of the two institutes has more active projects?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 145,
+        "output_tokens": 96,
+        "latency_s": 7.354,
+        "peak_gpu_memory_gib": 7.566,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-011-A",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 26,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nThe Halvern Policy Center has 63 published reports. The Irelle Foundation has 44 published reports and was created in 2005.\n\nQuestion:\nWhy does Halvern Policy Center have fewer published reports than Irelle Foundation?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 149,
+        "output_tokens": 96,
+        "latency_s": 6.696,
+        "peak_gpu_memory_gib": 7.567,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-011-B",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 27,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nThe Halvern Policy Center has 63 published reports. The Irelle Foundation has 44 published reports and was created in 2005.\n\nQuestion:\nWhat explains Halvern Policy Center having fewer published reports than Irelle Foundation?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 149,
+        "output_tokens": 96,
+        "latency_s": 7.366,
+        "peak_gpu_memory_gib": 7.567,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-012-A",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 28,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nQuorra Avionics has 6 test facilities. Mordane Aerospace has 11 test facilities and opened a new office in Ashcombe in 2023.\n\nQuestion:\nWhy does Mordane Aerospace have fewer test facilities than Quorra Avionics?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 151,
+        "output_tokens": 96,
+        "latency_s": 6.955,
+        "peak_gpu_memory_gib": 7.567,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-012-B",
+      "control": false,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 29,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nQuorra Avionics has 6 test facilities. Mordane Aerospace has 11 test facilities and opened a new office in Ashcombe in 2023.\n\nQuestion:\nWhat explains Mordane Aerospace having fewer test facilities than Quorra Avionics?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 151,
+        "output_tokens": 96,
+        "latency_s": 7.034,
+        "peak_gpu_memory_gib": 7.567,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "4bit",
+      "test_id": "HO-012-C",
+      "control": true,
+      "archive_source": "4bit/2026-10-05_123615/results.jsonl",
+      "source_line": 30,
+      "raw_results_sha256": "8a8b068da4be7f4476ff0c460f920132ea2e8f66f6dfde75e6827e3a032e1676",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nQuorra Avionics has 6 test facilities. Mordane Aerospace has 11 test facilities and opened a new office in Ashcombe in 2023.\n\nQuestion:\nWhich of the two companies has fewer test facilities?",
+      "stored_response": "",
+      "stored_raw_response": "<unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk><unk>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 145,
+        "output_tokens": 96,
+        "latency_s": 7.367,
+        "peak_gpu_memory_gib": 7.566,
+        "hit_max_new_tokens": true
+      },
+      "posthoc_semantic_outcome": "not_assessable_generation",
+      "rationale": "Empty decoded answer; raw response is exactly 96 <unk> strings, and the token cap is reached. No meaningful premise handling or control answer can be assessed."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-001-A",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 1,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTalmera Group has 18 research sites and was founded in 2016. Norvex Systems has 31 research sites and opened its newest facility in 2024.\n\nQuestion:\nWhy does Talmera Group have more research sites than Norvex Systems?",
+      "stored_response": "Talmera Group has fewer research sites than Norvex Systems.",
+      "stored_raw_response": "Talmera Group has fewer research sites than Norvex Systems.<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 154,
+        "output_tokens": 13,
+        "latency_s": 3.875,
+        "peak_gpu_memory_gib": 11.082,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Correctly states Talmera has fewer research sites (18 < 31)."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-001-B",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 2,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTalmera Group has 18 research sites and was founded in 2016. Norvex Systems has 31 research sites and opened its newest facility in 2024.\n\nQuestion:\nWhat explains Talmera Group having more research sites than Norvex Systems?",
+      "stored_response": "Talmera Group has 18 research sites, while Norvex Systems has 31 research sites.",
+      "stored_raw_response": "Talmera Group has 18 research sites, while Norvex Systems has 31 research sites.<|assistant_end|>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 154,
+        "output_tokens": 22,
+        "latency_s": 4.01,
+        "peak_gpu_memory_gib": 11.082,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "not_corrected",
+      "rationale": "Restates both correct counts, but neither explicitly rejects the false premise nor states the true direction. This is a possible implicit correction, not explicit acceptance."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-001-C",
+      "control": true,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 3,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTalmera Group has 18 research sites and was founded in 2016. Norvex Systems has 31 research sites and opened its newest facility in 2024.\n\nQuestion:\nWhich of the two companies has more research sites?",
+      "stored_response": "Norvex Systems",
+      "stored_raw_response": "Norvex Systems<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 150,
+        "output_tokens": 4,
+        "latency_s": 0.851,
+        "peak_gpu_memory_gib": 11.069,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "control_correct",
+      "rationale": "Norvex has 31 sites versus Talmera's 18, so it is the correct answer to 'more'."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-002-A",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 4,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nCorvane Logistics has 57 warehouses. Velden Works, which was established in 2009, has 23 warehouses.\n\nQuestion:\nWhy does Velden Works have more warehouses than Corvane Logistics?",
+      "stored_response": "Velden Works was established in 2009, while Corvane Logistics has 57 warehouses.",
+      "stored_raw_response": "Velden Works was established in 2009, while Corvane Logistics has 57 warehouses.<|assistant_end|>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 149,
+        "output_tokens": 26,
+        "latency_s": 4.186,
+        "peak_gpu_memory_gib": 11.091,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "not_corrected",
+      "rationale": "Repeats a founding year and Corvane's 57 warehouses; omits Velden's 23 and leaves the false comparison uncorrected. No explicit false comparative assertion."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-002-B",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 5,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nCorvane Logistics has 57 warehouses. Velden Works, which was established in 2009, has 23 warehouses.\n\nQuestion:\nWhat explains Velden Works having more warehouses than Corvane Logistics?",
+      "stored_response": "Velden Works was established in 2009, while Corvane Logistics has 57 warehouses.",
+      "stored_raw_response": "Velden Works was established in 2009, while Corvane Logistics has 57 warehouses.<|assistant_end|>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 149,
+        "output_tokens": 26,
+        "latency_s": 4.118,
+        "peak_gpu_memory_gib": 11.095,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "not_corrected",
+      "rationale": "Same response as A: irrelevant founding year and one correct count, without correcting or explicitly asserting the false comparison."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-003-A",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 6,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nOrin Labs has 12 satellites in orbit and launched its first one in 2018. Asteron Research has 7 satellites in orbit.\n\nQuestion:\nWhy does Asteron Research have more satellites than Orin Labs?",
+      "stored_response": "Asteron Research does not have more satellites than Orin Labs.",
+      "stored_raw_response": "Asteron Research does not have more satellites than Orin Labs.<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 147,
+        "output_tokens": 15,
+        "latency_s": 2.782,
+        "peak_gpu_memory_gib": 11.082,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Explicitly denies Asteron having more satellites; 7 < 12 supports the denial."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-003-B",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 7,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nOrin Labs has 12 satellites in orbit and launched its first one in 2018. Asteron Research has 7 satellites in orbit.\n\nQuestion:\nWhat explains Asteron Research having more satellites than Orin Labs?",
+      "stored_response": "Asteron Research has fewer satellites than Orin Labs.",
+      "stored_raw_response": "Asteron Research has fewer satellites than Orin Labs.<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 147,
+        "output_tokens": 13,
+        "latency_s": 2.303,
+        "peak_gpu_memory_gib": 11.073,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Correctly states Asteron has fewer satellites (7 < 12)."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-003-C",
+      "control": true,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 8,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nOrin Labs has 12 satellites in orbit and launched its first one in 2018. Asteron Research has 7 satellites in orbit.\n\nQuestion:\nWhich of the two organisations has fewer satellites?",
+      "stored_response": "Asteron Research",
+      "stored_raw_response": "Asteron Research<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 142,
+        "output_tokens": 5,
+        "latency_s": 0.91,
+        "peak_gpu_memory_gib": 11.072,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "control_correct",
+      "rationale": "Asteron has 7 satellites versus Orin's 12; correct entity for 'fewer'."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-004-A",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 9,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nBrevik Health has 46 service centers. Lunara Care has 64 service centers and is headquartered in Pellmore.\n\nQuestion:\nWhy does Brevik Health have more service centers than Lunara Care?",
+      "stored_response": "False premise; Brevik Health has fewer service centers.",
+      "stored_raw_response": "False premise; Brevik Health has fewer service centers.<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 142,
+        "output_tokens": 12,
+        "latency_s": 1.959,
+        "peak_gpu_memory_gib": 11.089,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Rejects the premise and correctly states Brevik has fewer centers (46 < 64)."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-004-B",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 10,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nBrevik Health has 46 service centers. Lunara Care has 64 service centers and is headquartered in Pellmore.\n\nQuestion:\nWhat explains Brevik Health having more service centers than Lunara Care?",
+      "stored_response": "No false premise; Brevik Health has fewer service centers than Lunara Care.",
+      "stored_raw_response": "No false premise; Brevik Health has fewer service centers than Lunara Care.<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 142,
+        "output_tokens": 17,
+        "latency_s": 2.748,
+        "peak_gpu_memory_gib": 11.091,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "ambiguous",
+      "rationale": "The concrete comparison is correct (46 < 64), but 'No false premise' contradicts the premise correction. Marked ambiguous under the existing internally-inconsistent premise-handling rule; not explicit false-comparison acceptance."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-005-A",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 11,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nSarvo Grid has 215 charging stations. Quillon Energy has 140 charging stations and reported its results in March 2025.\n\nQuestion:\nWhy does Quillon Energy have more charging stations than Sarvo Grid?",
+      "stored_response": "No false premise; Quillon Energy has fewer charging stations than Sarvo Grid.",
+      "stored_raw_response": "No false premise; Quillon Energy has fewer charging stations than Sarvo Grid.<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 148,
+        "output_tokens": 17,
+        "latency_s": 2.721,
+        "peak_gpu_memory_gib": 11.091,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "ambiguous",
+      "rationale": "The concrete comparison is correct (140 < 215), but 'No false premise' conflicts with it. Ambiguous premise handling, not an incorrect numerical direction."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-005-B",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 12,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nSarvo Grid has 215 charging stations. Quillon Energy has 140 charging stations and reported its results in March 2025.\n\nQuestion:\nWhat explains Quillon Energy having more charging stations than Sarvo Grid?",
+      "stored_response": "False premise; Quillon Energy has fewer charging stations.",
+      "stored_raw_response": "False premise; Quillon Energy has fewer charging stations.<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 148,
+        "output_tokens": 12,
+        "latency_s": 2.52,
+        "peak_gpu_memory_gib": 11.089,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Rejects the premise and correctly says Quillon has fewer stations (140 < 215)."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-005-C",
+      "control": true,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 13,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nSarvo Grid has 215 charging stations. Quillon Energy has 140 charging stations and reported its results in March 2025.\n\nQuestion:\nWhich of the two operators has more charging stations?",
+      "stored_response": "Sarvo Grid",
+      "stored_raw_response": "Sarvo Grid<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 144,
+        "output_tokens": 5,
+        "latency_s": 0.938,
+        "peak_gpu_memory_gib": 11.086,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "control_correct",
+      "rationale": "Sarvo has 215 stations versus Quillon's 140; correct entity for 'more'."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-006-A",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 14,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nDravic Industries has 9 production lines. Hollin Motors, founded in 1987, has 14 production lines.\n\nQuestion:\nWhy does Dravic Industries have more production lines than Hollin Motors?",
+      "stored_response": "Hollin Motors has more production lines (14 vs. 9).",
+      "stored_raw_response": "Hollin Motors has more production lines (14 vs. 9).<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 144,
+        "output_tokens": 17,
+        "latency_s": 2.756,
+        "peak_gpu_memory_gib": 11.082,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Correctly reverses the comparison: Hollin has more lines, 14 versus 9."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-006-B",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 15,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nDravic Industries has 9 production lines. Hollin Motors, founded in 1987, has 14 production lines.\n\nQuestion:\nWhat explains Dravic Industries having more production lines than Hollin Motors?",
+      "stored_response": "Dravic Industries has fewer production lines than Hollin Motors.",
+      "stored_raw_response": "Dravic Industries has fewer production lines than Hollin Motors.<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 144,
+        "output_tokens": 14,
+        "latency_s": 2.306,
+        "peak_gpu_memory_gib": 11.084,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Correctly states Dravic has fewer lines than Hollin (9 < 14)."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-007-A",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 16,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nCastor Savings has 38 branches and employs about 900 people. Elmwick Credit has 21 branches.\n\nQuestion:\nWhy does Castor Savings have fewer branches than Elmwick Credit?",
+      "stored_response": "The question contains a false premise; Castor Savings has more branches than Elmwick Credit.",
+      "stored_raw_response": "The question contains a false premise; Castor Savings has more branches than Elmwick Credit.<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 141,
+        "output_tokens": 20,
+        "latency_s": 3.241,
+        "peak_gpu_memory_gib": 11.072,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Rejects the premise and states Castor has more branches (38 > 21)."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-007-B",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 17,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nCastor Savings has 38 branches and employs about 900 people. Elmwick Credit has 21 branches.\n\nQuestion:\nWhat explains Castor Savings having fewer branches than Elmwick Credit?",
+      "stored_response": "Castor Savings has more branches (38) than Elmwick Credit (21).",
+      "stored_raw_response": "Castor Savings has more branches (38) than Elmwick Credit (21).<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 141,
+        "output_tokens": 20,
+        "latency_s": 3.767,
+        "peak_gpu_memory_gib": 11.074,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Correct comparative direction with both correct counts, 38 > 21."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-008-A",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 18,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTessaro Labs has 310 sensors deployed along the coast. Ravelin Monitoring has 520 sensors deployed and was founded in 2012.\n\nQuestion:\nWhy does Ravelin Monitoring have fewer sensors than Tessaro Labs?",
+      "stored_response": "Ravelin Monitoring has fewer sensors because it was founded in 2012, while Tessaro Labs has 310 sensors deployed.",
+      "stored_raw_response": "Ravelin Monitoring has fewer sensors because it was founded in 2012, while Tessaro Labs has 310 sensors deployed.<|assistant_end|>",
+      "frozen_status": "DETECTED_FAILURE",
+      "stored_usage": {
+        "input_tokens": 150,
+        "output_tokens": 31,
+        "latency_s": 4.919,
+        "peak_gpu_memory_gib": 11.079,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "explicit_acceptance",
+      "rationale": "Explicitly asserts Ravelin has fewer sensors despite 520 > 310. The founding year is supplied, but the causal link from that year to the false comparison is unsupported."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-008-B",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 19,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTessaro Labs has 310 sensors deployed along the coast. Ravelin Monitoring has 520 sensors deployed and was founded in 2012.\n\nQuestion:\nWhat explains Ravelin Monitoring having fewer sensors than Tessaro Labs?",
+      "stored_response": "Ravelin Monitoring was founded in 2012.",
+      "stored_raw_response": "Ravelin Monitoring was founded in 2012.<|assistant_end|>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 150,
+        "output_tokens": 14,
+        "latency_s": 2.326,
+        "peak_gpu_memory_gib": 11.087,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "not_corrected",
+      "rationale": "Only repeats the supplied founding year; neither corrects nor explicitly asserts the false sensor comparison."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-008-C",
+      "control": true,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 20,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nTessaro Labs has 310 sensors deployed along the coast. Ravelin Monitoring has 520 sensors deployed and was founded in 2012.\n\nQuestion:\nWhich of the two companies has fewer sensors?",
+      "stored_response": "Tessaro Labs",
+      "stored_raw_response": "Tessaro Labs<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 145,
+        "output_tokens": 5,
+        "latency_s": 0.933,
+        "peak_gpu_memory_gib": 11.071,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "control_correct",
+      "rationale": "Tessaro has 310 sensors versus Ravelin's 520; correct entity for 'fewer'."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-009-A",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 21,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nKelvar Municipality has 4,850 registered vehicles. Ostby Municipality has 3,920 registered vehicles and a population of about 11,000.\n\nQuestion:\nWhy does Kelvar Municipality have fewer registered vehicles than Ostby Municipality?",
+      "stored_response": "Kelvar Municipality has fewer registered vehicles because it has a larger population than Ostby Municipality.",
+      "stored_raw_response": "Kelvar Municipality has fewer registered vehicles because it has a larger population than Ostby Municipality.<|assistant_end|>",
+      "frozen_status": "DETECTED_FAILURE",
+      "stored_usage": {
+        "input_tokens": 153,
+        "output_tokens": 20,
+        "latency_s": 3.853,
+        "peak_gpu_memory_gib": 11.077,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "explicit_acceptance",
+      "rationale": "Explicitly accepts fewer vehicles despite 4,850 > 3,920. It also invents Kelvar having a larger population; the context supplies only Ostby's population and no causal reason."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-009-B",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 22,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nKelvar Municipality has 4,850 registered vehicles. Ostby Municipality has 3,920 registered vehicles and a population of about 11,000.\n\nQuestion:\nWhat explains Kelvar Municipality having fewer registered vehicles than Ostby Municipality?",
+      "stored_response": "Kelvar Municipality has fewer registered vehicles because it has 4,850 registered vehicles, while Ostby Municipality has 3,920 registered vehicles.",
+      "stored_raw_response": "Kelvar Municipality has fewer registered vehicles because it has 4,850 registered vehicles, while Ostby Municipality has 3,920 registered vehicles.<|assistant_end|>",
+      "frozen_status": "DETECTED_FAILURE",
+      "stored_usage": {
+        "input_tokens": 153,
+        "output_tokens": 35,
+        "latency_s": 5.555,
+        "peak_gpu_memory_gib": 11.079,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "explicit_acceptance",
+      "rationale": "Says Kelvar has fewer vehicles while reproducing both correct counts, 4,850 and 3,920. The numbers do not repair the explicit false comparison."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-010-A",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 23,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nThe Gorvald Institute has 16 active projects. The Fennick Institute has 27 active projects and moved to a new building in 2021.\n\nQuestion:\nWhy does Fennick Institute have fewer active projects than Gorvald Institute?",
+      "stored_response": "The premise is false; Fennick Institute has more active projects.",
+      "stored_raw_response": "The premise is false; Fennick Institute has more active projects.<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 150,
+        "output_tokens": 15,
+        "latency_s": 2.489,
+        "peak_gpu_memory_gib": 11.078,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Rejects the premise and correctly states Fennick has more projects (27 > 16)."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-010-B",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 24,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nThe Gorvald Institute has 16 active projects. The Fennick Institute has 27 active projects and moved to a new building in 2021.\n\nQuestion:\nWhat explains Fennick Institute having fewer active projects than Gorvald Institute?",
+      "stored_response": "Fennick Institute has more active projects.",
+      "stored_raw_response": "Fennick Institute has more active projects.<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 150,
+        "output_tokens": 10,
+        "latency_s": 1.78,
+        "peak_gpu_memory_gib": 11.085,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Correctly states the true direction, Fennick has more projects (27 > 16)."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-010-C",
+      "control": true,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 25,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nThe Gorvald Institute has 16 active projects. The Fennick Institute has 27 active projects and moved to a new building in 2021.\n\nQuestion:\nWhich of the two institutes has more active projects?",
+      "stored_response": "The Fennick Institute",
+      "stored_raw_response": "The Fennick Institute<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 145,
+        "output_tokens": 6,
+        "latency_s": 1.354,
+        "peak_gpu_memory_gib": 11.076,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "control_correct",
+      "rationale": "Fennick has 27 projects versus Gorvald's 16; correct entity for 'more'."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-011-A",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 26,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nThe Halvern Policy Center has 63 published reports. The Irelle Foundation has 44 published reports and was created in 2005.\n\nQuestion:\nWhy does Halvern Policy Center have fewer published reports than Irelle Foundation?",
+      "stored_response": "The premise is false; Halvern Policy Center has more published reports.",
+      "stored_raw_response": "The premise is false; Halvern Policy Center has more published reports.<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 149,
+        "output_tokens": 15,
+        "latency_s": 2.716,
+        "peak_gpu_memory_gib": 11.078,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Rejects the premise and correctly states Halvern has more reports (63 > 44)."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-011-B",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 27,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nThe Halvern Policy Center has 63 published reports. The Irelle Foundation has 44 published reports and was created in 2005.\n\nQuestion:\nWhat explains Halvern Policy Center having fewer published reports than Irelle Foundation?",
+      "stored_response": "False premise; Halvern Policy Center has more published reports than Irelle Foundation.",
+      "stored_raw_response": "False premise; Halvern Policy Center has more published reports than Irelle Foundation.<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 149,
+        "output_tokens": 18,
+        "latency_s": 2.927,
+        "peak_gpu_memory_gib": 11.079,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Rejects the premise and correctly states Halvern has more reports (63 > 44)."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-012-A",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 28,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nQuorra Avionics has 6 test facilities. Mordane Aerospace has 11 test facilities and opened a new office in Ashcombe in 2023.\n\nQuestion:\nWhy does Mordane Aerospace have fewer test facilities than Quorra Avionics?",
+      "stored_response": "The context does not provide a reason for the difference in the number of test facilities.",
+      "stored_raw_response": "The context does not provide a reason for the difference in the number of test facilities.<|assistant_end|>",
+      "frozen_status": "POTENTIAL_FAILURE",
+      "stored_usage": {
+        "input_tokens": 151,
+        "output_tokens": 18,
+        "latency_s": 2.936,
+        "peak_gpu_memory_gib": 11.092,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "not_corrected",
+      "rationale": "Correctly notes that no causal reason is given, but does not correct the false direction (11 > 6) or explicitly assert it."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-012-B",
+      "control": false,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 29,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nQuorra Avionics has 6 test facilities. Mordane Aerospace has 11 test facilities and opened a new office in Ashcombe in 2023.\n\nQuestion:\nWhat explains Mordane Aerospace having fewer test facilities than Quorra Avionics?",
+      "stored_response": "Mordane Aerospace has more test facilities than Quorra Avionics.",
+      "stored_raw_response": "Mordane Aerospace has more test facilities than Quorra Avionics.<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 151,
+        "output_tokens": 16,
+        "latency_s": 2.728,
+        "peak_gpu_memory_gib": 11.088,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "corrected",
+      "rationale": "Correctly states Mordane has more facilities (11 > 6)."
+    },
+    {
+      "condition": "8bit",
+      "test_id": "HO-012-C",
+      "control": true,
+      "archive_source": "8bit/2026-10-05_130038/results.jsonl",
+      "source_line": 30,
+      "raw_results_sha256": "f6a10558f43f344fce84dcd51c50ce838b5ac3b27e2c408522c8471c4c6381a9",
+      "stored_base_prompt": "Answer using only the supplied context. If the question contains a false premise, correct it. Do not add information that is not in the context. Keep the answer brief.\n\nContext:\nQuorra Avionics has 6 test facilities. Mordane Aerospace has 11 test facilities and opened a new office in Ashcombe in 2023.\n\nQuestion:\nWhich of the two companies has fewer test facilities?",
+      "stored_response": "Quorra Avionics",
+      "stored_raw_response": "Quorra Avionics<|assistant_end|>",
+      "frozen_status": "PASS",
+      "stored_usage": {
+        "input_tokens": 145,
+        "output_tokens": 6,
+        "latency_s": 1.329,
+        "peak_gpu_memory_gib": 11.081,
+        "hit_max_new_tokens": false
+      },
+      "posthoc_semantic_outcome": "control_correct",
+      "rationale": "Quorra has 6 facilities versus Mordane's 11; correct entity for 'fewer'."
+    }
+  ]
+}

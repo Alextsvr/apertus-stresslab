@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "publication_date": "2026-10-06",
+  "analysis_source": "Codex AI-assisted technical and semantic audits; no independent human adjudication",
+  "original_phase3b_prereg_commit": "ed64ba8cb382073d652b24e647a898c94f8ce186",
+  "attempts": [
+    {
+      "id": "colab-t4-quantization-2026-10-05",
+      "procedure_commit": "fdbb94c6963ccb7aec96e1548fbca74bff4ccadf",
+      "archive": "evidence/colab/colab-t4-quantization-2026-10-05.zip",
+      "archive_bytes": 90417,
+      "archive_sha256": "5928e9af0297338f38d5130dc2f56a741b34da4020ed24bc4e185376d78eccb4",
+      "internal_files": 16,
+      "registered_sources": {
+        "scripts/colab_quantization.py": "launcher.py",
+        "docs/colab_quantization_protocol.md": "protocol.md"
+      },
+      "result_member": "execution_status.json",
+      "stored_result": {
+        "complete": true,
+        "exit_codes": {
+          "4bit": 0,
+          "8bit": 0
+        }
+      },
+      "stored_record_counts": {
+        "NF4_FP16": {
+          "member": "4bit/2026-10-05_123615/results.jsonl",
+          "records": 30,
+          "statuses": {
+            "POTENTIAL_FAILURE": 30
+          }
+        },
+        "INT8_FP16": {
+          "member": "8bit/2026-10-05_130038/results.jsonl",
+          "records": 30,
+          "statuses": {
+            "PASS": 22,
+            "POTENTIAL_FAILURE": 5,
+            "DETECTED_FAILURE": 3
+          }
+        }
+      },
+      "sender_checksum_received_and_matched": false,
+      "report": "docs/colab_diagnostics/colab-t4-2026-10-05/post_run_report.md",
+      "report_sha256": "e270d19b024cc2a8d970266bbfd68bd750bc77a2ecab01d0a1a72c722b35d700",
+      "audit_metadata": "docs/colab_diagnostics/colab-t4-2026-10-05/integrity.json",
+      "audit_metadata_sha256": "f5913d3e8c0005e8a8a625af321e4adf9e5ec5fdfa356e1a2c703bcbabd8dcd5",
+      "annotations": "docs/colab_diagnostics/colab-t4-2026-10-05/semantic_annotations.json",
+      "annotations_sha256": "38d4a6072c942d939c0712e1ccbb538dc7014334294bcf0ef82a115ecd6aa830"
+    },
+    {
+      "id": "colab-4bit-diagnostic-2026-10-06",
+      "procedure_commit": "562fc48518b163a276e39a3f431acd1a1c7192c9",
+      "archive": "evidence/colab/colab-4bit-diagnostic-2026-10-06.zip",
+      "archive_bytes": 22295,
+      "archive_sha256": "50f77cd2ba0aa919f53ae4a466a39067576f099aea326c3d8277dce65bdd109a",
+      "internal_files": 8,
+      "registered_sources": {
+        "scripts/colab_4bit_diagnostic.py": "launcher.py",
+        "docs/colab_4bit_diagnostic_protocol.md": "protocol.md"
+      },
+      "result_member": "diagnostic.json",
+      "stored_result": {
+        "outcome": "non_finite_detected",
+        "forward_calls": 1,
+        "observed_tensor_events": 99
+      },
+      "stored_record_counts": {},
+      "sender_checksum_received_and_matched": true,
+      "report": "docs/colab_diagnostics/colab-4bit-diagnostic-2026-10-06/post_run_report.md",
+      "report_sha256": "0861495c07ea1926ef2cf796c36aa9bc0f26be502fc42303a0cc1844a9d3891b",
+      "audit_metadata": "docs/colab_diagnostics/colab-4bit-diagnostic-2026-10-06/integrity.json",
+      "audit_metadata_sha256": "6d20cc188a10060bf3781ba8137957191957420e360eed4e890168f27e66bae1"
+    },
+    {
+      "id": "colab-layer-replay-2026-10-06",
+      "procedure_commit": "81bc476c0d765667f82c22c8b9e1beaaf2b9745b",
+      "archive": "evidence/colab/colab-layer-replay-2026-10-06.zip",
+      "archive_bytes": 6226343,
+      "archive_sha256": "ef98d1fe60a71adf4abe2082a9a4974d8ec8ba4eb97e04e596a1d6cd83b2ae23",
+      "internal_files": 16,
+      "registered_sources": {
+        "scripts/colab_layer_replay.py": "launcher.py",
+        "docs/colab_layer_replay_protocol.md": "protocol.md",
+        "scripts/colab_4bit_diagnostic.py": "colab_4bit_diagnostic.py",
+        "scripts/colab_quantization.py": "colab_quantization.py",
+        "scripts/verify_evidence.py": "verify_evidence.py"
+      },
+      "result_member": "comparison.json",
+      "stored_result": {
+        "outcome": "paired_replay_complete",
+        "observed_tensor_events": 99
+      },
+      "stored_record_counts": {},
+      "sender_checksum_received_and_matched": true,
+      "report": "docs/colab_diagnostics/colab-layer-replay-2026-10-06/post_run_report.md",
+      "report_sha256": "bf5b96a6964439c1a79cef8418037353279e5489a59bef502d1919962de7f159",
+      "audit_metadata": "docs/colab_diagnostics/colab-layer-replay-2026-10-06/integrity.json",
+      "audit_metadata_sha256": "e20dc550c301b7d6adfa18e7845495f58d7a94de58c8e4e0e74e352522e1ff6d"
+    },
+    {
+      "id": "colab-fp32-activation-probe-2026-10-06",
+      "procedure_commit": "956b6d57c8a90787d9850f239dd5541eae38b53c",
+      "archive": "evidence/colab/colab-fp32-activation-probe-2026-10-06.zip",
+      "archive_bytes": 25689,
+      "archive_sha256": "1fc0b20ba6df520028e8b0e3898a7087baf5122d850937b8b33a84f3f88136e1",
+      "internal_files": 11,
+      "registered_sources": {
+        "scripts/colab_fp32_probe.py": "launcher.py",
+        "docs/colab_fp32_probe_protocol.md": "protocol.md",
+        "scripts/colab_4bit_diagnostic.py": "colab_4bit_diagnostic.py",
+        "scripts/colab_layer_replay.py": "colab_layer_replay.py",
+        "scripts/colab_quantization.py": "colab_quantization.py",
+        "scripts/verify_evidence.py": "verify_evidence.py"
+      },
+      "result_member": "probe.json",
+      "stored_result": {
+        "outcome": "runtime_error",
+        "forward_calls_attempted": 0,
+        "observed_tensor_events": 0
+      },
+      "stored_record_counts": {},
+      "sender_checksum_received_and_matched": true,
+      "report": "docs/colab_diagnostics/colab-fp32-activation-probe-2026-10-06/post_run_report.md",
+      "report_sha256": "f51dcb8e34ad12b9a5d485c00617a8aa8b7a8bcaeebdc76fbc88f892af5e6f4f",
+      "audit_metadata": "docs/colab_diagnostics/colab-fp32-activation-probe-2026-10-06/integrity.json",
+      "audit_metadata_sha256": "0daf899d0f6a15b4cedd4d0db5e374b774102f4a2bc5114fe69ba68fa9af70f5"
+    },
+    {
+      "id": "colab-fp32-activation-probe-2026-10-06-attempt2",
+      "procedure_commit": "3ed0ae3b580e7c8e4e75f88b7337f43b154bf3a8",
+      "archive": "evidence/colab/colab-fp32-activation-probe-2026-10-06-attempt2.zip",
+      "archive_bytes": 26500,
+      "archive_sha256": "a0b21d6664df7bf4f225cac504517a7dd2e6489ac0dfe70e14b2db3f6c13157c",
+      "internal_files": 11,
+      "registered_sources": {
+        "scripts/colab_fp32_probe.py": "launcher.py",
+        "docs/colab_fp32_probe_protocol.md": "protocol.md",
+        "scripts/colab_4bit_diagnostic.py": "colab_4bit_diagnostic.py",
+        "scripts/colab_layer_replay.py": "colab_layer_replay.py",
+        "scripts/colab_quantization.py": "colab_quantization.py",
+        "scripts/verify_evidence.py": "verify_evidence.py"
+      },
+      "result_member": "probe.json",
+      "stored_result": {
+        "outcome": "runtime_error",
+        "forward_calls_attempted": 0,
+        "observed_tensor_events": 0
+      },
+      "stored_record_counts": {},
+      "sender_checksum_received_and_matched": true,
+      "report": "docs/colab_diagnostics/colab-fp32-activation-probe-2026-10-06-attempt2/post_run_report.md",
+      "report_sha256": "1c0abbded9f7f9e03ecd920d7815b061d39f7c8c25ff64760cadb0eae1ba3dff",
+      "audit_metadata": "docs/colab_diagnostics/colab-fp32-activation-probe-2026-10-06-attempt2/integrity.json",
+      "audit_metadata_sha256": "3cbb659bd788185aab7b9eee3220156983921fa045d75ddddb46d0ef3cf3a922"
+    },
+    {
+      "id": "colab-fp32-activation-probe-2026-10-06-attempt3",
+      "procedure_commit": "c8ec8053b2b84c01087c7a393ebb4ebe7537327c",
+      "archive": "evidence/colab/colab-fp32-activation-probe-2026-10-06-attempt3.zip",
+      "archive_bytes": 189981,
+      "archive_sha256": "96c0c4553e5dd96f28982ac9b4a6504f30807e6b4f870a97198678382e554a2e",
+      "internal_files": 12,
+      "registered_sources": {
+        "scripts/colab_fp32_probe.py": "launcher.py",
+        "docs/colab_fp32_probe_protocol.md": "protocol.md",
+        "scripts/colab_4bit_diagnostic.py": "colab_4bit_diagnostic.py",
+        "scripts/colab_layer_replay.py": "colab_layer_replay.py",
+        "scripts/colab_quantization.py": "colab_quantization.py",
+        "scripts/verify_evidence.py": "verify_evidence.py"
+      },
+      "result_member": "probe.json",
+      "stored_result": {
+        "outcome": "short_probe_complete",
+        "forward_calls_attempted": 2,
+        "observed_tensor_events": 2070
+      },
+      "stored_record_counts": {},
+      "sender_checksum_received_and_matched": true,
+      "report": "docs/colab_diagnostics/colab-fp32-activation-probe-2026-10-06-attempt3/post_run_report.md",
+      "report_sha256": "69f6af595a4dd682a4fc465fdd19d9463f66de13fa10348b63eb9881e4ed340c",
+      "audit_metadata": "docs/colab_diagnostics/colab-fp32-activation-probe-2026-10-06-attempt3/integrity.json",
+      "audit_metadata_sha256": "d78de8a79c5f15e43d45f0ae069b93e1d54ff51e0983c822068954d2db6c9d0e"
+    },
+    {
+      "id": "colab-fp32-generation-smoke-2026-10-06",
+      "procedure_commit": "b864d896245bc956c24b438c6dc92602935a87a1",
+      "archive": "evidence/colab/colab-fp32-generation-smoke-2026-10-06.zip",
+      "archive_bytes": 559108,
+      "archive_sha256": "e50e058df196207d0c9712f7ea4950a0168a39989b5596f800622a849d880b4a",
+      "internal_files": 13,
+      "registered_sources": {
+        "scripts/colab_fp32_smoke.py": "launcher.py",
+        "docs/colab_fp32_smoke_protocol.md": "protocol.md",
+        "scripts/colab_4bit_diagnostic.py": "colab_4bit_diagnostic.py",
+        "scripts/colab_fp32_probe.py": "colab_fp32_probe.py",
+        "scripts/colab_layer_replay.py": "colab_layer_replay.py",
+        "scripts/colab_quantization.py": "colab_quantization.py",
+        "scripts/verify_evidence.py": "verify_evidence.py"
+      },
+      "result_member": "smoke.json",
+      "stored_result": {
+        "outcome": "smoke_complete",
+        "total_forward_calls_attempted": 22,
+        "observed_tensor_events": 25394
+      },
+      "stored_record_counts": {},
+      "sender_checksum_received_and_matched": true,
+      "report": "docs/colab_diagnostics/colab-fp32-generation-smoke-2026-10-06/post_run_report.md",
+      "report_sha256": "eefc2d6b4386c52ab1ae8de9a7bacbf5696b70a14f6b147e33eb13652608607b",
+      "audit_metadata": "docs/colab_diagnostics/colab-fp32-generation-smoke-2026-10-06/integrity.json",
+      "audit_metadata_sha256": "7b947c382008ca3bbc8422ec6f4c99d9f5ba2984531b5f4c459943266665e8ba"
+    },
+    {
+      "id": "colab-fp32-generation-long-2026-10-06",
+      "procedure_commit": "86c30699c412ac7e9ae78f1eb025de66057634a2",
+      "archive": "evidence/colab/colab-fp32-generation-long-2026-10-06.zip",
+      "archive_bytes": 1899546,
+      "archive_sha256": "3ef82701b2049d42527c1b601176e52f796b679e2060578dea69bc9539045afc",
+      "internal_files": 15,
+      "registered_sources": {
+        "scripts/colab_fp32_long.py": "launcher.py",
+        "docs/colab_fp32_long_protocol.md": "protocol.md",
+        "scripts/colab_4bit_diagnostic.py": "colab_4bit_diagnostic.py",
+        "scripts/colab_fp32_long_cell.py": "colab_fp32_long_cell.py",
+        "scripts/colab_fp32_probe.py": "colab_fp32_probe.py",
+        "scripts/colab_layer_replay.py": "colab_layer_replay.py",
+        "scripts/colab_quantization.py": "colab_quantization.py",
+        "scripts/verify_evidence.py": "verify_evidence.py"
+      },
+      "result_member": "long_probe.json",
+      "stored_result": {
+        "outcome": "long_probe_complete",
+        "total_forward_calls_attempted": 96,
+        "observed_tensor_events": 111584
+      },
+      "stored_record_counts": {},
+      "sender_checksum_received_and_matched": true,
+      "report": "docs/colab_diagnostics/colab-fp32-generation-long-2026-10-06/post_run_report.md",
+      "report_sha256": "6400b327d49eeefa041bf3b101811c47a473642a23cdc1eee3a562c1e7503780",
+      "audit_metadata": "docs/colab_diagnostics/colab-fp32-generation-long-2026-10-06/integrity.json",
+      "audit_metadata_sha256": "53620c4852d3a3a72fc1fe1847872b9ff708dacb897ce6e20996124982e0b80b"
+    }
+  ]
+}
