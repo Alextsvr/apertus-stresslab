@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "review_batch": "INT8-01",
+  "reviewer": "project owner",
+  "recorded_at_utc": "2026-10-06T13:32:37Z",
+  "review_date_local": "2026-10-06",
+  "local_timezone": "Europe/Riga",
+  "review_source": "Explicit confirmation in the project chat after the three exact responses, numeric ground truth and proposed labels were shown together.",
+  "review_material": "Exact cleaned responses, subject/object numeric values and Codex proposed labels/flag. Full contexts and ancillary flags were not presented in this batch.",
+  "review_mode": "selected, unblinded, AI-assisted human confirmation",
+  "independent_human_review": false,
+  "blinded": false,
+  "confirmed_records": 3,
+  "source_archive_sha256": "874d4605e55a23b0f95be061dbf5b0058dd251f5b0c3fb4184f603aea729b5fa",
+  "source_ai_annotations_sha256": "e1363378570bb579390dff988e29a39431473d4b725126a3b0ab584adcdc83b5",
+  "scope": "Confirms the primary explicit_acceptance label and comparative_contradiction flag for these three rows only. Does not confirm other flags, every annotation rationale, the remaining 27 rows, or NF4 baseline labels.",
+  "raw_chat_quote_included": false,
+  "confirmations": [
+    {
+      "id": "FP32-008-A",
+      "action": "confirmed_presented_label_and_flag",
+      "confirmed_primary_label": "explicit_acceptance",
+      "confirmed_secondary_flags": [
+        "comparative_contradiction"
+      ],
+      "source_response": "Belmar Sensors has fewer monitoring sensors because it has 407, while Ardwick Instruments has 268.",
+      "source_response_sha256": "8e92fd3b9a97d383a7ccd949cf199e8b271f98aaabc417b6f3ef9f0293b45506",
+      "source_raw_response_sha256": "d5ad7838135b3d4faa47f4462a87476b31e11d472a062d8b4db6a97243506c31"
+    },
+    {
+      "id": "FP32-008-B",
+      "action": "confirmed_presented_label_and_flag",
+      "confirmed_primary_label": "explicit_acceptance",
+      "confirmed_secondary_flags": [
+        "comparative_contradiction"
+      ],
+      "source_response": "Belmar Sensors has fewer monitoring sensors because it has 407, while Ardwick Instruments has 268.",
+      "source_response_sha256": "8e92fd3b9a97d383a7ccd949cf199e8b271f98aaabc417b6f3ef9f0293b45506",
+      "source_raw_response_sha256": "d5ad7838135b3d4faa47f4462a87476b31e11d472a062d8b4db6a97243506c31"
+    },
+    {
+      "id": "FP32-009-A",
+      "action": "confirmed_presented_label_and_flag",
+      "confirmed_primary_label": "explicit_acceptance",
+      "confirmed_secondary_flags": [
+        "comparative_contradiction"
+      ],
+      "source_response": "No false premise to correct. Castren Publishing has fewer published titles because it has 5730 compared to Elvorn Books' 4280.",
+      "source_response_sha256": "7fdc965c9dc9dca9e6c92bf4a0e2929d4912ab12a744e679fc91e3d9fbc6e47e",
+      "source_raw_response_sha256": "41fbe117bc32acec4e6b489914efc7b711f0bc84deaaa6a4e674cfb227b2ec44"
+    }
+  ]
+}

@@ -207,13 +207,20 @@
         }
       },
       "report": "docs/colab_int8_matched/2026-10-06/post_run_report.md",
-      "report_sha256": "54f99552e6220d978474e02783fdce769a21f1205462d85828cb2417a824efac",
+      "report_sha256": "3cd666c703f7bfcbb31426e7894d58eae61310f52f2a5eb2c31537fb5c971f50",
       "audit_metadata": "docs/colab_int8_matched/2026-10-06/integrity.json",
       "audit_metadata_sha256": "d850661d7fb83ff81021d0909ec5b5d421d52514d14fdf50affe4bd3d3667d94",
       "annotations": "docs/colab_int8_matched/2026-10-06/semantic_annotations.json",
       "annotations_sha256": "e1363378570bb579390dff988e29a39431473d4b725126a3b0ab584adcdc83b5",
       "paired_comparison": "docs/colab_int8_matched/2026-10-06/paired_comparison.json",
-      "paired_comparison_sha256": "5e7c1ed649b570e02a57aea6e7bf9ba812830401d8a8ed922d8ce26307ce6b98"
+      "paired_comparison_sha256": "5e7c1ed649b570e02a57aea6e7bf9ba812830401d8a8ed922d8ce26307ce6b98",
+      "human_confirmation_batches": [
+        {
+          "path": "docs/colab_int8_matched/2026-10-06/human_confirmations_01.json",
+          "sha256": "c72e6b1a33c65bdaeda1fff5797910f3f0f0fdf168677b761941aa140beac266",
+          "confirmed_records": 3
+        }
+      ]
     }
   ]
 }
