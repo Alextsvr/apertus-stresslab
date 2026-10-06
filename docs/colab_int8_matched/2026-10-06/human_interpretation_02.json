@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "review_batch": "INT8-02",
+  "reviewer": "project owner",
+  "recorded_at_utc": "2026-10-06T13:37:49Z",
+  "review_date_local": "2026-10-06",
+  "local_timezone": "Europe/Riga",
+  "review_source": "User considers 002-A sufficiently correct after seeing the exact question/answer, 64 versus 29 ground truth, the strict category and the implicit-correction alternative.",
+  "review_mode": "selected, unblinded, AI-assisted human interpretation",
+  "independent_human_review": false,
+  "blinded": false,
+  "reviewed_records": 1,
+  "source_archive_sha256": "874d4605e55a23b0f95be061dbf5b0058dd251f5b0c3fb4184f603aea729b5fa",
+  "source_ai_annotations_sha256": "e1363378570bb579390dff988e29a39431473d4b725126a3b0ab584adcdc83b5",
+  "scope": "Alternative assessment of one answer only. Not confirmation of its strict not_corrected label, the full audit, other flags or NF4 baseline annotations.",
+  "raw_chat_quote_included": false,
+  "interpretations": [
+    {
+      "id": "FP32-002-A",
+      "action": "alternative_semantic_interpretation",
+      "human_judgment": "sufficiently_correct",
+      "interpretation": "Implicit correction by contrasting the two correct numeric values; this interpretation summarizes the user judgment in response to the presented alternatives.",
+      "registered_primary_label_unchanged": "not_corrected",
+      "registered_criterion_difference": "The primary corrected category requires explicit rejection/reversal; the human judgment accepts an implicit numeric correction.",
+      "source_response": "Kelmar Logistics has 64 warehouses, while Dorsen Works has 29 warehouses.",
+      "source_response_sha256": "ede43eaf7d439b4f3770f5053a3248293ac125d00d4e6ed8abecfb80c7f879cd",
+      "source_raw_response_sha256": "82230c6911098a69a39c0e51b9e4382bbddd287340f125ff0023ef30649393ae"
+    }
+  ]
+}

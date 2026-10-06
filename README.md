@@ -166,3 +166,7 @@ The separately registered INT8 condition completed all 30 matched prompts with E
 This additional condition uses an observed exploratory baseline and changes quantization, nominal computation precision and backend kernels together across sessions. It does not establish an isolated causal precision/quantization improvement or independent held-out robustness. The original Phase 3B raw/source/dataset/evaluator, frozen 22 / 6 / 2 overall counts and prereg tag remain unchanged; no original rerun/rescore or NF4 baseline rerun/relabel occurred.
 
 [Full 30-row paired comparison and provenance](docs/colab_int8_matched/2026-10-06/post_run_report.md).
+
+### Current research synthesis and selected human review — 2026-10-06
+
+[Current research synthesis](docs/research_summary_2026-10-06.md) connects the original frozen Phase 3B result, directly replayed FP16 overflow, technical FP32 continuation and the mixed same-prompt INT8 comparison. Four selected INT8 rows now have unblinded, AI-assisted human input: three confirmed explicit acceptances/self-contradictions, and one sufficiently-correct implicit numeric comparison (002-A). The original strict AI labels remain 8 / 4 / 12; interpreting only 002-A as an implicit correction gives a separately identified post-hoc 9 / 4 / 11 sensitivity illustration. No full independent human audit, causal precision/quantization benefit or new inference is claimed.

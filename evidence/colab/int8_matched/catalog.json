@@ -207,7 +207,7 @@
         }
       },
       "report": "docs/colab_int8_matched/2026-10-06/post_run_report.md",
-      "report_sha256": "3cd666c703f7bfcbb31426e7894d58eae61310f52f2a5eb2c31537fb5c971f50",
+      "report_sha256": "18dc667358c4431cf2c667c1dcde7c0abbf803efea3879015689f7671841b3f2",
       "audit_metadata": "docs/colab_int8_matched/2026-10-06/integrity.json",
       "audit_metadata_sha256": "d850661d7fb83ff81021d0909ec5b5d421d52514d14fdf50affe4bd3d3667d94",
       "annotations": "docs/colab_int8_matched/2026-10-06/semantic_annotations.json",
@@ -219,6 +219,13 @@
           "path": "docs/colab_int8_matched/2026-10-06/human_confirmations_01.json",
           "sha256": "c72e6b1a33c65bdaeda1fff5797910f3f0f0fdf168677b761941aa140beac266",
           "confirmed_records": 3
+        }
+      ],
+      "human_interpretation_batches": [
+        {
+          "path": "docs/colab_int8_matched/2026-10-06/human_interpretation_02.json",
+          "sha256": "a97d776b88e2d83f49030946e0855b009264d764c4ae7961bbb460c3e28a2217",
+          "reviewed_records": 1
         }
       ]
     }

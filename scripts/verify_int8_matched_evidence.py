@@ -209,6 +209,29 @@ def verify(root=ROOT, *, verify_git=True):
             for field in ('source_response', 'source_response_sha256', 'source_raw_response_sha256'):
                 require(confirmation[field] == source[field], 'Human-confirmed response differs')
             human_ids.add(case_id)
+    interpretation_ids = set()
+    for batch in item.get('human_interpretation_batches', []):
+        content = (root / safe_name(batch['path'])).read_bytes()
+        require(digest(content) == batch['sha256'], 'Human interpretation artifact changed')
+        human = json.loads(content)
+        require(human['source_archive_sha256'] == item['archive_sha256'] and
+                human['source_ai_annotations_sha256'] == item['annotations_sha256'] and
+                human['independent_human_review'] is False and human['blinded'] is False,
+                'Human interpretation provenance differs')
+        require(len(human['interpretations']) == human['reviewed_records'] == batch['reviewed_records'],
+                'Human interpretation count differs')
+        for interpretation in human['interpretations']:
+            case_id = interpretation['id']
+            require(case_id in sources and case_id not in human_ids | interpretation_ids,
+                    'Unknown/duplicate human-interpreted ID')
+            source = sources[case_id]
+            require(interpretation['action'] == 'alternative_semantic_interpretation' and
+                    interpretation['human_judgment'] == 'sufficiently_correct' and
+                    interpretation['registered_primary_label_unchanged'] == source['label'],
+                    'Human interpretation scope differs')
+            for field in ('source_response', 'source_response_sha256', 'source_raw_response_sha256'):
+                require(interpretation[field] == source[field], 'Human-interpreted response differs')
+            interpretation_ids.add(case_id)
     for line in (root / 'evidence/colab/int8_matched/SHA256SUMS').read_text().splitlines():
         expected, relative = line.split('  ', 1)
         require(digest((root / safe_name(relative)).read_bytes()) == expected, 'INT8 publication manifest differs')
@@ -218,6 +241,8 @@ def verify(root=ROOT, *, verify_git=True):
             'annotation_source_matches': len(audit['annotations']), 'ai_assisted_annotation_counts': item['annotation_counts'],
             'paired_correction_counts': summary['paired_correction_counts'], 'independent_human_review': False,
             'selected_ai_assisted_human_confirmations': len(human_ids),
+            'selected_ai_assisted_human_alternative_interpretations': len(interpretation_ids),
+            'distinct_human_reviewed_records': len(human_ids | interpretation_ids),
             'inference_or_evaluator_rescoring_performed': False}
 
 
