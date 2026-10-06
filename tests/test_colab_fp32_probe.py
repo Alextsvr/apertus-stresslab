@@ -101,3 +101,23 @@ def test_failed_worker_seals_evidence_and_cannot_retry(tmp_path, monkeypatch):
     with pytest.raises(RuntimeError, match="Archive exists"):
         probe.run()
     assert len(calls) == 1
+
+
+def test_dependency_gate_reports_actual_hash_and_does_not_modify_file(tmp_path, monkeypatch):
+    import hashlib
+    dependency = tmp_path / "wrong.zip"
+    content = b"different dependency bytes"
+    dependency.write_bytes(content)
+    monkeypatch.setattr(probe, "PRIOR", dependency)
+    actual = hashlib.sha256(content).hexdigest()
+    with pytest.raises(RuntimeError, match=f"expected {probe.PRIOR_SHA}, got {actual}"):
+        probe.read_prior()
+    assert dependency.read_bytes() == content
+
+
+def test_missing_dependency_reports_path_without_creating_it(tmp_path, monkeypatch):
+    dependency = tmp_path / "missing.zip"
+    monkeypatch.setattr(probe, "PRIOR", dependency)
+    with pytest.raises(RuntimeError, match="Verified dependency missing"):
+        probe.read_prior()
+    assert not dependency.exists()

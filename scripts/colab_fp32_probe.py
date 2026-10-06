@@ -18,10 +18,10 @@ from colab_quantization import ROOT, MODEL, REVISION, check, claim, git, require
 from colab_4bit_diagnostic import PROMPT, NonFiniteObserved, tensors, stats
 from colab_layer_replay import TARGET, weight_identity, precision_settings
 
-DEST = ROOT / "results/colab-fp32-activation-probe-2026-10-06"
+DEST = ROOT / "results/colab-fp32-activation-probe-2026-10-06-attempt2"
 PLAN = ROOT / "docs/colab_fp32_probe_protocol.md"
-PRIOR = ROOT / "results/colab-layer-replay-2026-10-06.zip"
 PRIOR_SHA = "ef98d1fe60a71adf4abe2082a9a4974d8ec8ba4eb97e04e596a1d6cd83b2ae23"
+PRIOR = ROOT / "results/evidence-dependencies" / f"{PRIOR_SHA}.zip"
 CAP = 8
 
 
@@ -98,7 +98,9 @@ def output_quality(text, ids, unk, stopped_on_eos):
 
 
 def read_prior():
-    require(sha(PRIOR) == PRIOR_SHA, "Preceding replay archive differs or is missing")
+    require(PRIOR.is_file(), f"Verified dependency missing: {PRIOR}")
+    actual = sha(PRIOR)
+    require(actual == PRIOR_SHA, f"Dependency hash mismatch: expected {PRIOR_SHA}, got {actual}")
     with zipfile.ZipFile(PRIOR) as z:
         entries = [line.split("  ", 1) for line in z.read("SHA256SUMS").decode().splitlines()]
         require(len(entries) == 16 and len(z.namelist()) == 17
@@ -132,7 +134,8 @@ def worker():
         for key in ("versions", "all_packages", "gpu_identity", "torch_cuda", "source_sha256", "dataset_sha256", "model_revision"):
             require(previous[key] == preflight[key], f"Environment differs from replay: {key}")
         preflight.update(probe_plan_sha256=sha(PLAN), probe_launcher_sha256=sha(Path(__file__)),
-                         preceding_archive_sha256=PRIOR_SHA)
+                         preceding_archive_sha256=PRIOR_SHA, dependency_path=str(PRIOR),
+                         attempt=2, preceding_failed_attempt_sha256="1fc0b20ba6df520028e8b0e3898a7087baf5122d850937b8b33a84f3f88136e1")
         save(DEST / "preflight.json", preflight)
         snapshot = Path(Path("/content/apertus-pinned-snapshot.txt").read_text().strip())
         require(snapshot.name == REVISION, "Cached model revision differs")
