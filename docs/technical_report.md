@@ -353,3 +353,11 @@ The separately registered exploratory run completed 30/30 responses with EOS, no
 This new one-configuration study uses new prompts informed by prior outputs; it is not independent held-out validation or a causal precision comparison. Its annotations must not be merged with original Phase 3B frozen counts. Original raw/source/dataset/evaluator and prereg tag remain unchanged; no rerun/rescore is performed.
 
 [Full response-level audit and provenance](colab_semantic/2026-10-06/post_run_report.md).
+
+### INT8/FP16 matched-prompt result — post-run 2026-10-06
+
+The separately registered INT8 condition completed all 30 matched prompts with EOS, no truncation/unknown tokens and no non-finite or unexpected-dtype observations at selected boundaries. All input-ID arrays and the full recorded environment match the NF4/FP32 baseline, with a different physical T4 UUID. No semantic evaluator ran. Separate AI-assisted labels are 8 corrected / 4 explicit_acceptance / 12 not_corrected among 24 false-premise responses; all six controls are correct. The unchanged NF4 baseline is 7 / 5 / 12 with six correct controls. Three pairs gain a correction, two lose one, five are corrected in both and fourteen in neither. INT8 has three comparisons contradicting its own correct displayed values (008-A/B and 009-A), versus one in NF4. No independent human review is claimed.
+
+This additional condition uses an observed exploratory baseline and changes quantization, nominal computation precision and backend kernels together across sessions. It does not establish an isolated causal precision/quantization improvement or independent held-out robustness. The original Phase 3B raw/source/dataset/evaluator, frozen 22 / 6 / 2 overall counts and prereg tag remain unchanged; no original rerun/rescore or NF4 baseline rerun/relabel occurred.
+
+[Full 30-row paired comparison and provenance](colab_int8_matched/2026-10-06/post_run_report.md).

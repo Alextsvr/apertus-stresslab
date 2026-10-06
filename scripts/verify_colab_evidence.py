@@ -101,6 +101,9 @@ def verify(root=ROOT, *, verify_git=True, include_phase3b=True):
     if (root / 'evidence/colab/semantic/catalog.json').is_file():
         from verify_semantic_evidence import verify as verify_semantic
         result['new_semantic_study'] = verify_semantic(root, verify_git=verify_git)
+    if (root / 'evidence/colab/int8_matched/catalog.json').is_file():
+        from verify_int8_matched_evidence import verify as verify_matched
+        result['int8_matched_condition'] = verify_matched(root, verify_git=verify_git)
     return result
 
 

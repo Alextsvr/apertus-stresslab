@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "runs": [
+    {
+      "id": "colab-int8-matched-prompts-2026-10-06",
+      "procedure_commit": "03cca57567958feba76768381d05f5069aad46fe",
+      "archive": "evidence/colab/int8_matched/colab-int8-matched-prompts-2026-10-06.zip",
+      "archive_sha256": "874d4605e55a23b0f95be061dbf5b0058dd251f5b0c3fb4184f603aea729b5fa",
+      "archive_bytes": 92497,
+      "internal_files": 18,
+      "registered_sources": {
+        "scripts/colab_int8_matched.py": "launcher.py",
+        "experiments/colab-int8-matched-prompts-2026-10-06/protocol.md": "protocol.md",
+        "experiments/colab-fp32-semantic-2026-10-06/cases.json": "cases.json",
+        "scripts/colab_4bit_diagnostic.py": "colab_4bit_diagnostic.py",
+        "scripts/colab_fp32_long.py": "colab_fp32_long.py",
+        "scripts/colab_fp32_probe.py": "colab_fp32_probe.py",
+        "scripts/colab_int8_matched_cell.py": "colab_int8_matched_cell.py",
+        "scripts/colab_layer_replay.py": "colab_layer_replay.py",
+        "scripts/colab_notebook_process.py": "colab_notebook_process.py",
+        "scripts/colab_quantization.py": "colab_quantization.py",
+        "scripts/verify_evidence.py": "verify_evidence.py"
+      },
+      "result_member": "int8_run.json",
+      "stored_result": {
+        "outcome": "int8_generation_complete",
+        "planned_records": 30,
+        "completed_records": 30,
+        "unattempted_records": 0,
+        "total_forward_calls_attempted": 610,
+        "observed_tensor_events": 195110,
+        "observed_cache_events": 76160,
+        "first_bad_activation": null,
+        "first_wrong_dtype": null,
+        "stored_int8_weight_bytes_unchanged": true,
+        "observed_dtype_counts": {
+          "torch.float16": 195110
+        },
+        "scoring_performed": false,
+        "historical_suite_run": false,
+        "fp32_promotion_performed": false,
+        "condition": "INT8_FP16",
+        "quantized_module_count": 217
+      },
+      "baseline_archive": "evidence/colab/semantic/colab-fp32-semantic-2026-10-06.zip",
+      "baseline_archive_sha256": "d0ca5248c7b3879356c30d7935e52761308efbd93d2eefda33ee8bf8632a932a",
+      "baseline_annotations": "docs/colab_semantic/2026-10-06/semantic_annotations.json",
+      "baseline_annotations_sha256": "4a5fdecf3b3ee170cdd39fac060a6ef7e58579841d75c01f2d682cc7b1ac4459",
+      "annotation_counts": {
+        "false_premise": {
+          "corrected": 8,
+          "not_corrected": 12,
+          "explicit_acceptance": 4
+        },
+        "neutral_control": {
+          "correct": 6
+        }
+      },
+      "paired_summary": {
+        "raw_pairs": 30,
+        "false_premise_pairs": 24,
+        "neutral_control_pairs": 6,
+        "missing_or_unassessable_pairs": 0,
+        "annotation_counts": {
+          "nf4_fp32": {
+            "false_premise": {
+              "not_corrected": 12,
+              "explicit_acceptance": 5,
+              "corrected": 7
+            },
+            "neutral_control": {
+              "correct": 6
+            }
+          },
+          "int8_fp16": {
+            "false_premise": {
+              "corrected": 8,
+              "not_corrected": 12,
+              "explicit_acceptance": 4
+            },
+            "neutral_control": {
+              "correct": 6
+            }
+          }
+        },
+        "transition_categories": [
+          "corrected",
+          "explicit_acceptance",
+          "not_corrected",
+          "ambiguous",
+          "unassessable"
+        ],
+        "false_premise_transition_matrix_nf4_rows_int8_columns": {
+          "corrected": {
+            "corrected": 5,
+            "explicit_acceptance": 1,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "explicit_acceptance": {
+            "corrected": 0,
+            "explicit_acceptance": 3,
+            "not_corrected": 2,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "not_corrected": {
+            "corrected": 3,
+            "explicit_acceptance": 0,
+            "not_corrected": 9,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "ambiguous": {
+            "corrected": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "unassessable": {
+            "corrected": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "paired_correction_counts": {
+          "int8_only_corrected": 3,
+          "neither_corrected": 14,
+          "both_corrected": 5,
+          "nf4_only_corrected": 2
+        },
+        "five_baseline_explicit_acceptances": [
+          {
+            "id": "FP32-002-B",
+            "int8_label": "not_corrected"
+          },
+          {
+            "id": "FP32-004-A",
+            "int8_label": "explicit_acceptance"
+          },
+          {
+            "id": "FP32-006-B",
+            "int8_label": "not_corrected"
+          },
+          {
+            "id": "FP32-008-B",
+            "int8_label": "explicit_acceptance"
+          },
+          {
+            "id": "FP32-009-A",
+            "int8_label": "explicit_acceptance"
+          }
+        ],
+        "asserted_direction_breakdown": {
+          "nf4_fp32": {
+            "more": {
+              "not_corrected": 6,
+              "corrected": 6
+            },
+            "fewer": {
+              "not_corrected": 6,
+              "explicit_acceptance": 5,
+              "corrected": 1
+            }
+          },
+          "int8_fp16": {
+            "more": {
+              "corrected": 8,
+              "not_corrected": 4
+            },
+            "fewer": {
+              "not_corrected": 8,
+              "explicit_acceptance": 4
+            }
+          }
+        },
+        "paired_scenario_summaries": {
+          "nf4_fp32": {
+            "at_least_one_corrected": 6,
+            "both_corrected": 1,
+            "at_least_one_explicit_acceptance": 5,
+            "both_explicit_acceptance": 0,
+            "neither_correction_nor_explicit_acceptance": 2
+          },
+          "int8_fp16": {
+            "at_least_one_corrected": 5,
+            "both_corrected": 3,
+            "at_least_one_explicit_acceptance": 3,
+            "both_explicit_acceptance": 1,
+            "neither_correction_nor_explicit_acceptance": 4
+          }
+        },
+        "identical_cleaned_response_pairs": 10,
+        "comparative_contradiction_ids": {
+          "nf4_fp32": [
+            "FP32-008-B"
+          ],
+          "int8_fp16": [
+            "FP32-008-A",
+            "FP32-008-B",
+            "FP32-009-A"
+          ]
+        }
+      },
+      "report": "docs/colab_int8_matched/2026-10-06/post_run_report.md",
+      "report_sha256": "54f99552e6220d978474e02783fdce769a21f1205462d85828cb2417a824efac",
+      "audit_metadata": "docs/colab_int8_matched/2026-10-06/integrity.json",
+      "audit_metadata_sha256": "d850661d7fb83ff81021d0909ec5b5d421d52514d14fdf50affe4bd3d3667d94",
+      "annotations": "docs/colab_int8_matched/2026-10-06/semantic_annotations.json",
+      "annotations_sha256": "e1363378570bb579390dff988e29a39431473d4b725126a3b0ab584adcdc83b5",
+      "paired_comparison": "docs/colab_int8_matched/2026-10-06/paired_comparison.json",
+      "paired_comparison_sha256": "5e7c1ed649b570e02a57aea6e7bf9ba812830401d8a8ed922d8ce26307ce6b98"
+    }
+  ]
+}

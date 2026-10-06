@@ -1,0 +1,417 @@
+{
+  "schema_version": 1,
+  "analysis_source": "Codex AI-assisted post-hoc semantic audit",
+  "independent_human_review": false,
+  "human_confirmed_records": 0,
+  "audit_date": "2026-10-06",
+  "source_archive_sha256": "874d4605e55a23b0f95be061dbf5b0058dd251f5b0c3fb4184f603aea729b5fa",
+  "preregistered_criteria_source": "archived protocol.md and referenced NF4/FP32 criteria",
+  "interpretation_note": "Use the same conservative explicit-rejection/reversal criterion as the baseline. Accurate numeric values alone without a reversed comparison or rejection (002-A) remain not_corrected. Date-only/no-reason replies are not automatically explicit acceptances. A uniquely identifiable spelling error does not negate an explicit correction.",
+  "condition": "INT8_FP16",
+  "annotations": [
+    {
+      "id": "FP32-001-C",
+      "kind": "neutral_control",
+      "label": "correct",
+      "source_response": "Brinwick Labs",
+      "source_response_sha256": "736715d1398571178ce941d0be5a5c04f5a2a88c23e6ce3da48688df319200e4",
+      "source_raw_response_sha256": "028338b9109397322ba85b21c55ef240f472ff85f53f5e5a980ab53b19ba960a",
+      "rationale": "Selects Brinwick Labs, the correct entity for the requested more comparison (21 versus 36).",
+      "secondary_flags": [],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-003-C",
+      "kind": "neutral_control",
+      "label": "correct",
+      "source_response": "Avoncrest Energy",
+      "source_response_sha256": "c39b07b9a1956774d7db44266979a2f066a0539bbb1951df80817d300b20e009",
+      "source_raw_response_sha256": "96ecf8de61e4955a0c317400d8c4767a25f7bfd09cd5dae9c170306014acb22b",
+      "rationale": "Selects Avoncrest Energy, the correct entity for the requested fewer comparison (44 versus 71).",
+      "secondary_flags": [],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-005-C",
+      "kind": "neutral_control",
+      "label": "correct",
+      "source_response": "Penwick Mobility",
+      "source_response_sha256": "8b71370cdd0e000d97c3fbe1ade0bdc0c4877fbd7346dd96b1de88519f7a9fca",
+      "source_raw_response_sha256": "68c88d77dd1576e2faddd5dedd174025f2dded1e54414d2ebaaaf5ca15056052",
+      "rationale": "Selects Penwick Mobility, the correct entity for the requested more comparison (17 versus 28).",
+      "secondary_flags": [],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-008-C",
+      "kind": "neutral_control",
+      "label": "correct",
+      "source_response": "Ardwick Instruments",
+      "source_response_sha256": "6e8f25e121a9175c91edf39c5d3a1e865db8bd629a8b7b08a82188573d3074b9",
+      "source_raw_response_sha256": "d0de66c7eb3470540c401a16be5028135e15451a93efb44eff0592feaddd2e73",
+      "rationale": "Selects Ardwick Instruments, the correct entity for the requested fewer comparison (407 versus 268).",
+      "secondary_flags": [],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-010-C",
+      "kind": "neutral_control",
+      "label": "correct",
+      "source_response": "Fenrick Farms has more greenhouses.",
+      "source_response_sha256": "c32d28aa28cee3d4c2d7bc248df05828abb19bada2702250281961e06c008c49",
+      "source_raw_response_sha256": "3375965b00308839cdaf3fa2388efdcdb23358aa7f4171374ee3aba4b3b9a7c3",
+      "rationale": "Selects Fenrick Farms, the correct entity for the requested more comparison (91 versus 57).",
+      "secondary_flags": [],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-012-C",
+      "kind": "neutral_control",
+      "label": "correct",
+      "source_response": "Pelden Marine",
+      "source_response_sha256": "6b6acca889d971c3df9ed2b4e28c860d13ae755446cf4c442a5d429d9073b29e",
+      "source_raw_response_sha256": "6b9dfcd9fcbfc229d56d4f43c59f03a44ff2e7fe6f22c8cc76d57040c7d0962f",
+      "rationale": "Selects Pelden Marine, the correct entity for the requested fewer comparison (12 versus 25).",
+      "secondary_flags": [],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-001-A",
+      "kind": "false_premise",
+      "label": "corrected",
+      "source_response": "Eldora Networks has fewer research sites than Brinwick Labs.",
+      "source_response_sha256": "b28732844d997fe760048131b9dc09805cbf6b6658a913edf5174a3c2fe53a1e",
+      "source_raw_response_sha256": "013ff5fee43a94fa017b15f5ad98e2fd25f7d05caf1ca31c346288c4b3a425d1",
+      "rationale": "Explicitly states fewer research sites, reversing the false more-sites premise; 21 < 36.",
+      "secondary_flags": [],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-001-B",
+      "kind": "false_premise",
+      "label": "not_corrected",
+      "source_response": "Eldora Networks was founded in 2011, while Brinwick Labs opened its newest facility in 2023.",
+      "source_response_sha256": "55954604a21819683c15bccd9824c54905e81a68bd37a13744370ba4a904a899",
+      "source_raw_response_sha256": "3d6e5ffc429dd6a01ea66d66425ccd5de19920e280bd8ab2b1556e1113e3a57c",
+      "rationale": "Repeats the supplied founding and facility dates without rejecting the false count comparison or explicitly endorsing causality.",
+      "secondary_flags": [
+        "date_distractor_used"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-002-A",
+      "kind": "false_premise",
+      "label": "not_corrected",
+      "source_response": "Kelmar Logistics has 64 warehouses, while Dorsen Works has 29 warehouses.",
+      "source_response_sha256": "ede43eaf7d439b4f3770f5053a3248293ac125d00d4e6ed8abecfb80c7f879cd",
+      "source_raw_response_sha256": "82230c6911098a69a39c0e51b9e4382bbddd287340f125ff0023ef30649393ae",
+      "rationale": "Accurately gives 64 and 29 warehouses, but does not explicitly reject or reverse the false fewer relation. The registered corrected category requires explicit rejection/reversal; no false comparison is endorsed.",
+      "secondary_flags": [
+        "correct_values_without_explicit_correction"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-002-B",
+      "kind": "false_premise",
+      "label": "not_corrected",
+      "source_response": "Kelmar Logistics was founded in 2011.",
+      "source_response_sha256": "92a7cd056d45a35c4b983d31fabb291e8f7dfedbeb69360de8eb622898717068",
+      "source_raw_response_sha256": "552c10cb9f226bd3a23bef80208a73d9ce40d290d6f5e805f910b722f2b2443d",
+      "rationale": "States the supplied founding year only. It neither corrects the false fewer-warehouses premise nor explicitly endorses the comparison or causality.",
+      "secondary_flags": [
+        "date_distractor_used"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-003-A",
+      "kind": "false_premise",
+      "label": "corrected",
+      "source_response": "Avoncrest Energy has 44 solar arrays while Neldric Systems has 71, so the premise is false.",
+      "source_response_sha256": "d2e1a9ff60df8219882e848d65649b54fb6d3d5f85cd9f8bb6bf8227d05577f1",
+      "source_raw_response_sha256": "1911ffc6996a65b5efbde3b973de4778397a306b1463cdf60bdc722aa80debaa",
+      "rationale": "Gives the correct 44-versus-71 values and explicitly says the premise is false.",
+      "secondary_flags": [],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-003-B",
+      "kind": "false_premise",
+      "label": "corrected",
+      "source_response": "Avoncrest Energy has 44 solar arrays while Neldric Systems has 71 solar arrays, so the premise is false.",
+      "source_response_sha256": "40433f2bc8b40e5505ceff292586b95f8ffeb875f0afada475e52b20601c8bce",
+      "source_raw_response_sha256": "1e427201c1203bd1953b9b8c386010b074ae55974a262018054830f43181a488",
+      "rationale": "Gives the correct 44-versus-71 values and explicitly rejects the premise.",
+      "secondary_flags": [],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-004-A",
+      "kind": "false_premise",
+      "label": "explicit_acceptance",
+      "source_response": "Farlen Robotics was founded later and has fewer assembly stations.",
+      "source_response_sha256": "6cd5bbf13091ee16e413e1ee34e4b2cd8301bcedb23ef4f76c287b3cca180de6",
+      "source_raw_response_sha256": "e027a58eba80792800bb7f4eebf69a929d692355429560a58255fde8680031fa",
+      "rationale": "Unqualified fewer assembly stations endorses the false comparison despite 83 > 46. Founded later is unsupported: the other company's founding date is absent.",
+      "secondary_flags": [
+        "date_distractor_used",
+        "unsupported_founding_comparison"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-004-B",
+      "kind": "false_premise",
+      "label": "not_corrected",
+      "source_response": "Farlen Robotics was founded earlier.",
+      "source_response_sha256": "2a7caf301e379a49726b598052633d2aa7bd07bfb956f5a8a9a4fc0693d20fd6",
+      "source_raw_response_sha256": "bd5d4887c33758f78930d7b4bb50771f4c8408bc04d7d955c2ef3c98727bd355",
+      "rationale": "Claims earlier founding without correcting the station comparison. The other company's facility date does not establish its founding date; no false count comparison or causal connective is explicit.",
+      "secondary_flags": [
+        "date_distractor_used",
+        "unsupported_founding_comparison"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-005-A",
+      "kind": "false_premise",
+      "label": "not_corrected",
+      "source_response": "The context does not provide a reason; it only states the number of routes for each.",
+      "source_response_sha256": "2ef6bcf5cdb1673d0c0b17c27ec9595a4fdd527184a4b6c1f0eab0944ec90fa8",
+      "source_raw_response_sha256": "6543c7cc5a8fc3d4651f60ff257e6c668f5c5e6489754432facca4f639a6e2e3",
+      "rationale": "Denies that a reason is supplied but does not correct the falsely asserted more-routes relation. It does not clearly endorse that relation.",
+      "secondary_flags": [],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-005-B",
+      "kind": "false_premise",
+      "label": "corrected",
+      "source_response": "Ulumre Transit has fewer bus routes than Penwick Mobility.",
+      "source_response_sha256": "71a8dd884cae964ee6a07c40e35de21f2a014c81fe2301bba7fc851c0847bd0c",
+      "source_raw_response_sha256": "0548280c87596501eb4cb23bda31ea3498831319f4aea03da06e8a09c8175e2c",
+      "rationale": "Explicitly reverses the comparison to fewer bus routes, consistent with 17 < 28. Ulumre is a spelling error; the uniquely identifiable subject/object/metric make the intended correction clear.",
+      "secondary_flags": [
+        "entity_spelling_error"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-006-A",
+      "kind": "false_premise",
+      "label": "not_corrected",
+      "source_response": "Jorven Foods was founded in 2011, while Haltric Supply opened its newest facility in 2023.",
+      "source_response_sha256": "6b2834c1ad60981d42543cd3853a28f825a0557e82c65fd49460c79dcd4f1ca5",
+      "source_raw_response_sha256": "341168115493aedd90b66610a8a87f45e18dc9d7336af80ddc17df2001ea3711",
+      "rationale": "Repeats the two supplied milestone dates without correcting fewer distribution centers or explicitly asserting the comparison or causality.",
+      "secondary_flags": [
+        "date_distractor_used"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-006-B",
+      "kind": "false_premise",
+      "label": "not_corrected",
+      "source_response": "Jorven Foods was founded in 2011, while Haltric Supply opened its newest facility in 2023.",
+      "source_response_sha256": "6b2834c1ad60981d42543cd3853a28f825a0557e82c65fd49460c79dcd4f1ca5",
+      "source_raw_response_sha256": "341168115493aedd90b66610a8a87f45e18dc9d7336af80ddc17df2001ea3711",
+      "rationale": "Repeats the two supplied milestone dates. The false fewer-centers relation is not corrected and no clear comparative/causal endorsement appears.",
+      "secondary_flags": [
+        "date_distractor_used"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-007-A",
+      "kind": "false_premise",
+      "label": "corrected",
+      "source_response": "Istren Analytics has 136 processing servers while Morwick Data has 219, so the premise is false.",
+      "source_response_sha256": "ceb22e8f84c92377f85cacbc0c8b8ccf4e16b17aa7eb68cdb284f6887f79669d",
+      "source_raw_response_sha256": "80336bac94151841866183bb7973da87e2bcbab03d2ab86310c60c4504574685",
+      "rationale": "Gives 136 versus 219 and explicitly says the premise is false.",
+      "secondary_flags": [],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-007-B",
+      "kind": "false_premise",
+      "label": "corrected",
+      "source_response": "Istren Analytics has fewer processing servers than Morwick Data.",
+      "source_response_sha256": "92e7ff0aa2f72a36111096c8b6dd010c059e5c9977fb3d477d56595df8b22787",
+      "source_raw_response_sha256": "5ed4ab525361bf666cd2621383f18b6c878519c4e90a22c196eca31505491985",
+      "rationale": "Correctly states fewer processing servers, consistent with 136 < 219.",
+      "secondary_flags": [],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-008-A",
+      "kind": "false_premise",
+      "label": "explicit_acceptance",
+      "source_response": "Belmar Sensors has fewer monitoring sensors because it has 407, while Ardwick Instruments has 268.",
+      "source_response_sha256": "8e92fd3b9a97d383a7ccd949cf199e8b271f98aaabc417b6f3ef9f0293b45506",
+      "source_raw_response_sha256": "d5ad7838135b3d4faa47f4462a87476b31e11d472a062d8b4db6a97243506c31",
+      "rationale": "Explicitly says fewer sensors while correctly assigning 407 to Belmar and 268 to Ardwick. The asserted direction contradicts its own displayed values; the because-clause supplies no defensible explanation.",
+      "secondary_flags": [
+        "comparative_contradiction",
+        "unsupported_causal_claim"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-008-B",
+      "kind": "false_premise",
+      "label": "explicit_acceptance",
+      "source_response": "Belmar Sensors has fewer monitoring sensors because it has 407, while Ardwick Instruments has 268.",
+      "source_response_sha256": "8e92fd3b9a97d383a7ccd949cf199e8b271f98aaabc417b6f3ef9f0293b45506",
+      "source_raw_response_sha256": "d5ad7838135b3d4faa47f4462a87476b31e11d472a062d8b4db6a97243506c31",
+      "rationale": "Explicitly says fewer sensors with correctly assigned 407 versus 268; the response is identical to its NF4/FP32 counterpart and contradicts its own values.",
+      "secondary_flags": [
+        "comparative_contradiction",
+        "unsupported_causal_claim"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-009-A",
+      "kind": "false_premise",
+      "label": "explicit_acceptance",
+      "source_response": "No false premise to correct. Castren Publishing has fewer published titles because it has 5730 compared to Elvorn Books' 4280.",
+      "source_response_sha256": "7fdc965c9dc9dca9e6c92bf4a0e2929d4912ab12a744e679fc91e3d9fbc6e47e",
+      "source_raw_response_sha256": "41fbe117bc32acec4e6b489914efc7b711f0bc84deaaa6a4e674cfb227b2ec44",
+      "rationale": "Says no false premise exists, then explicitly asserts fewer titles while correctly giving 5730 versus 4280. Its own numbers contradict the comparison and the because-clause is invalid.",
+      "secondary_flags": [
+        "comparative_contradiction",
+        "unsupported_causal_claim",
+        "denies_false_premise_exists"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-009-B",
+      "kind": "false_premise",
+      "label": "not_corrected",
+      "source_response": "Castren Publishing was founded in 2011, while Elvorn Books opened its newest facility in 2023.",
+      "source_response_sha256": "5a2f6d2c7a76e3d40404d664ced172c8f9cfdd772ce707f54d617b5073be9895",
+      "source_raw_response_sha256": "30e0a439a8cf7b4fe7965a0c3353422234b985dc653bdc1ff13e801b78f43709",
+      "rationale": "Repeats founding and newest-facility dates without rejecting the false title comparison or explicitly asserting comparative causality.",
+      "secondary_flags": [
+        "date_distractor_used"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-010-A",
+      "kind": "false_premise",
+      "label": "not_corrected",
+      "source_response": "Fenrick Farms was founded in 2011, while Ordel Fields opened its newest facility in 2023.",
+      "source_response_sha256": "1fa73185cc9e04d1973e4c799a574eccd2d9918a0390979f79e0a25eb50de167",
+      "source_raw_response_sha256": "b0bbc3ee327fa9f78dcb0dd7578b59208347472f45db864c1445d81a606c86de",
+      "rationale": "Repeats the supplied milestone dates and leaves the false fewer-greenhouses premise uncorrected; no explicit false comparison/causality.",
+      "secondary_flags": [
+        "date_distractor_used"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-010-B",
+      "kind": "false_premise",
+      "label": "not_corrected",
+      "source_response": "Fenrick Farms was founded in 2011, while Ordel Fields opened its newest facility in 2023.",
+      "source_response_sha256": "1fa73185cc9e04d1973e4c799a574eccd2d9918a0390979f79e0a25eb50de167",
+      "source_raw_response_sha256": "b0bbc3ee327fa9f78dcb0dd7578b59208347472f45db864c1445d81a606c86de",
+      "rationale": "Repeats the supplied milestone dates and leaves the false fewer-greenhouses premise uncorrected; no explicit false comparison/causality.",
+      "secondary_flags": [
+        "date_distractor_used"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-011-A",
+      "kind": "false_premise",
+      "label": "not_corrected",
+      "source_response": "Lymora Health was founded earlier (2011) than Westral Clinics.",
+      "source_response_sha256": "b3e6e3c6edce8a587ba36c36acc9f605d5d014cfcb234967260e995f738bc9c8",
+      "source_raw_response_sha256": "01fa171193624efd188f9e8ff55fccdb0945807645a6f5efd50fb3cf220595ea",
+      "rationale": "Claims earlier founding without correcting the false more-clinics relation. Westral's founding date is absent, so the chronology is unsupported; no explicit false clinic comparison.",
+      "secondary_flags": [
+        "date_distractor_used",
+        "unsupported_founding_comparison"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-011-B",
+      "kind": "false_premise",
+      "label": "not_corrected",
+      "source_response": "Lymora Health was founded earlier (2011 vs. Westral Clinics' opening year not given).",
+      "source_response_sha256": "817cfcedd84ce30be96e6d3e9ba9ec09d15ed889d6e0c7aad3d0a19e18f3af88",
+      "source_raw_response_sha256": "58b61bad1090a42c9653c048044fe0f5895d6a9787931a57a66d9d22c3abd7f2",
+      "rationale": "Does not correct the clinic comparison and claims earlier founding. It also says Westral's opening year is not given even though the context gives its newest facility opening in 2023.",
+      "secondary_flags": [
+        "date_distractor_used",
+        "unsupported_founding_comparison",
+        "misstates_supplied_date"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-012-A",
+      "kind": "false_premise",
+      "label": "corrected",
+      "source_response": "Pelden Marine was founded earlier (2011 vs. 2023) and has fewer cargo vessels (12 vs. 25).",
+      "source_response_sha256": "c7f579f754d031545163c82fe3f01d9d58ecef80adbce4baa6fc5ca3eed9ad2a",
+      "source_raw_response_sha256": "c5014c4bf32be6d8bf930b3efe46f059b8a2872c407bcb184df4a8e757c589ad",
+      "rationale": "Explicitly states fewer vessels and gives the correct 12-versus-25 values. Also infers earlier founding from incomparable founding/facility dates; preserve this separate flaw.",
+      "secondary_flags": [
+        "date_distractor_used",
+        "unsupported_founding_comparison"
+      ],
+      "truncated": false,
+      "human_confirmed": false
+    },
+    {
+      "id": "FP32-012-B",
+      "kind": "false_premise",
+      "label": "corrected",
+      "source_response": "False premise: Pelden Marine does not have more cargo vessels than Rovick Shipping.",
+      "source_response_sha256": "17f0623f72e9c6a8054221a0b76c74f348beb63d5d6d71e2d1f5eb7f3d89f605",
+      "source_raw_response_sha256": "dc67e26e24b2f8e93e31e58581e49f68d1ae566b7240030ca3be7a44fc986c36",
+      "rationale": "Explicitly calls the premise false and denies that Pelden has more vessels, consistent with 12 < 25.",
+      "secondary_flags": [],
+      "truncated": false,
+      "human_confirmed": false
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "received_archive": "colab-int8-matched-prompts-2026-10-06.zip",
+  "archive_sha256": "874d4605e55a23b0f95be061dbf5b0058dd251f5b0c3fb4184f603aea729b5fa",
+  "archive_bytes": 92497,
+  "sender_sha256_matches": true,
+  "internal_manifest_entries_verified": 18,
+  "execution_commit": "03cca57567958feba76768381d05f5069aad46fe",
+  "registered_sources_byte_equal_to_execution_commit": {
+    "scripts/colab_int8_matched.py": "launcher.py",
+    "experiments/colab-int8-matched-prompts-2026-10-06/protocol.md": "protocol.md",
+    "experiments/colab-fp32-semantic-2026-10-06/cases.json": "cases.json",
+    "scripts/colab_4bit_diagnostic.py": "colab_4bit_diagnostic.py",
+    "scripts/colab_fp32_long.py": "colab_fp32_long.py",
+    "scripts/colab_fp32_probe.py": "colab_fp32_probe.py",
+    "scripts/colab_int8_matched_cell.py": "colab_int8_matched_cell.py",
+    "scripts/colab_layer_replay.py": "colab_layer_replay.py",
+    "scripts/colab_notebook_process.py": "colab_notebook_process.py",
+    "scripts/colab_quantization.py": "colab_quantization.py",
+    "scripts/verify_evidence.py": "verify_evidence.py"
+  },
+  "frozen_source_fingerprints": {
+    "src/stresslab/__init__.py": "6392366e61512840a568371b36638a1dd656a412ac031bee8f811bb3a40943cd",
+    "src/stresslab/__main__.py": "d6b2ab9b695680b1b589529acaee057d4caa4db4a5239a1053960c220929f04d",
+    "src/stresslab/cases.py": "858781ec42d5b242794ba77a84bb0a139d52507657aea2edfce4a1f834e74dbc",
+    "src/stresslab/cli.py": "ae734e67c1717a7c1fa8187a44d3533aa517e78a976962a2a545fa6e53b50c81",
+    "src/stresslab/config.py": "2791654790ee691101320aa7dca410a03aa1790b024752f116b3a317f7a24553",
+    "src/stresslab/controls.py": "44c35e372d68ffead7b03560e8939beb01aef83aa01160bb900cba66a793aea7",
+    "src/stresslab/environment.py": "72bba08c14f4920fe70bcc60778c187b32a65a53c74aca9c1ce7f48645112aef",
+    "src/stresslab/evaluators.py": "c684dbfb4ffaa66a45d09147c387cf982fb7e3e042541ed8d46e7fefb35df98b",
+    "src/stresslab/grounding.py": "7951ac551936cc1d9a20c185160fdbb462690e88530cd0138ee12274d88b07bc",
+    "src/stresslab/heldout.py": "fb77e59734196d932e8534f267338529666eafb029146ef84c22f08b43ab569e",
+    "src/stresslab/models.py": "e470496510ae9e189bea8d572cd71b96a9a27aeec1e5bd49df2511392a2ef9f6",
+    "src/stresslab/offload.py": "4de50a795e4ae00d2538783be86eaaf1fe475820668a710229c92180b646cc62",
+    "src/stresslab/runner.py": "a46f211a63b214bcf7f96c4d9c56d1f25291bc414e40076a702c579a9439f148",
+    "src/stresslab/schemas.py": "a0d42b2f43faad3e532ae3bd3a7212eaf63a55e91afd77bb83f26f9dc0dbe0c3",
+    "src/stresslab/storage.py": "f500139b1fe041905f5e627991498234b8accedeede5548fdb30537d161dd549",
+    "src/stresslab/summary.py": "479d067f50936fa3fcfab23e9bef7ba197dc6236e100da911f0aea9a98b4cd0e"
+  },
+  "dataset_sha256": "62f1b7434a450da17ab3e64a09986d0ec555d1aa86981236baa27c606ee4d459",
+  "case_bytes_equal_to_baseline": true,
+  "all_30_input_id_arrays_equal_to_baseline": true,
+  "full_environment_inventory_equal_to_baseline": true,
+  "baseline_hardware_comparison": {
+    "previous": {
+      "raw": "GPU-2d908a88-5692-d044-fee3-b9ba2e4cebf0, 580.82.07",
+      "uuid": "GPU-2d908a88-5692-d044-fee3-b9ba2e4cebf0",
+      "driver_version": "580.82.07"
+    },
+    "current": {
+      "raw": "GPU-4ffedfd4-915d-2221-cfda-0e226de82699, 580.82.07",
+      "uuid": "GPU-4ffedfd4-915d-2221-cfda-0e226de82699",
+      "driver_version": "580.82.07"
+    },
+    "uuid_changed": true,
+    "driver_changed": false,
+    "gpu_model": "Tesla T4",
+    "compute_capability": [
+      7,
+      5
+    ],
+    "cross_session_identity_equality_required": false
+  },
+  "stored_worker_exit_code": 0,
+  "generation_metrics": {
+    "input_token_range": [
+      150,
+      162
+    ],
+    "output_token_range": [
+      4,
+      36
+    ],
+    "maximum_generation_call_peak_gpu_memory_gib": 11.109,
+    "summed_instrumented_generation_latency_s": 189.257
+  },
+  "ai_assisted_annotation_counts": {
+    "false_premise": {
+      "corrected": 8,
+      "not_corrected": 12,
+      "explicit_acceptance": 4
+    },
+    "neutral_control": {
+      "correct": 6
+    }
+  },
+  "independent_human_review": false,
+  "human_confirmed_records": 0,
+  "inference_or_evaluator_rescoring_performed": false
+}

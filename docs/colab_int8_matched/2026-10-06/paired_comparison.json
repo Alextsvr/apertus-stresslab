@@ -1,0 +1,932 @@
+{
+  "schema_version": 1,
+  "analysis_source": "Codex AI-assisted post-hoc semantic audit",
+  "independent_human_review": false,
+  "human_confirmed_records": 0,
+  "nf4_fp32_archive_sha256": "d0ca5248c7b3879356c30d7935e52761308efbd93d2eefda33ee8bf8632a932a",
+  "nf4_fp32_annotations_sha256": "4a5fdecf3b3ee170cdd39fac060a6ef7e58579841d75c01f2d682cc7b1ac4459",
+  "int8_fp16_archive_sha256": "874d4605e55a23b0f95be061dbf5b0058dd251f5b0c3fb4184f603aea729b5fa",
+  "summary": {
+    "raw_pairs": 30,
+    "false_premise_pairs": 24,
+    "neutral_control_pairs": 6,
+    "missing_or_unassessable_pairs": 0,
+    "annotation_counts": {
+      "nf4_fp32": {
+        "false_premise": {
+          "not_corrected": 12,
+          "explicit_acceptance": 5,
+          "corrected": 7
+        },
+        "neutral_control": {
+          "correct": 6
+        }
+      },
+      "int8_fp16": {
+        "false_premise": {
+          "corrected": 8,
+          "not_corrected": 12,
+          "explicit_acceptance": 4
+        },
+        "neutral_control": {
+          "correct": 6
+        }
+      }
+    },
+    "transition_categories": [
+      "corrected",
+      "explicit_acceptance",
+      "not_corrected",
+      "ambiguous",
+      "unassessable"
+    ],
+    "false_premise_transition_matrix_nf4_rows_int8_columns": {
+      "corrected": {
+        "corrected": 5,
+        "explicit_acceptance": 1,
+        "not_corrected": 1,
+        "ambiguous": 0,
+        "unassessable": 0
+      },
+      "explicit_acceptance": {
+        "corrected": 0,
+        "explicit_acceptance": 3,
+        "not_corrected": 2,
+        "ambiguous": 0,
+        "unassessable": 0
+      },
+      "not_corrected": {
+        "corrected": 3,
+        "explicit_acceptance": 0,
+        "not_corrected": 9,
+        "ambiguous": 0,
+        "unassessable": 0
+      },
+      "ambiguous": {
+        "corrected": 0,
+        "explicit_acceptance": 0,
+        "not_corrected": 0,
+        "ambiguous": 0,
+        "unassessable": 0
+      },
+      "unassessable": {
+        "corrected": 0,
+        "explicit_acceptance": 0,
+        "not_corrected": 0,
+        "ambiguous": 0,
+        "unassessable": 0
+      }
+    },
+    "paired_correction_counts": {
+      "int8_only_corrected": 3,
+      "neither_corrected": 14,
+      "both_corrected": 5,
+      "nf4_only_corrected": 2
+    },
+    "five_baseline_explicit_acceptances": [
+      {
+        "id": "FP32-002-B",
+        "int8_label": "not_corrected"
+      },
+      {
+        "id": "FP32-004-A",
+        "int8_label": "explicit_acceptance"
+      },
+      {
+        "id": "FP32-006-B",
+        "int8_label": "not_corrected"
+      },
+      {
+        "id": "FP32-008-B",
+        "int8_label": "explicit_acceptance"
+      },
+      {
+        "id": "FP32-009-A",
+        "int8_label": "explicit_acceptance"
+      }
+    ],
+    "asserted_direction_breakdown": {
+      "nf4_fp32": {
+        "more": {
+          "not_corrected": 6,
+          "corrected": 6
+        },
+        "fewer": {
+          "not_corrected": 6,
+          "explicit_acceptance": 5,
+          "corrected": 1
+        }
+      },
+      "int8_fp16": {
+        "more": {
+          "corrected": 8,
+          "not_corrected": 4
+        },
+        "fewer": {
+          "not_corrected": 8,
+          "explicit_acceptance": 4
+        }
+      }
+    },
+    "paired_scenario_summaries": {
+      "nf4_fp32": {
+        "at_least_one_corrected": 6,
+        "both_corrected": 1,
+        "at_least_one_explicit_acceptance": 5,
+        "both_explicit_acceptance": 0,
+        "neither_correction_nor_explicit_acceptance": 2
+      },
+      "int8_fp16": {
+        "at_least_one_corrected": 5,
+        "both_corrected": 3,
+        "at_least_one_explicit_acceptance": 3,
+        "both_explicit_acceptance": 1,
+        "neither_correction_nor_explicit_acceptance": 4
+      }
+    },
+    "identical_cleaned_response_pairs": 10,
+    "comparative_contradiction_ids": {
+      "nf4_fp32": [
+        "FP32-008-B"
+      ],
+      "int8_fp16": [
+        "FP32-008-A",
+        "FP32-008-B",
+        "FP32-009-A"
+      ]
+    }
+  },
+  "pairs": [
+    {
+      "id": "FP32-001-C",
+      "scenario_id": "FP32-001",
+      "kind": "neutral_control",
+      "asserted_relation": null,
+      "subject_value": 21,
+      "object_value": 36,
+      "nf4_fp32": {
+        "label": "correct",
+        "response": "Brinwick Labs",
+        "response_sha256": "736715d1398571178ce941d0be5a5c04f5a2a88c23e6ce3da48688df319200e4",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "correct",
+        "response": "Brinwick Labs",
+        "response_sha256": "736715d1398571178ce941d0be5a5c04f5a2a88c23e6ce3da48688df319200e4",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "identical_cleaned_response": true
+    },
+    {
+      "id": "FP32-003-C",
+      "scenario_id": "FP32-003",
+      "kind": "neutral_control",
+      "asserted_relation": null,
+      "subject_value": 44,
+      "object_value": 71,
+      "nf4_fp32": {
+        "label": "correct",
+        "response": "Avoncrest Energy",
+        "response_sha256": "c39b07b9a1956774d7db44266979a2f066a0539bbb1951df80817d300b20e009",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "correct",
+        "response": "Avoncrest Energy",
+        "response_sha256": "c39b07b9a1956774d7db44266979a2f066a0539bbb1951df80817d300b20e009",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "identical_cleaned_response": true
+    },
+    {
+      "id": "FP32-005-C",
+      "scenario_id": "FP32-005",
+      "kind": "neutral_control",
+      "asserted_relation": null,
+      "subject_value": 17,
+      "object_value": 28,
+      "nf4_fp32": {
+        "label": "correct",
+        "response": "Penwick Mobility",
+        "response_sha256": "8b71370cdd0e000d97c3fbe1ade0bdc0c4877fbd7346dd96b1de88519f7a9fca",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "correct",
+        "response": "Penwick Mobility",
+        "response_sha256": "8b71370cdd0e000d97c3fbe1ade0bdc0c4877fbd7346dd96b1de88519f7a9fca",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "identical_cleaned_response": true
+    },
+    {
+      "id": "FP32-008-C",
+      "scenario_id": "FP32-008",
+      "kind": "neutral_control",
+      "asserted_relation": null,
+      "subject_value": 407,
+      "object_value": 268,
+      "nf4_fp32": {
+        "label": "correct",
+        "response": "Ardwick Instruments",
+        "response_sha256": "6e8f25e121a9175c91edf39c5d3a1e865db8bd629a8b7b08a82188573d3074b9",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "correct",
+        "response": "Ardwick Instruments",
+        "response_sha256": "6e8f25e121a9175c91edf39c5d3a1e865db8bd629a8b7b08a82188573d3074b9",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "identical_cleaned_response": true
+    },
+    {
+      "id": "FP32-010-C",
+      "scenario_id": "FP32-010",
+      "kind": "neutral_control",
+      "asserted_relation": null,
+      "subject_value": 91,
+      "object_value": 57,
+      "nf4_fp32": {
+        "label": "correct",
+        "response": "Fenrick Farms",
+        "response_sha256": "65c567e4f474f01d6c6057ec7926c9425d876d8107ce29d4e75c7adc54e2967b",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "correct",
+        "response": "Fenrick Farms has more greenhouses.",
+        "response_sha256": "c32d28aa28cee3d4c2d7bc248df05828abb19bada2702250281961e06c008c49",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-012-C",
+      "scenario_id": "FP32-012",
+      "kind": "neutral_control",
+      "asserted_relation": null,
+      "subject_value": 12,
+      "object_value": 25,
+      "nf4_fp32": {
+        "label": "correct",
+        "response": "Pelden Marine",
+        "response_sha256": "6b6acca889d971c3df9ed2b4e28c860d13ae755446cf4c442a5d429d9073b29e",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "correct",
+        "response": "Pelden Marine",
+        "response_sha256": "6b6acca889d971c3df9ed2b4e28c860d13ae755446cf4c442a5d429d9073b29e",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "identical_cleaned_response": true
+    },
+    {
+      "id": "FP32-001-A",
+      "scenario_id": "FP32-001",
+      "kind": "false_premise",
+      "asserted_relation": "more",
+      "subject_value": 21,
+      "object_value": 36,
+      "nf4_fp32": {
+        "label": "not_corrected",
+        "response": "The context does not provide a reason for Eldora Networks having more research sites than Brinwick Labs.",
+        "response_sha256": "9a10c7abd253ebd07e3ab7f93ca2008029b9a6a09e06e9836d6eadb79ad26dce",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "corrected",
+        "response": "Eldora Networks has fewer research sites than Brinwick Labs.",
+        "response_sha256": "b28732844d997fe760048131b9dc09805cbf6b6658a913edf5174a3c2fe53a1e",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-001-B",
+      "scenario_id": "FP32-001",
+      "kind": "false_premise",
+      "asserted_relation": "more",
+      "subject_value": 21,
+      "object_value": 36,
+      "nf4_fp32": {
+        "label": "not_corrected",
+        "response": "Eldora Networks was founded earlier (2011) than Brinwick Labs.",
+        "response_sha256": "903b242c91dc6b7da1dd322183ec647acd312a0731c34bbe4d4e53f7deae9fbe",
+        "secondary_flags": [
+          "date_distractor_used",
+          "unsupported_founding_comparison"
+        ],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "not_corrected",
+        "response": "Eldora Networks was founded in 2011, while Brinwick Labs opened its newest facility in 2023.",
+        "response_sha256": "55954604a21819683c15bccd9824c54905e81a68bd37a13744370ba4a904a899",
+        "secondary_flags": [
+          "date_distractor_used"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-002-A",
+      "scenario_id": "FP32-002",
+      "kind": "false_premise",
+      "asserted_relation": "fewer",
+      "subject_value": 64,
+      "object_value": 29,
+      "nf4_fp32": {
+        "label": "not_corrected",
+        "response": "Kelmar Logistics was founded in 2011, while Dorsen Works opened its newest facility in 2023.",
+        "response_sha256": "08f803d6f05043f47be9286c24dea6090cc877f78b28710ff23bd7c61392a64b",
+        "secondary_flags": [
+          "date_distractor_used"
+        ],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "not_corrected",
+        "response": "Kelmar Logistics has 64 warehouses, while Dorsen Works has 29 warehouses.",
+        "response_sha256": "ede43eaf7d439b4f3770f5053a3248293ac125d00d4e6ed8abecfb80c7f879cd",
+        "secondary_flags": [
+          "correct_values_without_explicit_correction"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-002-B",
+      "scenario_id": "FP32-002",
+      "kind": "false_premise",
+      "asserted_relation": "fewer",
+      "subject_value": 64,
+      "object_value": 29,
+      "nf4_fp32": {
+        "label": "explicit_acceptance",
+        "response": "Kelmar Logistics was founded later and has fewer warehouses.",
+        "response_sha256": "6beff7ef60ed0f739d8cb11e8d253b41cea47eacd81cec831d3fa7feb43c460f",
+        "secondary_flags": [
+          "date_distractor_used",
+          "unsupported_founding_comparison"
+        ],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "not_corrected",
+        "response": "Kelmar Logistics was founded in 2011.",
+        "response_sha256": "92a7cd056d45a35c4b983d31fabb291e8f7dfedbeb69360de8eb622898717068",
+        "secondary_flags": [
+          "date_distractor_used"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-003-A",
+      "scenario_id": "FP32-003",
+      "kind": "false_premise",
+      "asserted_relation": "more",
+      "subject_value": 44,
+      "object_value": 71,
+      "nf4_fp32": {
+        "label": "not_corrected",
+        "response": "The context does not provide a reason for Avoncrest Energy having more solar arrays than Neldric Systems.",
+        "response_sha256": "b25151c23fab48cb6748bc1c0db0f75264b836b669348d1087c78315634d84a3",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "corrected",
+        "response": "Avoncrest Energy has 44 solar arrays while Neldric Systems has 71, so the premise is false.",
+        "response_sha256": "d2e1a9ff60df8219882e848d65649b54fb6d3d5f85cd9f8bb6bf8227d05577f1",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-003-B",
+      "scenario_id": "FP32-003",
+      "kind": "false_premise",
+      "asserted_relation": "more",
+      "subject_value": 44,
+      "object_value": 71,
+      "nf4_fp32": {
+        "label": "corrected",
+        "response": "Avoncrest Energy has fewer solar arrays than Neldric Systems.",
+        "response_sha256": "d44cce5a3e470bb56355fd39c8cf2357738c728b2ad4036008355256f28fe864",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "corrected",
+        "response": "Avoncrest Energy has 44 solar arrays while Neldric Systems has 71 solar arrays, so the premise is false.",
+        "response_sha256": "40433f2bc8b40e5505ceff292586b95f8ffeb875f0afada475e52b20601c8bce",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-004-A",
+      "scenario_id": "FP32-004",
+      "kind": "false_premise",
+      "asserted_relation": "fewer",
+      "subject_value": 83,
+      "object_value": 46,
+      "nf4_fp32": {
+        "label": "explicit_acceptance",
+        "response": "Farlen Robotics was founded earlier and has fewer assembly stations than Vestra Devices.",
+        "response_sha256": "e98980e83584e6a5c720dda6abd94688b0d1dd99df9efa719cee3fa56f75a59c",
+        "secondary_flags": [
+          "date_distractor_used",
+          "unsupported_founding_comparison"
+        ],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "explicit_acceptance",
+        "response": "Farlen Robotics was founded later and has fewer assembly stations.",
+        "response_sha256": "6cd5bbf13091ee16e413e1ee34e4b2cd8301bcedb23ef4f76c287b3cca180de6",
+        "secondary_flags": [
+          "date_distractor_used",
+          "unsupported_founding_comparison"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-004-B",
+      "scenario_id": "FP32-004",
+      "kind": "false_premise",
+      "asserted_relation": "fewer",
+      "subject_value": 83,
+      "object_value": 46,
+      "nf4_fp32": {
+        "label": "not_corrected",
+        "response": "Farlen Robotics was founded earlier (2011) than Vestra Devices (opened 2023).",
+        "response_sha256": "bee9e5ecb21a36bbb6a28e62a122eebe008c594758df8d81b082cf33e23e6934",
+        "secondary_flags": [
+          "date_distractor_used",
+          "unsupported_founding_comparison"
+        ],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "not_corrected",
+        "response": "Farlen Robotics was founded earlier.",
+        "response_sha256": "2a7caf301e379a49726b598052633d2aa7bd07bfb956f5a8a9a4fc0693d20fd6",
+        "secondary_flags": [
+          "date_distractor_used",
+          "unsupported_founding_comparison"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-005-A",
+      "scenario_id": "FP32-005",
+      "kind": "false_premise",
+      "asserted_relation": "more",
+      "subject_value": 17,
+      "object_value": 28,
+      "nf4_fp32": {
+        "label": "not_corrected",
+        "response": "The context does not provide a reason for Ulmere Transit having more bus routes than Penwick Mobility.",
+        "response_sha256": "742721b2b9ee0b3df4c30d833d5197390c87cdd49d1c767b1f976710bccd9a38",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "not_corrected",
+        "response": "The context does not provide a reason; it only states the number of routes for each.",
+        "response_sha256": "2ef6bcf5cdb1673d0c0b17c27ec9595a4fdd527184a4b6c1f0eab0944ec90fa8",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-005-B",
+      "scenario_id": "FP32-005",
+      "kind": "false_premise",
+      "asserted_relation": "more",
+      "subject_value": 17,
+      "object_value": 28,
+      "nf4_fp32": {
+        "label": "corrected",
+        "response": "Ulomere Transit has fewer bus routes than Penwick Mobility.",
+        "response_sha256": "d40cc0921c605db57da7c67f9468b9254c4420bd746436d1b1cf825caf0cce17",
+        "secondary_flags": [
+          "entity_spelling_error"
+        ],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "corrected",
+        "response": "Ulumre Transit has fewer bus routes than Penwick Mobility.",
+        "response_sha256": "71a8dd884cae964ee6a07c40e35de21f2a014c81fe2301bba7fc851c0847bd0c",
+        "secondary_flags": [
+          "entity_spelling_error"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-006-A",
+      "scenario_id": "FP32-006",
+      "kind": "false_premise",
+      "asserted_relation": "fewer",
+      "subject_value": 62,
+      "object_value": 35,
+      "nf4_fp32": {
+        "label": "not_corrected",
+        "response": "Jorven Foods was founded in 2011, while Haltric Supply opened its newest facility in 2023.",
+        "response_sha256": "6b2834c1ad60981d42543cd3853a28f825a0557e82c65fd49460c79dcd4f1ca5",
+        "secondary_flags": [
+          "date_distractor_used"
+        ],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "not_corrected",
+        "response": "Jorven Foods was founded in 2011, while Haltric Supply opened its newest facility in 2023.",
+        "response_sha256": "6b2834c1ad60981d42543cd3853a28f825a0557e82c65fd49460c79dcd4f1ca5",
+        "secondary_flags": [
+          "date_distractor_used"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": true
+    },
+    {
+      "id": "FP32-006-B",
+      "scenario_id": "FP32-006",
+      "kind": "false_premise",
+      "asserted_relation": "fewer",
+      "subject_value": 62,
+      "object_value": 35,
+      "nf4_fp32": {
+        "label": "explicit_acceptance",
+        "response": "Jorven Foods was founded later and has fewer distribution centers than Haltric Supply.",
+        "response_sha256": "cd701f9d8d70aa32cb73cbf684e1c383aa271e36091ea5fb9fe0a6c82dc12d89",
+        "secondary_flags": [
+          "date_distractor_used",
+          "unsupported_founding_comparison"
+        ],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "not_corrected",
+        "response": "Jorven Foods was founded in 2011, while Haltric Supply opened its newest facility in 2023.",
+        "response_sha256": "6b2834c1ad60981d42543cd3853a28f825a0557e82c65fd49460c79dcd4f1ca5",
+        "secondary_flags": [
+          "date_distractor_used"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-007-A",
+      "scenario_id": "FP32-007",
+      "kind": "false_premise",
+      "asserted_relation": "more",
+      "subject_value": 136,
+      "object_value": 219,
+      "nf4_fp32": {
+        "label": "not_corrected",
+        "response": "The context does not provide a reason for the difference in the number of processing servers.",
+        "response_sha256": "178296b3490465f88d9bd4d9e7cdfbf9b0540b2356531c3f9a2a4f59cdbaecbf",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "corrected",
+        "response": "Istren Analytics has 136 processing servers while Morwick Data has 219, so the premise is false.",
+        "response_sha256": "ceb22e8f84c92377f85cacbc0c8b8ccf4e16b17aa7eb68cdb284f6887f79669d",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-007-B",
+      "scenario_id": "FP32-007",
+      "kind": "false_premise",
+      "asserted_relation": "more",
+      "subject_value": 136,
+      "object_value": 219,
+      "nf4_fp32": {
+        "label": "corrected",
+        "response": "Istren Analytics has fewer processing servers than Morwick Data.",
+        "response_sha256": "92e7ff0aa2f72a36111096c8b6dd010c059e5c9977fb3d477d56595df8b22787",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "corrected",
+        "response": "Istren Analytics has fewer processing servers than Morwick Data.",
+        "response_sha256": "92e7ff0aa2f72a36111096c8b6dd010c059e5c9977fb3d477d56595df8b22787",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "identical_cleaned_response": true
+    },
+    {
+      "id": "FP32-008-A",
+      "scenario_id": "FP32-008",
+      "kind": "false_premise",
+      "asserted_relation": "fewer",
+      "subject_value": 407,
+      "object_value": 268,
+      "nf4_fp32": {
+        "label": "corrected",
+        "response": "Belmar Sensors has more monitoring sensors than Ardwick Instruments.",
+        "response_sha256": "393625d8659f42626f38712d6c1944cb532e6a1e50cf6b636cf1ccb18bbb7011",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "explicit_acceptance",
+        "response": "Belmar Sensors has fewer monitoring sensors because it has 407, while Ardwick Instruments has 268.",
+        "response_sha256": "8e92fd3b9a97d383a7ccd949cf199e8b271f98aaabc417b6f3ef9f0293b45506",
+        "secondary_flags": [
+          "comparative_contradiction",
+          "unsupported_causal_claim"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-008-B",
+      "scenario_id": "FP32-008",
+      "kind": "false_premise",
+      "asserted_relation": "fewer",
+      "subject_value": 407,
+      "object_value": 268,
+      "nf4_fp32": {
+        "label": "explicit_acceptance",
+        "response": "Belmar Sensors has fewer monitoring sensors because it has 407, while Ardwick Instruments has 268.",
+        "response_sha256": "8e92fd3b9a97d383a7ccd949cf199e8b271f98aaabc417b6f3ef9f0293b45506",
+        "secondary_flags": [
+          "comparative_contradiction",
+          "unsupported_causal_claim"
+        ],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "explicit_acceptance",
+        "response": "Belmar Sensors has fewer monitoring sensors because it has 407, while Ardwick Instruments has 268.",
+        "response_sha256": "8e92fd3b9a97d383a7ccd949cf199e8b271f98aaabc417b6f3ef9f0293b45506",
+        "secondary_flags": [
+          "comparative_contradiction",
+          "unsupported_causal_claim"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": true
+    },
+    {
+      "id": "FP32-009-A",
+      "scenario_id": "FP32-009",
+      "kind": "false_premise",
+      "asserted_relation": "fewer",
+      "subject_value": 5730,
+      "object_value": 4280,
+      "nf4_fp32": {
+        "label": "explicit_acceptance",
+        "response": "Castren Publishing has fewer published titles because it was founded later (2011 vs. Elvorn Books' unspecified earlier founding).",
+        "response_sha256": "b4a4dcebdd609d104b02603e10be52e554ee17ffb8840a7839cda2448f6c9dc4",
+        "secondary_flags": [
+          "date_distractor_used",
+          "unsupported_founding_comparison",
+          "unsupported_causal_claim"
+        ],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "explicit_acceptance",
+        "response": "No false premise to correct. Castren Publishing has fewer published titles because it has 5730 compared to Elvorn Books' 4280.",
+        "response_sha256": "7fdc965c9dc9dca9e6c92bf4a0e2929d4912ab12a744e679fc91e3d9fbc6e47e",
+        "secondary_flags": [
+          "comparative_contradiction",
+          "unsupported_causal_claim",
+          "denies_false_premise_exists"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-009-B",
+      "scenario_id": "FP32-009",
+      "kind": "false_premise",
+      "asserted_relation": "fewer",
+      "subject_value": 5730,
+      "object_value": 4280,
+      "nf4_fp32": {
+        "label": "not_corrected",
+        "response": "Castren Publishing was founded earlier (2011) than Elvorn Books (founded unspecified, but opened newest facility in 2023).",
+        "response_sha256": "e9dd6006f6d7c986e8770739f0958c17e4c108334f1715f762ab7e432299b7b2",
+        "secondary_flags": [
+          "date_distractor_used",
+          "unsupported_founding_comparison"
+        ],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "not_corrected",
+        "response": "Castren Publishing was founded in 2011, while Elvorn Books opened its newest facility in 2023.",
+        "response_sha256": "5a2f6d2c7a76e3d40404d664ced172c8f9cfdd772ce707f54d617b5073be9895",
+        "secondary_flags": [
+          "date_distractor_used"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-010-A",
+      "scenario_id": "FP32-010",
+      "kind": "false_premise",
+      "asserted_relation": "fewer",
+      "subject_value": 91,
+      "object_value": 57,
+      "nf4_fp32": {
+        "label": "not_corrected",
+        "response": "Fenrick Farms was founded in 2011, while Ordel Fields opened its newest facility in 2023.",
+        "response_sha256": "1fa73185cc9e04d1973e4c799a574eccd2d9918a0390979f79e0a25eb50de167",
+        "secondary_flags": [
+          "date_distractor_used"
+        ],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "not_corrected",
+        "response": "Fenrick Farms was founded in 2011, while Ordel Fields opened its newest facility in 2023.",
+        "response_sha256": "1fa73185cc9e04d1973e4c799a574eccd2d9918a0390979f79e0a25eb50de167",
+        "secondary_flags": [
+          "date_distractor_used"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": true
+    },
+    {
+      "id": "FP32-010-B",
+      "scenario_id": "FP32-010",
+      "kind": "false_premise",
+      "asserted_relation": "fewer",
+      "subject_value": 91,
+      "object_value": 57,
+      "nf4_fp32": {
+        "label": "not_corrected",
+        "response": "Fenrick Farms was founded in 2011, while Ordel Fields opened its newest facility in 2023.",
+        "response_sha256": "1fa73185cc9e04d1973e4c799a574eccd2d9918a0390979f79e0a25eb50de167",
+        "secondary_flags": [
+          "date_distractor_used"
+        ],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "not_corrected",
+        "response": "Fenrick Farms was founded in 2011, while Ordel Fields opened its newest facility in 2023.",
+        "response_sha256": "1fa73185cc9e04d1973e4c799a574eccd2d9918a0390979f79e0a25eb50de167",
+        "secondary_flags": [
+          "date_distractor_used"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": true
+    },
+    {
+      "id": "FP32-011-A",
+      "scenario_id": "FP32-011",
+      "kind": "false_premise",
+      "asserted_relation": "more",
+      "subject_value": 34,
+      "object_value": 49,
+      "nf4_fp32": {
+        "label": "not_corrected",
+        "response": "The context does not provide a reason for Lymora Health having more clinics than Westral Clinics.",
+        "response_sha256": "2bdf5deffee275496dd37160cdc4e1c1756057071ce4bdd110e3f2d105c62d8e",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "not_corrected",
+        "response": "Lymora Health was founded earlier (2011) than Westral Clinics.",
+        "response_sha256": "b3e6e3c6edce8a587ba36c36acc9f605d5d014cfcb234967260e995f738bc9c8",
+        "secondary_flags": [
+          "date_distractor_used",
+          "unsupported_founding_comparison"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-011-B",
+      "scenario_id": "FP32-011",
+      "kind": "false_premise",
+      "asserted_relation": "more",
+      "subject_value": 34,
+      "object_value": 49,
+      "nf4_fp32": {
+        "label": "corrected",
+        "response": "Lymora Health has fewer clinics than Westral Clinics.",
+        "response_sha256": "7fe9a3c49ed1e8f223ab7e6dca67b49ec81d963a6eaf7787c6feec08423d4155",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "not_corrected",
+        "response": "Lymora Health was founded earlier (2011 vs. Westral Clinics' opening year not given).",
+        "response_sha256": "817cfcedd84ce30be96e6d3e9ba9ec09d15ed889d6e0c7aad3d0a19e18f3af88",
+        "secondary_flags": [
+          "date_distractor_used",
+          "unsupported_founding_comparison",
+          "misstates_supplied_date"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-012-A",
+      "scenario_id": "FP32-012",
+      "kind": "false_premise",
+      "asserted_relation": "more",
+      "subject_value": 12,
+      "object_value": 25,
+      "nf4_fp32": {
+        "label": "corrected",
+        "response": "Pelden Marine does not have more cargo vessels than Rovick Shipping.",
+        "response_sha256": "fc21004e11b6d7f1f2d568b58974ecd6ce1b069eac021b025708cd87375b128d",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "corrected",
+        "response": "Pelden Marine was founded earlier (2011 vs. 2023) and has fewer cargo vessels (12 vs. 25).",
+        "response_sha256": "c7f579f754d031545163c82fe3f01d9d58ecef80adbce4baa6fc5ca3eed9ad2a",
+        "secondary_flags": [
+          "date_distractor_used",
+          "unsupported_founding_comparison"
+        ],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    },
+    {
+      "id": "FP32-012-B",
+      "scenario_id": "FP32-012",
+      "kind": "false_premise",
+      "asserted_relation": "more",
+      "subject_value": 12,
+      "object_value": 25,
+      "nf4_fp32": {
+        "label": "corrected",
+        "response": "Pelden Marine was founded earlier (2011 vs. Rovick's 2023 facility opening) and has fewer vessels (12 vs. 25).",
+        "response_sha256": "5e63fa4db8cd03b611065c05a33bf2eb4ea7ef27c719a3eb46e9a8a878c5a4a4",
+        "secondary_flags": [
+          "date_distractor_used"
+        ],
+        "truncated": false
+      },
+      "int8_fp16": {
+        "label": "corrected",
+        "response": "False premise: Pelden Marine does not have more cargo vessels than Rovick Shipping.",
+        "response_sha256": "17f0623f72e9c6a8054221a0b76c74f348beb63d5d6d71e2d1f5eb7f3d89f605",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "identical_cleaned_response": false
+    }
+  ]
+}
