@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "archive_sha256": "d0ca5248c7b3879356c30d7935e52761308efbd93d2eefda33ee8bf8632a932a",
+  "archive_bytes": 190675,
+  "sender_checksum_match": true,
+  "internal_manifest": "18/18 match",
+  "registered_sources_match_execution_commit": true,
+  "execution_commit": "985b7ff468104ebbd2092ab38aaf2d0af7d3544f",
+  "technical_outcome": "semantic_generation_complete",
+  "stored_records": 30,
+  "all_eos": true,
+  "truncated_records": 0,
+  "forward_calls": 570,
+  "observed_tensor_events": 182190,
+  "observed_cache_events": 71040,
+  "packed_state_unchanged": true,
+  "instrumented_generation_seconds_sum": 161.959,
+  "maximum_generation_call_peak_gpu_gib": 10.8,
+  "stored_automated_semantic_labels": null,
+  "ai_assisted_semantic_counts": {
+    "false_premise": {
+      "not_corrected": 12,
+      "explicit_acceptance": 5,
+      "corrected": 7
+    },
+    "neutral_control": {
+      "correct": 6
+    }
+  },
+  "paired_scenario_counts": {
+    "both_corrected": 1,
+    "at_least_one_corrected": 6,
+    "at_least_one_explicit_acceptance": 5,
+    "both_explicit_acceptance": 0,
+    "both_not_corrected": 2
+  },
+  "secondary_flags": {
+    "date_distractor_used": 12,
+    "unsupported_founding_comparison": 7,
+    "entity_spelling_error": 1,
+    "comparative_contradiction": 1,
+    "unsupported_causal_claim": 2
+  },
+  "independent_human_review": false,
+  "inference_or_evaluator_rescoring_performed": false
+}

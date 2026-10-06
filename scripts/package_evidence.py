@@ -44,6 +44,13 @@ def payload_files(root: Path) -> list[Path]:
             if relative.is_absolute() or '..' in relative.parts or relative.parts[:2] != ('evidence', 'colab'):
                 raise ValueError('Unsafe diagnostic archive path')
             selected.extend([root / relative, root / (item['archive'] + '.sha256')])
+    semantic_catalog = root / 'evidence/colab/semantic/catalog.json'
+    if semantic_catalog.is_file():
+        for item in json.loads(semantic_catalog.read_text(encoding='utf-8'))['runs']:
+            relative = Path(item['archive'])
+            if relative.is_absolute() or '..' in relative.parts or relative.parts[:3] != ('evidence','colab','semantic'):
+                raise ValueError('Unsafe semantic archive path')
+            selected.extend([root / relative, root / (item['archive'] + '.sha256')])
     preparation = root / 'evidence/colab/preparation'
     if preparation.is_dir():
         entries = [line.split('  ', 1) for line in (preparation / 'SHA256SUMS').read_text().splitlines()]

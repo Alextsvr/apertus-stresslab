@@ -7,3 +7,6 @@ docs/colab_diagnostics/** -text
 
 # Prospective semantic prompts/protocol: preserve registered bytes.
 experiments/** -text
+
+# Preserve the executed notebook from its original Git commit.
+notebooks/sessions/** -text

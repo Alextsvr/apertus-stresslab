@@ -98,6 +98,9 @@ def verify(root=ROOT, *, verify_git=True, include_phase3b=True):
     if include_phase3b:
         from verify_evidence import verify as verify_phase3b
         result["original_phase3b"] = verify_phase3b(root)
+    if (root / 'evidence/colab/semantic/catalog.json').is_file():
+        from verify_semantic_evidence import verify as verify_semantic
+        result['new_semantic_study'] = verify_semantic(root, verify_git=verify_git)
     return result
 
 

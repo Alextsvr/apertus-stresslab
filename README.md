@@ -142,3 +142,13 @@ notebooks, with separate provenance; in a Git checkout it excludes untracked loc
 The next-session preparation passed on a free T4: sender/internal checksums match, all 746 package entries match the successful technical dependency, and no model was loaded. The preserved record is in [evidence/colab/preparation](evidence/colab/preparation/).
 
 The [new prospective protocol](experiments/colab-fp32-semantic-2026-10-06/protocol.md) fixes 24 new false-premise prompts and six controls before inference. It uses NF4 packed weights with the recorded FP32 intervention, one greedy response per prompt and separate technical stop gates. This is an exploratory design informed by prior outputs, not independent held-out validation or a causal precision comparison. No semantic evaluator or historical Phase 3B run is invoked; any later audit remains separate. Execution has not yet occurred at registration. Original source/dataset/raw files and frozen counts remain unchanged.
+
+### New NF4/FP32 semantic result — post-run 2026-10-06
+
+The separately registered exploratory run completed 30/30 responses with EOS, no truncation/unknown tokens, finite FP32 observations at selected boundaries, and unchanged packed NF4 state. No semantic evaluator ran. A separate AI-assisted post-hoc audit labels the 24 false-premise answers as 7 corrected, 5 explicit_acceptance, 12 not_corrected; all six controls are correct. None of these annotations has independent human sign-off. FP32-008-B explicitly says fewer sensors while printing 407 versus 268, so technical numerical functionality did not eliminate this comparative error.
+
+This new one-configuration study uses new prompts informed by prior outputs; it is not independent held-out validation or a causal precision comparison. Its annotations must not be merged with original Phase 3B frozen counts. Original raw/source/dataset/evaluator and prereg tag remain unchanged; no rerun/rescore is performed.
+
+[Full response-level audit and provenance](docs/colab_semantic/2026-10-06/post_run_report.md).
+
+The [saved preparation notebook](notebooks/sessions/2026-10-06-preparation.ipynb) retains the user's executed notebook from commit `1ffbcc7` byte-for-byte. The main setup notebook remains a clean, opt-in template with no saved outputs.

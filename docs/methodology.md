@@ -386,3 +386,11 @@ Per-call peak memory and instrumented latency exclude load/promotion. General st
 environments and higher-precision semantic confirmation remain future work. The unified notebook performs
 model-free review by default; environment/model-cache preparation is opt-in and executes no study inference.
 A changed fresh Colab inventory must be recorded and considered before another prospective experiment.
+
+### New NF4/FP32 semantic result — post-run 2026-10-06
+
+The separately registered exploratory run completed 30/30 responses with EOS, no truncation/unknown tokens, finite FP32 observations at selected boundaries, and unchanged packed NF4 state. No semantic evaluator ran. A separate AI-assisted post-hoc audit labels the 24 false-premise answers as 7 corrected, 5 explicit_acceptance, 12 not_corrected; all six controls are correct. None of these annotations has independent human sign-off. FP32-008-B explicitly says fewer sensors while printing 407 versus 268, so technical numerical functionality did not eliminate this comparative error.
+
+This new one-configuration study uses new prompts informed by prior outputs; it is not independent held-out validation or a causal precision comparison. Its annotations must not be merged with original Phase 3B frozen counts. Original raw/source/dataset/evaluator and prereg tag remain unchanged; no rerun/rescore is performed.
+
+[Full response-level audit and provenance](colab_semantic/2026-10-06/post_run_report.md).

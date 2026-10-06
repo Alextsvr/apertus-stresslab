@@ -58,3 +58,11 @@ The stdlib verifier checks all eight ZIP hashes/sizes, checksum sidecars, comple
 Use [the unified notebook](../../notebooks/colab_evidence_and_setup.ipynb) to review/verify evidence on CPU, and optionally prepare the recorded free T4 environment and model cache. Preparation flags default to false; there is no automatic generation, replay of historical attempts or full-suite cell. The bootstrap is syntax-checked locally, not GPU-validated in a new Colab session. A future changed base runtime/package inventory must be recorded and considered in a new prospective plan before inference. The old `colab_smoke_test.ipynb` is historical and is not the current setup route.
 
 Any next semantic experiment needs its own prospective prompts/configuration/quality gates and separate outputs. The present publication executes no further inference or rescoring.
+
+### New NF4/FP32 semantic result — post-run 2026-10-06
+
+The separately registered exploratory run completed 30/30 responses with EOS, no truncation/unknown tokens, finite FP32 observations at selected boundaries, and unchanged packed NF4 state. No semantic evaluator ran. A separate AI-assisted post-hoc audit labels the 24 false-premise answers as 7 corrected, 5 explicit_acceptance, 12 not_corrected; all six controls are correct. None of these annotations has independent human sign-off. FP32-008-B explicitly says fewer sensors while printing 407 versus 268, so technical numerical functionality did not eliminate this comparative error.
+
+This new one-configuration study uses new prompts informed by prior outputs; it is not independent held-out validation or a causal precision comparison. Its annotations must not be merged with original Phase 3B frozen counts. Original raw/source/dataset/evaluator and prereg tag remain unchanged; no rerun/rescore is performed.
+
+[Full response-level audit and provenance](../colab_semantic/2026-10-06/post_run_report.md).

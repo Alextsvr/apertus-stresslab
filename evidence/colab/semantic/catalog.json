@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "runs": [
+    {
+      "id": "colab-fp32-semantic-2026-10-06",
+      "procedure_commit": "985b7ff468104ebbd2092ab38aaf2d0af7d3544f",
+      "archive": "evidence/colab/semantic/colab-fp32-semantic-2026-10-06.zip",
+      "archive_sha256": "d0ca5248c7b3879356c30d7935e52761308efbd93d2eefda33ee8bf8632a932a",
+      "archive_bytes": 190675,
+      "internal_files": 18,
+      "registered_sources": {
+        "scripts/colab_fp32_semantic.py": "launcher.py",
+        "experiments/colab-fp32-semantic-2026-10-06/protocol.md": "protocol.md",
+        "experiments/colab-fp32-semantic-2026-10-06/cases.json": "cases.json",
+        "scripts/colab_quantization.py": "colab_quantization.py",
+        "scripts/colab_4bit_diagnostic.py": "colab_4bit_diagnostic.py",
+        "scripts/colab_layer_replay.py": "colab_layer_replay.py",
+        "scripts/colab_fp32_probe.py": "colab_fp32_probe.py",
+        "scripts/colab_fp32_long.py": "colab_fp32_long.py",
+        "scripts/verify_evidence.py": "verify_evidence.py",
+        "scripts/colab_fp32_semantic_cell.py": "colab_fp32_semantic_cell.py",
+        "scripts/colab_notebook_process.py": "colab_notebook_process.py"
+      },
+      "result_member": "semantic_run.json",
+      "stored_result": {
+        "outcome": "semantic_generation_complete",
+        "completed_records": 30,
+        "unattempted_records": 0,
+        "total_forward_calls_attempted": 570,
+        "observed_tensor_events": 182190,
+        "observed_cache_events": 71040,
+        "first_bad_activation": null,
+        "first_wrong_dtype": null,
+        "packed_state_unchanged_after_attempt": true,
+        "scoring_performed": false,
+        "historical_suite_run": false
+      },
+      "report": "docs/colab_semantic/2026-10-06/post_run_report.md",
+      "audit_metadata": "docs/colab_semantic/2026-10-06/integrity.json",
+      "annotations": "docs/colab_semantic/2026-10-06/semantic_annotations.json",
+      "annotation_counts": {
+        "false_premise": {
+          "not_corrected": 12,
+          "explicit_acceptance": 5,
+          "corrected": 7
+        },
+        "neutral_control": {
+          "correct": 6
+        }
+      },
+      "report_sha256": "dfd5aec7fc66af898d52d7dbe2a2d5606ac5454941ca28e90e14735e8e51214a",
+      "audit_metadata_sha256": "785482b0f1210e459437852b5aa1b015b5ba7b9ede583986a555a1f9bcc3aeef",
+      "annotations_sha256": "4a5fdecf3b3ee170cdd39fac060a6ef7e58579841d75c01f2d682cc7b1ac4459"
+    }
+  ]
+}
