@@ -33,7 +33,7 @@ CAP = 96
 INPUT_CAP = 256
 HELPERS = ('colab_quantization.py', 'colab_4bit_diagnostic.py', 'colab_layer_replay.py',
            'colab_fp32_probe.py', 'colab_fp32_long.py', 'verify_evidence.py',
-           'colab_fp32_semantic_cell.py')
+           'colab_fp32_semantic_cell.py', 'colab_notebook_process.py')
 
 
 def read_archive(path, digest):

@@ -49,3 +49,7 @@ Exit code zero means all 30 generations passed the **technical output gates**; i
 AI-authored audit labels must be identified as AI-assisted post-hoc annotations. Human-confirmed labels, if later supplied, need explicit provenance and remain separate. They do not replace raw answers or the original Phase 3B frozen labels. Report case-level counts and paired-scenario outcomes; A/B are correlated and cannot be treated as 24 independent scenario samples. No population claim or causal precision-improvement conclusion follows from this small synthetic one-seed run.
 
 Original Phase 3B raw files, evaluator, dataset, original counts and `phase3b-preregistered` / `ed64ba8` are unchanged. No historical suite inference or raw-response rescoring is performed.
+
+## Prospective notebook-output transport amendment — 2026-10-06
+
+After cache preparation completed without a notebook error, the user observed no displayed subprocess output. Before any semantic inference, the notebook helper now pipes child stdout/stderr to notebook Python and prints it explicitly; suppressed preflight stderr is displayed on failure. The same worker arguments, prompts, order, decoding, precision, resource/output gates and evidence preservation remain fixed. The executed transport helper is included in the attempt archive. This amendment does not repeat the completed download, execute inference, or claim cache verification from a green notebook check alone. A separate read-only pointer/shard check will confirm cache presence.
