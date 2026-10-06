@@ -10,3 +10,4 @@ experiments/** -text
 
 # Preserve the executed notebook from its original Git commit.
 notebooks/sessions/** -text
+docs/colab_semantic/** -text
