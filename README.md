@@ -156,3 +156,5 @@ The [saved preparation notebook](notebooks/sessions/2026-10-06-preparation.ipynb
 ### Prospective INT8 condition on the same 30 prompts — 2026-10-06
 
 The [new protocol](experiments/colab-int8-matched-prompts-2026-10-06/protocol.md) fixes one INT8/FP16 response per previously observed prompt, with identical order/decoding and exact baseline input-ID matching before any generation. Outputs use their own exclusive directory; no NF4/FP32 rerun or semantic evaluator is invoked. This is a prospective new condition against an observed exploratory baseline, not held-out validation or an isolated causal quantization/precision comparison. Preparation/check/cache/run are separate explicit notebook-helper modes. No INT8 responses to these prompts are known at registration.
+
+The [saved semantic session notebook](notebooks/sessions/2026-10-06-semantic-session.ipynb) preserves the user's Colab save from commit `451cf61` byte-for-byte (SHA256 `3fdf2cb30505dfcce2abe5f2cd1c550f224c6c7c2089023a58fa15cd2e4f3fbe`). Its executed cells and outputs are historical records; the main notebook remains the opt-in preparation template.
