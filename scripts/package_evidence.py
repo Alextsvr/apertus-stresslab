@@ -13,7 +13,7 @@ from verify_evidence import RAW_NAMES, ROOT, RUN, verify
 
 TOP_FILES = ('.gitignore', '.gitattributes', 'LICENSE', 'README.md', 'pyproject.toml',
              'requirements.txt', 'requirements-inference.txt')
-DIRECTORIES = ('src', 'data', 'tests', 'scripts', 'docs', 'notebooks', 'evidence/colab')
+DIRECTORIES = ('src', 'data', 'tests', 'scripts', 'docs', 'notebooks', 'evidence/colab', 'experiments')
 SUFFIXES = {'.py', '.md', '.json', '.jsonl', '.txt', '.toml', '.sha256', '.ipynb'}
 EXCLUDED = {'.git', '.venv', 'venv', '__pycache__', '.pytest_cache', '.cache', 'dist', 'node_modules'}
 
@@ -44,6 +44,18 @@ def payload_files(root: Path) -> list[Path]:
             if relative.is_absolute() or '..' in relative.parts or relative.parts[:2] != ('evidence', 'colab'):
                 raise ValueError('Unsafe diagnostic archive path')
             selected.extend([root / relative, root / (item['archive'] + '.sha256')])
+    preparation = root / 'evidence/colab/preparation'
+    if preparation.is_dir():
+        entries = [line.split('  ', 1) for line in (preparation / 'SHA256SUMS').read_text().splitlines()]
+        names = {name for _, name in entries}
+        actual = {p.name for p in preparation.iterdir() if p.is_file() and p.name != 'SHA256SUMS'}
+        if len(entries) != len(names) or names != actual:
+            raise ValueError('Incomplete preparation manifest')
+        for expected, name in entries:
+            path = preparation / name
+            if Path(name).name != name or path.is_symlink() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+                raise ValueError('Changed or unsafe preparation input')
+            selected.append(path)
     for path in selected:
         if not path.is_file() or path.is_symlink():
             raise ValueError(f'Missing or non-regular package input: {path.relative_to(root)}')

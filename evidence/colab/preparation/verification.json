@@ -1,0 +1,16 @@
+{
+  "outcome": "preparation_verified",
+  "archive_sha256": "dc7c4e8cea9a98b8372b95dedcc120e9c9752631ab775aac6aa8f3ff7e388ca8",
+  "archive_bytes": 8868,
+  "sender_checksum_match": true,
+  "internal_manifest_match": true,
+  "source_matches_recorded_git_checkpoint": true,
+  "previous_technical_inventory_match": true,
+  "recorded_distribution_entries": 746,
+  "weights_loaded": false,
+  "inference_or_scoring_performed": false,
+  "checked_at_utc_from_received_record": "2026-10-06T11:45:01.109846+00:00",
+  "free_vram_gib": 14.461,
+  "available_ram_gib": 11.064,
+  "gpu_identity": "GPU-2d908a88-5692-d044-fee3-b9ba2e4cebf0, 580.82.07"
+}

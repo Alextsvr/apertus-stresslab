@@ -136,3 +136,9 @@ Use the [unified Colab notebook](notebooks/colab_evidence_and_setup.ipynb) for m
 optional environment/cache preparation. It has no automatic inference or historical rerun/rescore. The older
 smoke notebook is historical. The current packaging command also includes catalogued diagnostic ZIPs and the
 notebooks, with separate provenance; in a Git checkout it excludes untracked local audit folders.
+
+### Prospective exploratory NF4/FP32 semantic run — 2026-10-06
+
+The next-session preparation passed on a free T4: sender/internal checksums match, all 746 package entries match the successful technical dependency, and no model was loaded. The preserved record is in [evidence/colab/preparation](evidence/colab/preparation/).
+
+The [new prospective protocol](experiments/colab-fp32-semantic-2026-10-06/protocol.md) fixes 24 new false-premise prompts and six controls before inference. It uses NF4 packed weights with the recorded FP32 intervention, one greedy response per prompt and separate technical stop gates. This is an exploratory design informed by prior outputs, not independent held-out validation or a causal precision comparison. No semantic evaluator or historical Phase 3B run is invoked; any later audit remains separate. Execution has not yet occurred at registration. Original source/dataset/raw files and frozen counts remain unchanged.

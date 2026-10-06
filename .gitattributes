@@ -4,3 +4,6 @@ docs/audits/phase3b-2026-10-02_111432/** -text
 
 evidence/colab/** -text
 docs/colab_diagnostics/** -text
+
+# Prospective semantic prompts/protocol: preserve registered bytes.
+experiments/** -text
