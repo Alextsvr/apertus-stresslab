@@ -106,3 +106,27 @@ def test_actual_publication_checks_eight_archives_without_model():
     result = evidence.verify(root)
     assert result["attempts_verified"] == 8 and result["original_phase3b"]["raw_sha256"] == "4/4 match"
     assert not result["inference_or_rescoring_performed"]
+
+
+def test_unified_notebook_has_no_saved_outputs_or_generation_and_preparation_is_opt_in():
+    import ast
+    root = Path(__file__).resolve().parents[1]
+    notebook = json.loads((root / "notebooks/colab_evidence_and_setup.ipynb").read_text(encoding="utf-8"))
+    flags = {}
+    source_cells = []
+    for cell in notebook["cells"]:
+        if cell["cell_type"] != "code":
+            continue
+        assert cell["outputs"] == [] and cell["execution_count"] is None
+        source = "".join(cell["source"])
+        source_cells.append(source)
+        tree = ast.parse(source)
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Assign) and isinstance(node.value, ast.Constant):
+                for target in node.targets:
+                    if isinstance(target, ast.Name) and target.id in ("PREPARE_ENV", "CACHE_MODEL"):
+                        flags[target.id] = node.value.value
+            if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
+                assert node.func.attr != "generate"
+    assert flags == {"PREPARE_ENV": False, "CACHE_MODEL": False}
+    assert not any('"--run"' in s or "-m stresslab run" in s for s in source_cells)
