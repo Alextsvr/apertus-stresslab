@@ -18,7 +18,7 @@ from colab_quantization import ROOT, MODEL, REVISION, check, claim, git, require
 from colab_4bit_diagnostic import PROMPT, NonFiniteObserved, tensors, stats
 from colab_layer_replay import TARGET, weight_identity, precision_settings
 
-DEST = ROOT / "results/colab-fp32-activation-probe-2026-10-06-attempt2"
+DEST = ROOT / "results/colab-fp32-activation-probe-2026-10-06-attempt3"
 PLAN = ROOT / "docs/colab_fp32_probe_protocol.md"
 PRIOR_SHA = "ef98d1fe60a71adf4abe2082a9a4974d8ec8ba4eb97e04e596a1d6cd83b2ae23"
 PRIOR = ROOT / "results/evidence-dependencies" / f"{PRIOR_SHA}.zip"
@@ -110,6 +110,23 @@ def read_prior():
         return json.loads(z.read("preflight.json")), json.loads(z.read("comparison.json"))
 
 
+def check_probe_environment(previous, current):
+    """Record cross-session GPU provenance while enforcing the planned hardware class."""
+    for key in ("versions", "all_packages", "torch_cuda", "source_sha256", "dataset_sha256", "model_revision", "gpu"):
+        require(previous[key] == current[key], f"Environment differs from replay: {key}")
+    require(current["gpu_compute_capability"] == [7, 5], "Expected T4 compute capability 7.5")
+    identities = {}
+    for label, environment in (("previous", previous), ("current", current)):
+        raw = environment["gpu_identity"]
+        uuid, separator, driver = raw.partition(",")
+        require(bool(separator and uuid.strip() and driver.strip()), f"Invalid {label} GPU identity")
+        identities[label] = {"raw": raw, "uuid": uuid.strip(), "driver_version": driver.strip()}
+    return {**identities, "uuid_changed": identities["previous"]["uuid"] != identities["current"]["uuid"],
+            "driver_changed": identities["previous"]["driver_version"] != identities["current"]["driver_version"],
+            "gpu_model": current["gpu"], "compute_capability": current["gpu_compute_capability"],
+            "cross_session_identity_equality_required": False}
+
+
 def worker():
     os.environ["HF_HUB_OFFLINE"] = "1"
     import torch
@@ -129,13 +146,19 @@ def worker():
         previous, previous_result = read_prior()
         require(previous_result["outcome"] == "paired_replay_complete", "Previous replay incomplete")
         preflight = check()
+        preflight["gpu_compute_capability"] = list(torch.cuda.get_device_capability(0))
+        preflight.update(probe_plan_sha256=sha(PLAN), probe_launcher_sha256=sha(Path(__file__)),
+                         preceding_archive_sha256=PRIOR_SHA, dependency_path=str(PRIOR), attempt=3,
+                         prior_gpu_identity=previous["gpu_identity"],
+                         preceding_stopped_attempts_sha256=[
+                             "1fc0b20ba6df520028e8b0e3898a7087baf5122d850937b8b33a84f3f88136e1",
+                             "a0b21d6664df7bf4f225cac504517a7dd2e6489ac0dfe70e14b2db3f6c13157c"])
+        # Preserve current provenance before any cross-session equality rejection.
+        save(DEST / "preflight.json", preflight)
         for relative in ("scripts/colab_fp32_probe.py", "docs/colab_fp32_probe_protocol.md"):
             require(bool(git("ls-files", "--", relative)), f"Not committed: {relative}")
-        for key in ("versions", "all_packages", "gpu_identity", "torch_cuda", "source_sha256", "dataset_sha256", "model_revision"):
-            require(previous[key] == preflight[key], f"Environment differs from replay: {key}")
-        preflight.update(probe_plan_sha256=sha(PLAN), probe_launcher_sha256=sha(Path(__file__)),
-                         preceding_archive_sha256=PRIOR_SHA, dependency_path=str(PRIOR),
-                         attempt=2, preceding_failed_attempt_sha256="1fc0b20ba6df520028e8b0e3898a7087baf5122d850937b8b33a84f3f88136e1")
+        report["hardware_identity_comparison"] = check_probe_environment(previous, preflight)
+        preflight["hardware_identity_comparison"] = report["hardware_identity_comparison"]
         save(DEST / "preflight.json", preflight)
         snapshot = Path(Path("/content/apertus-pinned-snapshot.txt").read_text().strip())
         require(snapshot.name == REVISION, "Cached model revision differs")

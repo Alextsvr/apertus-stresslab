@@ -121,3 +121,27 @@ def test_missing_dependency_reports_path_without_creating_it(tmp_path, monkeypat
     with pytest.raises(RuntimeError, match="Verified dependency missing"):
         probe.read_prior()
     assert not dependency.exists()
+
+
+def test_new_t4_uuid_and_driver_are_recorded_without_rejecting_functional_probe():
+    keys = ("versions", "all_packages", "torch_cuda", "source_sha256", "dataset_sha256", "model_revision")
+    previous = {key: "same" for key in keys}
+    previous.update(gpu="Tesla T4", gpu_identity="GPU-old, 580.82.07")
+    current = dict(previous, gpu_identity="GPU-new, 580.99.01", gpu_compute_capability=[7, 5])
+    result = probe.check_probe_environment(previous, current)
+    assert result["uuid_changed"] and result["driver_changed"]
+    assert result["current"]["uuid"] == "GPU-new"
+    assert result["previous"]["driver_version"] == "580.82.07"
+    assert not result["cross_session_identity_equality_required"]
+
+
+def test_same_class_allowance_does_not_accept_software_source_or_hardware_changes():
+    keys = ("versions", "all_packages", "torch_cuda", "source_sha256", "dataset_sha256", "model_revision")
+    previous = {key: "same" for key in keys}
+    previous.update(gpu="Tesla T4", gpu_identity="GPU-old, 580.82.07")
+    current = dict(previous, gpu_identity="GPU-new, 580.82.07", gpu_compute_capability=[7, 5])
+    for key in (*keys, "gpu"):
+        with pytest.raises(RuntimeError, match=key):
+            probe.check_probe_environment(previous, dict(current, **{key: "different"}))
+    with pytest.raises(RuntimeError, match="compute capability"):
+        probe.check_probe_environment(previous, dict(current, gpu_compute_capability=[8, 0]))
