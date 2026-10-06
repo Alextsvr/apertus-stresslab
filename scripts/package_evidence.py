@@ -58,6 +58,13 @@ def payload_files(root: Path) -> list[Path]:
             if relative.is_absolute() or '..' in relative.parts or relative.parts[:3] != ('evidence', 'colab', 'int8_matched'):
                 raise ValueError('Unsafe matched INT8 archive path')
             selected.extend([root / relative, root / (item['archive'] + '.sha256')])
+    date_catalog = root / 'evidence/colab/date_ablation/catalog.json'
+    if date_catalog.is_file():
+        for item in json.loads(date_catalog.read_text(encoding='utf-8'))['runs']:
+            relative = Path(item['archive'])
+            if relative.is_absolute() or '..' in relative.parts or relative.parts[:3] != ('evidence', 'colab', 'date_ablation'):
+                raise ValueError('Unsafe date-study archive path')
+            selected.extend([root / relative, root / (item['archive'] + '.sha256')])
     preparation = root / 'evidence/colab/preparation'
     if preparation.is_dir():
         entries = [line.split('  ', 1) for line in (preparation / 'SHA256SUMS').read_text().splitlines()]

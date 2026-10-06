@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "runs": [
+    {
+      "archive": "evidence/colab/date_ablation/colab-fp32-date-ablation-2026-10-06.zip",
+      "archive_sha256": "bc5ed2f663df2b906a44736c756dbf941719bca19ceab73114d25dc50a05e95f",
+      "archive_bytes": 206672,
+      "internal_files": 19,
+      "procedure_commit": "cf83f31623282611912446bcd94694f3ea320139",
+      "registered_sources": {
+        "scripts/colab_fp32_dates.py": "launcher.py",
+        "experiments/colab-fp32-date-ablation-2026-10-06/protocol.md": "protocol.md",
+        "experiments/colab-fp32-date-ablation-2026-10-06/cases.json": "cases.json",
+        "experiments/colab-fp32-date-ablation-2026-10-06/audit_rubric.json": "audit_rubric.json",
+        "scripts/colab_4bit_diagnostic.py": "colab_4bit_diagnostic.py",
+        "scripts/colab_fp32_dates_cell.py": "colab_fp32_dates_cell.py",
+        "scripts/colab_fp32_long.py": "colab_fp32_long.py",
+        "scripts/colab_fp32_probe.py": "colab_fp32_probe.py",
+        "scripts/colab_layer_replay.py": "colab_layer_replay.py",
+        "scripts/colab_notebook_process.py": "colab_notebook_process.py",
+        "scripts/colab_quantization.py": "colab_quantization.py",
+        "scripts/verify_evidence.py": "verify_evidence.py"
+      },
+      "id": "colab-fp32-date-ablation-2026-10-06",
+      "result_member": "date_ablation_run.json",
+      "baseline_archive": "evidence/colab/semantic/colab-fp32-semantic-2026-10-06.zip",
+      "baseline_archive_sha256": "d0ca5248c7b3879356c30d7935e52761308efbd93d2eefda33ee8bf8632a932a",
+      "stored_result": {
+        "outcome": "date_ablation_complete",
+        "planned_records": 72,
+        "completed_records": 72,
+        "unattempted_records": 0,
+        "total_forward_calls_attempted": 1088,
+        "observed_tensor_events": 346816,
+        "observed_cache_events": 134656,
+        "packed_state_unchanged_after_attempt": true,
+        "first_bad_activation": null,
+        "first_wrong_dtype": null,
+        "scoring_performed": false,
+        "historical_suite_run": false
+      },
+      "annotation_counts": {
+        "dates_absent": {
+          "false_premise": {
+            "corrected_explicit": 21,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 1,
+            "not_corrected": 2,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "neutral_control": {
+            "correct": 12,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "dates_present": {
+          "false_premise": {
+            "corrected_explicit": 9,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 7,
+            "not_corrected": 8,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "neutral_control": {
+            "correct": 12,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "sender_checksum_received_and_matched": true,
+      "report": "docs/colab_date_ablation/2026-10-06/post_run_report.md",
+      "report_sha256": "73e5f185d98c47fcaa631735703af0a988963f26608e237906849f7d96e7393d",
+      "annotations": "docs/colab_date_ablation/2026-10-06/semantic_annotations.json",
+      "annotations_sha256": "3a923533b7d3c0f29b9a2a5dc46827416a337e1729923d937db9d19a6d2b8ab6",
+      "paired_comparison": "docs/colab_date_ablation/2026-10-06/paired_comparison.json",
+      "paired_comparison_sha256": "8b42ce51e9da16184468d6916b5e59d22269cbbb3eae1244fde023146c42b37e",
+      "audit_metadata": "docs/colab_date_ablation/2026-10-06/integrity.json",
+      "audit_metadata_sha256": "912c2818ef5bb8f8ec1d101d8cc64096440414d5cf418f6e8e7cd2365baac46c"
+    }
+  ]
+}

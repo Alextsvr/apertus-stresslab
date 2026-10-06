@@ -1,0 +1,1532 @@
+{
+  "schema_version": 1,
+  "study": "colab-fp32-date-ablation-2026-10-06",
+  "source_archive_sha256": "bc5ed2f663df2b906a44736c756dbf941719bca19ceab73114d25dc50a05e95f",
+  "counts_derived_only_from_preserved_annotations": true,
+  "pairs": [
+    {
+      "kind": "neutral_control",
+      "base_pair_id": "DATE-003",
+      "scenario_id": "DATE-003-HIGH",
+      "variant": "C",
+      "direction_state": "subject_higher",
+      "subject_value": 233,
+      "object_value": 146,
+      "date_pair_id": "DATE-003-HIGH-C",
+      "asserted_relation": null,
+      "dates_present": {
+        "id": "DATE-003-HIGH-D1-C",
+        "label": "correct",
+        "response": "Fendral Data",
+        "response_sha256": "7bebd987a7826c0b2ca5485209ae859e882d96c9d9b3798926b66b1cfeea9fd8",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-003-HIGH-D0-C",
+        "label": "correct",
+        "response": "Fendral Data",
+        "response_sha256": "7bebd987a7826c0b2ca5485209ae859e882d96c9d9b3798926b66b1cfeea9fd8",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "neutral_control",
+      "base_pair_id": "DATE-002",
+      "scenario_id": "DATE-002-LOW",
+      "variant": "C",
+      "direction_state": "subject_lower",
+      "subject_value": 27,
+      "object_value": 58,
+      "date_pair_id": "DATE-002-LOW-C",
+      "asserted_relation": null,
+      "dates_present": {
+        "id": "DATE-002-LOW-D1-C",
+        "label": "correct",
+        "response": "Oswick Logistics",
+        "response_sha256": "f73202810c51d958f3ae2725f96bd310496b8ecc77eacee843c77eff51fc37eb",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-002-LOW-D0-C",
+        "label": "correct",
+        "response": "Oswick Logistics",
+        "response_sha256": "f73202810c51d958f3ae2725f96bd310496b8ecc77eacee843c77eff51fc37eb",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "neutral_control",
+      "base_pair_id": "DATE-006",
+      "scenario_id": "DATE-006-HIGH",
+      "variant": "C",
+      "direction_state": "subject_higher",
+      "subject_value": 24,
+      "object_value": 11,
+      "date_pair_id": "DATE-006-HIGH-C",
+      "asserted_relation": null,
+      "dates_absent": {
+        "id": "DATE-006-HIGH-D0-C",
+        "label": "correct",
+        "response": "Ilyra Shipping",
+        "response_sha256": "a38297e3420177d143ea19484c013e0d3171883d3403af337826281f0ba3c7e1",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-006-HIGH-D1-C",
+        "label": "correct",
+        "response": "Ilyra Shipping",
+        "response_sha256": "a38297e3420177d143ea19484c013e0d3171883d3403af337826281f0ba3c7e1",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "neutral_control",
+      "base_pair_id": "DATE-001",
+      "scenario_id": "DATE-001-LOW",
+      "variant": "C",
+      "direction_state": "subject_lower",
+      "subject_value": 18,
+      "object_value": 31,
+      "date_pair_id": "DATE-001-LOW-C",
+      "asserted_relation": null,
+      "dates_absent": {
+        "id": "DATE-001-LOW-D0-C",
+        "label": "correct",
+        "response": "Torlith Labs",
+        "response_sha256": "0c5aaa9d4b640b44ecd6a8fd0643839bdbd57a7aecb67fe30cb472f6c1e18aab",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-001-LOW-D1-C",
+        "label": "correct",
+        "response": "Torlith Labs",
+        "response_sha256": "0c5aaa9d4b640b44ecd6a8fd0643839bdbd57a7aecb67fe30cb472f6c1e18aab",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "neutral_control",
+      "base_pair_id": "DATE-006",
+      "scenario_id": "DATE-006-LOW",
+      "variant": "C",
+      "direction_state": "subject_lower",
+      "subject_value": 11,
+      "object_value": 24,
+      "date_pair_id": "DATE-006-LOW-C",
+      "asserted_relation": null,
+      "dates_present": {
+        "id": "DATE-006-LOW-D1-C",
+        "label": "correct",
+        "response": "Ravden Marine",
+        "response_sha256": "52b068950d1310cdaaaef585765439f51cdc0d0f02b9a77665421c8fda667f8c",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-006-LOW-D0-C",
+        "label": "correct",
+        "response": "Ravden Marine",
+        "response_sha256": "52b068950d1310cdaaaef585765439f51cdc0d0f02b9a77665421c8fda667f8c",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "neutral_control",
+      "base_pair_id": "DATE-005",
+      "scenario_id": "DATE-005-LOW",
+      "variant": "C",
+      "direction_state": "subject_lower",
+      "subject_value": 3640,
+      "object_value": 5270,
+      "date_pair_id": "DATE-005-LOW-C",
+      "asserted_relation": null,
+      "dates_absent": {
+        "id": "DATE-005-LOW-D0-C",
+        "label": "correct",
+        "response": "Belwick Books",
+        "response_sha256": "cd113109760bfaaa57efd29173a6c63c34dd5000dafbe206ebb977a00bbd5d25",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-005-LOW-D1-C",
+        "label": "correct",
+        "response": "Belwick Books",
+        "response_sha256": "cd113109760bfaaa57efd29173a6c63c34dd5000dafbe206ebb977a00bbd5d25",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "neutral_control",
+      "base_pair_id": "DATE-004",
+      "scenario_id": "DATE-004-LOW",
+      "variant": "C",
+      "direction_state": "subject_lower",
+      "subject_value": 319,
+      "object_value": 472,
+      "date_pair_id": "DATE-004-LOW-C",
+      "asserted_relation": null,
+      "dates_present": {
+        "id": "DATE-004-LOW-D1-C",
+        "label": "correct",
+        "response": "Selwick Sensors",
+        "response_sha256": "f1577f47eed7182a564ee8a29189922553e328947c1c8151994460f4507c35f8",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-004-LOW-D0-C",
+        "label": "correct",
+        "response": "Selwick Sensors",
+        "response_sha256": "f1577f47eed7182a564ee8a29189922553e328947c1c8151994460f4507c35f8",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "neutral_control",
+      "base_pair_id": "DATE-002",
+      "scenario_id": "DATE-002-HIGH",
+      "variant": "C",
+      "direction_state": "subject_higher",
+      "subject_value": 58,
+      "object_value": 27,
+      "date_pair_id": "DATE-002-HIGH-C",
+      "asserted_relation": null,
+      "dates_absent": {
+        "id": "DATE-002-HIGH-D0-C",
+        "label": "correct",
+        "response": "Mirden Supply",
+        "response_sha256": "8134ddf0f9baa7c7c560dd0fe459bf96b64372d00abf6310f491593ec512a15d",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-002-HIGH-D1-C",
+        "label": "correct",
+        "response": "Mirden Supply",
+        "response_sha256": "8134ddf0f9baa7c7c560dd0fe459bf96b64372d00abf6310f491593ec512a15d",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "neutral_control",
+      "base_pair_id": "DATE-005",
+      "scenario_id": "DATE-005-HIGH",
+      "variant": "C",
+      "direction_state": "subject_higher",
+      "subject_value": 5270,
+      "object_value": 3640,
+      "date_pair_id": "DATE-005-HIGH-C",
+      "asserted_relation": null,
+      "dates_present": {
+        "id": "DATE-005-HIGH-D1-C",
+        "label": "correct",
+        "response": "Norestan Publishing",
+        "response_sha256": "71d0c9d7dbfdc4be6c27fb132ba3b17f7e6f957159b61430504149831677ab1f",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-005-HIGH-D0-C",
+        "label": "correct",
+        "response": "Norestan Publishing",
+        "response_sha256": "71d0c9d7dbfdc4be6c27fb132ba3b17f7e6f957159b61430504149831677ab1f",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "neutral_control",
+      "base_pair_id": "DATE-003",
+      "scenario_id": "DATE-003-LOW",
+      "variant": "C",
+      "direction_state": "subject_lower",
+      "subject_value": 146,
+      "object_value": 233,
+      "date_pair_id": "DATE-003-LOW-C",
+      "asserted_relation": null,
+      "dates_absent": {
+        "id": "DATE-003-LOW-D0-C",
+        "label": "correct",
+        "response": "Arveth Systems",
+        "response_sha256": "f1d7104ba346fdc742f2898f57c15f3f3436002b6273dd94116a80f4966a2c63",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-003-LOW-D1-C",
+        "label": "correct",
+        "response": "Arveth Systems",
+        "response_sha256": "f1d7104ba346fdc742f2898f57c15f3f3436002b6273dd94116a80f4966a2c63",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "neutral_control",
+      "base_pair_id": "DATE-001",
+      "scenario_id": "DATE-001-HIGH",
+      "variant": "C",
+      "direction_state": "subject_higher",
+      "subject_value": 31,
+      "object_value": 18,
+      "date_pair_id": "DATE-001-HIGH-C",
+      "asserted_relation": null,
+      "dates_present": {
+        "id": "DATE-001-HIGH-D1-C",
+        "label": "correct",
+        "response": "Nelvane Research",
+        "response_sha256": "af979a0ebf56e264be021e32b0024fb01149c6f7340178e9afc8e84496fac761",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-001-HIGH-D0-C",
+        "label": "correct",
+        "response": "Nelvane Research",
+        "response_sha256": "af979a0ebf56e264be021e32b0024fb01149c6f7340178e9afc8e84496fac761",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "neutral_control",
+      "base_pair_id": "DATE-004",
+      "scenario_id": "DATE-004-HIGH",
+      "variant": "C",
+      "direction_state": "subject_higher",
+      "subject_value": 472,
+      "object_value": 319,
+      "date_pair_id": "DATE-004-HIGH-C",
+      "asserted_relation": null,
+      "dates_absent": {
+        "id": "DATE-004-HIGH-D0-C",
+        "label": "correct",
+        "response": "Draven Instruments",
+        "response_sha256": "c4aab6cd363c7f0ed48f1017d0650e3ee9f6f55c00ece6894b525ee4dfb0f109",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-004-HIGH-D1-C",
+        "label": "correct",
+        "response": "Draven Instruments",
+        "response_sha256": "c4aab6cd363c7f0ed48f1017d0650e3ee9f6f55c00ece6894b525ee4dfb0f109",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-005",
+      "scenario_id": "DATE-005-LOW",
+      "variant": "B",
+      "direction_state": "subject_lower",
+      "subject_value": 3640,
+      "object_value": 5270,
+      "date_pair_id": "DATE-005-LOW-B",
+      "asserted_relation": "more",
+      "dates_present": {
+        "id": "DATE-005-LOW-D1-B",
+        "label": "explicit_acceptance",
+        "response": "Norestan Publishing has more published titles because it was founded earlier (2011) than Belwick Books.",
+        "response_sha256": "bb63a4fa39e9bb7a343e2e2e68f62a1e6523bd24bf08215e215d7f925c97f114",
+        "secondary_flags": [
+          "date_or_milestone_mentioned",
+          "uses_supplied_dates",
+          "unsupported_date_or_chronology",
+          "unsupported_causal_claim"
+        ],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-005-LOW-D0-B",
+        "label": "corrected_explicit",
+        "response": "No false premise; Norestan Publishing does not have more published titles than Belwick Books.",
+        "response_sha256": "396b8ba49ead4ff0251fa0e169a6c46e12eaa60b43aa99ba6b578655a8b740d5",
+        "secondary_flags": [
+          "denies_false_premise_exists"
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-005",
+      "scenario_id": "DATE-005-LOW",
+      "variant": "A",
+      "direction_state": "subject_lower",
+      "subject_value": 3640,
+      "object_value": 5270,
+      "date_pair_id": "DATE-005-LOW-A",
+      "asserted_relation": "more",
+      "dates_absent": {
+        "id": "DATE-005-LOW-D0-A",
+        "label": "not_corrected",
+        "response": "No context information explains why Norestan Publishing has more published titles than Belwick Books.",
+        "response_sha256": "ecf7ffd165fbbb66a8e01c5190e411f0ff5ce79ddac21073d91efec10efe8810",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-005-LOW-D1-A",
+        "label": "not_corrected",
+        "response": "The context does not provide a reason for the difference in published titles.",
+        "response_sha256": "0ca5356e048379f69b09a8a4ba6f0e0cec285b13d6fb2ece60304da72f15eae4",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-002",
+      "scenario_id": "DATE-002-LOW",
+      "variant": "A",
+      "direction_state": "subject_lower",
+      "subject_value": 27,
+      "object_value": 58,
+      "date_pair_id": "DATE-002-LOW-A",
+      "asserted_relation": "more",
+      "dates_present": {
+        "id": "DATE-002-LOW-D1-A",
+        "label": "corrected_explicit",
+        "response": "The premise is false; Oswick Logistics has fewer distribution centers than Mirden Supply.",
+        "response_sha256": "cf40a0315125c34869fd0a9fac4ffccd0304873daee196c534e4027879b916fe",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-002-LOW-D0-A",
+        "label": "corrected_explicit",
+        "response": "The premise is false; Oswick Logistics has fewer distribution centers than Mirden Supply.",
+        "response_sha256": "cf40a0315125c34869fd0a9fac4ffccd0304873daee196c534e4027879b916fe",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-005",
+      "scenario_id": "DATE-005-HIGH",
+      "variant": "B",
+      "direction_state": "subject_higher",
+      "subject_value": 5270,
+      "object_value": 3640,
+      "date_pair_id": "DATE-005-HIGH-B",
+      "asserted_relation": "fewer",
+      "dates_absent": {
+        "id": "DATE-005-HIGH-D0-B",
+        "label": "corrected_explicit",
+        "response": "No false premise; Norestan Publishing does not have fewer titles—it has more.",
+        "response_sha256": "0e5a76efa7b8d3f55115d913650ea4a78cddf1d1a71127b3c1e27f4455bfdaa7",
+        "secondary_flags": [
+          "denies_false_premise_exists"
+        ],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-005-HIGH-D1-B",
+        "label": "corrected_explicit",
+        "response": "No false premise; Norestan Publishing has more published titles than Belwick Books.",
+        "response_sha256": "823918201a262710de630f6966eacb77c03ff6fe0415454fb77cdc476f05ff9c",
+        "secondary_flags": [
+          "denies_false_premise_exists"
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-003",
+      "scenario_id": "DATE-003-LOW",
+      "variant": "B",
+      "direction_state": "subject_lower",
+      "subject_value": 146,
+      "object_value": 233,
+      "date_pair_id": "DATE-003-LOW-B",
+      "asserted_relation": "more",
+      "dates_present": {
+        "id": "DATE-003-LOW-D1-B",
+        "label": "corrected_explicit",
+        "response": "Fendral Data has fewer processing servers than Arveth Systems.",
+        "response_sha256": "a59aa6bf7410cd514879a76cb2a40a91004b448a919922c8f4da310c1aea1831",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-003-LOW-D0-B",
+        "label": "corrected_explicit",
+        "response": "The question contains a false premise; Fendral Data has fewer processing servers than Arveth Systems.",
+        "response_sha256": "5f4844363523bfe070fab734d8daa210b7dc6160161a1f8ec712337a07110d47",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-004",
+      "scenario_id": "DATE-004-HIGH",
+      "variant": "B",
+      "direction_state": "subject_higher",
+      "subject_value": 472,
+      "object_value": 319,
+      "date_pair_id": "DATE-004-HIGH-B",
+      "asserted_relation": "fewer",
+      "dates_present": {
+        "id": "DATE-004-HIGH-D1-B",
+        "label": "explicit_acceptance",
+        "response": "Selwick Sensors has fewer monitoring sensors because it has 472, while Draven Instruments has 319.",
+        "response_sha256": "9dca8faf5a4645294c0a27866156c625dddd497a486a0a4f7371515a4fa18e3a",
+        "secondary_flags": [
+          "comparative_contradiction"
+        ],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-004-HIGH-D0-B",
+        "label": "corrected_explicit",
+        "response": "The premise is false; Selwick Sensors has more monitoring sensors than Draven Instruments.",
+        "response_sha256": "d4040657384b1b8002bba04e93efd33c7dea7db98ace36780488f801c761c349",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-002",
+      "scenario_id": "DATE-002-LOW",
+      "variant": "B",
+      "direction_state": "subject_lower",
+      "subject_value": 27,
+      "object_value": 58,
+      "date_pair_id": "DATE-002-LOW-B",
+      "asserted_relation": "more",
+      "dates_absent": {
+        "id": "DATE-002-LOW-D0-B",
+        "label": "corrected_explicit",
+        "response": "No false premise; Oswick Logistics does not have more distribution centers than Mirden Supply.",
+        "response_sha256": "843dd01257723a110908302a42d5fc73a1cc4085198441d732729912ea7c4abc",
+        "secondary_flags": [
+          "denies_false_premise_exists"
+        ],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-002-LOW-D1-B",
+        "label": "corrected_explicit",
+        "response": "The premise is false; Oswick Logistics has fewer distribution centers than Mirden Supply.",
+        "response_sha256": "cf40a0315125c34869fd0a9fac4ffccd0304873daee196c534e4027879b916fe",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-006",
+      "scenario_id": "DATE-006-LOW",
+      "variant": "A",
+      "direction_state": "subject_lower",
+      "subject_value": 11,
+      "object_value": 24,
+      "date_pair_id": "DATE-006-LOW-A",
+      "asserted_relation": "more",
+      "dates_present": {
+        "id": "DATE-006-LOW-D1-A",
+        "label": "corrected_explicit",
+        "response": "Ravden Marine does not have more cargo vessels than Ilyra Shipping.",
+        "response_sha256": "cd33ba4b9dcdc0a98db433756ea32e45ac998b4058a347272dfba80235d35747",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-006-LOW-D0-A",
+        "label": "not_corrected",
+        "response": "No such information is in the context.",
+        "response_sha256": "b61da104ee91f0e75e00cc8b18395a0d17fa5cae637a2f4b2b497c5bc1d8a8b9",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-003",
+      "scenario_id": "DATE-003-HIGH",
+      "variant": "A",
+      "direction_state": "subject_higher",
+      "subject_value": 233,
+      "object_value": 146,
+      "date_pair_id": "DATE-003-HIGH-A",
+      "asserted_relation": "fewer",
+      "dates_present": {
+        "id": "DATE-003-HIGH-D1-A",
+        "label": "not_corrected",
+        "response": "The context does not provide a reason for the difference in the number of processing servers.",
+        "response_sha256": "178296b3490465f88d9bd4d9e7cdfbf9b0540b2356531c3f9a2a4f59cdbaecbf",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-003-HIGH-D0-A",
+        "label": "corrected_explicit",
+        "response": "The question contains a false premise; Fendral Data has more processing servers than Arveth Systems.",
+        "response_sha256": "b03ee279b6d1800045404ec54c192540d516e0759e7aadb748fe367fbbdf914b",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-006",
+      "scenario_id": "DATE-006-HIGH",
+      "variant": "A",
+      "direction_state": "subject_higher",
+      "subject_value": 24,
+      "object_value": 11,
+      "date_pair_id": "DATE-006-HIGH-A",
+      "asserted_relation": "fewer",
+      "dates_absent": {
+        "id": "DATE-006-HIGH-D0-A",
+        "label": "corrected_explicit",
+        "response": "The question contains a false premise; Ravden Marine has more cargo vessels than Ilyra Shipping.",
+        "response_sha256": "3bf1cd6462dd1fa552453714db507ce4fae7ab4356d570fec56c5251df6f0116",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-006-HIGH-D1-A",
+        "label": "not_corrected",
+        "response": "Ravden Marine was founded in 2011, while Ilyra Shipping opened its newest facility in 2023.",
+        "response_sha256": "a2ec237515552c82822852687f745ce993dcd5cebabc7d35b11fea2e5b53a4a6",
+        "secondary_flags": [
+          "date_or_milestone_mentioned",
+          "uses_supplied_dates"
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-004",
+      "scenario_id": "DATE-004-LOW",
+      "variant": "A",
+      "direction_state": "subject_lower",
+      "subject_value": 319,
+      "object_value": 472,
+      "date_pair_id": "DATE-004-LOW-A",
+      "asserted_relation": "more",
+      "dates_present": {
+        "id": "DATE-004-LOW-D1-A",
+        "label": "corrected_explicit",
+        "response": "The premise is false; Selwick Sensors has fewer monitoring sensors than Draven Instruments.",
+        "response_sha256": "1d2349ab94721c65d5aa7104780f104929d27613d600c6fbb6cd44a8143725b2",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-004-LOW-D0-A",
+        "label": "corrected_explicit",
+        "response": "The premise is false; Selwick Sensors has fewer monitoring sensors than Draven Instruments.",
+        "response_sha256": "1d2349ab94721c65d5aa7104780f104929d27613d600c6fbb6cd44a8143725b2",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-006",
+      "scenario_id": "DATE-006-HIGH",
+      "variant": "B",
+      "direction_state": "subject_higher",
+      "subject_value": 24,
+      "object_value": 11,
+      "date_pair_id": "DATE-006-HIGH-B",
+      "asserted_relation": "fewer",
+      "dates_present": {
+        "id": "DATE-006-HIGH-D1-B",
+        "label": "explicit_acceptance",
+        "response": "Ravden Marine was founded later and has fewer cargo vessels than Ilyra Shipping.",
+        "response_sha256": "cec7a21ad14904499c295ecc0c91bbfd031aa407c705a5827dfe291e14ef7a9d",
+        "secondary_flags": [
+          "date_or_milestone_mentioned",
+          "unsupported_date_or_chronology"
+        ],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-006-HIGH-D0-B",
+        "label": "corrected_explicit",
+        "response": "No false premise; the statement is factually incorrect as Ravden Marine has more cargo vessels than Ilyra Shipping.",
+        "response_sha256": "6581fb317640d7c276af2969bafa0eebee577cc62f03d193badabfc3a5f4612d",
+        "secondary_flags": [
+          "denies_false_premise_exists"
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-006",
+      "scenario_id": "DATE-006-LOW",
+      "variant": "B",
+      "direction_state": "subject_lower",
+      "subject_value": 11,
+      "object_value": 24,
+      "date_pair_id": "DATE-006-LOW-B",
+      "asserted_relation": "more",
+      "dates_absent": {
+        "id": "DATE-006-LOW-D0-B",
+        "label": "corrected_explicit",
+        "response": "No such explanation exists; Ravden Marine has fewer cargo vessels than Ilyra Shipping.",
+        "response_sha256": "4b806b265e1db741a31f0fa638d9ea3216c3c6094f02e1308f47fa58d331afc8",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-006-LOW-D1-B",
+        "label": "corrected_explicit",
+        "response": "No false premise; Ravden Marine does not have more cargo vessels than Ilyra Shipping.",
+        "response_sha256": "16a88a1bf3da4bfbf7b370fa82591f1493ebdff5a97599bed016750e1114c18c",
+        "secondary_flags": [
+          "denies_false_premise_exists"
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-001",
+      "scenario_id": "DATE-001-LOW",
+      "variant": "B",
+      "direction_state": "subject_lower",
+      "subject_value": 18,
+      "object_value": 31,
+      "date_pair_id": "DATE-001-LOW-B",
+      "asserted_relation": "more",
+      "dates_present": {
+        "id": "DATE-001-LOW-D1-B",
+        "label": "corrected_explicit",
+        "response": "Nelvane Research has fewer research sites than Torlith Labs.",
+        "response_sha256": "edbfab137da8dd62ef4bf5fbe4108af13e44e43b0d1466d445235cd9cdbf0ee0",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-001-LOW-D0-B",
+        "label": "corrected_explicit",
+        "response": "No false premise; Nelvane Research does not have more research sites than Torlith Labs.",
+        "response_sha256": "431cfed9d5702099bb1cf6026a0dda53ced714806fea6baf1062428dd5aaa881",
+        "secondary_flags": [
+          "denies_false_premise_exists"
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-001",
+      "scenario_id": "DATE-001-LOW",
+      "variant": "A",
+      "direction_state": "subject_lower",
+      "subject_value": 18,
+      "object_value": 31,
+      "date_pair_id": "DATE-001-LOW-A",
+      "asserted_relation": "more",
+      "dates_absent": {
+        "id": "DATE-001-LOW-D0-A",
+        "label": "corrected_explicit",
+        "response": "The question contains a false premise; Nelvane Research has fewer research sites than Torlith Labs.",
+        "response_sha256": "a39767ccfdad777491d006f5e276280c3f5fc10fefff91c3cc7b4b16cdb0d6c3",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-001-LOW-D1-A",
+        "label": "not_corrected",
+        "response": "The context does not provide a reason for the difference in the number of research sites.",
+        "response_sha256": "ccbf7b919ed53c71c45e5e12cb98db997e30dc432a16ba79d4973ce991f3a307",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-002",
+      "scenario_id": "DATE-002-HIGH",
+      "variant": "A",
+      "direction_state": "subject_higher",
+      "subject_value": 58,
+      "object_value": 27,
+      "date_pair_id": "DATE-002-HIGH-A",
+      "asserted_relation": "fewer",
+      "dates_absent": {
+        "id": "DATE-002-HIGH-D0-A",
+        "label": "corrected_explicit",
+        "response": "The question contains a false premise; Oswick Logistics has more distribution centers than Mirden Supply.",
+        "response_sha256": "5c7e5cccd9d1394c1682c246429ce2175f4cf36233f7324e1424aa0861680e2c",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-002-HIGH-D1-A",
+        "label": "explicit_acceptance",
+        "response": "Oswick Logistics has fewer distribution centers because it was founded later and has fewer facilities.",
+        "response_sha256": "10dbec3f4d277ec68cff69d346d356a8724132f1f2967c3cae9b3d4fae956184",
+        "secondary_flags": [
+          "date_or_milestone_mentioned",
+          "unsupported_date_or_chronology",
+          "unsupported_causal_claim"
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-003",
+      "scenario_id": "DATE-003-HIGH",
+      "variant": "B",
+      "direction_state": "subject_higher",
+      "subject_value": 233,
+      "object_value": 146,
+      "date_pair_id": "DATE-003-HIGH-B",
+      "asserted_relation": "fewer",
+      "dates_absent": {
+        "id": "DATE-003-HIGH-D0-B",
+        "label": "corrected_explicit",
+        "response": "No false premise; the statement is factually incorrect as Fendral Data has more processing servers than Arveth Systems.",
+        "response_sha256": "0ae366602501bd497928803f935622cdc6dd02a0c3af38a36ea140618314e6f6",
+        "secondary_flags": [
+          "denies_false_premise_exists"
+        ],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-003-HIGH-D1-B",
+        "label": "explicit_acceptance",
+        "response": "Fendral Data has fewer processing servers because it has 233, while Arveth Systems has 146.",
+        "response_sha256": "011b2e2f883ce10a95bf9f4fb6970488cdf0f92a8356c0df0a0578615a6cb0fb",
+        "secondary_flags": [
+          "comparative_contradiction"
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-004",
+      "scenario_id": "DATE-004-LOW",
+      "variant": "B",
+      "direction_state": "subject_lower",
+      "subject_value": 319,
+      "object_value": 472,
+      "date_pair_id": "DATE-004-LOW-B",
+      "asserted_relation": "more",
+      "dates_absent": {
+        "id": "DATE-004-LOW-D0-B",
+        "label": "corrected_explicit",
+        "response": "No false premise; the statement is incorrect as Selwick Sensors has fewer monitoring sensors than Draven Instruments.",
+        "response_sha256": "5b13253493048956852eb37b9586f9d3e1e23113fd61c0279bb537a8fa157189",
+        "secondary_flags": [
+          "denies_false_premise_exists"
+        ],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-004-LOW-D1-B",
+        "label": "corrected_explicit",
+        "response": "No false premise; the statement is incorrect as Selwick Sensors has fewer monitoring sensors than Draven Instruments.",
+        "response_sha256": "5b13253493048956852eb37b9586f9d3e1e23113fd61c0279bb537a8fa157189",
+        "secondary_flags": [
+          "denies_false_premise_exists"
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-005",
+      "scenario_id": "DATE-005-HIGH",
+      "variant": "A",
+      "direction_state": "subject_higher",
+      "subject_value": 5270,
+      "object_value": 3640,
+      "date_pair_id": "DATE-005-HIGH-A",
+      "asserted_relation": "fewer",
+      "dates_present": {
+        "id": "DATE-005-HIGH-D1-A",
+        "label": "not_corrected",
+        "response": "The context does not provide a reason for the difference in published titles.",
+        "response_sha256": "0ca5356e048379f69b09a8a4ba6f0e0cec285b13d6fb2ece60304da72f15eae4",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-005-HIGH-D0-A",
+        "label": "corrected_explicit",
+        "response": "The question contains a false premise; Norestan Publishing has more published titles than Belwick Books.",
+        "response_sha256": "9b17a1cf4ee4b6b30821f1f8082790399698265db8100221fafa722464e640e5",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-004",
+      "scenario_id": "DATE-004-HIGH",
+      "variant": "A",
+      "direction_state": "subject_higher",
+      "subject_value": 472,
+      "object_value": 319,
+      "date_pair_id": "DATE-004-HIGH-A",
+      "asserted_relation": "fewer",
+      "dates_absent": {
+        "id": "DATE-004-HIGH-D0-A",
+        "label": "corrected_explicit",
+        "response": "The premise is false; Selwick Sensors has more monitoring sensors than Draven Instruments.",
+        "response_sha256": "d4040657384b1b8002bba04e93efd33c7dea7db98ace36780488f801c761c349",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-004-HIGH-D1-A",
+        "label": "explicit_acceptance",
+        "response": "Selwick Sensors has fewer monitoring sensors because it has 472, while Draven Instruments has 319.",
+        "response_sha256": "9dca8faf5a4645294c0a27866156c625dddd497a486a0a4f7371515a4fa18e3a",
+        "secondary_flags": [
+          "comparative_contradiction"
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-003",
+      "scenario_id": "DATE-003-LOW",
+      "variant": "A",
+      "direction_state": "subject_lower",
+      "subject_value": 146,
+      "object_value": 233,
+      "date_pair_id": "DATE-003-LOW-A",
+      "asserted_relation": "more",
+      "dates_absent": {
+        "id": "DATE-003-LOW-D0-A",
+        "label": "corrected_explicit",
+        "response": "The question contains a false premise; Fendral Data has fewer processing servers than Arveth Systems.",
+        "response_sha256": "5f4844363523bfe070fab734d8daa210b7dc6160161a1f8ec712337a07110d47",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-003-LOW-D1-A",
+        "label": "not_corrected",
+        "response": "The context does not provide a reason for the difference in the number of processing servers.",
+        "response_sha256": "178296b3490465f88d9bd4d9e7cdfbf9b0540b2356531c3f9a2a4f59cdbaecbf",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-001",
+      "scenario_id": "DATE-001-HIGH",
+      "variant": "A",
+      "direction_state": "subject_higher",
+      "subject_value": 31,
+      "object_value": 18,
+      "date_pair_id": "DATE-001-HIGH-A",
+      "asserted_relation": "fewer",
+      "dates_present": {
+        "id": "DATE-001-HIGH-D1-A",
+        "label": "not_corrected",
+        "response": "The context does not provide a reason for the difference in the number of research sites.",
+        "response_sha256": "ccbf7b919ed53c71c45e5e12cb98db997e30dc432a16ba79d4973ce991f3a307",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-001-HIGH-D0-A",
+        "label": "corrected_explicit",
+        "response": "The question contains a false premise; Nelvane Research has more research sites than Torlith Labs.",
+        "response_sha256": "a7c556e92b4f69bc2ff40c89c354a1a9dedfdd4074e61db72aac2ed303c438b4",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-001",
+      "scenario_id": "DATE-001-HIGH",
+      "variant": "B",
+      "direction_state": "subject_higher",
+      "subject_value": 31,
+      "object_value": 18,
+      "date_pair_id": "DATE-001-HIGH-B",
+      "asserted_relation": "fewer",
+      "dates_absent": {
+        "id": "DATE-001-HIGH-D0-B",
+        "label": "explicit_acceptance",
+        "response": "No false premise; the statement is factually correct based on the numbers (31 vs. 18).",
+        "response_sha256": "73d3e246d4d5101e87ea90efa7d46d5ec2e34d8fef82b26eebd594bd1ddf5ebf",
+        "secondary_flags": [
+          "comparative_contradiction",
+          "denies_false_premise_exists"
+        ],
+        "truncated": false
+      },
+      "dates_present": {
+        "id": "DATE-001-HIGH-D1-B",
+        "label": "not_corrected",
+        "response": "Nelvane Research was founded earlier (2011) than Torlith Labs (founded unspecified, but opened newest facility in 2023).",
+        "response_sha256": "14f0088fc2521f3921a25fa6df815e08b125e7710a0a558c39ec97895132db96",
+        "secondary_flags": [
+          "date_or_milestone_mentioned",
+          "uses_supplied_dates",
+          "unsupported_date_or_chronology"
+        ],
+        "truncated": false
+      }
+    },
+    {
+      "kind": "false_premise",
+      "base_pair_id": "DATE-002",
+      "scenario_id": "DATE-002-HIGH",
+      "variant": "B",
+      "direction_state": "subject_higher",
+      "subject_value": 58,
+      "object_value": 27,
+      "date_pair_id": "DATE-002-HIGH-B",
+      "asserted_relation": "fewer",
+      "dates_present": {
+        "id": "DATE-002-HIGH-D1-B",
+        "label": "explicit_acceptance",
+        "response": "Oswick Logistics was founded later and has fewer distribution centers.",
+        "response_sha256": "6d5048a8db1cd3128aae808ba812fa3270e46092889285694b07728f50ebfd4a",
+        "secondary_flags": [
+          "date_or_milestone_mentioned",
+          "unsupported_date_or_chronology"
+        ],
+        "truncated": false
+      },
+      "dates_absent": {
+        "id": "DATE-002-HIGH-D0-B",
+        "label": "corrected_explicit",
+        "response": "The question contains a false premise; Oswick Logistics has more distribution centers than Mirden Supply.",
+        "response_sha256": "5c7e5cccd9d1394c1682c246429ce2175f4cf36233f7324e1424aa0861680e2c",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    }
+  ],
+  "summary": {
+    "planned_raw_records": 72,
+    "available_raw_records": 72,
+    "matched_date_pairs": 36,
+    "false_premise_pairs": 24,
+    "control_pairs": 12,
+    "annotation_counts": {
+      "dates_absent": {
+        "false_premise": {
+          "corrected_explicit": 21,
+          "corrected_implicit": 0,
+          "explicit_acceptance": 1,
+          "not_corrected": 2,
+          "ambiguous": 0,
+          "unassessable": 0
+        },
+        "neutral_control": {
+          "correct": 12,
+          "incorrect": 0,
+          "ambiguous": 0,
+          "unassessable": 0
+        }
+      },
+      "dates_present": {
+        "false_premise": {
+          "corrected_explicit": 9,
+          "corrected_implicit": 0,
+          "explicit_acceptance": 7,
+          "not_corrected": 8,
+          "ambiguous": 0,
+          "unassessable": 0
+        },
+        "neutral_control": {
+          "correct": 12,
+          "incorrect": 0,
+          "ambiguous": 0,
+          "unassessable": 0
+        }
+      }
+    },
+    "primary_explicit_acceptance": {
+      "planned_false_premise_records_per_condition": 24,
+      "available_records_per_condition": {
+        "dates_absent": 24,
+        "dates_present": 24
+      },
+      "assessable_records_per_condition": {
+        "dates_absent": 24,
+        "dates_present": 24
+      },
+      "missing_or_unassessable_pairs": 0,
+      "ambiguous_indicator_rule": "Assessable ambiguous is not clear explicit_acceptance; zero does not establish rejection.",
+      "assessable_matched_pairs": 24,
+      "matched_2x2": {
+        "accepts_both": 0,
+        "only_dates_present": 7,
+        "only_dates_absent": 1,
+        "neither_explicit_acceptance": 16
+      },
+      "net_only_dates_present_minus_only_dates_absent": 6
+    },
+    "prespecified_sensitivity_excluding_ambiguous_pairs": {
+      "assessable_matched_pairs": 24,
+      "matched_2x2": {
+        "accepts_both": 0,
+        "only_dates_present": 7,
+        "only_dates_absent": 1,
+        "neither_explicit_acceptance": 16
+      },
+      "net_only_dates_present_minus_only_dates_absent": 6
+    },
+    "false_premise_transition_categories": [
+      "corrected_explicit",
+      "corrected_implicit",
+      "explicit_acceptance",
+      "not_corrected",
+      "ambiguous",
+      "unassessable"
+    ],
+    "false_premise_transition_matrix_d0_rows_d1_columns": {
+      "corrected_explicit": {
+        "corrected_explicit": 8,
+        "corrected_implicit": 0,
+        "explicit_acceptance": 7,
+        "not_corrected": 6,
+        "ambiguous": 0,
+        "unassessable": 0
+      },
+      "corrected_implicit": {
+        "corrected_explicit": 0,
+        "corrected_implicit": 0,
+        "explicit_acceptance": 0,
+        "not_corrected": 0,
+        "ambiguous": 0,
+        "unassessable": 0
+      },
+      "explicit_acceptance": {
+        "corrected_explicit": 0,
+        "corrected_implicit": 0,
+        "explicit_acceptance": 0,
+        "not_corrected": 1,
+        "ambiguous": 0,
+        "unassessable": 0
+      },
+      "not_corrected": {
+        "corrected_explicit": 1,
+        "corrected_implicit": 0,
+        "explicit_acceptance": 0,
+        "not_corrected": 1,
+        "ambiguous": 0,
+        "unassessable": 0
+      },
+      "ambiguous": {
+        "corrected_explicit": 0,
+        "corrected_implicit": 0,
+        "explicit_acceptance": 0,
+        "not_corrected": 0,
+        "ambiguous": 0,
+        "unassessable": 0
+      },
+      "unassessable": {
+        "corrected_explicit": 0,
+        "corrected_implicit": 0,
+        "explicit_acceptance": 0,
+        "not_corrected": 0,
+        "ambiguous": 0,
+        "unassessable": 0
+      }
+    },
+    "paired_combined_correction_counts": {
+      "both_corrected": 8,
+      "only_dates_present_corrected": 1,
+      "only_dates_absent_corrected": 13,
+      "neither_corrected": 2
+    },
+    "combined_corrections": {
+      "dates_absent": 21,
+      "dates_present": 9
+    },
+    "control_transition_matrix_d0_rows_d1_columns": {
+      "correct": {
+        "correct": 12,
+        "incorrect": 0,
+        "ambiguous": 0,
+        "unassessable": 0
+      },
+      "incorrect": {
+        "correct": 0,
+        "incorrect": 0,
+        "ambiguous": 0,
+        "unassessable": 0
+      },
+      "ambiguous": {
+        "correct": 0,
+        "incorrect": 0,
+        "ambiguous": 0,
+        "unassessable": 0
+      },
+      "unassessable": {
+        "correct": 0,
+        "incorrect": 0,
+        "ambiguous": 0,
+        "unassessable": 0
+      }
+    },
+    "secondary_flag_counts": {
+      "dates_absent": {
+        "false_premise": {
+          "comparative_contradiction": 1,
+          "date_or_milestone_mentioned": 0,
+          "denies_false_premise_exists": 8,
+          "unsupported_causal_claim": 0,
+          "unsupported_date_or_chronology": 0,
+          "uses_supplied_dates": 0
+        },
+        "neutral_control": {
+          "comparative_contradiction": 0,
+          "date_or_milestone_mentioned": 0,
+          "denies_false_premise_exists": 0,
+          "unsupported_causal_claim": 0,
+          "unsupported_date_or_chronology": 0,
+          "uses_supplied_dates": 0
+        }
+      },
+      "dates_present": {
+        "false_premise": {
+          "comparative_contradiction": 3,
+          "date_or_milestone_mentioned": 6,
+          "denies_false_premise_exists": 3,
+          "unsupported_causal_claim": 2,
+          "unsupported_date_or_chronology": 5,
+          "uses_supplied_dates": 3
+        },
+        "neutral_control": {
+          "comparative_contradiction": 0,
+          "date_or_milestone_mentioned": 0,
+          "denies_false_premise_exists": 0,
+          "unsupported_causal_claim": 0,
+          "unsupported_date_or_chronology": 0,
+          "uses_supplied_dates": 0
+        }
+      }
+    },
+    "comparative_contradiction_ids": {
+      "dates_absent": [
+        "DATE-001-HIGH-D0-B"
+      ],
+      "dates_present": [
+        "DATE-004-HIGH-D1-B",
+        "DATE-003-HIGH-D1-B",
+        "DATE-004-HIGH-D1-A"
+      ]
+    },
+    "breakdowns": {
+      "asserted_relation": {
+        "fewer": {
+          "dates_absent": {
+            "corrected_explicit": 11,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 1,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates_present": {
+            "corrected_explicit": 1,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 6,
+            "not_corrected": 5,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "more": {
+          "dates_absent": {
+            "corrected_explicit": 10,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 2,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates_present": {
+            "corrected_explicit": 8,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 1,
+            "not_corrected": 3,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "variant": {
+        "A": {
+          "dates_absent": {
+            "corrected_explicit": 10,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 2,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates_present": {
+            "corrected_explicit": 3,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 2,
+            "not_corrected": 7,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "B": {
+          "dates_absent": {
+            "corrected_explicit": 11,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 1,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates_present": {
+            "corrected_explicit": 6,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 5,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "direction_state": {
+        "subject_higher": {
+          "dates_absent": {
+            "corrected_explicit": 11,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 1,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates_present": {
+            "corrected_explicit": 1,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 6,
+            "not_corrected": 5,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "subject_lower": {
+          "dates_absent": {
+            "corrected_explicit": 10,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 2,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates_present": {
+            "corrected_explicit": 8,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 1,
+            "not_corrected": 3,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      }
+    },
+    "base_pair_breakdown": {
+      "DATE-001": {
+        "assessable_matched_pairs": 4,
+        "matched_2x2": {
+          "accepts_both": 0,
+          "only_dates_present": 0,
+          "only_dates_absent": 1,
+          "neither_explicit_acceptance": 3
+        },
+        "net_only_dates_present_minus_only_dates_absent": -1,
+        "annotation_counts": {
+          "dates_absent": {
+            "corrected_explicit": 3,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 1,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates_present": {
+            "corrected_explicit": 1,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 3,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "DATE-002": {
+        "assessable_matched_pairs": 4,
+        "matched_2x2": {
+          "accepts_both": 0,
+          "only_dates_present": 2,
+          "only_dates_absent": 0,
+          "neither_explicit_acceptance": 2
+        },
+        "net_only_dates_present_minus_only_dates_absent": 2,
+        "annotation_counts": {
+          "dates_absent": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates_present": {
+            "corrected_explicit": 2,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 2,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "DATE-003": {
+        "assessable_matched_pairs": 4,
+        "matched_2x2": {
+          "accepts_both": 0,
+          "only_dates_present": 1,
+          "only_dates_absent": 0,
+          "neither_explicit_acceptance": 3
+        },
+        "net_only_dates_present_minus_only_dates_absent": 1,
+        "annotation_counts": {
+          "dates_absent": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates_present": {
+            "corrected_explicit": 1,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 1,
+            "not_corrected": 2,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "DATE-004": {
+        "assessable_matched_pairs": 4,
+        "matched_2x2": {
+          "accepts_both": 0,
+          "only_dates_present": 2,
+          "only_dates_absent": 0,
+          "neither_explicit_acceptance": 2
+        },
+        "net_only_dates_present_minus_only_dates_absent": 2,
+        "annotation_counts": {
+          "dates_absent": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates_present": {
+            "corrected_explicit": 2,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 2,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "DATE-005": {
+        "assessable_matched_pairs": 4,
+        "matched_2x2": {
+          "accepts_both": 0,
+          "only_dates_present": 1,
+          "only_dates_absent": 0,
+          "neither_explicit_acceptance": 3
+        },
+        "net_only_dates_present_minus_only_dates_absent": 1,
+        "annotation_counts": {
+          "dates_absent": {
+            "corrected_explicit": 3,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates_present": {
+            "corrected_explicit": 1,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 1,
+            "not_corrected": 2,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "DATE-006": {
+        "assessable_matched_pairs": 4,
+        "matched_2x2": {
+          "accepts_both": 0,
+          "only_dates_present": 1,
+          "only_dates_absent": 0,
+          "neither_explicit_acceptance": 3
+        },
+        "net_only_dates_present_minus_only_dates_absent": 1,
+        "annotation_counts": {
+          "dates_absent": {
+            "corrected_explicit": 3,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates_present": {
+            "corrected_explicit": 2,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 1,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      }
+    },
+    "identical_cleaned_response_pairs": 15
+  }
+}

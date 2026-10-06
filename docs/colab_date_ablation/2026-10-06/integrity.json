@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "study": "colab-fp32-date-ablation-2026-10-06",
+  "archive": "evidence/colab/date_ablation/colab-fp32-date-ablation-2026-10-06.zip",
+  "archive_sha256": "bc5ed2f663df2b906a44736c756dbf941719bca19ceab73114d25dc50a05e95f",
+  "archive_bytes": 206672,
+  "internal_files": 19,
+  "procedure_commit": "cf83f31623282611912446bcd94694f3ea320139",
+  "registered_sources": {
+    "scripts/colab_fp32_dates.py": "launcher.py",
+    "experiments/colab-fp32-date-ablation-2026-10-06/protocol.md": "protocol.md",
+    "experiments/colab-fp32-date-ablation-2026-10-06/cases.json": "cases.json",
+    "experiments/colab-fp32-date-ablation-2026-10-06/audit_rubric.json": "audit_rubric.json",
+    "scripts/colab_4bit_diagnostic.py": "colab_4bit_diagnostic.py",
+    "scripts/colab_fp32_dates_cell.py": "colab_fp32_dates_cell.py",
+    "scripts/colab_fp32_long.py": "colab_fp32_long.py",
+    "scripts/colab_fp32_probe.py": "colab_fp32_probe.py",
+    "scripts/colab_layer_replay.py": "colab_layer_replay.py",
+    "scripts/colab_notebook_process.py": "colab_notebook_process.py",
+    "scripts/colab_quantization.py": "colab_quantization.py",
+    "scripts/verify_evidence.py": "verify_evidence.py"
+  },
+  "hashes_saved_before_semantic_annotations": true,
+  "records": 72,
+  "forward_calls": 1088,
+  "tensor_events": 346816,
+  "cache_events": 134656,
+  "input_token_range": [
+    130,
+    160
+  ],
+  "output_token_range": [
+    4,
+    35
+  ],
+  "generation_latency_sum_s": 330.476,
+  "max_generation_peak_gpu_memory_gib": 10.799,
+  "post_promotion_memory": {
+    "allocated_gib": 10.389,
+    "cuda_free_gib": 2.984,
+    "cuda_total_gib": 14.563
+  },
+  "sender_checksum_received_and_matched": true,
+  "crc_and_internal_sha256_verified": true,
+  "source_files_matched_registered_git_blobs": 12,
+  "all_previous_protected_files_unchanged": true,
+  "archived_rubric_used_without_modification": true,
+  "semantic_evaluator_invoked": false,
+  "posthoc_analysis_provenance": "AI-assisted; no independent human adjudication",
+  "human_confirmed_records": 0,
+  "inference_or_evaluator_rescoring_performed": false
+}
