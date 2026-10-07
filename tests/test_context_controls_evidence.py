@@ -34,7 +34,9 @@ def test_actual_evidence_and_fixed_endpoint_without_inference_or_writing():
     assert result['primary_explicit_acceptance_dates_minus_attributes']['net_left_minus_right']==2
     assert result['combined_corrections']=={'bare':20,'dates':10,'attributes':3}
     assert comparison['summary']==evidence.paired_summary(comparison['triplets'])
-    assert not result['independent_human_review'] and result['human_confirmed_records']==0
+    assert not result['independent_human_review'] and result['original_ai_annotation_human_confirmed_records']==0
+    assert result['selected_ai_assisted_human_confirmations']==3
+    assert result['confirmed_primary_label_records']==1 and result['secondary_flags_only_records']==2
     assert not result['inference_or_evaluator_rescoring_performed']
     assert before==(evidence.ROOT/item['archive']).read_bytes()
 
@@ -125,3 +127,40 @@ def test_verifier_has_no_model_or_semantic_evaluator_dependency():
     imports=[n.module or '' for n in ast.walk(tree) if isinstance(n,ast.ImportFrom)]
     imports.extend(alias.name for n in ast.walk(tree) if isinstance(n,ast.Import) for alias in n.names)
     assert all(not name.startswith(('torch','transformers','stresslab')) for name in imports)
+
+
+def human_artifacts():
+    item,audit,*_=artifacts()
+    human=json.loads((evidence.ROOT/item['human_confirmation_batches'][0]['path']).read_text())
+    return item,audit,human
+
+
+def test_contradiction_only_replies_cannot_be_expanded_to_primary_acceptance_confirmation():
+    item,audit,human=human_artifacts();changed=copy.deepcopy(human)
+    changed['confirmations'][0]['confirmed_primary_label']='explicit_acceptance'
+    with pytest.raises(ValueError,match='Flag-only human scope differs'):
+        evidence.check_human_batch(changed,item,audit['annotations'],set())
+
+
+def test_actual_primary_only_implicit_confirmation_and_flag_only_scopes():
+    item,audit,human=human_artifacts()
+    assert evidence.check_human_batch(human,item,audit['annotations'],set())=={
+        'CTX-006-LOW-F-B','CTX-002-HIGH-F-B','CTX-004-LOW-F-B'}
+    assert human['confirmations'][2]['confirmed_primary_label']=='corrected_implicit'
+    assert all(c['confirmed_primary_label'] is None for c in human['confirmations'][:2])
+
+
+def test_duplicate_human_review_cannot_inflate_distinct_rows():
+    item,audit,human=human_artifacts()
+    with pytest.raises(ValueError,match='Unknown/duplicate human-confirmed ID'):
+        evidence.check_human_batch(human,item,audit['annotations'],{'CTX-006-LOW-F-B'})
+
+
+def test_human_review_cannot_substitute_response_or_claim_independence():
+    item,audit,human=human_artifacts();changed=copy.deepcopy(human)
+    changed['confirmations'][0]['source_response']='Different answer'
+    with pytest.raises(ValueError,match='Human-confirmed response differs'):
+        evidence.check_human_batch(changed,item,audit['annotations'],set())
+    changed=copy.deepcopy(human);changed['independent_human_review']=True
+    with pytest.raises(ValueError,match='Human confirmation provenance differs'):
+        evidence.check_human_batch(changed,item,audit['annotations'],set())

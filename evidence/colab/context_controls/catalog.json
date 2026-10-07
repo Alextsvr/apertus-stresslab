@@ -92,7 +92,7 @@
       },
       "sender_checksum_received_and_matched": true,
       "report": "docs/colab_context_controls/2026-10-07/post_run_report.md",
-      "report_sha256": "bbfaa07c14e8a68f87a651bb74938375b7b0efa52c7e6490793a7f56f65de7d1",
+      "report_sha256": "a3d3f2b8d1f3bd5c45bbe24ad8606567680178ccff582f79f65284b0c1826258",
       "annotations": "docs/colab_context_controls/2026-10-07/semantic_annotations.json",
       "annotations_sha256": "cc9518f5f90c39531dbdf1c50824b9b5615a883f3eeefb3081e338bc8cb381ef",
       "paired_comparison": "docs/colab_context_controls/2026-10-07/paired_comparison.json",
@@ -100,7 +100,16 @@
       "audit_metadata": "docs/colab_context_controls/2026-10-07/integrity.json",
       "audit_metadata_sha256": "45667fc293fe2b7edd5bd3d39058ed4d635f9995e984a2c3bdba524d1bf2553d",
       "receipt": "evidence/colab/context_controls/receipt.json",
-      "receipt_sha256": "769e1e17eb1fb4b65ca2b3086378f2940982191181bf4e3532ce2f61523869fe"
+      "receipt_sha256": "769e1e17eb1fb4b65ca2b3086378f2940982191181bf4e3532ce2f61523869fe",
+      "human_confirmation_batches": [
+        {
+          "path": "docs/colab_context_controls/2026-10-07/human_confirmations_01.json",
+          "sha256": "9643bc4dc3bfd9150e5722c8ca7a490f5757e72da008439af568d2926efbf76f",
+          "confirmed_records": 3,
+          "confirmed_primary_label_records": 1,
+          "secondary_flags_only_records": 2
+        }
+      ]
     }
   ]
 }

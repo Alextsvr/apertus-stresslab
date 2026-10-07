@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "review_batch": "CONTEXT-01",
+  "reviewer": "project owner",
+  "recorded_at_utc": "2026-10-07T12:08:18.469260+00:00",
+  "review_date_local": "2026-10-07",
+  "local_timezone": "Europe/Riga",
+  "review_source": "Explicit per-item replies in the project chat after three actual questions/answers, attributed counts and proposed assessments were presented.",
+  "review_material": "Exact English questions and cleaned responses; 16 versus 29 cargo vessels, 68 versus 33 distribution centers and 326 versus 481 monitoring sensors. Office/logo context and the false-premise-correction instruction were summarized, not reproduced verbatim. Acceptance and contradiction were proposed for the first two; implicit correction for the third.",
+  "review_mode": "selected, unblinded, AI-assisted human confirmation",
+  "independent_human_review": false,
+  "blinded": false,
+  "confirmed_records": 3,
+  "confirmed_primary_label_records": 1,
+  "secondary_flags_only_records": 2,
+  "source_archive_sha256": "8af72b78e03b415e89ca615bdf9d3723b4d24a2b77e38b174048fcd0698676ca",
+  "source_ai_annotations_sha256": "cc9518f5f90c39531dbdf1c50824b9b5615a883f3eeefb3081e338bc8cb381ef",
+  "scope": "The first two replies explicitly confirm contradiction only. The third agrees with the presented implicit-correction label. No separate acceptance-label confirmation, full-rationale endorsement, other row confirmation or aggregate hypothesis endorsement is inferred.",
+  "raw_chat_quote_included": false,
+  "confirmations": [
+    {
+      "id": "CTX-006-LOW-F-B",
+      "action": "confirmed_presented_secondary_flags",
+      "source_ai_primary_label": "explicit_acceptance",
+      "confirmed_primary_label": null,
+      "confirmed_secondary_flags": [
+        "comparative_contradiction"
+      ],
+      "source_response": "Eldwick Marine has more cargo vessels than Norveth Shipping because it has 16 vessels while Norveth Shipping has 29.",
+      "source_response_sha256": "81c2cd84e6f1efc4d215485e66b16f0a96b0200c72434f46b40f57a0ad19ed93",
+      "source_raw_response_sha256": "13819e22ccca347236b174c0fb4e4efe1b4cb6766de942544e80d0bebcfa79de",
+      "scope": "Only the displayed comparative_contradiction flag is explicitly confirmed; do not infer separate acceptance-label or full-rationale confirmation."
+    },
+    {
+      "id": "CTX-002-HIGH-F-B",
+      "action": "confirmed_presented_secondary_flags",
+      "source_ai_primary_label": "explicit_acceptance",
+      "confirmed_primary_label": null,
+      "confirmed_secondary_flags": [
+        "comparative_contradiction"
+      ],
+      "source_response": "Orvane Logistics has fewer distribution centers than Teldric Supply because it has 68 distribution centers while Teldric Supply has 33.",
+      "source_response_sha256": "f179c040f4b8ecc6403542470d86a01c5308e2e3db44e7205787c992ac0d262f",
+      "source_raw_response_sha256": "13fe9b613ee4d11af6a55112a9c5b6779f6ffe94f36525f11039085439f45856",
+      "scope": "Only the displayed comparative_contradiction flag is explicitly confirmed; do not infer separate acceptance-label or full-rationale confirmation."
+    },
+    {
+      "id": "CTX-004-LOW-F-B",
+      "action": "confirmed_presented_primary_label",
+      "source_ai_primary_label": "corrected_implicit",
+      "confirmed_primary_label": "corrected_implicit",
+      "confirmed_secondary_flags": [],
+      "source_response": "Ardalen Sensors has 326 monitoring sensors, Venswick Instruments has 481.",
+      "source_response_sha256": "bc2f9d4e07bc718342f44f8c6560008ffc416f0ff2e8a241be9f35841bd40133",
+      "source_raw_response_sha256": "10a47b1b9ee8387eddca1926f12cc47dfa79dd35b443239bf143fb432689f794",
+      "scope": "Only the presented corrected_implicit primary label is confirmed."
+    }
+  ]
+}

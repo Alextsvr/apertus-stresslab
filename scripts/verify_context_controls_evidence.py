@@ -127,6 +127,38 @@ def check_triplets(pairs, annotations, records):
 
 
 
+def check_human_batch(human,item,annotations,seen):
+    sources={a['id']:a for a in annotations}
+    require(human['source_archive_sha256']==item['archive_sha256'] and
+            human['source_ai_annotations_sha256']==item['annotations_sha256'] and
+            human['independent_human_review'] is False and human['blinded'] is False and
+            human['review_mode']=='selected, unblinded, AI-assisted human confirmation' and
+            human['raw_chat_quote_included'] is False, 'Human confirmation provenance differs')
+    require(len(human['confirmations'])==human['confirmed_records'], 'Human confirmation count differs')
+    primary=flag_only=0
+    for confirmation in human['confirmations']:
+        case_id=confirmation['id']
+        require(case_id in sources and case_id not in seen, 'Unknown/duplicate human-confirmed ID')
+        source=sources[case_id]
+        require(confirmation['source_ai_primary_label']==source['label'], 'Human source AI label differs')
+        action=confirmation['action'];flags=confirmation['confirmed_secondary_flags']
+        if action=='confirmed_presented_secondary_flags':
+            require(confirmation['confirmed_primary_label'] is None and bool(flags), 'Flag-only human scope differs')
+            flag_only+=1
+        elif action=='confirmed_presented_primary_label':
+            require(confirmation['confirmed_primary_label']==source['label'] and flags==[], 'Primary-only human scope differs')
+            primary+=1
+        else:
+            raise ValueError('Unknown human confirmation action')
+        require(len(flags)==len(set(flags)) and set(flags).issubset(source['secondary_flags']), 'Human-confirmed flags differ')
+        for field in ('source_response','source_response_sha256','source_raw_response_sha256'):
+            require(confirmation[field]==source[field], 'Human-confirmed response differs')
+        seen.add(case_id)
+    require(primary==human['confirmed_primary_label_records'] and flag_only==human['secondary_flags_only_records'],
+            'Human scope totals differ')
+    return seen
+
+
 def verify(root=ROOT, *, verify_git=True):
     root = Path(root)
     catalog = json.loads((root/CATALOG).read_text(encoding='utf-8'))
@@ -242,6 +274,16 @@ def verify(root=ROOT, *, verify_git=True):
     for field,actual in (('records',len(records)),('forward_calls',len(forwards)),
                         ('tensor_events',result['observed_tensor_events']),('cache_events',result['observed_cache_events'])):
         require(integrity[field]==actual, 'Integrity count differs')
+    human_ids=set();primary_confirmed=flag_only_confirmed=0
+    for batch in item.get('human_confirmation_batches',[]):
+        content=(root/safe_name(batch['path'])).read_bytes()
+        require(digest(content)==batch['sha256'], 'Human confirmation artifact changed')
+        human=json.loads(content)
+        for field in ('confirmed_records','confirmed_primary_label_records','secondary_flags_only_records'):
+            require(human[field]==batch[field], 'Catalog human scope count differs')
+        check_human_batch(human,item,annotations,human_ids)
+        primary_confirmed+=human['confirmed_primary_label_records']
+        flag_only_confirmed+=human['secondary_flags_only_records']
     for line in (root/'evidence/colab/context_controls/SHA256SUMS').read_text().splitlines():
         expected,relative = line.split('  ',1)
         require(digest((root/safe_name(relative)).read_bytes())==expected, 'Context publication manifest differs')
@@ -250,7 +292,9 @@ def verify(root=ROOT, *, verify_git=True):
             'registered_input_arrays_matched':len(inputs),'equal_length_date_attribute_triplets':36,
             'ai_assisted_annotation_counts':summary['annotation_counts'],
             'primary_explicit_acceptance_dates_minus_attributes':summary['primary_explicit_acceptance_dates_minus_attributes'],
-            'combined_corrections':summary['combined_corrections'],'human_confirmed_records':0,
+            'combined_corrections':summary['combined_corrections'],'original_ai_annotation_human_confirmed_records':0,
+            'selected_ai_assisted_human_confirmations':len(human_ids),'distinct_human_reviewed_records':len(human_ids),
+            'confirmed_primary_label_records':primary_confirmed,'secondary_flags_only_records':flag_only_confirmed,
             'independent_human_review':False,'inference_or_evaluator_rescoring_performed':False}
 
 
