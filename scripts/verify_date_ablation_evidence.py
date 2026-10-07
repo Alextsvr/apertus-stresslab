@@ -121,6 +121,29 @@ def check_pairs(pairs, annotations, records):
             require(pair[condition]==expected, f'Matched annotation source differs: {condition}')
 
 
+
+def check_human_batch(human, item, annotations, seen):
+    sources = {a['id']:a for a in annotations}
+    require(human['source_archive_sha256']==item['archive_sha256'] and
+            human['source_ai_annotations_sha256']==item['annotations_sha256'] and
+            human['independent_human_review'] is False and human['blinded'] is False and
+            human['review_mode']=='selected, unblinded, AI-assisted human confirmation' and
+            human['raw_chat_quote_included'] is False, 'Human confirmation provenance differs')
+    require(len(human['confirmations'])==human['confirmed_records'], 'Human confirmation count differs')
+    for confirmation in human['confirmations']:
+        case_id = confirmation['id']
+        require(case_id in sources and case_id not in seen, 'Unknown/duplicate human-confirmed ID')
+        source = sources[case_id]
+        require(confirmation['action']=='confirmed_presented_label_and_flag' and
+                confirmation['confirmed_primary_label']==source['label'] and
+                len(confirmation['confirmed_secondary_flags'])==len(set(confirmation['confirmed_secondary_flags'])) and
+                set(confirmation['confirmed_secondary_flags']).issubset(source['secondary_flags']), 'Human-confirmed scope differs')
+        for field in ('source_response','source_response_sha256','source_raw_response_sha256'):
+            require(confirmation[field]==source[field], 'Human-confirmed response differs')
+        seen.add(case_id)
+    return seen
+
+
 def verify(root=ROOT, *, verify_git=True):
     root = Path(root)
     catalog = json.loads((root/CATALOG).read_text(encoding='utf-8'))
@@ -210,6 +233,13 @@ def verify(root=ROOT, *, verify_git=True):
     check_pairs(comparison['pairs'],annotations,records)
     summary = paired_summary(comparison['pairs'])
     require(comparison['summary']==summary and item['annotation_counts']==summary['annotation_counts'], 'Stored paired counts differ')
+    human_ids = set()
+    for batch in item.get('human_confirmation_batches', []):
+        content = (root/safe_name(batch['path'])).read_bytes()
+        require(digest(content)==batch['sha256'], 'Human confirmation artifact changed')
+        human = json.loads(content)
+        require(human['confirmed_records']==batch['confirmed_records'], 'Catalog human confirmation count differs')
+        check_human_batch(human,item,annotations,human_ids)
     for line in (root/'evidence/colab/date_ablation/SHA256SUMS').read_text().splitlines():
         expected,relative = line.split('  ',1)
         require(digest((root/safe_name(relative)).read_bytes())==expected, 'Date publication manifest differs')
@@ -217,6 +247,7 @@ def verify(root=ROOT, *, verify_git=True):
             'raw_records':len(records),'forward_metadata_records':len(forwards),'annotation_source_matches':len(annotations),
             'ai_assisted_annotation_counts':summary['annotation_counts'],'primary_explicit_acceptance':summary['primary_explicit_acceptance'],
             'paired_combined_correction_counts':summary['paired_combined_correction_counts'],
+            'selected_ai_assisted_human_confirmations':len(human_ids),'distinct_human_reviewed_records':len(human_ids),
             'independent_human_review':False,'inference_or_evaluator_rescoring_performed':False}
 
 

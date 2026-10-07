@@ -104,3 +104,36 @@ def test_packager_rejects_unrelated_date_archive_path(tmp_path):
     catalog.write_text(json.dumps({'runs':[{'archive':'evidence/colab/semantic/unrelated.zip'}]}))
     with pytest.raises(ValueError,match='Unsafe date-study archive path'):
         payload_files(tmp_path)
+
+
+def human_artifacts():
+    item,audit,*_=artifacts()
+    path=item['human_confirmation_batches'][0]['path']
+    human=json.loads((evidence.ROOT/path).read_text(encoding='utf-8'))
+    return item,audit,human
+
+
+def test_selected_human_confirmation_scope_preserves_original_ai_annotations():
+    item,audit,human=human_artifacts()
+    ids=evidence.check_human_batch(human,item,audit['annotations'],set())
+    assert ids=={'DATE-003-HIGH-D1-B','DATE-004-HIGH-D1-A','DATE-004-HIGH-D1-B'}
+    assert audit['human_confirmed_records']==0
+    assert all(a['human_confirmed'] is False for a in audit['annotations'])
+    assert evidence.digest((evidence.ROOT/item['annotations']).read_bytes())=='3a923533b7d3c0f29b9a2a5dc46827416a337e1729923d937db9d19a6d2b8ab6'
+    assert evidence.verify()['selected_ai_assisted_human_confirmations']==3
+
+
+def test_human_confirmation_cannot_substitute_a_response():
+    item,audit,human=human_artifacts()
+    changed=copy.deepcopy(human)
+    changed['confirmations'][0]['source_response']='The premise is false.'
+    with pytest.raises(ValueError,match='Human-confirmed response differs'):
+        evidence.check_human_batch(changed,item,audit['annotations'],set())
+
+
+def test_selected_confirmation_cannot_be_promoted_to_independent_review():
+    item,audit,human=human_artifacts()
+    changed=copy.deepcopy(human)
+    changed['independent_human_review']=True
+    with pytest.raises(ValueError,match='Human confirmation provenance differs'):
+        evidence.check_human_batch(changed,item,audit['annotations'],set())
