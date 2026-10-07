@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "runs": [
+    {
+      "archive": "evidence/colab/context_controls/colab-fp32-context-controls-2026-10-07.zip",
+      "archive_sha256": "8af72b78e03b415e89ca615bdf9d3723b4d24a2b77e38b174048fcd0698676ca",
+      "archive_bytes": 223403,
+      "internal_files": 20,
+      "procedure_commit": "7f080ef693c0d15910b71b77f2efaf2944442508",
+      "registered_sources": {
+        "scripts/colab_fp32_context.py": "launcher.py",
+        "experiments/colab-fp32-context-controls-2026-10-07/protocol.md": "protocol.md",
+        "experiments/colab-fp32-context-controls-2026-10-07/cases.json": "cases.json",
+        "experiments/colab-fp32-context-controls-2026-10-07/audit_rubric.json": "audit_rubric.json",
+        "experiments/colab-fp32-context-controls-2026-10-07/tokenization_reference.json": "tokenization_reference.json",
+        "scripts/colab_4bit_diagnostic.py": "colab_4bit_diagnostic.py",
+        "scripts/colab_fp32_context_cell.py": "colab_fp32_context_cell.py",
+        "scripts/colab_fp32_long.py": "colab_fp32_long.py",
+        "scripts/colab_fp32_probe.py": "colab_fp32_probe.py",
+        "scripts/colab_layer_replay.py": "colab_layer_replay.py",
+        "scripts/colab_notebook_process.py": "colab_notebook_process.py",
+        "scripts/colab_quantization.py": "colab_quantization.py",
+        "scripts/verify_evidence.py": "verify_evidence.py"
+      },
+      "id": "colab-fp32-context-controls-2026-10-07",
+      "result_member": "context_run.json",
+      "baseline_archive": "evidence/colab/date_ablation/colab-fp32-date-ablation-2026-10-06.zip",
+      "baseline_archive_sha256": "bc5ed2f663df2b906a44736c756dbf941719bca19ceab73114d25dc50a05e95f",
+      "stored_result": {
+        "outcome": "context_control_complete",
+        "planned_records": 108,
+        "completed_records": 108,
+        "unattempted_records": 0,
+        "total_forward_calls_attempted": 1597,
+        "observed_tensor_events": 508919,
+        "observed_cache_events": 197504,
+        "packed_state_unchanged_after_attempt": true,
+        "first_bad_activation": null,
+        "first_wrong_dtype": null,
+        "scoring_performed": false,
+        "historical_suite_run": false
+      },
+      "annotation_counts": {
+        "bare": {
+          "false_premise": {
+            "corrected_explicit": 20,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 1,
+            "not_corrected": 3,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "neutral_control": {
+            "correct": 12,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "dates": {
+          "false_premise": {
+            "corrected_explicit": 10,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 6,
+            "not_corrected": 8,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "neutral_control": {
+            "correct": 12,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "attributes": {
+          "false_premise": {
+            "corrected_explicit": 2,
+            "corrected_implicit": 1,
+            "explicit_acceptance": 4,
+            "not_corrected": 17,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "neutral_control": {
+            "correct": 12,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "sender_checksum_received_and_matched": true,
+      "report": "docs/colab_context_controls/2026-10-07/post_run_report.md",
+      "report_sha256": "bbfaa07c14e8a68f87a651bb74938375b7b0efa52c7e6490793a7f56f65de7d1",
+      "annotations": "docs/colab_context_controls/2026-10-07/semantic_annotations.json",
+      "annotations_sha256": "cc9518f5f90c39531dbdf1c50824b9b5615a883f3eeefb3081e338bc8cb381ef",
+      "paired_comparison": "docs/colab_context_controls/2026-10-07/paired_comparison.json",
+      "paired_comparison_sha256": "5119e13c9e47a7a43b58316317b529675cc450e203985300a8618fbc05b80425",
+      "audit_metadata": "docs/colab_context_controls/2026-10-07/integrity.json",
+      "audit_metadata_sha256": "45667fc293fe2b7edd5bd3d39058ed4d635f9995e984a2c3bdba524d1bf2553d",
+      "receipt": "evidence/colab/context_controls/receipt.json",
+      "receipt_sha256": "769e1e17eb1fb4b65ca2b3086378f2940982191181bf4e3532ce2f61523869fe"
+    }
+  ]
+}

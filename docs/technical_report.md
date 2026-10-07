@@ -361,3 +361,11 @@ The separately registered INT8 condition completed all 30 matched prompts with E
 This additional condition uses an observed exploratory baseline and changes quantization, nominal computation precision and backend kernels together across sessions. It does not establish an isolated causal precision/quantization improvement or independent held-out robustness. The original Phase 3B raw/source/dataset/evaluator, frozen 22 / 6 / 2 overall counts and prereg tag remain unchanged; no original rerun/rescore or NF4 baseline rerun/relabel occurred.
 
 [Full 30-row paired comparison and provenance](colab_int8_matched/2026-10-06/post_run_report.md).
+
+### Matched-length context controls — post-run 2026-10-07
+
+The separately registered 108-prompt NF4/FP32 study completed all technical checks; every runtime input matches its prospective CPU reference. Date and non-temporal attribute contexts have identical full token lengths in all 36 triplets, each bare +20. A separate AI-assisted audit under the archived rubric finds false-premise acceptance 1/24 bare, 6/24 dates, 4/24 attributes; combined corrections 20/24, 10/24, 3/24 (attributes: two explicit, one implicit). All 36 controls are correct. No semantic evaluator ran and no new row has human confirmation.
+
+The registered primary D/F acceptance contrast is +2 (one both, five date-only, three attribute-only, fifteen neither); no missing/ambiguous/unassessable pair occurs. Three of six correlated entity blocks have a positive contrast, two zero, one negative. Both enriched conditions reduce corrections relative to bare; attributes produce seventeen non-corrections and four numeric contradictions without dates. This agrees with H1 only descriptively for these wordings and is consistent with a broader added-context problem; length matching does not isolate a universal date mechanism or equate semantics. One greedy output per informed synthetic prompt and an unblinded AI-assisted audit limit inference. Original Phase 3B raw/evaluator/dataset/prereg and frozen 22/6/2 overall counts, all previous studies/labels and selected human supplements remain unchanged; no historical rerun/rescore/relabel occurred.
+
+[Full 108-row audit, all registered comparisons and provenance](colab_context_controls/2026-10-07/post_run_report.md).

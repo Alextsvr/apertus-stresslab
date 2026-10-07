@@ -107,6 +107,9 @@ def verify(root=ROOT, *, verify_git=True, include_phase3b=True):
     if (root / 'evidence/colab/date_ablation/catalog.json').is_file():
         from verify_date_ablation_evidence import verify as verify_dates
         result['date_context_ablation'] = verify_dates(root, verify_git=verify_git)
+    if (root / 'evidence/colab/context_controls/catalog.json').is_file():
+        from verify_context_controls_evidence import verify as verify_context
+        result['matched_length_context_controls'] = verify_context(root, verify_git=verify_git)
     return result
 
 

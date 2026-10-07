@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "study": "colab-fp32-context-controls-2026-10-07",
+  "archive": "evidence/colab/context_controls/colab-fp32-context-controls-2026-10-07.zip",
+  "archive_sha256": "8af72b78e03b415e89ca615bdf9d3723b4d24a2b77e38b174048fcd0698676ca",
+  "archive_bytes": 223403,
+  "internal_files": 20,
+  "procedure_commit": "7f080ef693c0d15910b71b77f2efaf2944442508",
+  "registered_sources": {
+    "scripts/colab_fp32_context.py": "launcher.py",
+    "experiments/colab-fp32-context-controls-2026-10-07/protocol.md": "protocol.md",
+    "experiments/colab-fp32-context-controls-2026-10-07/cases.json": "cases.json",
+    "experiments/colab-fp32-context-controls-2026-10-07/audit_rubric.json": "audit_rubric.json",
+    "experiments/colab-fp32-context-controls-2026-10-07/tokenization_reference.json": "tokenization_reference.json",
+    "scripts/colab_4bit_diagnostic.py": "colab_4bit_diagnostic.py",
+    "scripts/colab_fp32_context_cell.py": "colab_fp32_context_cell.py",
+    "scripts/colab_fp32_long.py": "colab_fp32_long.py",
+    "scripts/colab_fp32_probe.py": "colab_fp32_probe.py",
+    "scripts/colab_layer_replay.py": "colab_layer_replay.py",
+    "scripts/colab_notebook_process.py": "colab_notebook_process.py",
+    "scripts/colab_quantization.py": "colab_quantization.py",
+    "scripts/verify_evidence.py": "verify_evidence.py"
+  },
+  "anchored_at_utc": "2026-10-07T08:32:17.327614+00:00",
+  "hashes_saved_before_semantic_annotations": true,
+  "responses_read_before_anchor": true,
+  "sender_checksum_received_and_matched": true,
+  "crc_and_internal_sha256_verified": true,
+  "source_files_matched_registered_git_blobs": 13,
+  "semantic_evaluator_invoked": false,
+  "inference_or_evaluator_rescoring_performed": false
+}
