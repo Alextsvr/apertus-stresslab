@@ -120,7 +120,7 @@ def test_selected_human_confirmation_scope_preserves_original_ai_annotations():
     assert audit['human_confirmed_records']==0
     assert all(a['human_confirmed'] is False for a in audit['annotations'])
     assert evidence.digest((evidence.ROOT/item['annotations']).read_bytes())=='3a923533b7d3c0f29b9a2a5dc46827416a337e1729923d937db9d19a6d2b8ab6'
-    assert evidence.verify()['selected_ai_assisted_human_confirmations']==3
+    assert evidence.verify()['selected_ai_assisted_human_confirmations']==4
 
 
 def test_human_confirmation_cannot_substitute_a_response():
@@ -136,4 +136,15 @@ def test_selected_confirmation_cannot_be_promoted_to_independent_review():
     changed=copy.deepcopy(human)
     changed['independent_human_review']=True
     with pytest.raises(ValueError,match='Human confirmation provenance differs'):
+        evidence.check_human_batch(changed,item,audit['annotations'],set())
+
+
+def test_primary_only_confirmation_cannot_claim_secondary_flags():
+    item,audit,*_=artifacts()
+    batch=item['human_confirmation_batches'][1]
+    human=json.loads((evidence.ROOT/batch['path']).read_text(encoding='utf-8'))
+    assert evidence.check_human_batch(human,item,audit['annotations'],set())=={'DATE-005-LOW-D0-A'}
+    changed=copy.deepcopy(human)
+    changed['confirmations'][0]['confirmed_secondary_flags']=['comparative_contradiction']
+    with pytest.raises(ValueError,match='Human-confirmed scope differs'):
         evidence.check_human_batch(changed,item,audit['annotations'],set())

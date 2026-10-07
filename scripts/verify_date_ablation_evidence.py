@@ -134,7 +134,10 @@ def check_human_batch(human, item, annotations, seen):
         case_id = confirmation['id']
         require(case_id in sources and case_id not in seen, 'Unknown/duplicate human-confirmed ID')
         source = sources[case_id]
-        require(confirmation['action']=='confirmed_presented_label_and_flag' and
+        action = confirmation['action']
+        require(action in {'confirmed_presented_label_and_flag','confirmed_presented_primary_label'} and
+                (bool(confirmation['confirmed_secondary_flags']) if action=='confirmed_presented_label_and_flag'
+                 else confirmation['confirmed_secondary_flags']==[]) and
                 confirmation['confirmed_primary_label']==source['label'] and
                 len(confirmation['confirmed_secondary_flags'])==len(set(confirmation['confirmed_secondary_flags'])) and
                 set(confirmation['confirmed_secondary_flags']).issubset(source['secondary_flags']), 'Human-confirmed scope differs')

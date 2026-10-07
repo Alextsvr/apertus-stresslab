@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "review_batch": "DATE-02",
+  "reviewer": "project owner",
+  "recorded_at_utc": "2026-10-07T07:41:15.205610+00:00",
+  "review_date_local": "2026-10-07",
+  "local_timezone": "Europe/Riga",
+  "review_source": "Explicit agreement in the project chat after the exact question and response, attributed numeric ground truth and proposed distinction between non-correction and clear acceptance were presented.",
+  "review_material": "Exact English question and cleaned response; subject/object count values; proposed primary label and explanation. The original context was summarized by its two numeric facts.",
+  "review_mode": "selected, unblinded, AI-assisted human confirmation",
+  "independent_human_review": false,
+  "blinded": false,
+  "confirmed_records": 1,
+  "source_archive_sha256": "bc5ed2f663df2b906a44736c756dbf941719bca19ceab73114d25dc50a05e95f",
+  "source_ai_annotations_sha256": "3a923533b7d3c0f29b9a2a5dc46827416a337e1729923d937db9d19a6d2b8ab6",
+  "scope": "Confirms only not_corrected for DATE-005-LOW-D0-A. Does not classify this answer as a successful correction or a confirmed rejection, confirm clear explicit acceptance, endorse the full annotation rationale, other rows or the aggregate hypothesis.",
+  "raw_chat_quote_included": false,
+  "confirmations": [
+    {
+      "id": "DATE-005-LOW-D0-A",
+      "action": "confirmed_presented_primary_label",
+      "confirmed_primary_label": "not_corrected",
+      "confirmed_secondary_flags": [],
+      "source_response": "No context information explains why Norestan Publishing has more published titles than Belwick Books.",
+      "source_response_sha256": "ecf7ffd165fbbb66a8e01c5190e411f0ff5ce79ddac21073d91efec10efe8810",
+      "source_raw_response_sha256": "5f2eca96599c230257429cde98a820d5a973935c93ed7ce0efef570c3326d149"
+    }
+  ]
+}
