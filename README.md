@@ -206,3 +206,20 @@ The registered primary D/F acceptance contrast is +2 (one both, five date-only, 
 [Batch CONTEXT-01](docs/colab_context_controls/2026-10-07/human_confirmations_01.json) records the project owner's selected, unblinded, AI-assisted review of three attribute-condition answers. Only comparative_contradiction is explicitly confirmed for CTX-006-LOW-F-B and CTX-002-HIGH-F-B; no separate acceptance-label confirmation is inferred. Only corrected_implicit is confirmed for CTX-004-LOW-F-B. The other 105 rows and aggregate hypothesis are not human-confirmed. Original AI labels/paired counts/raw evidence and all previous studies remain unchanged; this is not independent full human adjudication.
 
 [Batch CONTEXT-02](docs/colab_context_controls/2026-10-07/human_confirmations_02.json) adds selected human confirmation of the explicit_acceptance primary label only for CTX-005-HIGH-B-B, which validates the false fewer question despite bare counts 6150 versus 4380. No ancillary flag is confirmed or added. The context-study follow-up now covers four distinct rows: two primary-label confirmations and two contradiction-flag-only confirmations. The other 104 rows and aggregate hypothesis remain without human confirmation. Original raw/AI/paired evidence, earlier human batches and all counts are unchanged; review is unblinded and AI-assisted.
+
+## Prospective Qwen comparison (2026-10-07; no outputs yet)
+
+An exploratory extension registers Qwen2.5-7B-Instruct at revision
+`a09a35458c702b33eeacc393d103063234e8bc28` on the exact same 108 ordered
+context-control prompts, with native Qwen template and NF4 weights / FP32
+activations. All 108 token arrays were computed on CPU before Qwen inference;
+dates and non-temporal facts independently match at bare + 20 tokens in all 36
+triplets. One greedy generation per prompt, seed 42, cap 96, repetition penalty
+1.0. This is informed by completed Apertus results, not a new held-out test.
+
+[Prospective protocol](experiments/colab-qwen-context-comparison-2026-10-07/protocol.md)
+and [separate Colab helper](scripts/colab_qwen_context_cell.py) describe
+prepare/check/cache/run modes, numerical gates, partial evidence preservation
+and the planned descriptive comparison. No Qwen responses have been obtained.
+The public checkpoint needs no HF token. Historical raw results, frozen source,
+dataset/evaluator and selected human confirmations are unchanged.
