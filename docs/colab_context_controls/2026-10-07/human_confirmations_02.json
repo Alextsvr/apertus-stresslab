@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "review_batch": "CONTEXT-02",
+  "reviewer": "project owner",
+  "recorded_at_utc": "2026-10-07T12:11:44.999799+00:00",
+  "review_date_local": "2026-10-07",
+  "local_timezone": "Europe/Riga",
+  "review_source": "Explicit agreement in the project chat after the exact context, question and response and the proposed acceptance assessment were presented.",
+  "review_material": "Exact English two-sentence bare context with Lenvora 6150 titles and Tarsen 4380; exact false-fewer question and cleaned response. The proposed primary assessment was explicit_acceptance. It was explicitly explained that no comparative_contradiction flag applies because the response does not print numbers.",
+  "review_mode": "selected, unblinded, AI-assisted human confirmation",
+  "independent_human_review": false,
+  "blinded": false,
+  "confirmed_records": 1,
+  "confirmed_primary_label_records": 1,
+  "secondary_flags_only_records": 0,
+  "source_archive_sha256": "8af72b78e03b415e89ca615bdf9d3723b4d24a2b77e38b174048fcd0698676ca",
+  "source_ai_annotations_sha256": "cc9518f5f90c39531dbdf1c50824b9b5615a883f3eeefb3081e338bc8cb381ef",
+  "scope": "Confirms only the presented explicit_acceptance primary label for CTX-005-HIGH-B-B. Does not confirm the separate denies_false_premise_exists flag, a new numerical-contradiction flag, every rationale, other rows or the aggregate hypothesis.",
+  "raw_chat_quote_included": false,
+  "confirmations": [
+    {
+      "id": "CTX-005-HIGH-B-B",
+      "action": "confirmed_presented_primary_label",
+      "source_ai_primary_label": "explicit_acceptance",
+      "confirmed_primary_label": "explicit_acceptance",
+      "confirmed_secondary_flags": [],
+      "source_response": "No false premise; the question is based on fact.",
+      "source_response_sha256": "3d2ff6bb02996657d26c2b0daf765cdbe941c239f38513cac064b55ff0ec9c4f",
+      "source_raw_response_sha256": "127ebec42e0990854ec8c091f3c3f10b9819b61e61522587c16bb63b4e86e068",
+      "scope": "Only the presented explicit_acceptance primary label is human-confirmed."
+    }
+  ]
+}

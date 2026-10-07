@@ -92,7 +92,7 @@
       },
       "sender_checksum_received_and_matched": true,
       "report": "docs/colab_context_controls/2026-10-07/post_run_report.md",
-      "report_sha256": "a3d3f2b8d1f3bd5c45bbe24ad8606567680178ccff582f79f65284b0c1826258",
+      "report_sha256": "42ccce8b02a8aed9c6085f5f65fdf2279d5668581c94922c3d617ad39ef93299",
       "annotations": "docs/colab_context_controls/2026-10-07/semantic_annotations.json",
       "annotations_sha256": "cc9518f5f90c39531dbdf1c50824b9b5615a883f3eeefb3081e338bc8cb381ef",
       "paired_comparison": "docs/colab_context_controls/2026-10-07/paired_comparison.json",
@@ -108,6 +108,13 @@
           "confirmed_records": 3,
           "confirmed_primary_label_records": 1,
           "secondary_flags_only_records": 2
+        },
+        {
+          "path": "docs/colab_context_controls/2026-10-07/human_confirmations_02.json",
+          "sha256": "7cdd1b92aea477a2981097a7463e3a678f1fb9be3bc4b45b6391aaac925984be",
+          "confirmed_records": 1,
+          "confirmed_primary_label_records": 1,
+          "secondary_flags_only_records": 0
         }
       ]
     }

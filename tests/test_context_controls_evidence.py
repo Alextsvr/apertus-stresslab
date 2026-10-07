@@ -35,8 +35,8 @@ def test_actual_evidence_and_fixed_endpoint_without_inference_or_writing():
     assert result['combined_corrections']=={'bare':20,'dates':10,'attributes':3}
     assert comparison['summary']==evidence.paired_summary(comparison['triplets'])
     assert not result['independent_human_review'] and result['original_ai_annotation_human_confirmed_records']==0
-    assert result['selected_ai_assisted_human_confirmations']==3
-    assert result['confirmed_primary_label_records']==1 and result['secondary_flags_only_records']==2
+    assert result['selected_ai_assisted_human_confirmations']==4
+    assert result['confirmed_primary_label_records']==2 and result['secondary_flags_only_records']==2
     assert not result['inference_or_evaluator_rescoring_performed']
     assert before==(evidence.ROOT/item['archive']).read_bytes()
 
@@ -164,3 +164,25 @@ def test_human_review_cannot_substitute_response_or_claim_independence():
     changed=copy.deepcopy(human);changed['independent_human_review']=True
     with pytest.raises(ValueError,match='Human confirmation provenance differs'):
         evidence.check_human_batch(changed,item,audit['annotations'],set())
+
+
+def test_bare_acceptance_human_confirmation_is_primary_only_and_source_bound():
+    item,audit,*_=artifacts()
+    human=json.loads((evidence.ROOT/item['human_confirmation_batches'][1]['path']).read_text())
+    assert evidence.check_human_batch(human,item,audit['annotations'],set())=={'CTX-005-HIGH-B-B'}
+    confirmation=human['confirmations'][0]
+    assert confirmation['confirmed_primary_label']=='explicit_acceptance'
+    assert confirmation['confirmed_secondary_flags']==[]
+    changed=copy.deepcopy(human)
+    changed['confirmations'][0]['confirmed_secondary_flags']=['denies_false_premise_exists']
+    with pytest.raises(ValueError,match='Primary-only human scope differs'):
+        evidence.check_human_batch(changed,item,audit['annotations'],set())
+
+
+def test_human_confirmations_across_batches_have_four_distinct_rows_and_preserve_scope():
+    item,audit,*_=artifacts();seen=set();primary=flags_only=0
+    for batch in item['human_confirmation_batches']:
+        human=json.loads((evidence.ROOT/batch['path']).read_text())
+        evidence.check_human_batch(human,item,audit['annotations'],seen)
+        primary+=human['confirmed_primary_label_records'];flags_only+=human['secondary_flags_only_records']
+    assert len(seen)==4 and primary==flags_only==2
