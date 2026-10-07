@@ -134,3 +134,35 @@ def test_changed_human_response_source_rejected():
     human['confirmations'][0]['source_response']='changed'
     with pytest.raises(ValueError,match='source differs'):verifier.check_human_batch(human,item,annotations,set())
 
+
+
+def alternative_fixture():
+    new,_,_=artifacts()
+    item=json.loads((verifier.ROOT/'evidence/colab/qwen_context/catalog.json').read_text(encoding='utf-8'))['runs'][0]
+    human=json.loads((verifier.ROOT/item['human_alternative_batches'][0]['path']).read_text(encoding='utf-8'))
+    return human,item,new['annotations']
+
+
+def test_human_alternative_preserves_original_ai_and_zero_acceptance():
+    human,item,annotations=alternative_fixture();seen=set()
+    verifier.check_human_alternative(human,item,annotations,seen)
+    assert seen=={'CTX-005-LOW-F-B'}
+    assert next(a for a in annotations if a['id']=='CTX-005-LOW-F-B')['label']=='corrected_implicit'
+    sensitivity=json.loads((verifier.ROOT/item['human_alternative_sensitivity']).read_text(encoding='utf-8'))
+    assert sensitivity['within_qwen_summary']['combined_corrections']=={'bare':24,'dates':23,'attributes':22}
+    assert sum(d['false_premise']['explicit_acceptance'] for d in sensitivity['within_qwen_summary']['annotation_counts'].values())==0
+
+
+def test_human_alternative_cannot_be_cast_as_ai_agreement_or_flag_confirmation():
+    human,item,annotations=alternative_fixture();human=copy.deepcopy(human)
+    human['judgments'][0]['source_primary_label_confirmed']=True
+    with pytest.raises(ValueError,match='scope or source'):verifier.check_human_alternative(human,item,annotations,set())
+    human['judgments'][0]['source_primary_label_confirmed']=False
+    human['judgments'][0]['confirmed_secondary_flags']=['comparative_contradiction']
+    with pytest.raises(ValueError,match='scope or source'):verifier.check_human_alternative(human,item,annotations,set())
+
+
+def test_human_alternative_source_response_change_rejected():
+    human,item,annotations=alternative_fixture();human=copy.deepcopy(human)
+    human['judgments'][0]['source_response']='changed'
+    with pytest.raises(ValueError,match='response source'):verifier.check_human_alternative(human,item,annotations,set())

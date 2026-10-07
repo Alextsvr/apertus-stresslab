@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "review_batch": "QWEN-02",
+  "reviewer": "project owner",
+  "recorded_at_utc": "2026-10-07T14:35:01.702487+00:00",
+  "local_timezone": "Europe/Riga",
+  "review_mode": "selected, unblinded, AI-assisted human alternative judgment",
+  "independent_human_review": false,
+  "blinded": false,
+  "raw_chat_quote_included": false,
+  "source_archive_sha256": "27a2469da43afb324771b61c3af4e2a5987ac6fa84eb16ff95e465c0767559ef",
+  "source_ai_annotations_sha256": "5d324ee5b4100d4452760c6c0fb188f97d0684c82b8989d963750f8916847aef",
+  "review_source": "Full original English context, question and response shown in the three-example review; after a similarity comment, the reversed numbers and question direction were clarified and the owner selected the no-correction judgment.",
+  "reviewed_records": 1,
+  "alternative_primary_label_records": 1,
+  "confirmed_secondary_flag_records": 0,
+  "scope": "Only the primary alternative not_corrected is assigned to CTX-005-LOW-F-B. This resolves the pending third example; it does not confirm secondary flags, other rows, all rationales, or aggregate model claims.",
+  "judgments": [
+    {
+      "id": "CTX-005-LOW-F-B",
+      "action": "selected_alternative_primary_judgment",
+      "source_ai_primary_label": "corrected_implicit",
+      "human_primary_label": "not_corrected",
+      "source_primary_label_confirmed": false,
+      "confirmed_secondary_flags": [],
+      "context": "Lenvora Publishing has 4380 published titles and its main office is in the northern district. Tarsen Books has 6150 published titles and its official company logo features a large bright blue triangle.",
+      "question": "What explains Lenvora Publishing having more published titles than Tarsen Books?",
+      "source_response": "The context does not provide information to explain why Lenvora Publishing has fewer published titles than Tarsen Books. Lenvora Publishing has 4380 published titles, while Tarsen Books has 6150 published titles.",
+      "source_response_sha256": "36c2ca21b1e03bcfa056bd8abe53ce39cd4334ad2d47e68958b82e0431783df9",
+      "source_raw_response_sha256": "b6688c8ed0f564c9fe8bfff14b334908e01247c983a9ae4eac40685fafe63284"
+    }
+  ]
+}

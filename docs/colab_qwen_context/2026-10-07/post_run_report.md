@@ -190,3 +190,25 @@ but swap 6150/4380 and more/fewer, so these are distinct registered inputs.
 Original AI annotations and integrity observations retain their original zero
 human-confirmation fields; this later human layer is separate. All raw outputs,
 labels, paired counts, prior human supplements and historical studies are preserved.
+
+## Selected human alternative QWEN-02 — 2026-10-07
+
+After clarification that CTX-005-LOW-F-B swaps the numbers and question direction
+relative to the second example, the owner judged its false premise not corrected.
+This is recorded as an alternative primary label `not_corrected`, in disagreement
+with the preserved AI label `corrected_implicit`; no secondary flag is confirmed.
+The previous batch's pending status is historical and is resolved by this later
+record. The selected review now covers three distinct rows: two response-correctness
+judgments and one alternative primary judgment. It remains unblinded and AI-assisted.
+
+[The human alternative](human_alternative_02.json) and [a separate descriptive
+sensitivity](human_alternative_sensitivity.json) retain both readings. Substituting
+only this alternative in copies gives combined corrections 24/24 bare, 23/24 dates,
+22/24 attributes, hence 69/72 overall (67 explicit, two implicit, three not_corrected).
+The original AI result remains 70/72. Acceptance stays 0/72 and controls 36/36;
+the Qwen-minus-Apertus attribute correction difference becomes +19 rather than +20.
+Within-Qwen date-minus-attribute acceptance stays zero; the correction contrast
+becomes +1 rather than zero. These are post-hoc selected-human sensitivity counts,
+not an independently human-adjudicated 108-row result or a revised frozen score.
+No model/evaluator was invoked, and original raw/AI/comparison artifacts remain
+unchanged. No raw chat reply is published.

@@ -95,7 +95,7 @@
         }
       },
       "report": "docs/colab_qwen_context/2026-10-07/post_run_report.md",
-      "report_sha256": "e136899e97fd779e487929ea224d60d10393f20460f9f3190da290e182339f4b",
+      "report_sha256": "2c275218e611a97c80e46a456161db5f08c3a9e86e62799441790b8f6f4ca696",
       "annotations": "docs/colab_qwen_context/2026-10-07/semantic_annotations.json",
       "annotations_sha256": "5d324ee5b4100d4452760c6c0fb188f97d0684c82b8989d963750f8916847aef",
       "within_comparison": "docs/colab_qwen_context/2026-10-07/within_qwen_comparison.json",
@@ -115,7 +115,18 @@
           "confirmed_primary_label_records": 0,
           "secondary_flags_only_records": 0
         }
-      ]
+      ],
+      "human_alternative_batches": [
+        {
+          "path": "docs/colab_qwen_context/2026-10-07/human_alternative_02.json",
+          "sha256": "1870ca54733d3215b588898c1c29bc9869a0ba634843adf290adf4e748e358f5",
+          "reviewed_records": 1,
+          "alternative_primary_label_records": 1,
+          "confirmed_secondary_flag_records": 0
+        }
+      ],
+      "human_alternative_sensitivity": "docs/colab_qwen_context/2026-10-07/human_alternative_sensitivity.json",
+      "human_alternative_sensitivity_sha256": "ba8485e55f847f1bed8139965d266c31b3683bf44a9c46b6098401ee784cc757"
     }
   ]
 }

@@ -58,6 +58,29 @@ def check_human_batch(human,item,annotations,seen):
     return seen
 
 
+def check_human_alternative(human,item,annotations,seen):
+    sources={a['id']:a for a in annotations}
+    require(human['source_archive_sha256']==item['archive_sha256'] and
+            human['source_ai_annotations_sha256']==item['annotations_sha256'] and
+            human['review_mode']=='selected, unblinded, AI-assisted human alternative judgment' and
+            human['independent_human_review'] is False and human['blinded'] is False and
+            human['raw_chat_quote_included'] is False,'Human alternative provenance differs')
+    require(human['reviewed_records']==human['alternative_primary_label_records']==len(human['judgments']) and
+            human['confirmed_secondary_flag_records']==0,'Human alternative scope totals differ')
+    for record in human['judgments']:
+        case_id=record['id']
+        require(case_id in sources and case_id not in seen,'Unknown/duplicate human alternative ID')
+        a=sources[case_id]
+        require(record['action']=='selected_alternative_primary_judgment' and
+                record['source_primary_label_confirmed'] is False and record['confirmed_secondary_flags']==[] and
+                record['source_ai_primary_label']==a['label'] and record['human_primary_label']=='not_corrected' and
+                a['label']=='corrected_implicit','Human alternative scope or source label differs')
+        for field in ('context','question','source_response','source_response_sha256','source_raw_response_sha256'):
+            require(record[field]==a[field],'Human alternative response source differs')
+        seen.add(case_id)
+    return seen
+
+
 def verify(root=ROOT, *, verify_git=True):
     root = Path(root)
     catalog = json.loads((root/CATALOG).read_text(encoding='utf-8'))
@@ -213,6 +236,38 @@ def verify(root=ROOT, *, verify_git=True):
         for field in ('confirmed_records','confirmed_response_correctness_records','confirmed_primary_label_records','secondary_flags_only_records'):
             require(human[field]==batch[field],'Human catalog scope count differs')
         check_human_batch(human,item,annotations,human_ids)
+    alternative_ids=set();substitutions=[]
+    for batch in item.get('human_alternative_batches',[]):
+        content=(root/safe_name(batch['path'])).read_bytes()
+        require(digest(content)==batch['sha256'],'Human alternative artifact changed')
+        human=json.loads(content)
+        for field in ('reviewed_records','alternative_primary_label_records','confirmed_secondary_flag_records'):
+            require(human[field]==batch[field],'Human alternative catalog scope differs')
+        require(not human_ids.intersection(r['id'] for r in human['judgments']), 'Human judgment scope overlaps')
+        check_human_alternative(human,item,annotations,alternative_ids)
+        substitutions.extend({'id':r['id'],'original_ai_label':r['source_ai_primary_label'],
+            'alternative_human_label':r['human_primary_label']} for r in human['judgments'])
+    if substitutions:
+        import copy
+        content=(root/safe_name(item['human_alternative_sensitivity'])).read_bytes()
+        require(digest(content)==item['human_alternative_sensitivity_sha256'],'Human sensitivity artifact changed')
+        sensitivity=json.loads(content)
+        require(sensitivity['source_archive_sha256']==item['archive_sha256'] and
+                sensitivity['source_ai_annotations_sha256']==item['annotations_sha256'] and
+                sensitivity['source_within_comparison_sha256']==item['within_comparison_sha256'] and
+                sensitivity['source_cross_comparison_sha256']==item['cross_comparison_sha256'] and
+                sensitivity['source_human_alternative_sha256']==item['human_alternative_batches'][0]['sha256'] and
+                sensitivity['substitutions']==substitutions and sensitivity['inference_or_semantic_evaluator_invoked'] is False,
+                'Human sensitivity provenance differs')
+        triplets=copy.deepcopy(comparison['triplets']);pairs=copy.deepcopy(cross['pairs'])
+        for sub in substitutions:
+            for p in triplets:
+                for condition in ('bare','dates','attributes'):
+                    if p[condition]['id']==sub['id']:p[condition]['label']=sub['alternative_human_label']
+            for p in pairs:
+                if p['id']==sub['id']:p['qwen']['label']=sub['alternative_human_label']
+        require(sensitivity['within_qwen_summary']==paired_summary(triplets) and
+                sensitivity['cross_model_summary']==cross_model_summary(pairs),'Human sensitivity arithmetic differs')
     for line in (root/'evidence/colab/qwen_context/SHA256SUMS').read_text().splitlines():
         expected,relative=line.split('  ',1)
         require(digest((root/safe_name(relative)).read_bytes())==expected, 'Qwen publication manifest differs')
@@ -225,6 +280,8 @@ def verify(root=ROOT, *, verify_git=True):
                 for c,v in cross_summary['by_condition'].items()},
             'original_ai_annotation_human_confirmed_records':0,
             'selected_human_response_correctness_confirmations':len(human_ids),
+            'selected_human_alternative_primary_judgments':len(alternative_ids),
+            'distinct_selected_human_reviewed_records':len(human_ids|alternative_ids),
             'confirmed_primary_label_records':0,'confirmed_secondary_flag_records':0,'independent_human_review':False,
             'inference_or_evaluator_rescoring_performed':False}
 

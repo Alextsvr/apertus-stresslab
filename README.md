@@ -250,3 +250,12 @@ two rows, without independently assigning explicit/implicit subtype or secondary
 flags. CTX-005-LOW-F-B is a distinct reversed-number case and remains without a
 semantic confirmation. Original AI annotations, raw outputs and all counts remain
 unchanged; this is a separate limited human layer, not full human adjudication.
+
+[QWEN-02](docs/colab_qwen_context/2026-10-07/human_alternative_02.json) resolves
+the third selected example: the owner assigns `not_corrected` to CTX-005-LOW-F-B,
+while the original AI label `corrected_implicit` is preserved. The separate
+[selected-human-alternative sensitivity](docs/colab_qwen_context/2026-10-07/human_alternative_sensitivity.json)
+gives 69/72 corrections (attributes 22/24) if only that label is substituted;
+original AI counts stay 70/72, acceptance stays 0/72 and controls 36/36.
+Three distinct Qwen rows now have selected human judgments: two correctness
+judgments and one primary-label alternative, with no confirmed secondary flags.
