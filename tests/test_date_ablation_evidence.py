@@ -120,7 +120,7 @@ def test_selected_human_confirmation_scope_preserves_original_ai_annotations():
     assert audit['human_confirmed_records']==0
     assert all(a['human_confirmed'] is False for a in audit['annotations'])
     assert evidence.digest((evidence.ROOT/item['annotations']).read_bytes())=='3a923533b7d3c0f29b9a2a5dc46827416a337e1729923d937db9d19a6d2b8ab6'
-    assert evidence.verify()['selected_ai_assisted_human_confirmations']==4
+    assert evidence.verify()['selected_ai_assisted_human_confirmations']==5
 
 
 def test_human_confirmation_cannot_substitute_a_response():

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "review_batch": "DATE-03",
+  "reviewer": "project owner",
+  "recorded_at_utc": "2026-10-07T07:44:23.190375+00:00",
+  "review_date_local": "2026-10-07",
+  "local_timezone": "Europe/Riga",
+  "review_source": "Explicit confirmation in the project chat after the exact English question and response, attributed numeric ground truth and proposed acceptance/contradiction assessment were shown.",
+  "review_material": "Exact English question and cleaned response; Nelvane 31 research sites versus Torlith 18; proposed explicit_acceptance label and comparative_contradiction flag. The original context was summarized by its two numeric facts.",
+  "review_mode": "selected, unblinded, AI-assisted human confirmation",
+  "independent_human_review": false,
+  "blinded": false,
+  "confirmed_records": 1,
+  "source_archive_sha256": "bc5ed2f663df2b906a44736c756dbf941719bca19ceab73114d25dc50a05e95f",
+  "source_ai_annotations_sha256": "3a923533b7d3c0f29b9a2a5dc46827416a337e1729923d937db9d19a6d2b8ab6",
+  "scope": "Confirms only explicit_acceptance and comparative_contradiction for DATE-001-HIGH-D0-B. Does not confirm the separate denies_false_premise_exists flag, every rationale, other rows or the aggregate hypothesis.",
+  "raw_chat_quote_included": false,
+  "confirmations": [
+    {
+      "id": "DATE-001-HIGH-D0-B",
+      "action": "confirmed_presented_label_and_flag",
+      "confirmed_primary_label": "explicit_acceptance",
+      "confirmed_secondary_flags": [
+        "comparative_contradiction"
+      ],
+      "source_response": "No false premise; the statement is factually correct based on the numbers (31 vs. 18).",
+      "source_response_sha256": "73d3e246d4d5101e87ea90efa7d46d5ec2e34d8fef82b26eebd594bd1ddf5ebf",
+      "source_raw_response_sha256": "74dbbcaa75e3679553d409ea686251bf55621aafbb7c3cc870fc12f947b0b4b2"
+    }
+  ]
+}
