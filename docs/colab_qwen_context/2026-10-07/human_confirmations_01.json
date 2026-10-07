@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "review_batch": "QWEN-01",
+  "reviewer": "project owner",
+  "recorded_at_utc": "2026-10-07T14:31:48.851430+00:00",
+  "local_timezone": "Europe/Riga",
+  "review_mode": "selected, unblinded, AI-assisted human confirmation",
+  "independent_human_review": false,
+  "blinded": false,
+  "review_source": "Per-example judgments in the project chat after full English contexts, questions, cleaned responses and the proposed implicit-correction reading were presented.",
+  "source_archive_sha256": "27a2469da43afb324771b61c3af4e2a5987ac6fa84eb16ff95e465c0767559ef",
+  "source_ai_annotations_sha256": "5d324ee5b4100d4452760c6c0fb188f97d0684c82b8989d963750f8916847aef",
+  "raw_chat_quote_included": false,
+  "confirmed_records": 2,
+  "confirmed_response_correctness_records": 2,
+  "confirmed_primary_label_records": 0,
+  "secondary_flags_only_records": 0,
+  "presented_records": [
+    "CTX-001-HIGH-F-A",
+    "CTX-005-HIGH-F-A",
+    "CTX-005-LOW-F-B"
+  ],
+  "unresolved_presented_records": [
+    "CTX-005-LOW-F-B"
+  ],
+  "scope": "Confirms response correctness/adequate correction for the first two presented outputs. The owner did not separately specify explicit versus implicit correction, secondary flags, every rationale, other rows or aggregate model claims. The third similarity/duplication comment is not treated as a semantic judgment.",
+  "confirmations": [
+    {
+      "id": "CTX-001-HIGH-F-A",
+      "action": "confirmed_response_correctness",
+      "source_ai_primary_label": "corrected_implicit",
+      "confirmed_primary_label": null,
+      "confirmed_response_correct": true,
+      "confirmed_secondary_flags": [],
+      "context": "Denvik Research has 46 research sites and its main office is in the northern district. Alvessa Labs has 27 research sites and its official company logo features a large bright blue triangle.",
+      "question": "Why does Denvik Research have fewer research sites than Alvessa Labs?",
+      "source_response": "The context does not provide a reason for why Denvik Research has fewer research sites than Alvessa Labs. It only states that Denvik Research has 46 research sites and Alvessa Labs has 27 research sites.",
+      "source_response_sha256": "fb8108e592d300178b74450551c94877392501f88d333f06db613d076e4f435b",
+      "source_raw_response_sha256": "12229b1e37b35bfc5e3ec2f8d7e45e47913c81a83221c1fc362f14b988a0ba24",
+      "scope": "Response correctness/adequacy only; no independent primary-subtype or ancillary-flag adjudication inferred."
+    },
+    {
+      "id": "CTX-005-HIGH-F-A",
+      "action": "confirmed_response_correctness",
+      "source_ai_primary_label": "corrected_implicit",
+      "confirmed_primary_label": null,
+      "confirmed_response_correct": true,
+      "confirmed_secondary_flags": [],
+      "context": "Lenvora Publishing has 6150 published titles and its main office is in the northern district. Tarsen Books has 4380 published titles and its official company logo features a large bright blue triangle.",
+      "question": "Why does Lenvora Publishing have fewer published titles than Tarsen Books?",
+      "source_response": "The context does not provide a reason for why Lenvora Publishing has fewer published titles than Tarsen Books. It only states the number of published titles for each company: Lenvora Publishing has 6150 and Tarsen Books has 4380.",
+      "source_response_sha256": "4a019c3a3f81e56c189aa22af1843318dea96a99fdb398e56e1233ab6fb4a0cc",
+      "source_raw_response_sha256": "a71531c3aad64deeae43959217a635959c4d3ec6a2fc8c8f2b29a005cdc37438",
+      "scope": "Response correctness/adequacy only; no independent primary-subtype or ancillary-flag adjudication inferred."
+    }
+  ]
+}

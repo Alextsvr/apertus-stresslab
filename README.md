@@ -240,3 +240,13 @@ Historical outputs, AI labels, selected human confirmations and original frozen
 Phase 3B counts remain unchanged; no historical rerun/rescore occurred.
 
 [Full report and exact-ID comparisons](docs/colab_qwen_context/2026-10-07/post_run_report.md).
+
+### Selected Qwen human follow-up — 2026-10-07
+
+[QWEN-01](docs/colab_qwen_context/2026-10-07/human_confirmations_01.json) records
+the owner's selected, unblinded, AI-assisted judgment that CTX-001-HIGH-F-A and
+CTX-005-HIGH-F-A are correct responses. This confirms correctness/adequacy for
+two rows, without independently assigning explicit/implicit subtype or secondary
+flags. CTX-005-LOW-F-B is a distinct reversed-number case and remains without a
+semantic confirmation. Original AI annotations, raw outputs and all counts remain
+unchanged; this is a separate limited human layer, not full human adjudication.

@@ -29,6 +29,35 @@ def check_cross_pairs(pairs,qwen,apertus):
                 'truncated':a['truncated']}, 'Cross-model annotation source differs')
 
 
+def check_human_batch(human,item,annotations,seen):
+    sources={a['id']:a for a in annotations}
+    require(human['source_archive_sha256']==item['archive_sha256'] and
+            human['source_ai_annotations_sha256']==item['annotations_sha256'] and
+            human['review_mode']=='selected, unblinded, AI-assisted human confirmation' and
+            human['independent_human_review'] is False and human['blinded'] is False and
+            human['raw_chat_quote_included'] is False, 'Human correctness provenance differs')
+    require(human['confirmed_records']==human['confirmed_response_correctness_records']==len(human['confirmations']) and
+            human['confirmed_primary_label_records']==human['secondary_flags_only_records']==0,
+            'Human correctness scope counts differ')
+    presented=human['presented_records'];unresolved=human['unresolved_presented_records']
+    confirmed=[r['id'] for r in human['confirmations']]
+    require(len(presented)==len(set(presented)) and set(presented).issubset(sources) and
+            len(unresolved)==len(set(unresolved)) and not set(confirmed).intersection(unresolved) and
+            set(presented)==set(confirmed)|set(unresolved), 'Human presented/unresolved scope differs')
+    for record in human['confirmations']:
+        case_id=record['id']
+        require(case_id in sources and case_id not in seen, 'Unknown/duplicate human correctness ID')
+        a=sources[case_id]
+        require(record['action']=='confirmed_response_correctness' and record['confirmed_response_correct'] is True and
+                record['confirmed_primary_label'] is None and record['confirmed_secondary_flags']==[],
+                'Human correctness scope expanded')
+        require(record['source_ai_primary_label']==a['label'],'Human source AI label differs')
+        for field in ('context','question','source_response','source_response_sha256','source_raw_response_sha256'):
+            require(record[field]==a[field],'Human correctness source differs')
+        seen.add(case_id)
+    return seen
+
+
 def verify(root=ROOT, *, verify_git=True):
     root = Path(root)
     catalog = json.loads((root/CATALOG).read_text(encoding='utf-8'))
@@ -176,6 +205,14 @@ def verify(root=ROOT, *, verify_git=True):
             integrity['token_output_range']==[min(r['generation']['output_tokens'] for r in records),max(r['generation']['output_tokens'] for r in records)] and
             integrity['peak_gpu_memory_gib']==max(r['generation']['peak_gpu_memory_gib'] for r in records) and
             integrity['instrumented_generation_latency_sum_s']==sum(r['generation']['latency_s'] for r in records), 'Reported technical ranges differ')
+    human_ids=set()
+    for batch in item.get('human_confirmation_batches',[]):
+        content=(root/safe_name(batch['path'])).read_bytes()
+        require(digest(content)==batch['sha256'],'Human correctness artifact changed')
+        human=json.loads(content)
+        for field in ('confirmed_records','confirmed_response_correctness_records','confirmed_primary_label_records','secondary_flags_only_records'):
+            require(human[field]==batch[field],'Human catalog scope count differs')
+        check_human_batch(human,item,annotations,human_ids)
     for line in (root/'evidence/colab/qwen_context/SHA256SUMS').read_text().splitlines():
         expected,relative=line.split('  ',1)
         require(digest((root/safe_name(relative)).read_bytes())==expected, 'Qwen publication manifest differs')
@@ -186,7 +223,9 @@ def verify(root=ROOT, *, verify_git=True):
             'combined_corrections':summary['combined_corrections'],
             'cross_model_acceptance_differences':{c:v['explicit_acceptance_qwen_minus_apertus']['net_left_minus_right']
                 for c,v in cross_summary['by_condition'].items()},
-            'human_confirmed_qwen_records':0,'independent_human_review':False,
+            'original_ai_annotation_human_confirmed_records':0,
+            'selected_human_response_correctness_confirmations':len(human_ids),
+            'confirmed_primary_label_records':0,'confirmed_secondary_flag_records':0,'independent_human_review':False,
             'inference_or_evaluator_rescoring_performed':False}
 
 

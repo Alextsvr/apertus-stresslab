@@ -25,7 +25,7 @@ def test_returned_evidence_full_integrity_and_no_human_scope_inferred():
     result=verifier.verify()
     assert result['raw_records']==result['annotation_source_matches']==result['registered_input_arrays_matched']==108
     assert result['forward_metadata_records']==3347
-    assert result['human_confirmed_qwen_records']==0 and result['inference_or_evaluator_rescoring_performed'] is False
+    assert result['original_ai_annotation_human_confirmed_records']==0 and result['inference_or_evaluator_rescoring_performed'] is False
 
 
 def test_preserved_annotations_pair_by_exact_ids_and_same_user_text():
@@ -99,3 +99,38 @@ def test_implicit_boundary_labels_and_date_flags_remain_separate_from_acceptance
     assert {a['id'] for a in rows.values() if a['label']=='corrected_implicit'}==implicit
     assert rows['CTX-001-HIGH-D-B']['secondary_flags']==['date_or_milestone_mentioned','uses_supplied_dates']
     assert not any('comparative_contradiction' in a['secondary_flags'] for a in rows.values())
+
+
+def human_fixture():
+    new,_,_=artifacts()
+    item=json.loads((verifier.ROOT/'evidence/colab/qwen_context/catalog.json').read_text(encoding='utf-8'))['runs'][0]
+    human=json.loads((verifier.ROOT/item['human_confirmation_batches'][0]['path']).read_text(encoding='utf-8'))
+    return human,item,new['annotations']
+
+
+def test_human_confirms_two_correct_responses_without_third_or_subtype():
+    human,item,annotations=human_fixture();seen=set()
+    verifier.check_human_batch(human,item,annotations,seen)
+    assert seen=={'CTX-001-HIGH-F-A','CTX-005-HIGH-F-A'}
+    assert human['unresolved_presented_records']==['CTX-005-LOW-F-B']
+    assert human['confirmed_primary_label_records']==0
+
+
+@pytest.mark.parametrize('field,value',[('confirmed_primary_label','corrected_implicit'),('confirmed_secondary_flags',['comparative_contradiction'])])
+def test_human_correctness_does_not_expand_to_subtype_or_flags(field,value):
+    human,item,annotations=human_fixture();human=copy.deepcopy(human)
+    human['confirmations'][0][field]=value
+    with pytest.raises(ValueError,match='scope expanded'):verifier.check_human_batch(human,item,annotations,set())
+
+
+def test_unresolved_third_cannot_also_be_confirmed():
+    human,item,annotations=human_fixture();human=copy.deepcopy(human)
+    human['unresolved_presented_records'].append(human['confirmations'][0]['id'])
+    with pytest.raises(ValueError,match='unresolved scope'):verifier.check_human_batch(human,item,annotations,set())
+
+
+def test_changed_human_response_source_rejected():
+    human,item,annotations=human_fixture();human=copy.deepcopy(human)
+    human['confirmations'][0]['source_response']='changed'
+    with pytest.raises(ValueError,match='source differs'):verifier.check_human_batch(human,item,annotations,set())
+

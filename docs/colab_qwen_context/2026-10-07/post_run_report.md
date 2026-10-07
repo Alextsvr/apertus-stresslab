@@ -173,3 +173,20 @@ evaluators, raw outputs, labels and actual human supplements are preserved.
 Run `python scripts/verify_qwen_context_evidence.py` or the umbrella evidence
 verifier. They validate hashes, provenance and arithmetic from fixed labels;
 they do not classify response text or perform inference/rescoring.
+
+## Selected human follow-up QWEN-01 — 2026-10-07
+
+The project owner judged the presented responses CTX-001-HIGH-F-A and
+CTX-005-HIGH-F-A correct after seeing their full English context, question and
+cleaned response, with the proposed AI reading disclosed. This selected,
+unblinded, AI-assisted review confirms correctness/adequacy of two responses;
+it does not separately adjudicate explicit versus implicit subtype, ancillary
+flags, all annotation rationales, other rows or model-level conclusions.
+The third presented row, CTX-005-LOW-F-B, remains without a semantic confirmation:
+the owner noted similarity to the second example. They use the same companies
+but swap 6150/4380 and more/fewer, so these are distinct registered inputs.
+
+[Human follow-up record](human_confirmations_01.json) contains no raw chat quote.
+Original AI annotations and integrity observations retain their original zero
+human-confirmation fields; this later human layer is separate. All raw outputs,
+labels, paired counts, prior human supplements and historical studies are preserved.
