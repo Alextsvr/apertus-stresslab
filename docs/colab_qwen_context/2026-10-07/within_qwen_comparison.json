@@ -1,0 +1,2204 @@
+{
+  "source_archive_sha256": "27a2469da43afb324771b61c3af4e2a5987ac6fa84eb16ff95e465c0767559ef",
+  "analysis_source": "Codex AI-assisted post-hoc semantic audit",
+  "triplets": [
+    {
+      "context_triplet_id": "CTX-004-LOW-C",
+      "kind": "neutral_control",
+      "base_pair_id": "CTX-004",
+      "scenario_id": "CTX-004-LOW",
+      "variant": "C",
+      "direction_state": "subject_lower",
+      "subject_value": 326,
+      "object_value": 481,
+      "asserted_relation": null,
+      "bare": {
+        "id": "CTX-004-LOW-B-C",
+        "label": "correct",
+        "response": "Ardalen Sensors has fewer monitoring sensors.",
+        "response_sha256": "ae74a66c3004ba47d31ea8baee20fc3cefb66bf112231a81d979c1ab540fee79",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-004-LOW-D-C",
+        "label": "correct",
+        "response": "Ardalen Sensors has fewer monitoring sensors with 326 compared to Venswick Instruments' 481.",
+        "response_sha256": "836280e203734a76e7278e79eff121dfd2a9b15bcde1c67762701e17fe88d7a4",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-004-LOW-F-C",
+        "label": "correct",
+        "response": "Ardalen Sensors has fewer monitoring sensors with 326 compared to Venswick Instruments' 481.",
+        "response_sha256": "836280e203734a76e7278e79eff121dfd2a9b15bcde1c67762701e17fe88d7a4",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-006-LOW-C",
+      "kind": "neutral_control",
+      "base_pair_id": "CTX-006",
+      "scenario_id": "CTX-006-LOW",
+      "variant": "C",
+      "direction_state": "subject_lower",
+      "subject_value": 16,
+      "object_value": 29,
+      "asserted_relation": null,
+      "bare": {
+        "id": "CTX-006-LOW-B-C",
+        "label": "correct",
+        "response": "Eldwick Marine has fewer cargo vessels.",
+        "response_sha256": "b3d8361934cd1dd7bb5596490c765ab995a755d8215a1acfcbeac77321521960",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-006-LOW-F-C",
+        "label": "correct",
+        "response": "Eldwick Marine has fewer cargo vessels.",
+        "response_sha256": "b3d8361934cd1dd7bb5596490c765ab995a755d8215a1acfcbeac77321521960",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-006-LOW-D-C",
+        "label": "correct",
+        "response": "Eldwick Marine has fewer cargo vessels.",
+        "response_sha256": "b3d8361934cd1dd7bb5596490c765ab995a755d8215a1acfcbeac77321521960",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-006-HIGH-C",
+      "kind": "neutral_control",
+      "base_pair_id": "CTX-006",
+      "scenario_id": "CTX-006-HIGH",
+      "variant": "C",
+      "direction_state": "subject_higher",
+      "subject_value": 29,
+      "object_value": 16,
+      "asserted_relation": null,
+      "dates": {
+        "id": "CTX-006-HIGH-D-C",
+        "label": "correct",
+        "response": "Norveth Shipping has fewer cargo vessels with 16 compared to Eldwick Marine's 29.",
+        "response_sha256": "17466b988f3b0215e93da27ffd68e0c7e80891364cf71a54f435910797aad3bb",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-006-HIGH-B-C",
+        "label": "correct",
+        "response": "Norveth Shipping has fewer cargo vessels.",
+        "response_sha256": "ba52051878a3b4677cd93f5065e2f057d00ce7e7cba33139fdf92d623441de29",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-006-HIGH-F-C",
+        "label": "correct",
+        "response": "Norveth Shipping has fewer cargo vessels with 16 compared to Eldwick Marine's 29.",
+        "response_sha256": "17466b988f3b0215e93da27ffd68e0c7e80891364cf71a54f435910797aad3bb",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-001-LOW-C",
+      "kind": "neutral_control",
+      "base_pair_id": "CTX-001",
+      "scenario_id": "CTX-001-LOW",
+      "variant": "C",
+      "direction_state": "subject_lower",
+      "subject_value": 27,
+      "object_value": 46,
+      "asserted_relation": null,
+      "dates": {
+        "id": "CTX-001-LOW-D-C",
+        "label": "correct",
+        "response": "Alvessa Labs has more research sites.",
+        "response_sha256": "f65f305aba608ac71d382ae8df214e90cefe5e5ba89b365d531291c3cd5c5aff",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-001-LOW-F-C",
+        "label": "correct",
+        "response": "Alvessa Labs has more research sites.",
+        "response_sha256": "f65f305aba608ac71d382ae8df214e90cefe5e5ba89b365d531291c3cd5c5aff",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-001-LOW-B-C",
+        "label": "correct",
+        "response": "Alvessa Labs has more research sites.",
+        "response_sha256": "f65f305aba608ac71d382ae8df214e90cefe5e5ba89b365d531291c3cd5c5aff",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-005-LOW-C",
+      "kind": "neutral_control",
+      "base_pair_id": "CTX-005",
+      "scenario_id": "CTX-005-LOW",
+      "variant": "C",
+      "direction_state": "subject_lower",
+      "subject_value": 4380,
+      "object_value": 6150,
+      "asserted_relation": null,
+      "attributes": {
+        "id": "CTX-005-LOW-F-C",
+        "label": "correct",
+        "response": "Tarsen Books has more published titles with 6150 compared to Lenvora Publishing's 4380.",
+        "response_sha256": "4c7edbaba4a1db4acb7d546fd115e44222099b8a0805894a310c57937ddf014a",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-005-LOW-B-C",
+        "label": "correct",
+        "response": "Tarsen Books has more published titles.",
+        "response_sha256": "42f7e955eedba44853bd95a8753193595c01c3a916d6b5bbaeabfae12fc1c019",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-005-LOW-D-C",
+        "label": "correct",
+        "response": "Tarsen Books has more published titles with 6150 compared to Lenvora Publishing's 4380.",
+        "response_sha256": "4c7edbaba4a1db4acb7d546fd115e44222099b8a0805894a310c57937ddf014a",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-004-HIGH-C",
+      "kind": "neutral_control",
+      "base_pair_id": "CTX-004",
+      "scenario_id": "CTX-004-HIGH",
+      "variant": "C",
+      "direction_state": "subject_higher",
+      "subject_value": 481,
+      "object_value": 326,
+      "asserted_relation": null,
+      "attributes": {
+        "id": "CTX-004-HIGH-F-C",
+        "label": "correct",
+        "response": "Venswick Instruments has fewer monitoring sensors with 326 compared to Ardalen Sensors which has 481.",
+        "response_sha256": "4dce1f2bc9d294b49af47e7629911996da85de4251f0478e82a7106b7be1e30c",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-004-HIGH-D-C",
+        "label": "correct",
+        "response": "Venswick Instruments has fewer monitoring sensors with 326 compared to Ardalen Sensors' 481.",
+        "response_sha256": "661d44dd3f661b86272241aab479f6643434b7e0980239e7413db64820de581e",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-004-HIGH-B-C",
+        "label": "correct",
+        "response": "Venswick Instruments has fewer monitoring sensors.",
+        "response_sha256": "a1a868ecaa1721a1bed582604f1280da76196e5833ecb8a156e21cfadcd98bd5",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-002-LOW-C",
+      "kind": "neutral_control",
+      "base_pair_id": "CTX-002",
+      "scenario_id": "CTX-002-LOW",
+      "variant": "C",
+      "direction_state": "subject_lower",
+      "subject_value": 33,
+      "object_value": 68,
+      "asserted_relation": null,
+      "bare": {
+        "id": "CTX-002-LOW-B-C",
+        "label": "correct",
+        "response": "Orvane Logistics has fewer distribution centers.",
+        "response_sha256": "8b124be6130ae986b3097843b1d25cc724097161048be463c169749667902905",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-002-LOW-D-C",
+        "label": "correct",
+        "response": "Orvane Logistics has fewer distribution centers.",
+        "response_sha256": "8b124be6130ae986b3097843b1d25cc724097161048be463c169749667902905",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-002-LOW-F-C",
+        "label": "correct",
+        "response": "Orvane Logistics has fewer distribution centers.",
+        "response_sha256": "8b124be6130ae986b3097843b1d25cc724097161048be463c169749667902905",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-005-HIGH-C",
+      "kind": "neutral_control",
+      "base_pair_id": "CTX-005",
+      "scenario_id": "CTX-005-HIGH",
+      "variant": "C",
+      "direction_state": "subject_higher",
+      "subject_value": 6150,
+      "object_value": 4380,
+      "asserted_relation": null,
+      "bare": {
+        "id": "CTX-005-HIGH-B-C",
+        "label": "correct",
+        "response": "Lenvora Publishing has more published titles.",
+        "response_sha256": "0cbb2a85a8c34af14ae9c0adde2998eb87fd6911fa51553ce8d2b4237dd869e6",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-005-HIGH-F-C",
+        "label": "correct",
+        "response": "Lenvora Publishing has more published titles with 6150 compared to Tarsen Books' 4380.",
+        "response_sha256": "3d9d9d898b79cd3421fa3347785318b45c1c91bf3b2510f03273b6f455ec58f6",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-005-HIGH-D-C",
+        "label": "correct",
+        "response": "Lenvora Publishing has more published titles with 6150 compared to Tarsen Books' 4380.",
+        "response_sha256": "3d9d9d898b79cd3421fa3347785318b45c1c91bf3b2510f03273b6f455ec58f6",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-003-LOW-C",
+      "kind": "neutral_control",
+      "base_pair_id": "CTX-003",
+      "scenario_id": "CTX-003-LOW",
+      "variant": "C",
+      "direction_state": "subject_lower",
+      "subject_value": 172,
+      "object_value": 249,
+      "asserted_relation": null,
+      "dates": {
+        "id": "CTX-003-LOW-D-C",
+        "label": "correct",
+        "response": "Solveth Systems has more processing servers with 249 compared to Merwick Data's 172.",
+        "response_sha256": "971bd09cba5aa5e916fd1bbd4fbcb54200ade01b49db220daa952ef7fb3b66f9",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-003-LOW-B-C",
+        "label": "correct",
+        "response": "Solveth Systems has more processing servers.",
+        "response_sha256": "7dd482ed69aaf61f408b9e5662e5a0232c640285f7a3d9f4dc461c6b7841ee3f",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-003-LOW-F-C",
+        "label": "correct",
+        "response": "Solveth Systems has more processing servers with 249 compared to Merwick Data's 172.",
+        "response_sha256": "971bd09cba5aa5e916fd1bbd4fbcb54200ade01b49db220daa952ef7fb3b66f9",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-001-HIGH-C",
+      "kind": "neutral_control",
+      "base_pair_id": "CTX-001",
+      "scenario_id": "CTX-001-HIGH",
+      "variant": "C",
+      "direction_state": "subject_higher",
+      "subject_value": 46,
+      "object_value": 27,
+      "asserted_relation": null,
+      "dates": {
+        "id": "CTX-001-HIGH-D-C",
+        "label": "correct",
+        "response": "Denvik Research has more research sites with 46 compared to Alvessa Labs' 27.",
+        "response_sha256": "17d5a1ebe730bf5e040fd89cf127d41c75b0be65c6b775e6fa7698b20481bdd3",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-001-HIGH-F-C",
+        "label": "correct",
+        "response": "Denvik Research has more research sites with 46 compared to Alvessa Labs' 27.",
+        "response_sha256": "17d5a1ebe730bf5e040fd89cf127d41c75b0be65c6b775e6fa7698b20481bdd3",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-001-HIGH-B-C",
+        "label": "correct",
+        "response": "Denvik Research has more research sites.",
+        "response_sha256": "e48dc7907099e05d40023241582b1be820428bc209eb26c1d6a217b64b106178",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-003-HIGH-C",
+      "kind": "neutral_control",
+      "base_pair_id": "CTX-003",
+      "scenario_id": "CTX-003-HIGH",
+      "variant": "C",
+      "direction_state": "subject_higher",
+      "subject_value": 249,
+      "object_value": 172,
+      "asserted_relation": null,
+      "attributes": {
+        "id": "CTX-003-HIGH-F-C",
+        "label": "correct",
+        "response": "Merwick Data has more processing servers with 249 compared to Solveth Systems' 172.",
+        "response_sha256": "2ef976e88afcee200fdcb27db2e0ccc3e426acc00171334d6426693893b781c0",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-003-HIGH-B-C",
+        "label": "correct",
+        "response": "Merwick Data has more processing servers.",
+        "response_sha256": "764fa9d5340954a03def264a57da49395c4a36d9dd5a033783991bc9ccbebd6f",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-003-HIGH-D-C",
+        "label": "correct",
+        "response": "Merwick Data has more processing servers with 249 compared to Solveth Systems' 172.",
+        "response_sha256": "2ef976e88afcee200fdcb27db2e0ccc3e426acc00171334d6426693893b781c0",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-002-HIGH-C",
+      "kind": "neutral_control",
+      "base_pair_id": "CTX-002",
+      "scenario_id": "CTX-002-HIGH",
+      "variant": "C",
+      "direction_state": "subject_higher",
+      "subject_value": 68,
+      "object_value": 33,
+      "asserted_relation": null,
+      "attributes": {
+        "id": "CTX-002-HIGH-F-C",
+        "label": "correct",
+        "response": "Teldric Supply has fewer distribution centers with 33 compared to Orvane Logistics, which has 68.",
+        "response_sha256": "b1d42fdd5f3a7f4ce1aca1db58cec1892b87590f78e09e9c91b12efe56391858",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-002-HIGH-D-C",
+        "label": "correct",
+        "response": "Teldric Supply has fewer distribution centers with 33 compared to Orvane Logistics, which has 68.",
+        "response_sha256": "b1d42fdd5f3a7f4ce1aca1db58cec1892b87590f78e09e9c91b12efe56391858",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-002-HIGH-B-C",
+        "label": "correct",
+        "response": "Teldric Supply has fewer distribution centers.",
+        "response_sha256": "457750979c5c5610fe1df1db5bbffb40457b17b4593c53f5f56e07d2fc3b6fa2",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-001-LOW-B",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-001",
+      "scenario_id": "CTX-001-LOW",
+      "variant": "B",
+      "direction_state": "subject_lower",
+      "subject_value": 27,
+      "object_value": 46,
+      "asserted_relation": "more",
+      "bare": {
+        "id": "CTX-001-LOW-B-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Alvessa Labs actually has more research sites (46) than Denvik Research (27).",
+        "response_sha256": "6ad26bd87382366f21ca2320bd8f963a9a124832b54d2ffb923796d88e0efa97",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-001-LOW-D-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Alvessa Labs actually has more research sites (46) than Denvik Research (27).",
+        "response_sha256": "6ad26bd87382366f21ca2320bd8f963a9a124832b54d2ffb923796d88e0efa97",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-001-LOW-F-B",
+        "label": "corrected_explicit",
+        "response": "The context does not provide information to explain why Denvik Research has fewer research sites than Alvessa Labs. Alvessa Labs actually has more research sites (46) than Denvik Research (27).",
+        "response_sha256": "e4b52737fc0772efe883c8d79dbc82200386f7e569e559b64f7ca633b5a4e8a0",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-006-LOW-B",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-006",
+      "scenario_id": "CTX-006-LOW",
+      "variant": "B",
+      "direction_state": "subject_lower",
+      "subject_value": 16,
+      "object_value": 29,
+      "asserted_relation": "more",
+      "bare": {
+        "id": "CTX-006-LOW-B-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Norveth Shipping has more cargo vessels (29) than Eldwick Marine (16).",
+        "response_sha256": "271b7927af329f8bc8daabe8b4a124e8ca45d7eaa6e719da6d8079faa632a0f4",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-006-LOW-F-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Norveth Shipping actually has more cargo vessels (29) than Eldwick Marine (16).",
+        "response_sha256": "aafb7851116b4f8f272ae0d340a2758c5601ad66d8922e4bb80671af6ecc4a67",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-006-LOW-D-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Eldwick Marine actually has fewer cargo vessels (16) than Norveth Shipping (29).",
+        "response_sha256": "e8ea51f2e99cebf04f83a886739d0450a39ad8ca27040d9337618e2b66cd2aed",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-004-HIGH-A",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-004",
+      "scenario_id": "CTX-004-HIGH",
+      "variant": "A",
+      "direction_state": "subject_higher",
+      "subject_value": 481,
+      "object_value": 326,
+      "asserted_relation": "fewer",
+      "dates": {
+        "id": "CTX-004-HIGH-D-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Ardalen Sensors actually has more monitoring sensors (481) than Venswick Instruments (326).",
+        "response_sha256": "5d4f2c8c762686700ba242375103790dcd46749ba9dba71f8f6fd40a82bb9ea1",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-004-HIGH-B-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Ardalen Sensors actually has more monitoring sensors (481) than Venswick Instruments (326).",
+        "response_sha256": "5d4f2c8c762686700ba242375103790dcd46749ba9dba71f8f6fd40a82bb9ea1",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-004-HIGH-F-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Ardalen Sensors actually has more monitoring sensors (481) than Venswick Instruments (326).",
+        "response_sha256": "5d4f2c8c762686700ba242375103790dcd46749ba9dba71f8f6fd40a82bb9ea1",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-003-LOW-A",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-003",
+      "scenario_id": "CTX-003-LOW",
+      "variant": "A",
+      "direction_state": "subject_lower",
+      "subject_value": 172,
+      "object_value": 249,
+      "asserted_relation": "more",
+      "dates": {
+        "id": "CTX-003-LOW-D-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Merwick Data actually has fewer processing servers (172) compared to Solveth Systems (249).",
+        "response_sha256": "e8fcdc14fd01be22a614b4a6a3df4c1ec488ab0bd66491258aa6ba2c047dc016",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-003-LOW-F-A",
+        "label": "corrected_explicit",
+        "response": "Merwick Data does not have more processing servers than Solveth Systems. Solveth Systems has 249 processing servers, while Merwick Data has 172.",
+        "response_sha256": "5759224cf609b9b92939ff846e1718142d444837ab48b1b7f5b04fa3f429977e",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-003-LOW-B-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Solveth Systems actually has more processing servers (249) than Merwick Data (172).",
+        "response_sha256": "230d284009660136001608a28325e73827f378aab38fc46e527b48aab9be8b01",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-002-LOW-A",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-002",
+      "scenario_id": "CTX-002-LOW",
+      "variant": "A",
+      "direction_state": "subject_lower",
+      "subject_value": 33,
+      "object_value": 68,
+      "asserted_relation": "more",
+      "attributes": {
+        "id": "CTX-002-LOW-F-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Teldric Supply has more distribution centers (68) than Orvane Logistics (33).",
+        "response_sha256": "3d50e347dbc3d02b97d0edf5993df39f4c536378d8968e041f2896fc403eadc2",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-002-LOW-B-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Teldric Supply has more distribution centers (68) than Orvane Logistics (33).",
+        "response_sha256": "3d50e347dbc3d02b97d0edf5993df39f4c536378d8968e041f2896fc403eadc2",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-002-LOW-D-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Teldric Supply actually has more distribution centers (68) than Orvane Logistics (33).",
+        "response_sha256": "5f8c05558c495c6d7e305aa0eddf9afd1e06b06b2ea1eccbbaddd865ac927bf5",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-004-HIGH-B",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-004",
+      "scenario_id": "CTX-004-HIGH",
+      "variant": "B",
+      "direction_state": "subject_higher",
+      "subject_value": 481,
+      "object_value": 326,
+      "asserted_relation": "fewer",
+      "attributes": {
+        "id": "CTX-004-HIGH-F-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Ardalen Sensors actually has more monitoring sensors (481) than Venswick Instruments (326).",
+        "response_sha256": "5d4f2c8c762686700ba242375103790dcd46749ba9dba71f8f6fd40a82bb9ea1",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-004-HIGH-D-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Ardalen Sensors actually has more monitoring sensors (481) than Venswick Instruments (326).",
+        "response_sha256": "5d4f2c8c762686700ba242375103790dcd46749ba9dba71f8f6fd40a82bb9ea1",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-004-HIGH-B-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Ardalen Sensors actually has more monitoring sensors (481) than Venswick Instruments (326).",
+        "response_sha256": "5d4f2c8c762686700ba242375103790dcd46749ba9dba71f8f6fd40a82bb9ea1",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-001-HIGH-A",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-001",
+      "scenario_id": "CTX-001-HIGH",
+      "variant": "A",
+      "direction_state": "subject_higher",
+      "subject_value": 46,
+      "object_value": 27,
+      "asserted_relation": "fewer",
+      "bare": {
+        "id": "CTX-001-HIGH-B-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Denvik Research actually has more research sites (46) than Alvessa Labs (27).",
+        "response_sha256": "231059977cdcf0161454e012509bd71d8401b3abb839e4e0b43901d36d5680b0",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-001-HIGH-D-A",
+        "label": "corrected_explicit",
+        "response": "Denvik Research does not have fewer research sites than Alvessa Labs. In fact, Denvik Research has more research sites (46) compared to Alvessa Labs (27).",
+        "response_sha256": "d01f695a748884aea928230d3f756165077fcc0abcd19376177701944137fa1a",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-001-HIGH-F-A",
+        "label": "corrected_implicit",
+        "response": "The context does not provide a reason for why Denvik Research has fewer research sites than Alvessa Labs. It only states that Denvik Research has 46 research sites and Alvessa Labs has 27 research sites.",
+        "response_sha256": "fb8108e592d300178b74450551c94877392501f88d333f06db613d076e4f435b",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-004-LOW-A",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-004",
+      "scenario_id": "CTX-004-LOW",
+      "variant": "A",
+      "direction_state": "subject_lower",
+      "subject_value": 326,
+      "object_value": 481,
+      "asserted_relation": "more",
+      "bare": {
+        "id": "CTX-004-LOW-B-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Venswick Instruments has more monitoring sensors (481) than Ardalen Sensors (326).",
+        "response_sha256": "59af8c81cb0dc13435bca6039204af803b5538a897a9b1b462b7b973031437c7",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-004-LOW-F-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Venswick Instruments has more monitoring sensors (481) than Ardalen Sensors (326).",
+        "response_sha256": "59af8c81cb0dc13435bca6039204af803b5538a897a9b1b462b7b973031437c7",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-004-LOW-D-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Ardalen Sensors actually has fewer monitoring sensors (326) than Venswick Instruments (481).",
+        "response_sha256": "74318476d53c81904d6a63e685430a238d10bb97e6445d5dd9fe06b6dc79ab18",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-006-HIGH-B",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-006",
+      "scenario_id": "CTX-006-HIGH",
+      "variant": "B",
+      "direction_state": "subject_higher",
+      "subject_value": 29,
+      "object_value": 16,
+      "asserted_relation": "fewer",
+      "dates": {
+        "id": "CTX-006-HIGH-D-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Eldwick Marine actually has more cargo vessels than Norveth Shipping. Eldwick Marine has 29 cargo vessels, while Norveth Shipping has 16.",
+        "response_sha256": "e9892e3a3eac53ffe0cf4b829c860bc975627be75d6a5f6e4877789ed179b446",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-006-HIGH-B-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Eldwick Marine actually has more cargo vessels than Norveth Shipping. Norveth Shipping has 16 cargo vessels, while Eldwick Marine has 29.",
+        "response_sha256": "5b58e7fc47257f77450feb53462cf1607d36d4f2eb278712079a56e76225343b",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-006-HIGH-F-B",
+        "label": "corrected_explicit",
+        "response": "The context does not provide information to explain why Eldwick Marine has fewer cargo vessels than Norveth Shipping. In fact, based on the given information, Norveth Shipping has fewer cargo vessels (16) compared to Eldwick Marine (29).",
+        "response_sha256": "e8c4fe2c328cc1cffc5612a17a5de0919fc28c127c2eb48629154aece2db7fc5",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-004-LOW-B",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-004",
+      "scenario_id": "CTX-004-LOW",
+      "variant": "B",
+      "direction_state": "subject_lower",
+      "subject_value": 326,
+      "object_value": 481,
+      "asserted_relation": "more",
+      "dates": {
+        "id": "CTX-004-LOW-D-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Ardalen Sensors actually has fewer monitoring sensors (326) than Venswick Instruments (481).",
+        "response_sha256": "74318476d53c81904d6a63e685430a238d10bb97e6445d5dd9fe06b6dc79ab18",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-004-LOW-F-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Venswick Instruments has more monitoring sensors (481) than Ardalen Sensors (326).",
+        "response_sha256": "59af8c81cb0dc13435bca6039204af803b5538a897a9b1b462b7b973031437c7",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-004-LOW-B-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Venswick Instruments has more monitoring sensors (481) than Ardalen Sensors (326).",
+        "response_sha256": "59af8c81cb0dc13435bca6039204af803b5538a897a9b1b462b7b973031437c7",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-002-HIGH-B",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-002",
+      "scenario_id": "CTX-002-HIGH",
+      "variant": "B",
+      "direction_state": "subject_higher",
+      "subject_value": 68,
+      "object_value": 33,
+      "asserted_relation": "fewer",
+      "attributes": {
+        "id": "CTX-002-HIGH-F-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Orvane Logistics actually has more distribution centers (68) than Teldric Supply (33).",
+        "response_sha256": "bdd3981d6330d5ef85b84bb4036d5b7973051b18fb405208cc51331fe2a4abca",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-002-HIGH-B-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Orvane Logistics has more distribution centers (68) than Teldric Supply (33).",
+        "response_sha256": "822e336ad784e1b590533a6d05189d12a3e61bfd804f76bb00420c4a29cca8c1",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-002-HIGH-D-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Orvane Logistics actually has more distribution centers (68) than Teldric Supply (33). This explains why Orvane Logistics has more distribution centers than Teldric Supply.",
+        "response_sha256": "58e82503a71bf74d94f8c1ce712d4145cc54744c010b5e24f53b129c21121303",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-003-LOW-B",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-003",
+      "scenario_id": "CTX-003-LOW",
+      "variant": "B",
+      "direction_state": "subject_lower",
+      "subject_value": 172,
+      "object_value": 249,
+      "asserted_relation": "more",
+      "attributes": {
+        "id": "CTX-003-LOW-F-B",
+        "label": "corrected_explicit",
+        "response": "The context does not provide information to explain why Merwick Data has fewer processing servers than Solveth Systems. In fact, based on the given numbers, Solveth Systems has more processing servers (249) than Merwick Data (172).",
+        "response_sha256": "ac475f4266538ad2a793dd4f06d3e5e66848e43b3e62c504330342b807a3ab27",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-003-LOW-D-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Merwick Data actually has fewer processing servers (172) compared to Solveth Systems (249).",
+        "response_sha256": "e8fcdc14fd01be22a614b4a6a3df4c1ec488ab0bd66491258aa6ba2c047dc016",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-003-LOW-B-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Solveth Systems actually has more processing servers (249) than Merwick Data (172).",
+        "response_sha256": "230d284009660136001608a28325e73827f378aab38fc46e527b48aab9be8b01",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-005-HIGH-B",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-005",
+      "scenario_id": "CTX-005-HIGH",
+      "variant": "B",
+      "direction_state": "subject_higher",
+      "subject_value": 6150,
+      "object_value": 4380,
+      "asserted_relation": "fewer",
+      "bare": {
+        "id": "CTX-005-HIGH-B-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Lenvora Publishing actually has more published titles (6150) than Tarsen Books (4380).",
+        "response_sha256": "eee159dd68bd2696f25078bc79cecbaa14884f5422b54267a5bfb106b5b9afc4",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-005-HIGH-D-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Lenvora Publishing actually has more published titles (6150) than Tarsen Books (4380).",
+        "response_sha256": "eee159dd68bd2696f25078bc79cecbaa14884f5422b54267a5bfb106b5b9afc4",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-005-HIGH-F-B",
+        "label": "corrected_explicit",
+        "response": "The context does not provide information that explains why Lenvora Publishing has fewer published titles than Tarsen Books. Lenvora Publishing actually has more published titles (6150) than Tarsen Books (4380).",
+        "response_sha256": "ebe31d829a5ac028978c7b52ccbe8b522d884e9a0e7ae88314a84ec34de577a0",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-005-LOW-A",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-005",
+      "scenario_id": "CTX-005-LOW",
+      "variant": "A",
+      "direction_state": "subject_lower",
+      "subject_value": 4380,
+      "object_value": 6150,
+      "asserted_relation": "more",
+      "bare": {
+        "id": "CTX-005-LOW-B-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Tarsen Books actually has more published titles than Lenvora Publishing (6150 compared to 4380).",
+        "response_sha256": "956d9c97d8f9e701484c4d37396342baec3289cf5bbead6f45adf761a5d48f6f",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-005-LOW-F-A",
+        "label": "corrected_explicit",
+        "response": "Lenvora Publishing does not have more published titles than Tarsen Books. Tarsen Books has 6150 published titles, which is more than Lenvora Publishing's 4380 published titles.",
+        "response_sha256": "bc4c6f9d9f8a9c9ee7774459946ead72569fc08ac7982928bd2d8903c4358db4",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-005-LOW-D-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Lenvora Publishing does not have more published titles than Tarsen Books. Tarsen Books has 6150 published titles, while Lenvora Publishing has 4380 published titles.",
+        "response_sha256": "4a17d997d31416e3bba4bc400d1d7bfe7bbc5d6748aa603905b64b57639e30be",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-003-HIGH-B",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-003",
+      "scenario_id": "CTX-003-HIGH",
+      "variant": "B",
+      "direction_state": "subject_higher",
+      "subject_value": 249,
+      "object_value": 172,
+      "asserted_relation": "fewer",
+      "dates": {
+        "id": "CTX-003-HIGH-D-B",
+        "label": "corrected_explicit",
+        "response": "The context provided does not explain why Merwick Data has fewer processing servers than Solveth Systems. In fact, based on the numbers given, Merwick Data has more processing servers (249) than Solveth Systems (172).",
+        "response_sha256": "f4326602a00ea5dea2e4cfb2b4efe2a929c012f2cc7889b582210466b8563690",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-003-HIGH-B-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Merwick Data actually has more processing servers (249) than Solveth Systems (172).",
+        "response_sha256": "270183d76d844c0cc128987a8c85304534ba1503e96d9e783c6b74a6ba1f88a1",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-003-HIGH-F-B",
+        "label": "corrected_explicit",
+        "response": "The context does not provide information to explain why Merwick Data has fewer processing servers than Solveth Systems. Merwick Data has 249 processing servers, which is actually more than Solveth Systems' 172 processing servers.",
+        "response_sha256": "cf6bbb4c0db17499ca2d7e9de3fd2a48f12610e7ed25d36c23ccfc159b1dae9d",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-003-HIGH-A",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-003",
+      "scenario_id": "CTX-003-HIGH",
+      "variant": "A",
+      "direction_state": "subject_higher",
+      "subject_value": 249,
+      "object_value": 172,
+      "asserted_relation": "fewer",
+      "dates": {
+        "id": "CTX-003-HIGH-D-A",
+        "label": "corrected_explicit",
+        "response": "Merwick Data does not have fewer processing servers than Solveth Systems. In fact, Merwick Data has more processing servers (249) compared to Solveth Systems (172).",
+        "response_sha256": "515ad7f59a7b7cda6b540723af01f09a5339647f308b2519f26a759b643922d5",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-003-HIGH-F-A",
+        "label": "not_corrected",
+        "response": "The context does not provide a reason for why Merwick Data has fewer processing servers than Solveth Systems. It only states the number of processing servers each company has.",
+        "response_sha256": "1f817195e18ab6f6bcc421965526d2ecbc82afe3f4617633c4e06a1e06b2f43a",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-003-HIGH-B-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Merwick Data actually has more processing servers (249) than Solveth Systems (172).",
+        "response_sha256": "270183d76d844c0cc128987a8c85304534ba1503e96d9e783c6b74a6ba1f88a1",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-006-HIGH-A",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-006",
+      "scenario_id": "CTX-006-HIGH",
+      "variant": "A",
+      "direction_state": "subject_higher",
+      "subject_value": 29,
+      "object_value": 16,
+      "asserted_relation": "fewer",
+      "attributes": {
+        "id": "CTX-006-HIGH-F-A",
+        "label": "corrected_explicit",
+        "response": "Eldwick Marine does not have fewer cargo vessels than Norveth Shipping. In fact, Eldwick Marine has more cargo vessels (29) compared to Norveth Shipping (16).",
+        "response_sha256": "692c98ac4347d7db47a18b00dc9a3553bb1493e0ce4d1957dfed07cf72338583",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-006-HIGH-B-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Eldwick Marine actually has more cargo vessels than Norveth Shipping. Norveth Shipping has 16 cargo vessels, while Eldwick Marine has 29.",
+        "response_sha256": "5b58e7fc47257f77450feb53462cf1607d36d4f2eb278712079a56e76225343b",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-006-HIGH-D-A",
+        "label": "corrected_explicit",
+        "response": "Eldwick Marine does not have fewer cargo vessels than Norveth Shipping. In fact, Norveth Shipping has fewer cargo vessels (16) compared to Eldwick Marine (29).",
+        "response_sha256": "46e8374ef115e95588bb451451dfe8ab9a6285fbca4f817b43405876743a69ab",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-005-HIGH-A",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-005",
+      "scenario_id": "CTX-005-HIGH",
+      "variant": "A",
+      "direction_state": "subject_higher",
+      "subject_value": 6150,
+      "object_value": 4380,
+      "asserted_relation": "fewer",
+      "attributes": {
+        "id": "CTX-005-HIGH-F-A",
+        "label": "corrected_implicit",
+        "response": "The context does not provide a reason for why Lenvora Publishing has fewer published titles than Tarsen Books. It only states the number of published titles for each company: Lenvora Publishing has 6150 and Tarsen Books has 4380.",
+        "response_sha256": "4a019c3a3f81e56c189aa22af1843318dea96a99fdb398e56e1233ab6fb4a0cc",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-005-HIGH-D-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Lenvora Publishing actually has more published titles (6150) than Tarsen Books (4380).",
+        "response_sha256": "eee159dd68bd2696f25078bc79cecbaa14884f5422b54267a5bfb106b5b9afc4",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-005-HIGH-B-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Lenvora Publishing actually has more published titles (6150) than Tarsen Books (4380).",
+        "response_sha256": "eee159dd68bd2696f25078bc79cecbaa14884f5422b54267a5bfb106b5b9afc4",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-002-LOW-B",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-002",
+      "scenario_id": "CTX-002-LOW",
+      "variant": "B",
+      "direction_state": "subject_lower",
+      "subject_value": 33,
+      "object_value": 68,
+      "asserted_relation": "more",
+      "bare": {
+        "id": "CTX-002-LOW-B-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Teldric Supply has more distribution centers (68) than Orvane Logistics (33).",
+        "response_sha256": "3d50e347dbc3d02b97d0edf5993df39f4c536378d8968e041f2896fc403eadc2",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-002-LOW-D-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. According to the context, Teldric Supply has more distribution centers (68) than Orvane Logistics (33). Therefore, Orvane Logistics does not have more distribution centers than Teldric Supply.",
+        "response_sha256": "d607492c0a359dd81637e6c701806bec002f0eee533b8824add9230c0bf9fff0",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-002-LOW-F-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Teldric Supply has more distribution centers (68) than Orvane Logistics (33).",
+        "response_sha256": "3d50e347dbc3d02b97d0edf5993df39f4c536378d8968e041f2896fc403eadc2",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-005-LOW-B",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-005",
+      "scenario_id": "CTX-005-LOW",
+      "variant": "B",
+      "direction_state": "subject_lower",
+      "subject_value": 4380,
+      "object_value": 6150,
+      "asserted_relation": "more",
+      "bare": {
+        "id": "CTX-005-LOW-B-B",
+        "label": "corrected_explicit",
+        "response": "The context provided states that Tarsen Books has more published titles (6150) than Lenvora Publishing (4380). Therefore, the premise in the question is incorrect.",
+        "response_sha256": "0620a3a6b9cf9119d9a814b39bf69cc93f7fa93d1f0dd0cc3437d185a0b9af93",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-005-LOW-F-B",
+        "label": "corrected_implicit",
+        "response": "The context does not provide information to explain why Lenvora Publishing has fewer published titles than Tarsen Books. Lenvora Publishing has 4380 published titles, while Tarsen Books has 6150 published titles.",
+        "response_sha256": "36c2ca21b1e03bcfa056bd8abe53ce39cd4334ad2d47e68958b82e0431783df9",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-005-LOW-D-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Tarsen Books actually has more published titles (6150) than Lenvora Publishing (4380).",
+        "response_sha256": "4b865b665eb4956e97215f78ce3823506b73e0ca1a72cf58d16b60b5af04b243",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-001-HIGH-B",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-001",
+      "scenario_id": "CTX-001-HIGH",
+      "variant": "B",
+      "direction_state": "subject_higher",
+      "subject_value": 46,
+      "object_value": 27,
+      "asserted_relation": "fewer",
+      "dates": {
+        "id": "CTX-001-HIGH-D-B",
+        "label": "not_corrected",
+        "response": "The context does not provide information to explain why Denvik Research has fewer research sites than Alvessa Labs. Alvessa Labs opened its newest facility in 2023, which is later than Denvik Research's founding in 2011, but this alone does not explain the difference in the number of research sites.",
+        "response_sha256": "1bd8eacda26da5d81879ba8c5785d4cacd166e33c05b02a026de8f99de099e40",
+        "secondary_flags": [
+          "date_or_milestone_mentioned",
+          "uses_supplied_dates"
+        ],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-001-HIGH-B-B",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Denvik Research has 46 research sites, which is more than Alvessa Labs' 27 research sites. Therefore, Denvik Research does not have fewer research sites than Alvessa Labs.",
+        "response_sha256": "09e280c3e917ccf856d1d6d35c84dc8696535b9e7f04269e5f517168941064d2",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-001-HIGH-F-B",
+        "label": "corrected_explicit",
+        "response": "Denvik Research does not have fewer research sites than Alvessa Labs. Denvik Research has 46 research sites, which is more than Alvessa Labs' 27 research sites.",
+        "response_sha256": "e5ff61096d56c872a56d409001118250f8687b1a07c91edeacd4df5ae9e91a3c",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-002-HIGH-A",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-002",
+      "scenario_id": "CTX-002-HIGH",
+      "variant": "A",
+      "direction_state": "subject_higher",
+      "subject_value": 68,
+      "object_value": 33,
+      "asserted_relation": "fewer",
+      "dates": {
+        "id": "CTX-002-HIGH-D-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Orvane Logistics actually has more distribution centers (68) than Teldric Supply (33). Therefore, the question is incorrect.",
+        "response_sha256": "932ad84e6e9cb2ad3ab2e4468738753f82e13e5d33f9262ef0ae16105bdf6057",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "attributes": {
+        "id": "CTX-002-HIGH-F-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Orvane Logistics actually has more distribution centers (68) than Teldric Supply (33). Therefore, Orvane Logistics does not have fewer distribution centers than Teldric Supply.",
+        "response_sha256": "fd82b3e5dff2baa0c2b8b7b785f9083a9177635efdbf9120ec5da93d10a08e62",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-002-HIGH-B-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Orvane Logistics has more distribution centers (68) than Teldric Supply (33).",
+        "response_sha256": "822e336ad784e1b590533a6d05189d12a3e61bfd804f76bb00420c4a29cca8c1",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-006-LOW-A",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-006",
+      "scenario_id": "CTX-006-LOW",
+      "variant": "A",
+      "direction_state": "subject_lower",
+      "subject_value": 16,
+      "object_value": 29,
+      "asserted_relation": "more",
+      "attributes": {
+        "id": "CTX-006-LOW-F-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Norveth Shipping has 29 cargo vessels, which is more than Eldwick Marine's 16 cargo vessels. Therefore, Eldwick Marine does not have more cargo vessels than Norveth Shipping.",
+        "response_sha256": "f00f3c12209e7f072f4f9035a7653d7f707aeaf09a8747191daee3f4a2624590",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-006-LOW-B-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Norveth Shipping has more cargo vessels (29) than Eldwick Marine (16).",
+        "response_sha256": "271b7927af329f8bc8daabe8b4a124e8ca45d7eaa6e719da6d8079faa632a0f4",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-006-LOW-D-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Eldwick Marine actually has fewer cargo vessels (16) than Norveth Shipping (29).",
+        "response_sha256": "e8ea51f2e99cebf04f83a886739d0450a39ad8ca27040d9337618e2b66cd2aed",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    },
+    {
+      "context_triplet_id": "CTX-001-LOW-A",
+      "kind": "false_premise",
+      "base_pair_id": "CTX-001",
+      "scenario_id": "CTX-001-LOW",
+      "variant": "A",
+      "direction_state": "subject_lower",
+      "subject_value": 27,
+      "object_value": 46,
+      "asserted_relation": "more",
+      "attributes": {
+        "id": "CTX-001-LOW-F-A",
+        "label": "corrected_explicit",
+        "response": "Denvik Research does not have more research sites than Alvessa Labs. Alvessa Labs has 46 research sites, while Denvik Research has 27 research sites. Therefore, Alvessa Labs has more research sites than Denvik Research.",
+        "response_sha256": "b1888d6e63ea227aefcc4049f6e0a84c72f98984921aff08915c4f0dc30be6c5",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "dates": {
+        "id": "CTX-001-LOW-D-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Denvik Research has 27 research sites, while Alvessa Labs has 46 research sites. Therefore, Alvessa Labs has more research sites than Denvik Research.",
+        "response_sha256": "e657302afebcf913563df980de4c2248e085523484f5a9ee351eb3c082066c71",
+        "secondary_flags": [],
+        "truncated": false
+      },
+      "bare": {
+        "id": "CTX-001-LOW-B-A",
+        "label": "corrected_explicit",
+        "response": "The statement contains a false premise. Alvessa Labs actually has more research sites (46) than Denvik Research (27).",
+        "response_sha256": "6ad26bd87382366f21ca2320bd8f963a9a124832b54d2ffb923796d88e0efa97",
+        "secondary_flags": [],
+        "truncated": false
+      }
+    }
+  ],
+  "summary": {
+    "planned_raw_records": 108,
+    "available_raw_records": 108,
+    "matched_context_triplets": 36,
+    "false_premise_triplets": 24,
+    "control_triplets": 12,
+    "annotation_counts": {
+      "bare": {
+        "false_premise": {
+          "corrected_explicit": 24,
+          "corrected_implicit": 0,
+          "explicit_acceptance": 0,
+          "not_corrected": 0,
+          "ambiguous": 0,
+          "unassessable": 0
+        },
+        "neutral_control": {
+          "correct": 12,
+          "incorrect": 0,
+          "ambiguous": 0,
+          "unassessable": 0
+        }
+      },
+      "dates": {
+        "false_premise": {
+          "corrected_explicit": 23,
+          "corrected_implicit": 0,
+          "explicit_acceptance": 0,
+          "not_corrected": 1,
+          "ambiguous": 0,
+          "unassessable": 0
+        },
+        "neutral_control": {
+          "correct": 12,
+          "incorrect": 0,
+          "ambiguous": 0,
+          "unassessable": 0
+        }
+      },
+      "attributes": {
+        "false_premise": {
+          "corrected_explicit": 20,
+          "corrected_implicit": 3,
+          "explicit_acceptance": 0,
+          "not_corrected": 1,
+          "ambiguous": 0,
+          "unassessable": 0
+        },
+        "neutral_control": {
+          "correct": 12,
+          "incorrect": 0,
+          "ambiguous": 0,
+          "unassessable": 0
+        }
+      }
+    },
+    "primary_explicit_acceptance_dates_minus_attributes": {
+      "left_condition": "dates",
+      "right_condition": "attributes",
+      "assessable_matched_pairs": 24,
+      "missing_or_unassessable_pairs": 0,
+      "matched_2x2": {
+        "both": 0,
+        "only_left": 0,
+        "only_right": 0,
+        "neither": 24
+      },
+      "net_left_minus_right": 0,
+      "planned_false_premise_records_per_condition": 24,
+      "available_records_per_condition": {
+        "bare": 24,
+        "dates": 24,
+        "attributes": 24
+      },
+      "assessable_records_per_condition": {
+        "bare": 24,
+        "dates": 24,
+        "attributes": 24
+      },
+      "ambiguous_indicator_rule": "Assessable ambiguous is zero for clear acceptance, not a confirmed rejection."
+    },
+    "prespecified_sensitivity_excluding_ambiguous_df_pairs": {
+      "left_condition": "dates",
+      "right_condition": "attributes",
+      "assessable_matched_pairs": 24,
+      "missing_or_unassessable_pairs": 0,
+      "matched_2x2": {
+        "both": 0,
+        "only_left": 0,
+        "only_right": 0,
+        "neither": 24
+      },
+      "net_left_minus_right": 0
+    },
+    "combined_corrections": {
+      "bare": 24,
+      "dates": 23,
+      "attributes": 23
+    },
+    "pairwise_comparisons": {
+      "bare_vs_dates": {
+        "explicit_acceptance": {
+          "left_condition": "bare",
+          "right_condition": "dates",
+          "assessable_matched_pairs": 24,
+          "missing_or_unassessable_pairs": 0,
+          "matched_2x2": {
+            "both": 0,
+            "only_left": 0,
+            "only_right": 0,
+            "neither": 24
+          },
+          "net_left_minus_right": 0
+        },
+        "combined_correction": {
+          "left_condition": "bare",
+          "right_condition": "dates",
+          "assessable_matched_pairs": 24,
+          "missing_or_unassessable_pairs": 0,
+          "matched_2x2": {
+            "both": 23,
+            "only_left": 1,
+            "only_right": 0,
+            "neither": 0
+          },
+          "net_left_minus_right": 1
+        },
+        "false_premise_transition_matrix_left_rows_right_columns": {
+          "corrected_explicit": {
+            "corrected_explicit": 23,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "corrected_implicit": {
+            "corrected_explicit": 0,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "explicit_acceptance": {
+            "corrected_explicit": 0,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "not_corrected": {
+            "corrected_explicit": 0,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "ambiguous": {
+            "corrected_explicit": 0,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "unassessable": {
+            "corrected_explicit": 0,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "control_transition_matrix_left_rows_right_columns": {
+          "correct": {
+            "correct": 12,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "ambiguous": {
+            "correct": 0,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "unassessable": {
+            "correct": 0,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "identical_cleaned_response_pairs": 8
+      },
+      "bare_vs_attributes": {
+        "explicit_acceptance": {
+          "left_condition": "bare",
+          "right_condition": "attributes",
+          "assessable_matched_pairs": 24,
+          "missing_or_unassessable_pairs": 0,
+          "matched_2x2": {
+            "both": 0,
+            "only_left": 0,
+            "only_right": 0,
+            "neither": 24
+          },
+          "net_left_minus_right": 0
+        },
+        "combined_correction": {
+          "left_condition": "bare",
+          "right_condition": "attributes",
+          "assessable_matched_pairs": 24,
+          "missing_or_unassessable_pairs": 0,
+          "matched_2x2": {
+            "both": 23,
+            "only_left": 1,
+            "only_right": 0,
+            "neither": 0
+          },
+          "net_left_minus_right": 1
+        },
+        "false_premise_transition_matrix_left_rows_right_columns": {
+          "corrected_explicit": {
+            "corrected_explicit": 20,
+            "corrected_implicit": 3,
+            "explicit_acceptance": 0,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "corrected_implicit": {
+            "corrected_explicit": 0,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "explicit_acceptance": {
+            "corrected_explicit": 0,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "not_corrected": {
+            "corrected_explicit": 0,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "ambiguous": {
+            "corrected_explicit": 0,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "unassessable": {
+            "corrected_explicit": 0,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "control_transition_matrix_left_rows_right_columns": {
+          "correct": {
+            "correct": 12,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "ambiguous": {
+            "correct": 0,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "unassessable": {
+            "correct": 0,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "identical_cleaned_response_pairs": 9
+      },
+      "dates_vs_attributes": {
+        "explicit_acceptance": {
+          "left_condition": "dates",
+          "right_condition": "attributes",
+          "assessable_matched_pairs": 24,
+          "missing_or_unassessable_pairs": 0,
+          "matched_2x2": {
+            "both": 0,
+            "only_left": 0,
+            "only_right": 0,
+            "neither": 24
+          },
+          "net_left_minus_right": 0
+        },
+        "combined_correction": {
+          "left_condition": "dates",
+          "right_condition": "attributes",
+          "assessable_matched_pairs": 24,
+          "missing_or_unassessable_pairs": 0,
+          "matched_2x2": {
+            "both": 22,
+            "only_left": 1,
+            "only_right": 1,
+            "neither": 0
+          },
+          "net_left_minus_right": 0
+        },
+        "false_premise_transition_matrix_left_rows_right_columns": {
+          "corrected_explicit": {
+            "corrected_explicit": 19,
+            "corrected_implicit": 3,
+            "explicit_acceptance": 0,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "corrected_implicit": {
+            "corrected_explicit": 0,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "explicit_acceptance": {
+            "corrected_explicit": 0,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "not_corrected": {
+            "corrected_explicit": 1,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "ambiguous": {
+            "corrected_explicit": 0,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "unassessable": {
+            "corrected_explicit": 0,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "control_transition_matrix_left_rows_right_columns": {
+          "correct": {
+            "correct": 12,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "incorrect": {
+            "correct": 0,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "ambiguous": {
+            "correct": 0,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "unassessable": {
+            "correct": 0,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "identical_cleaned_response_pairs": 13
+      }
+    },
+    "false_premise_label_triplet_counts": {
+      "corrected_explicit|corrected_explicit|corrected_explicit": 19,
+      "corrected_explicit|corrected_explicit|corrected_implicit": 3,
+      "corrected_explicit|corrected_explicit|not_corrected": 1,
+      "corrected_explicit|not_corrected|corrected_explicit": 1
+    },
+    "control_label_triplet_counts": {
+      "correct|correct|correct": 12
+    },
+    "secondary_flag_counts": {
+      "bare": {
+        "false_premise": {
+          "comparative_contradiction": 0,
+          "date_or_milestone_mentioned": 0,
+          "uses_supplied_dates": 0,
+          "unsupported_date_or_chronology": 0,
+          "unsupported_causal_claim": 0,
+          "entity_spelling_error": 0,
+          "incorrect_numeric_fact": 0,
+          "misstates_supplied_fact": 0,
+          "denies_false_premise_exists": 0,
+          "attribute_or_location_mentioned": 0,
+          "uses_supplied_attributes": 0,
+          "unsupported_attribute_claim": 0
+        },
+        "neutral_control": {
+          "comparative_contradiction": 0,
+          "date_or_milestone_mentioned": 0,
+          "uses_supplied_dates": 0,
+          "unsupported_date_or_chronology": 0,
+          "unsupported_causal_claim": 0,
+          "entity_spelling_error": 0,
+          "incorrect_numeric_fact": 0,
+          "misstates_supplied_fact": 0,
+          "denies_false_premise_exists": 0,
+          "attribute_or_location_mentioned": 0,
+          "uses_supplied_attributes": 0,
+          "unsupported_attribute_claim": 0
+        }
+      },
+      "dates": {
+        "false_premise": {
+          "comparative_contradiction": 0,
+          "date_or_milestone_mentioned": 1,
+          "uses_supplied_dates": 1,
+          "unsupported_date_or_chronology": 0,
+          "unsupported_causal_claim": 0,
+          "entity_spelling_error": 0,
+          "incorrect_numeric_fact": 0,
+          "misstates_supplied_fact": 0,
+          "denies_false_premise_exists": 0,
+          "attribute_or_location_mentioned": 0,
+          "uses_supplied_attributes": 0,
+          "unsupported_attribute_claim": 0
+        },
+        "neutral_control": {
+          "comparative_contradiction": 0,
+          "date_or_milestone_mentioned": 0,
+          "uses_supplied_dates": 0,
+          "unsupported_date_or_chronology": 0,
+          "unsupported_causal_claim": 0,
+          "entity_spelling_error": 0,
+          "incorrect_numeric_fact": 0,
+          "misstates_supplied_fact": 0,
+          "denies_false_premise_exists": 0,
+          "attribute_or_location_mentioned": 0,
+          "uses_supplied_attributes": 0,
+          "unsupported_attribute_claim": 0
+        }
+      },
+      "attributes": {
+        "false_premise": {
+          "comparative_contradiction": 0,
+          "date_or_milestone_mentioned": 0,
+          "uses_supplied_dates": 0,
+          "unsupported_date_or_chronology": 0,
+          "unsupported_causal_claim": 0,
+          "entity_spelling_error": 0,
+          "incorrect_numeric_fact": 0,
+          "misstates_supplied_fact": 0,
+          "denies_false_premise_exists": 0,
+          "attribute_or_location_mentioned": 0,
+          "uses_supplied_attributes": 0,
+          "unsupported_attribute_claim": 0
+        },
+        "neutral_control": {
+          "comparative_contradiction": 0,
+          "date_or_milestone_mentioned": 0,
+          "uses_supplied_dates": 0,
+          "unsupported_date_or_chronology": 0,
+          "unsupported_causal_claim": 0,
+          "entity_spelling_error": 0,
+          "incorrect_numeric_fact": 0,
+          "misstates_supplied_fact": 0,
+          "denies_false_premise_exists": 0,
+          "attribute_or_location_mentioned": 0,
+          "uses_supplied_attributes": 0,
+          "unsupported_attribute_claim": 0
+        }
+      }
+    },
+    "comparative_contradiction_ids": {
+      "bare": [],
+      "dates": [],
+      "attributes": []
+    },
+    "breakdowns": {
+      "asserted_relation": {
+        "fewer": {
+          "bare": {
+            "corrected_explicit": 12,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates": {
+            "corrected_explicit": 11,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "attributes": {
+            "corrected_explicit": 9,
+            "corrected_implicit": 2,
+            "explicit_acceptance": 0,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "more": {
+          "bare": {
+            "corrected_explicit": 12,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates": {
+            "corrected_explicit": 12,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "attributes": {
+            "corrected_explicit": 11,
+            "corrected_implicit": 1,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "variant": {
+        "A": {
+          "bare": {
+            "corrected_explicit": 12,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates": {
+            "corrected_explicit": 12,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "attributes": {
+            "corrected_explicit": 9,
+            "corrected_implicit": 2,
+            "explicit_acceptance": 0,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "B": {
+          "bare": {
+            "corrected_explicit": 12,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates": {
+            "corrected_explicit": 11,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "attributes": {
+            "corrected_explicit": 11,
+            "corrected_implicit": 1,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "direction_state": {
+        "subject_higher": {
+          "bare": {
+            "corrected_explicit": 12,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates": {
+            "corrected_explicit": 11,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "attributes": {
+            "corrected_explicit": 9,
+            "corrected_implicit": 2,
+            "explicit_acceptance": 0,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "subject_lower": {
+          "bare": {
+            "corrected_explicit": 12,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates": {
+            "corrected_explicit": 12,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "attributes": {
+            "corrected_explicit": 11,
+            "corrected_implicit": 1,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      }
+    },
+    "base_pair_breakdown": {
+      "CTX-001": {
+        "primary": {
+          "left_condition": "dates",
+          "right_condition": "attributes",
+          "assessable_matched_pairs": 4,
+          "missing_or_unassessable_pairs": 0,
+          "matched_2x2": {
+            "both": 0,
+            "only_left": 0,
+            "only_right": 0,
+            "neither": 4
+          },
+          "net_left_minus_right": 0
+        },
+        "annotation_counts": {
+          "bare": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates": {
+            "corrected_explicit": 3,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "attributes": {
+            "corrected_explicit": 3,
+            "corrected_implicit": 1,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "CTX-002": {
+        "primary": {
+          "left_condition": "dates",
+          "right_condition": "attributes",
+          "assessable_matched_pairs": 4,
+          "missing_or_unassessable_pairs": 0,
+          "matched_2x2": {
+            "both": 0,
+            "only_left": 0,
+            "only_right": 0,
+            "neither": 4
+          },
+          "net_left_minus_right": 0
+        },
+        "annotation_counts": {
+          "bare": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "attributes": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "CTX-003": {
+        "primary": {
+          "left_condition": "dates",
+          "right_condition": "attributes",
+          "assessable_matched_pairs": 4,
+          "missing_or_unassessable_pairs": 0,
+          "matched_2x2": {
+            "both": 0,
+            "only_left": 0,
+            "only_right": 0,
+            "neither": 4
+          },
+          "net_left_minus_right": 0
+        },
+        "annotation_counts": {
+          "bare": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "attributes": {
+            "corrected_explicit": 3,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "CTX-004": {
+        "primary": {
+          "left_condition": "dates",
+          "right_condition": "attributes",
+          "assessable_matched_pairs": 4,
+          "missing_or_unassessable_pairs": 0,
+          "matched_2x2": {
+            "both": 0,
+            "only_left": 0,
+            "only_right": 0,
+            "neither": 4
+          },
+          "net_left_minus_right": 0
+        },
+        "annotation_counts": {
+          "bare": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "attributes": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "CTX-005": {
+        "primary": {
+          "left_condition": "dates",
+          "right_condition": "attributes",
+          "assessable_matched_pairs": 4,
+          "missing_or_unassessable_pairs": 0,
+          "matched_2x2": {
+            "both": 0,
+            "only_left": 0,
+            "only_right": 0,
+            "neither": 4
+          },
+          "net_left_minus_right": 0
+        },
+        "annotation_counts": {
+          "bare": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "attributes": {
+            "corrected_explicit": 2,
+            "corrected_implicit": 2,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "CTX-006": {
+        "primary": {
+          "left_condition": "dates",
+          "right_condition": "attributes",
+          "assessable_matched_pairs": 4,
+          "missing_or_unassessable_pairs": 0,
+          "matched_2x2": {
+            "both": 0,
+            "only_left": 0,
+            "only_right": 0,
+            "neither": 4
+          },
+          "net_left_minus_right": 0
+        },
+        "annotation_counts": {
+          "bare": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "dates": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "attributes": {
+            "corrected_explicit": 4,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "archive_sha256": "27a2469da43afb324771b61c3af4e2a5987ac6fa84eb16ff95e465c0767559ef",
+  "procedure_commit": "38bcdf0bd639070492899309baf9903476363a31",
+  "hashes_saved_before_semantic_annotations": true,
+  "responses_read_before_anchor": false,
+  "sender_checksum_received_and_matched": true,
+  "semantic_evaluator_invoked": false,
+  "records": 108,
+  "false_premise": 72,
+  "controls": 36,
+  "forward_calls": 3347,
+  "tensor_events": 941153,
+  "cache_events": 368816,
+  "internal_files_verified": 22,
+  "registered_source_files_verified": 15,
+  "token_input_range": [
+    98,
+    129
+  ],
+  "token_output_range": [
+    9,
+    69
+  ],
+  "post_promotion_memory": {
+    "allocated_gib": 7.211,
+    "cuda_free_gib": 5.049,
+    "cuda_total_gib": 14.563
+  },
+  "peak_gpu_memory_gib": 7.52078914642334,
+  "instrumented_generation_latency_sum_s": 791.5970975669992,
+  "all_stopped_on_eos": true,
+  "truncated_records": 0,
+  "human_confirmed_records": 0,
+  "inference_or_rescoring_performed_during_audit": false
+}

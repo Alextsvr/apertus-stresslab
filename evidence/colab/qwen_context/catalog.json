@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "runs": [
+    {
+      "id": "colab-qwen-context-comparison-2026-10-07",
+      "archive": "evidence/colab/qwen_context/colab-qwen-context-comparison-2026-10-07.zip",
+      "archive_sha256": "27a2469da43afb324771b61c3af4e2a5987ac6fa84eb16ff95e465c0767559ef",
+      "archive_bytes": 223099,
+      "internal_files": 22,
+      "procedure_commit": "38bcdf0bd639070492899309baf9903476363a31",
+      "raw_publication_commit": "226b94b",
+      "registered_sources": {
+        "scripts/colab_qwen_context.py": "launcher.py",
+        "experiments/colab-qwen-context-comparison-2026-10-07/protocol.md": "protocol.md",
+        "experiments/colab-qwen-context-comparison-2026-10-07/model_manifest.json": "model_manifest.json",
+        "experiments/colab-qwen-context-comparison-2026-10-07/tokenization_reference.json": "tokenization_reference.json",
+        "experiments/colab-fp32-context-controls-2026-10-07/cases.json": "cases.json",
+        "experiments/colab-fp32-context-controls-2026-10-07/audit_rubric.json": "audit_rubric.json",
+        "scripts/colab_4bit_diagnostic.py": "colab_4bit_diagnostic.py",
+        "scripts/colab_fp32_long.py": "colab_fp32_long.py",
+        "scripts/colab_fp32_probe.py": "colab_fp32_probe.py",
+        "scripts/colab_layer_replay.py": "colab_layer_replay.py",
+        "scripts/colab_notebook_process.py": "colab_notebook_process.py",
+        "scripts/colab_quantization.py": "colab_quantization.py",
+        "scripts/colab_qwen_adapter.py": "colab_qwen_adapter.py",
+        "scripts/colab_qwen_context_cell.py": "colab_qwen_context_cell.py",
+        "scripts/verify_evidence.py": "verify_evidence.py"
+      },
+      "baseline_archive": "evidence/colab/context_controls/colab-fp32-context-controls-2026-10-07.zip",
+      "baseline_archive_sha256": "8af72b78e03b415e89ca615bdf9d3723b4d24a2b77e38b174048fcd0698676ca",
+      "apertus_annotations": "docs/colab_context_controls/2026-10-07/semantic_annotations.json",
+      "apertus_annotations_sha256": "cc9518f5f90c39531dbdf1c50824b9b5615a883f3eeefb3081e338bc8cb381ef",
+      "stored_result": {
+        "outcome": "qwen_context_complete",
+        "planned_records": 108,
+        "completed_records": 108,
+        "unattempted_records": 0,
+        "total_forward_calls_attempted": 3347,
+        "observed_tensor_events": 941153,
+        "observed_cache_events": 368816,
+        "packed_state_unchanged_after_attempt": true,
+        "first_bad_activation": null,
+        "first_wrong_dtype": null,
+        "scoring_performed": false,
+        "historical_suite_run": false
+      },
+      "annotation_counts": {
+        "bare": {
+          "false_premise": {
+            "corrected_explicit": 24,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "neutral_control": {
+            "correct": 12,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "dates": {
+          "false_premise": {
+            "corrected_explicit": 23,
+            "corrected_implicit": 0,
+            "explicit_acceptance": 0,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "neutral_control": {
+            "correct": 12,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        },
+        "attributes": {
+          "false_premise": {
+            "corrected_explicit": 20,
+            "corrected_implicit": 3,
+            "explicit_acceptance": 0,
+            "not_corrected": 1,
+            "ambiguous": 0,
+            "unassessable": 0
+          },
+          "neutral_control": {
+            "correct": 12,
+            "incorrect": 0,
+            "ambiguous": 0,
+            "unassessable": 0
+          }
+        }
+      },
+      "report": "docs/colab_qwen_context/2026-10-07/post_run_report.md",
+      "report_sha256": "349bd5fa84127563c3a20d5b55b8af41008bc18798518ff324e1b100914b6d3b",
+      "annotations": "docs/colab_qwen_context/2026-10-07/semantic_annotations.json",
+      "annotations_sha256": "5d324ee5b4100d4452760c6c0fb188f97d0684c82b8989d963750f8916847aef",
+      "within_comparison": "docs/colab_qwen_context/2026-10-07/within_qwen_comparison.json",
+      "within_comparison_sha256": "f11102c3e700f82d4263b819fbe91a08aac0cd3d8151d9572af24730ff5cc0e4",
+      "cross_comparison": "docs/colab_qwen_context/2026-10-07/cross_model_comparison.json",
+      "cross_comparison_sha256": "2478b9880ba2373ead6139d56750c9bad9ab89f3e93429a34ec9d87ba425bccd",
+      "audit_metadata": "docs/colab_qwen_context/2026-10-07/integrity.json",
+      "audit_metadata_sha256": "c3ce185b9d6e6ba8c1ec4b02f3ff032a701a9181ac6a90f24ebef05094845f29",
+      "receipt": "evidence/colab/qwen_context/receipt.json",
+      "receipt_sha256": "fabfc126410f56557d90e73f3bdda769f0b1f87b1a2a0b3cb57510488417bc96"
+    }
+  ]
+}

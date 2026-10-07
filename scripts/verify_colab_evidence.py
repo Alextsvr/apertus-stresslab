@@ -110,6 +110,9 @@ def verify(root=ROOT, *, verify_git=True, include_phase3b=True):
     if (root / 'evidence/colab/context_controls/catalog.json').is_file():
         from verify_context_controls_evidence import verify as verify_context
         result['matched_length_context_controls'] = verify_context(root, verify_git=verify_git)
+    if (root / 'evidence/colab/qwen_context/catalog.json').is_file():
+        from verify_qwen_context_evidence import verify as verify_qwen
+        result['qwen_context_comparison'] = verify_qwen(root, verify_git=verify_git)
     return result
 
 

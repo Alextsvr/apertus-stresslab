@@ -223,3 +223,20 @@ prepare/check/cache/run modes, numerical gates, partial evidence preservation
 and the planned descriptive comparison. No Qwen responses have been obtained.
 The public checkpoint needs no HF token. Historical raw results, frozen source,
 dataset/evaluator and selected human confirmations are unchanged.
+
+### Qwen comparison — post-run 2026-10-07
+
+The registered Qwen run completed all 108 requests with matching input arrays,
+finite FP32 observations and unchanged 196 packed NF4 projections. All outputs
+stopped on EOS. A separate unblinded AI-assisted audit under the unchanged rubric
+finds 0/72 explicit false-comparison acceptances, versus Apertus's preserved 11/72
+on the same IDs. Combined corrections are 24/24 bare, 23/24 dates, 23/24 attributes;
+the attribute condition includes three implicit corrections. Qwen has two
+non-corrections, no comparative-contradiction flags and 36/36 correct controls.
+No Qwen row has human confirmation. This is a small, informed, descriptive
+cross-model extension; different training/architecture/templates/tokenizers confound
+causal attribution, and zero observed acceptance does not establish immunity.
+Historical outputs, AI labels, selected human confirmations and original frozen
+Phase 3B counts remain unchanged; no historical rerun/rescore occurred.
+
+[Full report and exact-ID comparisons](docs/colab_qwen_context/2026-10-07/post_run_report.md).
